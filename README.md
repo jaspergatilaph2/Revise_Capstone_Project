@@ -7,6 +7,29 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## About the Project (Building Permit System)
+About the Project
+
+The Building Permit Management System is a Laravel-based web application designed to streamline and digitize the process of managing building permit applications.
+
+This system provides an efficient platform for submitting, reviewing, approving, and tracking building permit requests, reducing paperwork and improving transparency between applicants and administrators.
+
+The project leverages Laravel’s powerful features to handle common web application tasks, such as:
+
+🏗️ Online building permit application submission
+
+🗂️ Centralized management of permit records
+
+👥 Role-based access for administrators and applicants
+
+📄 Document upload and verification
+
+🔍 Application status tracking and approval workflow
+
+📊 Reporting and record monitoring
+
+The Building Permit Management System is built to improve operational efficiency, ensure data accuracy, and support faster decision-making for local government units, offices, or organizations responsible for building regulation and compliance.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
