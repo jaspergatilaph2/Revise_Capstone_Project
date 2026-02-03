@@ -1,0 +1,150 @@
+/* ---------------- PRINT ---------------- */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    #print-area,
+    #print-area * {
+        visibility: visible;
+    }
+
+    #print-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 210mm;
+    }
+
+    .page-break {
+        page-break-before: always;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .a4-page {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+    }
+
+    /* ---------------- IMAGE ---------------- */
+    .a4-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+
+    /* ---------------- WATERMARK ---------------- */
+    #a4-wrapper {
+        position: relative;
+        /* parent for watermark */
+    }
+
+    #a4-wrapper::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200px;
+        /* adjust as needed */
+        height: 200px;
+        /* adjust as needed */
+        background: url('/images/Municipality_logo.jpg') no-repeat center;
+        background-size: contain;
+        opacity: 1;
+        /* light watermark, adjust from 0.05 to 0.2 if needed */
+        transform: translate(-50%, -50%) rotate(-20deg);
+        /* centered and rotated */
+        pointer-events: none;
+        /* clicks pass through */
+        z-index: 1;
+    }
+
+    /* Ensure page content is above watermark */
+    #a4-wrapper>* {
+        position: relative;
+        z-index: 2;
+    }
+}
+
+/* ---------------- SCREEN (RESPONSIVE) ---------------- */
+@media screen {
+    .a4-page {
+        width: 100%;
+        max-width: 210mm;
+        height: auto;
+        aspect-ratio: 210 / 297;
+        /* keeps A4 proportion */
+        margin: 0 auto 20px;
+    }
+
+    .a4-image {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* ---------------- MOBILE ---------------- */
+@media (max-width: 768px) {
+    #print-area {
+        padding: 0 10px;
+    }
+
+    .a4-page {
+        max-width: 100%;
+    }
+}
+
+/* ---------------- IMAGE ---------------- */
+.a4-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* ---------------- WATERMARK ---------------- */
+#a4-wrapper {
+    position: relative;
+    /* parent for watermark */
+}
+
+#a4-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    /* adjust as needed */
+    height: 200px;
+    /* adjust as needed */
+    background: url('/images/Municipality_logo.jpg') no-repeat center;
+    background-size: contain;
+    opacity: 1;
+    /* light watermark, adjust from 0.05 to 0.2 if needed */
+    transform: translate(-50%, -50%) rotate(-20deg);
+    /* centered and rotated */
+    pointer-events: none;
+    /* clicks pass through */
+    z-index: 1;
+}
+
+/* Ensure page content is above watermark */
+#a4-wrapper>* {
+    position: relative;
+    z-index: 2;
+}

@@ -1,0 +1,49 @@
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Hide everything */
+    body * {
+        visibility: hidden;
+    }
+
+    /* Show print area only */
+    #print-area,
+    #print-area * {
+        visibility: visible;
+    }
+
+    #print-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 210mm;
+        height: 297mm;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
+
+/* A4 container */
+.a4-page {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+}
+
+/* Image scaling */
+.a4-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* change to cover if needed */
+    display: block;
+}
