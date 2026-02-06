@@ -41,6 +41,7 @@ Route::group(['middleware' =>['auth', 'IfUsers']], function(){
   // Apply Permit
   Route::prefix('apply')->name('apply.permit.')->group(function(){
     Route::get('/index', [ApplicantsController::class, 'ApplyIndex'])->name('index');
+    Route::post('/store', [ApplicantsController::class, 'ApplyPermitIndex'])->name('permit');
   });
 
   // Downloads Permits

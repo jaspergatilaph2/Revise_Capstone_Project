@@ -319,7 +319,7 @@
                                     @endif
 
 
-                                    <form id="permitForm" action=""
+                                    <form id="permitForm" action="{{ route('apply.permit.permit') }}"
                                         method="POST" enctype="multipart/form-data">
                                         @csrf
 
@@ -389,11 +389,10 @@
                                             </div>
                                         </div>
 
-
                                         <div class="mt-3 d-flex flex-column flex-md-row gap-2 justify-content-end">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                             <button type="button" class="btn btn-primary" id="confirmSubmitBtn">Confirm & Review</button>
-                                            <!-- <a href="" class="btn btn-success">Next →</a> -->
+                                            
                                         </div>
 
                                     </form>

@@ -1,31 +1,38 @@
-const input = document.getElementById('documents'); // your file input
-const preview = document.getElementById('uploadedDocsPreview');
+document.getElementById('documents').addEventListener('change', function () {
+    const list = document.getElementById('uploadedDocsPreview');
+    list.innerHTML = '';
 
-input.addEventListener('change', () => {
-    preview.innerHTML = ''; // clear previous
+    const files = Array.from(this.files);
 
-    if (input.files.length === 0) {
-        preview.innerHTML = '<p class="text-muted mb-0">No documents uploaded.</p>';
+    if (files.length === 0) {
+        list.innerHTML = `
+            <li class="list-group-item text-muted">
+                No documents uploaded.
+            </li>`;
         return;
     }
 
-    Array.from(input.files).forEach(file => {
-        const fileDiv = document.createElement('div');
-        fileDiv.className = 'd-flex align-items-center border rounded p-1 px-2 text-truncate';
-        fileDiv.style.maxWidth = '200px'; // adjust width per your layout
-        fileDiv.title = file.name; // full name on hover
+    files.forEach((file) => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item list-group-item-action d-flex align-items-center';
+        li.style.cursor = 'pointer';
 
-        // optional: add a small file icon
-        const icon = document.createElement('span');
-        icon.className = 'me-1';
-        icon.innerHTML = '📄'; // simple document emoji, or use Bootstrap icons
+        // icon based on file type
+        let icon = 'fa-file';
+        if (file.type.includes('pdf')) icon = 'fa-file-pdf';
+        if (file.type.includes('image')) icon = 'fa-file-image';
 
-        const text = document.createElement('span');
-        text.className = 'text-truncate';
-        text.textContent = file.name;
+        li.innerHTML = `
+            <i class="fa-solid ${icon} me-2 text-primary"></i>
+            <span class="text-truncate">${file.name}</span>
+        `;
 
-        fileDiv.appendChild(icon);
-        fileDiv.appendChild(text);
-        preview.appendChild(fileDiv);
+        // open file on click
+        li.addEventListener('click', () => {
+            const fileURL = URL.createObjectURL(file);
+            window.open(fileURL, '_blank');
+        });
+
+        list.appendChild(li);
     });
 });

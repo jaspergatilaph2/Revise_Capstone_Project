@@ -367,7 +367,7 @@
                     <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center justify-content-md-start">
                       <!-- Apply for Permit -->
                       <div class="flex-fill">
-                        <a href="" class="btn btn-primary w-100">
+                        <a href="{{ route('apply.permit.index') }}" class="btn btn-primary w-100">
                           <i class="fa-solid fa-plus-circle me-1"></i> Apply for Permit
                         </a>
                       </div>
@@ -375,13 +375,13 @@
                       <!-- My Applications (Dropdown) -->
                       <div class="dropdown flex-fill dropdown-hover">
                         <button class="btn btn-outline-primary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa-solid fa-folder-open me-1"></i> My Applications
+                          <i class="fa-solid fa-folder-open me-1"></i> Downloads
                         </button>
                         <ul class="dropdown-menu w-100">
 
                           <li>
-                            <a class="dropdown-item" href="">
-                              <i class="fa-solid fa-hourglass-half me-1"></i> Process
+                            <a class="dropdown-item" href="{{ route('applicants.downloads.index') }}">
+                              <i class="fa-solid fa-download"></i> Permits
                             </a>
                           </li>
 

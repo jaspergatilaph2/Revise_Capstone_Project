@@ -136,7 +136,7 @@
     <script src="{{ asset('js/point.js') }}"></script>
     <script src="{{ asset('js/pinpoint.js') }}"></script>
     <script src="{{ asset('js/view-map.js') }}"></script>
-    <script src="{{ asset('js/comfimation-modal.js') }}"></script>
+    <script src="{{ asset('js/confirmation-modal.js') }}"></script>
     <!-- <script src="{{ asset('js/multiple-files.js')}}"></script> -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="{{ asset('js/appearNextButton.js') }}"></script>
@@ -147,7 +147,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="{{ asset('js/listing.js') }}"></script>
 </body>
 
 </html>

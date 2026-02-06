@@ -142,37 +142,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 🔹 Final submit
-    finalSubmit.addEventListener('click', async (e) => {
+    finalSubmit.addEventListener('click', (e) => {
         e.preventDefault();
         finalSubmit.disabled = true;
         finalSubmit.textContent = 'Submitting...';
 
-        const formData = new FormData(form);
-        filesArray.forEach(file => formData.append('documents[]', file));
+        const dataTransfer = new DataTransfer();
+        filesArray.forEach(file => dataTransfer.items.add(file));
+        input.files = dataTransfer.files;
 
-        try {
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                },
-            });
-
-            const data = await response.json(); // parse JSON
-
-            if (data.success && data.redirect) {
-                window.location.href = data.redirect; // redirect properly
-            } else {
-                console.error('Submission failed', data);
-                finalSubmit.disabled = false;
-                finalSubmit.textContent = 'Confirm & Submit';
-            }
-        } catch (err) {
-            console.error('Submit error:', err);
-            finalSubmit.disabled = false;
-            finalSubmit.textContent = 'Confirm & Submit';
-        }
+        form.submit(); // ✅ sends POST to /apply/store
     });
+
+
 
 });
