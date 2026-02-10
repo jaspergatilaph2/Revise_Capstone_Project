@@ -25,11 +25,12 @@
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
                 <li class="menu-item">
-                    <a href="{{ route('applicants.dashboard') }}" class="menu-link">
+                    <a href="" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
                     </a>
                 </li>
+
 
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -49,7 +50,7 @@
                 </li>
 
                 <!-- Layouts -->
-                <li class="menu-item {{ $ActiveTabMenu == 'Civil-Permit' ? 'active' : '' }}">
+                <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon fa-solid fa-download"></i>
                         <div data-i18n="Layouts">Downloads</div>
@@ -57,8 +58,8 @@
 
                     <ul class="menu-sub">
 
-                        <li class="menu-item {{ $SubActiveMenu == 'Permits' ? 'active' : '' }}">
-                            <a href="" class="menu-link">
+                        <li class="menu-item">
+                            <a href="{{ route('applicants.downloads.index') }}" class="menu-link">
                                 <div data-i18n="Without navbar">Permits</div>
                             </a>
                         </li>
@@ -73,7 +74,7 @@
 
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="" class="menu-link">
+                            <a href="{{ route('apply.permit.index') }}" class="menu-link">
                                 <div data-i18n="Without navbar">Apply Now</div>
                             </a>
                         </li>
@@ -86,60 +87,60 @@
                 </li>
 
                 <!-- <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon fa-solid fa-receipt"></i>
-                        <div data-i18n="Layouts">Payments</div>
-                    </a>
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon fa-solid fa-receipt"></i>
+            <div data-i18n="Layouts">Payments</div>
+          </a>
 
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Pending Payments</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Paid</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Overdue</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Pending Payments</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Paid</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Overdue</div>
+              </a>
+            </li>
+          </ul>
+        </li> -->
 
                 <!-- <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon fa-solid fa-comment"></i>
-                        <div data-i18n="Layouts">Notification / Messages</div>
-                    </a>
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon fa-solid fa-comment"></i>
+            <div data-i18n="Layouts">Notification / Messages</div>
+          </a>
 
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Notifications</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">History Notification</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Notifications</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">History Notification</div>
+              </a>
+            </li>
+          </ul>
+        </li> -->
 
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">Accounts</span>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item {{ $ActiveTabMenu === 'View' ? 'active' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon fa-solid fa-user"></i>
                         <div data-i18n="Account Settings">Account Settings</div>
                     </a>
                     <ul class="menu-sub">
-                        <li class="menu-item">
+                        <li class="menu-item {{ $SubActiveTab === 'Accounts' ? 'active' : '' }}">
                             <a href="" class="menu-link">
                                 <div data-i18n="Account">Account</div>
                             </a>
@@ -285,126 +286,91 @@
             <div class="content-wrapper">
                 <!-- Content -->
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <div class="container">
-                        <!-- Welcome Section -->
-                        <h3 class="mb-4 fw-bold text-primary text-center text-md-start">
-                            Follow the instructions to download the forms you need.
-                        </h3>
-                        <p class="text-muted text-center text-md-start">
-                            Here’s an overview of your application activity, <span class="text-dark">Download the necessary forms to get started with your application process.</span>
-                        </p>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Applicants Account Settings /</span>Show Account
+                    </h4>
 
-                        <!-- Stats Section -->
-                        <div class="row g-3">
-                            <!-- Notifications -->
-                            <div id="print-area" class="mt-4">
-                                <div id="a4-wrapper" class="a4-page">
-                                    <img
-                                        src="{{ asset('images/CamScanner 02-03-2026 20.19.jpg') }}"
-                                        alt="Civil / Structural Permit - Page 1"
-                                        class="a4-image">
-                                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> Account</a>
+                                </li>
+                            </ul>
 
-                                <!-- PAGE BREAK -->
-                                <div class="page-break"></div>
+                            <div class="card mb-4">
+                                <h5 class="card-header">Profile Details</h5>
+                                <!-- Account -->
+                                <hr class="my-0" />
 
-                                <!-- PAGE 2 -->
-                                <div class="a4-page">
-                                    <img
-                                        src="{{ asset('images/CamScanner 02-03-2026 20.22.jpg') }}"
-                                        alt="Civil / Structural Permit - Page 2"
-                                        class="a4-image">
-                                </div>
-                                <!-- END OF BOX 9 -->
-
-                                <!-- ACTION BUTTONS -->
-                                <div class="d-flex flex-column flex-md-row justify-content-center gap-3 no-print mt-4">
-
-                                    <a href="{{ route('applicants.downloads.index') }}"
-                                        class="btn btn-secondary w-100 w-md-auto">
-                                        Back
-                                    </a>
-
-                                    <button type="button"
-                                        class="btn btn-primary w-100 w-md-auto"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#downloadModal">
-                                        Download / Save as PDF
-                                    </button>
-
-                                </div>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title fs-5" id="downloadModalLabel">Reminder Before Download</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body fs-6">
-                                                Please make sure that you only fill out the checkmarks or dots in the form after downloading the PDF.
-                                                Any other inputs will appear as blank in the form. In addition, the Notary Public section should be left blank
-                                                for notarization purposes, we handle the notarization. Thank you!
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-                                                <button type="button"
-                                                    class="btn btn-primary btn-sm"
-                                                    id="proceedBtn"
-                                                    onclick="CivildownloadPDF()"
-                                                    data-bs-dismiss="modal"
-                                                    disabled>
-                                                    Proceed to Download (5)
-                                                </button>
-                                            </div>
+                                <div class="card-body">
+                                    <!-- User Data -->
+                                    <div class="row">
+                                        <!-- Name Field -->
+                                        <div class="mb-3 col-md-6">
+                                            <label for="name" class="form-label">Name</label>
+                                            <input class="form-control" type="text" id="name" name="name" value="{{ $accounts->name }}" readonly />
                                         </div>
+
+                                        <!-- Email Field -->
+                                        <div class="mb-3 col-md-6">
+                                            <label for="email" class="form-label">E-mail</label>
+                                            <input class="form-control" type="email" id="email" name="email" value="{{ $accounts->email }}" readonly />
+                                        </div>
+
+                                        <!-- Role Field -->
+                                        <div class="mb-3 col-md-6">
+                                            <label for="role" class="form-label">Role</label>
+                                            <input class="form-control" type="text" id="role" name="role" value="{{ $accounts->role }}" readonly />
+                                        </div>
+                                    </div>
+
+                                    <!-- Image Field -->
+                                    <div class="mb-3">
+                                        <label for="avatar" class="form-label">Profile Picture</label>
+                                        <img id="uploadedAvatar"
+                                            src="{{ session('google_avatar') ?? asset('sneat/img/avatars/1.png') }}"
+                                            alt="avatar" class="d-block rounded mt-2" width="100" height="100" />
                                     </div>
                                 </div>
 
-
+                                <!-- /Account -->
                             </div>
+
                         </div>
-
                     </div>
-
-                    <!-- Quick Actions -->
-
-
                 </div>
+
+                <!-- Footer -->
+                <footer class="content-footer footer bg-footer-theme mt-4">
+                    <div
+                        class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column text-center text-md-start">
+                        <div class="mb-2 mb-md-0">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>,
+                            <span class="fw-bold text-primary">Building Permit Management System</span>
+                        </div>
+                        <div>
+                            <a href="#" class="footer-link me-3">Documentation</a>
+                            <a href="#" class="footer-link me-3">Support</a>
+                            <a href="#" class="footer-link">Contact</a>
+                        </div>
+                    </div>
+                </footer>
+                <!-- / Footer -->
+
+                <div class="content-backdrop fade"></div>
             </div>
 
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme mt-4">
-                <div
-                    class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column text-center text-md-start">
-                    <div class="mb-2 mb-md-0">
-                        ©
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>,
-                        <span class="fw-bold text-primary">Building Permit Management System</span>
-                    </div>
-                    <div>
-                        <a href="#" class="footer-link me-3">Documentation</a>
-                        <a href="#" class="footer-link me-3">Support</a>
-                        <a href="#" class="footer-link">Contact</a>
-                    </div>
-                </div>
-            </footer>
-            <!-- / Footer -->
 
-            <div class="content-backdrop fade"></div>
+            <!-- Content wrapper -->
         </div>
-
-
-        <!-- Content wrapper -->
+        <!-- / Layout page -->
     </div>
-    <!-- / Layout page -->
-</div>
 
-<!-- Overlay -->
-<div class="layout-overlay layout-menu-toggle"></div>
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
 @endsection

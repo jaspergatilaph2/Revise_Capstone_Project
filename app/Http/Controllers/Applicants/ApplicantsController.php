@@ -51,6 +51,7 @@ class ApplicantsController extends Controller
         ]);
     }
 
+    // Electecal Permit Download
     public function ElectricalPermitIndex()
     {
         return view('Applicants.Downloads.electrical-permit', [
@@ -59,6 +60,7 @@ class ApplicantsController extends Controller
         ]);
     }
 
+    // Plumbing Permit Download
     public function PlumbingPermitIndex()
     {
         return view('Applicants.Downloads.plumbing-permit', [
@@ -67,16 +69,17 @@ class ApplicantsController extends Controller
         ]);
     }
 
+    // Apply Dashboard
     public function ApplyIndex()
     {
         return view('Applicants.Apply.index', [
             'ActiveTabMenu' => 'Apply',
-            'SubActiveMenu' => 'index'
+            'SubActiveMenu' => 'index',
         ]);
     }
 
 
-
+    // Apply Store
     public function ApplyPermitIndex(Request $request)
     {
         // ✅ Validate input
@@ -122,5 +125,24 @@ class ApplicantsController extends Controller
 
         return redirect()->back()
             ->with('success', 'Application submitted successfully!');
+    }
+
+    // Pending Dashboard
+    public function PendingPermitIndex()
+    {
+        return view('Applicants.Apply.pending-permit', [
+            'ActiveTabMenu' => 'Pending',
+            'SubActiveTab' => 'Permit'
+        ]);
+    }
+
+    // Applicants View Accounts
+    public function AccountsViewIndex()
+    {
+        $accounts = Auth::user();
+        return view('Applicants.Accounts.view', [
+            'ActiveTabMenu' => 'View',
+            'SubActiveTab' => 'Accounts'
+        ], compact('accounts'));
     }
 }

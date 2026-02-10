@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Applicants\ApplicantsController;
+use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,27 +26,34 @@ Route::get('/', function () {
   return view('welcome');
 });
 
+
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Admin Routes
-Route::group(['middleware' => ['auth', 'IfAdmin']], function(){
+Route::group(['middleware' => ['auth', 'IfAdmin']], function () {
   Route::get('/Dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 
 // Users Or Applicants Routes
-Route::group(['middleware' =>['auth', 'IfUsers']], function(){
+Route::group(['middleware' => ['auth', 'IfUsers']], function () {
   Route::get('/Dashboard', [ApplicantsController::class, 'index'])->name('applicants.dashboard');
 
+  // View And Update the User Or Applicant Accounts
+  Route::prefix('accounts')->name('applicants.accounts.')->group(function(){
+    Route::get('/view', [ApplicantsController::class, 'AccountsViewIndex'])->name('view');
+  });
+
   // Apply Permit
-  Route::prefix('apply')->name('apply.permit.')->group(function(){
+  Route::prefix('apply')->name('apply.permit.')->group(function () {
     Route::get('/index', [ApplicantsController::class, 'ApplyIndex'])->name('index');
     Route::post('/store', [ApplicantsController::class, 'ApplyPermitIndex'])->name('permit');
+    Route::get('/pending', [ApplicantsController::class, 'PendingPermitIndex'])->name('pending');
   });
 
   // Downloads Permits
-  Route::prefix('transfer')->name('applicants.downloads.')->group(function(){
+  Route::prefix('transfer')->name('applicants.downloads.')->group(function () {
     Route::get('/Downloads', [ApplicantsController::class, 'DownloadsIndex'])->name('index');
     Route::get('/Unified-application-form', [ApplicantsController::class, 'UnifiedApplicationFormDownload'])->name('unified-application-form');
     Route::get('/civil-permit', [ApplicantsController::class, 'CivilPermitDownload'])->name('civil-permit');
@@ -53,4 +61,7 @@ Route::group(['middleware' =>['auth', 'IfUsers']], function(){
     Route::get('/electrical-permit', [ApplicantsController::class, 'ElectricalPermitIndex'])->name('electrical-permit');
     Route::get('/plumbing-permit', [ApplicantsController::class, 'PlumbingPermitIndex'])->name('plumbing-permit');
   });
-}); 
+});
+
+Route::get('/auth/google', [GoogleController::class, 'redirect'])->name('google.login');
+Route::get('/auth/google/callback', [GoogleController::class, 'callback']);

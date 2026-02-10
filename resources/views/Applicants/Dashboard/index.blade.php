@@ -31,6 +31,24 @@
           </a>
         </li>
 
+
+        <li class="menu-item">
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon fa-solid fa-bars-progress"></i>
+            <div data-i18n="Layouts">Notification</div>
+          </a>
+
+          <ul class="menu-sub">
+
+            <li class="menu-item">
+              <a href="{{ route('apply.permit.pending') }}" class="menu-link">
+                <div data-i18n="Without navbar">Progress</div>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+
         <!-- Layouts -->
         <li class="menu-item">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -123,7 +141,7 @@
           </a>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a href="" class="menu-link">
+              <a href="{{ route('applicants.accounts.view') }}" class="menu-link">
                 <div data-i18n="Account">Account</div>
               </a>
             </li>

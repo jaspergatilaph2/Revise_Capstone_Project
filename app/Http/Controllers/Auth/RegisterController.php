@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -68,5 +69,19 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->role === 'mpdo') {
+            return redirect()->route('mpdo.dashboard');
+        } elseif ($user->role === 'bfp') {
+            return redirect()->route('bfp.dashboard');
+        }
+
+        // Default: applicant/user dashboard
+        return redirect()->route('applicants.dashboard');
     }
 }

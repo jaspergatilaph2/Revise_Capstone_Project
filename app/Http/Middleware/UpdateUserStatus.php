@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class IfAdmin
+class UpdateUserStatus
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,15 @@ class IfAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Not logged in → send to login
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
+        if (Auth::check()) {
+            $user = Auth::user();
 
-        // Logged in but NOT admin → send to applicant dashboard
-        if (Auth::user()->role !== 'admin') {
-            return redirect()->route('applicants.dashboard');
+            // Only update status for non-admin users
+            if ($user instanceof \Illuminate\Database\Eloquent\Model && $user->role !== 'admin') {
+                $user->status = 'active';
+                $user->last_seen = now(); // optional timestamp
+                $user->save();
+            }
         }
 
         return $next($request);

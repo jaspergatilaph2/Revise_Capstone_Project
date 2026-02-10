@@ -31,6 +31,23 @@
                     </a>
                 </li>
 
+                <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon fa-solid fa-bars-progress"></i>
+                        <div data-i18n="Layouts">Notification</div>
+                    </a>
+
+                    <ul class="menu-sub">
+
+                        <li class="menu-item">
+                            <a href="{{ route('apply.permit.pending') }}" class="menu-link">
+                                <div data-i18n="Without navbar">Progress</div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
                 <!-- Layouts -->
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -48,14 +65,14 @@
 
                     </ul>
                 </li>
-                <li class="menu-item {{ $ActiveTabMenu == 'Apply' ? 'active' : '' }}">
+                <li class="menu-item {{ $ActiveTabMenu === 'Apply' ? 'active' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon fa-solid fa-ticket"></i>
                         <div data-i18n="Layouts">Apply for Permit</div>
                     </a>
 
                     <ul class="menu-sub">
-                        <li class="menu-item {{ $SubActiveMenu == 'index' ? 'active' : '' }}">
+                        <li class="menu-item {{ $SubActiveMenu === 'index' ? 'active' : '' }}">
                             <a href="" class="menu-link">
                                 <div data-i18n="Without navbar">Apply Now</div>
                             </a>
@@ -392,7 +409,7 @@
                                         <div class="mt-3 d-flex flex-column flex-md-row gap-2 justify-content-end">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                             <button type="button" class="btn btn-primary" id="confirmSubmitBtn">Confirm & Review</button>
-                                            
+
                                         </div>
 
                                     </form>

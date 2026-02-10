@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <!-- Logo -->
                     <div class="app-brand justify-content-center">
-                        <a href="{{ route('welcome') }}" class="app-brand-link gap-2">
+                        <a href="{{ route('login') }}" class="app-brand-link gap-2">
                             <span class="app-brand-logo demo">
                                 <!-- Logo -->
                                 <img src="{{ asset('images/logo.png') }}" alt="" style="width: 135px;">
@@ -91,17 +91,29 @@
                             </div>
 
                             <!-- Google Login Button -->
-                            <a href="" class="btn btn-danger d-grid w-100">
-                                <i class="fab fa-google me-2"></i> {{ __('Login with Google') }}
+                            <a href="{{ route('google.login') }}"
+                                class="btn d-flex align-items-center justify-content-center w-100 google-btn"
+                                style="
+        background-color: #ffffff;
+        border: 1px solid #dadce0;
+        color: #3c4043;
+        font-weight: 500;
+        padding: 10px;
+   ">
+                                <img src="https://developers.google.com/identity/images/g-logo.png"
+                                    alt="Google logo"
+                                    style="width: 18px; height: 18px; margin-right: 10px;">
+                                Login with Google
                             </a>
+
 
                             <!-- Add gap -->
                             <div class="my-2"></div>
 
                             <!-- Facebook Login Button -->
-                            <a href="" class="btn btn-primary d-grid w-100 py-2">
+                            <!-- <a href="" class="btn btn-primary d-grid w-100 py-2">
                                 <i class="fab fa-facebook me-2"></i> {{ __('Login with Facebook') }}
-                            </a>
+                            </a> -->
 
                             <!-- Forgot Password Link -->
                             @if (Route::has('password.request'))

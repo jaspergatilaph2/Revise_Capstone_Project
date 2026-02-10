@@ -60,7 +60,7 @@
                     <!-- General Links -->
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}"
-                            href="{{ route('welcome') }}">
+                            href="{{ route('login') }}">
                             Home
                         </a>
                     </li>
@@ -106,7 +106,7 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li>
                                 <a class="dropdown-item"
-                                    href="{{ auth()->user()->is_admin
+                                    href="{{ auth()->user()->role === 'admin'
                                 ? route('admin.dashboard')
                                 : route('applicants.dashboard') }}">
                                     Dashboard
@@ -382,6 +382,6 @@
     </script>
     <script src="{{ asset('js/hamburger.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+   
 
 </html>

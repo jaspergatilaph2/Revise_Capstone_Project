@@ -16,10 +16,14 @@ class IfUsers
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check() && Auth::user()->role === 'user'){
-            return $next($request);
+        if (!Auth::check()) {
+            return redirect()->route('login');
         }
 
-        return response()->json(['error' => 'Unauthorized'], 403);
+        if (Auth::user()->role !== 'user') {
+            return redirect()->route('admin.dashboard');
+        }
+
+        return $next($request);
     }
 }
