@@ -44,4 +44,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getAvatarUrlAttribute()
+    {
+        // 1️⃣ Uploaded avatar (local)
+        if ($this->avatar) {
+            return asset($this->avatar);
+        }
+
+        // 2️⃣ Google account avatar (session-based)
+        if ($this->google_id && session()->has('google_avatar')) {
+            return session('google_avatar');
+        }
+
+        // 3️⃣ Default avatar
+        return asset('sneat/img/avatars/1.png');
+    }
 }

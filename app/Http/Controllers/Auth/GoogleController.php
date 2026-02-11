@@ -26,6 +26,7 @@ class GoogleController extends Controller
                 'google_id' => $googleUser->getId(),
                 'password' => bcrypt(uniqid()),
                 'role' => 'user', // default role
+                'google_avatar' => $googleUser->getAvatar(),
             ]
         );
 

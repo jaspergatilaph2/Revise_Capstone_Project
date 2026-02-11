@@ -340,60 +340,52 @@
                         <!-- Summary Cards -->
                         <div class="row g-4">
                             <!-- Total Applications -->
-                            @if ($TotalUsers > 0)
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
                                     <div class="card-body text-center">
                                         <i class="fa-solid fa-file-circle-plus fa-2x text-primary mb-2"></i>
                                         <h6 class="fw-bold text-uppercase small">Total Applications</h6>
-                                        <h3 class="fw-bolder text-primary mb-1" id="totalApplications">{{ $TotalUsers }}</h3>
+                                        <h3 class="fw-bolder text-primary mb-1" id="totalApplications"></h3>
                                         <p class="text-muted small mb-0">All applications submitted</p>
                                     </div>
                                 </div>
                             </div>
-                            @endif
 
                             <!-- Pending Approvals -->
-                            @if ($pendingApplications > 0)
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
                                     <div class="card-body text-center">
                                         <i class="fa-solid fa-hourglass-half fa-2x text-warning mb-2"></i>
                                         <h6 class="fw-bold text-uppercase small">Pending Approvals</h6>
-                                        <h3 class="fw-bolder text-warning mb-1" id="pendingApprovals">{{ $pendingApplications }}</h3>
+                                        <h3 class="fw-bolder text-warning mb-1" id="pendingApprovals"></h3>
                                         <p class="text-muted small mb-0">Awaiting review</p>
                                     </div>
                                 </div>
                             </div>
-                            @endif
 
                             <!-- Under Review -->
-                            @if ($underReviewCounts > 0)
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
                                     <div class="card-body text-center">
                                         <i class="fa-solid fa-magnifying-glass fa-2x text-warning mb-2"></i>
                                         <h6 class="fw-bold text-uppercase small">Under Review</h6>
-                                        <h3 class="fw-bolder text-warning mb-1" id="pendingApprovals">{{$underReviewCounts}}</h3>
+                                        <h3 class="fw-bolder text-warning mb-1" id="pendingApprovals"></h3>
                                         <p class="text-muted small mb-0">Awaiting review</p>
                                     </div>
                                 </div>
                             </div>
-                            @endif
 
                             <!-- Approved Permits -->
-                            @if ($approvedApplications > 0)
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
                                     <div class="card-body text-center">
                                         <i class="fa-solid fa-circle-check fa-2x text-success mb-2"></i>
                                         <h6 class="fw-bold text-uppercase small">Approved Permits</h6>
-                                        <h3 class="fw-bolder text-success mb-1" id="approvedPermits">{{ $approvedApplications }}</h3>
+                                        <h3 class="fw-bolder text-success mb-1" id="approvedPermits"></h3>
                                         <p class="text-muted small mb-0">Successfully issued permits</p>
                                     </div>
                                 </div>
                             </div>
-                            @endif
 
                             <!-- Revenue Collected -->
                             <div class="col-12 col-sm-6 col-lg-3">
@@ -476,51 +468,26 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @forelse ($users as $user)
-                                                    @php
-                                                    $status = 'Offline';
-                                                    $badgeClass = 'bg-danger';
 
-                                                    if ($user->last_seen) {
-                                                    $lastActivity = \Carbon\Carbon::parse($user->last_seen);
-
-                                                    if ($lastActivity->gt(now()->subMinutes(5))) {
-                                                    $status = 'Active';
-                                                    $badgeClass = 'bg-success';
-                                                    } elseif ($lastActivity->gt(now()->subMinutes(10))) {
-                                                    $status = 'Idle';
-                                                    $badgeClass = 'bg-warning';
-                                                    }
-                                                    }
-                                                    @endphp
                                                     <tr>
-                                                        <!-- Name -->
-                                                        <td>{{ $user->name }}</td>
-
-                                                        <!-- Role -->
-                                                        <td>{{ ucfirst($user->role) }}</td>
-
-                                                        <!-- Status -->
+                                                        <td>John Doe</td>
+                                                        <td>User</td>
                                                         <td>
-                                                            <span class="text-white px-3 py-2 rounded-pill shadow-sm fw-semibold {{ $badgeClass }}"
-                                                                style="font-size: 0.9rem; letter-spacing: 0.5px;">
-                                                                {{ $status }}
+                                                            <span class="px-3 py-2 rounded-pill shadow-sm fw-semibold small text-white bg-success" style="letter-spacing: 0.5px;">
+                                                                Active
                                                             </span>
-                                                        </td>
 
 
-                                                        <!-- Last Seen -->
-                                                        <td>
-                                                            {{ $user->last_seen ? \Carbon\Carbon::parse($user->last_seen)->diffForHumans() : 'N/A' }}
                                                         </td>
+                                                        <td>Yesterday</td>
                                                     </tr>
-                                                    @empty
                                                     <tr>
                                                         <td colspan="4" class="text-center text-muted">No users found</td>
                                                     </tr>
-                                                    @endforelse
+
                                                 </tbody>
                                             </table>
+
 
                                         </div>
                                     </div>

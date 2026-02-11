@@ -15,9 +15,9 @@
                     <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform:uppercase">BPMS</span>
                 </a>
 
-                <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                    <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                </a>
+                <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                </a> -->
             </div>
 
             <div class="menu-inner-shadow"></div>
@@ -54,7 +54,7 @@
                 </li>
 
                 <!-- Layouts -->
-                <li class="menu-item {{ $ActiveTabMenu == 'Downloads' ? 'active' : '' }}">
+                <li class="menu-item {{ $ActiveTabMenu == 'Documents' ? 'active' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon fa-solid fa-download"></i>
                         <div data-i18n="Layouts">Downloads</div>
@@ -62,7 +62,7 @@
 
                     <ul class="menu-sub">
 
-                        <li class="menu-item {{ $SubActiveMenu == 'Permits' ? 'active' : '' }}">
+                        <li class="menu-item {{ $SubActiveTab == 'Guide' ? 'active' : '' }}">
                             <a href="" class="menu-link">
                                 <div data-i18n="Without navbar">Permits</div>
                             </a>
@@ -78,7 +78,7 @@
 
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="{{ route('apply.permit.index') }}" class="menu-link">
+                            <a href="" class="menu-link">
                                 <div data-i18n="Without navbar">Apply Now</div>
                             </a>
                         </li>
@@ -288,160 +288,119 @@
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
-
                 <!-- Content -->
                 <div class="container-xxl flex-grow-1 container-p-y">
+                    <div class="container">
+                        <!-- Welcome Section -->
+                        <h3 class="mb-4 fw-bold text-primary text-center text-md-start">
+                            Follow the instructions to download the forms you need.
+                        </h3>
+                        <p class="text-muted text-center text-md-start">
+                            Here’s an overview of your application activity, <span class="text-dark">Download the necessary forms to get started with your application process.</span>
+                        </p>
 
-                    <!-- Header -->
-                    <h3 class="mb-3 fw-bold text-primary text-center text-md-start">
-                        Follow the instructions to download the forms you need.
-                    </h3>
-                    <p class="text-muted text-center text-md-start mb-4">
-                        Download the necessary forms to get started with your application process.
-                    </p>
+                        <!-- Stats Section -->
+                        <div class="row g-3">
+                            <!-- Notifications -->
+                            <!-- PRINT AREA (IMAGE ONLY) -->
+                            <div id="print-area" class="a4-page">
+                                <img
+                                    src="{{ asset('images/Documents-guide.jpg') }}"
+                                    alt="Unified Application Form for Building Permit"
+                                    class="a4-image">
+                            </div>
 
-                    <!-- Steps Section -->
-                    <div class="row g-3">
+                            <!-- ACTION BUTTONS (NOT PRINTED) -->
+                            <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4 no-print">
 
+                                <a href="{{ route('applicants.downloads.index') }}"
+                                    class="btn btn-secondary w-100 w-md-auto">
+                                    Back
+                                </a>
 
-                        <!-- Other paper to upload in order to approve the building permit -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-primary fw-bold mb-1">Documents Guide</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">GUIDE</h6>
-                                    <p class="card-text text-muted small">
-                                        Guide papers
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.documents') }}" class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
+                                <button type="button"
+                                    class="btn btn-primary w-100 w-md-auto"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#downloadModal">
+                                    Download / Save as PDF
+                                </button>
+
+                            </div>
+
+                            <!-- MODAL (NOT PRINTED) -->
+                            <div class="modal fade no-print" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title fs-5" id="downloadModalLabel">Reminder Before Download</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body fs-6">
+                                            <h6 class="fw-bold mb-2">Downloaded Guide Form</h6>
+                                            <ul class="mb-0">
+                                                <li>Download or print the PDF file before completing the form.</li>
+                                                <li>Only mark the designated checkboxes or circles provided.</li>
+                                                <li>Do not enter information in other areas, as these will appear blank.</li>
+                                                <li>Leave the <strong>Notary Public section</strong> completely empty.</li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="button"
+                                                class="btn btn-primary btn-sm"
+                                                id="proceedBtn"
+                                                onclick="documentsguidePDF()"
+                                                data-bs-dismiss="modal"
+                                                disabled>
+                                                Proceed to Download (5)
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
 
-                        <!-- Step 1 -->
-                        <div class="col-12 col-md-5 col-md-2 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-info fw-bold mb-1">Step 1</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Unified Form</h6>
-                                    <p class="card-text text-muted small">
-                                        Unified application form
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.unified-application-form') }}"
-                                        class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 2 -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-secondary fw-bold mb-1">Step 2</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Civil / Structural</h6>
-                                    <p class="card-text text-muted small">
-                                        Civil & structural permit
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.civil-permit') }}"
-                                        class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 3 -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-success fw-bold mb-1">Step 3</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Architectural</h6>
-                                    <p class="card-text text-muted small">
-                                        Architectural permit
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.architectural-permit') }}"
-                                        class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 4 -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-danger fw-bold mb-1">Step 4</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Electrical</h6>
-                                    <p class="card-text text-muted small">
-                                        Electrical permit
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.electrical-permit') }}" class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 5 -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-warning fw-bold mb-1">Step 5</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Plumbing</h6>
-                                    <p class="card-text text-muted small">
-                                        Plumbing permit
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.plumbing-permit') }}" class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+
+                    <!-- Quick Actions -->
+
 
                 </div>
-
-                <!-- Footer -->
-                <footer class="content-footer footer bg-footer-theme mt-4">
-                    <div class="container-xxl d-flex flex-wrap justify-content-between py-2
-                    flex-md-row flex-column text-center text-md-start">
-                        <div class="mb-2 mb-md-0">
-                            © <script>
-                                document.write(new Date().getFullYear());
-                            </script>,
-                            <span class="fw-bold text-primary">Building Permit Management System</span>
-                        </div>
-                        <div>
-                            <a href="#" class="footer-link me-3">Documentation</a>
-                            <a href="#" class="footer-link me-3">Support</a>
-                            <a href="#" class="footer-link">Contact</a>
-                        </div>
-                    </div>
-                </footer>
-
-                <div class="content-backdrop fade"></div>
             </div>
 
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme mt-4">
+                <div
+                    class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column text-center text-md-start">
+                    <div class="mb-2 mb-md-0">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>,
+                        <span class="fw-bold text-primary">Building Permit Management System</span>
+                    </div>
+                    <div>
+                        <a href="#" class="footer-link me-3">Documentation</a>
+                        <a href="#" class="footer-link me-3">Support</a>
+                        <a href="#" class="footer-link">Contact</a>
+                    </div>
+                </div>
+            </footer>
+            <!-- / Footer -->
 
-
-            <!-- Content wrapper -->
+            <div class="content-backdrop fade"></div>
         </div>
-        <!-- / Layout page -->
-    </div>
 
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
+
+        <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+</div>
+
+<!-- Overlay -->
+<div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
 @endsection

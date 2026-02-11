@@ -46,6 +46,12 @@
               </a>
             </li>
 
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Certificate</div>
+              </a>
+            </li>
+
           </ul>
         </li>
 
@@ -146,7 +152,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="" class="menu-link">
+              <a href="{{ route('applicants.accounts.update-accounts') }}" class="menu-link">
                 <div data-i18n="Notifications">Update Account</div>
               </a>
             </li>
@@ -163,7 +169,7 @@
           </a>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a href="" class="menu-link">
+              <a href="{{ route('record.history.log-history') }}" class="menu-link">
                 <div data-i18n="Under Maintenance">Logs</div>
               </a>
             </li>
@@ -202,25 +208,29 @@
               <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
                   <img
-                    src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('sneat/img/avatars/1.png') }}"
-                    alt class="w-px-120 h-px-120 rounded-circle" />
+                    src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }}"
+                    alt="User Avatar"
+                    class="w-px-120 h-px-120 rounded-circle" />
+
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item" href="{{ route('applicants.accounts.view') }}">
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar avatar-online">
                           <img
-                            src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('sneat/img/avatars/1.png') }}"
+                            src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }}"
                             alt class="w-px-120 h-px-120 rounded-circle" />
                         </div>
                       </div>
                       <div class="flex-grow-1">
                         <span class="fw-semibold d-block">{{Auth::user()->name}}</span>
-                        <small class="text-muted"> @php
-                          $role = strtolower(auth()->user()->role);
+                        <small class="text-muted">
+                          @php
+                          $role = strtolower($user->role); // use $user instead of auth()->user()
+
                           if ($role === 'bfp') {
                           $roleLabel = 'BFP';
                           } elseif ($role === 'admin') {
@@ -232,8 +242,25 @@
                           } else {
                           $roleLabel = 'User';
                           }
+
+                          // Status label
+                          $statusLabel = strtolower($user->status ?? 'inactive');
+                          if ($statusLabel === 'active') {
+                          $statusLabel = 'Active';
+                          } elseif ($statusLabel === 'inactive') {
+                          $statusLabel = 'Inactive';
+                          } else {
+                          $statusLabel = ucfirst($statusLabel);
+                          }
                           @endphp
-                          {{ $roleLabel }}</small>
+
+                          {{ $roleLabel }} ||
+                          <span class="px-2 py-1 rounded text-white {{ $user->status === 'active' ? 'bg-success' : 'bg-secondary' }}">
+                            {{ ucfirst($user->status) }}
+                          </span>
+                        </small>
+
+
                       </div>
                     </div>
                   </a>
@@ -242,7 +269,7 @@
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="">
+                  <a class="dropdown-item" href="{{ route('applicants.accounts.view') }}">
                     <i class="bx bx-user me-2"></i>
                     <span class="align-middle">My Profile</span>
                   </a>
@@ -254,7 +281,7 @@
                           </a>
                         </li> -->
                 <li>
-                  <a class="dropdown-item" href="">
+                  <a class="dropdown-item" href="{{ route('record.history.log-history') }}">
                     <i class="menu-icon tf-icons bx bx-file"></i>
                     <span class="align-middle">Logs</span>
                   </a>

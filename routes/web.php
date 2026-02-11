@@ -33,16 +33,23 @@ Auth::routes();
 
 //Admin Routes
 Route::group(['middleware' => ['auth', 'IfAdmin']], function () {
-  Route::get('/Dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+  Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 
 // Users Or Applicants Routes
 Route::group(['middleware' => ['auth', 'IfUsers']], function () {
   Route::get('/Dashboard', [ApplicantsController::class, 'index'])->name('applicants.dashboard');
 
+  // View Log History Of The User Or Applicants
+  Route::prefix('/record')->name('record.history.')->group(function () {
+    Route::get('/log-history', [ApplicantsController::class, 'LogsIndex'])->name('log-history');
+  });
+
   // View And Update the User Or Applicant Accounts
-  Route::prefix('accounts')->name('applicants.accounts.')->group(function(){
+  Route::prefix('accounts')->name('applicants.accounts.')->group(function () {
     Route::get('/view', [ApplicantsController::class, 'AccountsViewIndex'])->name('view');
+    Route::get('/revise', [ApplicantsController::class, 'UpdateAccountsIndex'])->name('update-accounts');
+    Route::put('/revise', [ApplicantsController::class, 'ReviseAccountsIndex'])->name('revise-accounts');
   });
 
   // Apply Permit
@@ -60,6 +67,7 @@ Route::group(['middleware' => ['auth', 'IfUsers']], function () {
     Route::get('/architectural-permit', [ApplicantsController::class, 'ArchitecturalPermitDownload'])->name('architectural-permit');
     Route::get('/electrical-permit', [ApplicantsController::class, 'ElectricalPermitIndex'])->name('electrical-permit');
     Route::get('/plumbing-permit', [ApplicantsController::class, 'PlumbingPermitIndex'])->name('plumbing-permit');
+    Route::get('/documents-guide', [ApplicantsController::class, 'DocumentsGuideIndex'])->name('documents');
   });
 });
 

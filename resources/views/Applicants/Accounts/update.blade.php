@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 
 <div class="layout-wrapper layout-content-navbar">
@@ -8,16 +9,16 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="" class="app-brand-link">
+                <a href="{{ route('applicants.dashboard') }}" class="app-brand-link">
                     <span class="app-brand-logo demo">
                     </span>
                     <img src="{{asset('images/Logo.png')}}" alt="" style="width: 50px;">
                     <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform:uppercase">BPMS</span>
                 </a>
 
-                <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                    <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                </a>
+                <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                </a> -->
             </div>
 
             <div class="menu-inner-shadow"></div>
@@ -30,6 +31,7 @@
                         <div data-i18n="Analytics">Dashboard</div>
                     </a>
                 </li>
+
 
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -54,7 +56,7 @@
                 </li>
 
                 <!-- Layouts -->
-                <li class="menu-item {{ $ActiveTabMenu == 'Downloads' ? 'active' : '' }}">
+                <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon fa-solid fa-download"></i>
                         <div data-i18n="Layouts">Downloads</div>
@@ -62,8 +64,8 @@
 
                     <ul class="menu-sub">
 
-                        <li class="menu-item {{ $SubActiveMenu == 'Permits' ? 'active' : '' }}">
-                            <a href="" class="menu-link">
+                        <li class="menu-item">
+                            <a href="{{ route('applicants.downloads.index') }}" class="menu-link">
                                 <div data-i18n="Without navbar">Permits</div>
                             </a>
                         </li>
@@ -91,54 +93,54 @@
                 </li>
 
                 <!-- <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon fa-solid fa-receipt"></i>
-                        <div data-i18n="Layouts">Payments</div>
-                    </a>
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon fa-solid fa-receipt"></i>
+            <div data-i18n="Layouts">Payments</div>
+          </a>
 
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Pending Payments</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Paid</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Overdue</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Pending Payments</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Paid</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Overdue</div>
+              </a>
+            </li>
+          </ul>
+        </li> -->
 
                 <!-- <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon fa-solid fa-comment"></i>
-                        <div data-i18n="Layouts">Notification / Messages</div>
-                    </a>
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon fa-solid fa-comment"></i>
+            <div data-i18n="Layouts">Notification / Messages</div>
+          </a>
 
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Notifications</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">History Notification</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Notifications</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">History Notification</div>
+              </a>
+            </li>
+          </ul>
+        </li> -->
 
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">Accounts</span>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item {{ $ActiveTabMenu === 'Update-Accounts' ? 'active' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon fa-solid fa-user"></i>
                         <div data-i18n="Account Settings">Account Settings</div>
@@ -149,8 +151,8 @@
                                 <div data-i18n="Account">Account</div>
                             </a>
                         </li>
-                        <li class="menu-item">
-                            <a href="{{ route('applicants.accounts.update-accounts') }}" class="menu-link">
+                        <li class="menu-item {{ $SubActiveMenu === 'Dashboard' ? 'active' : '' }}">
+                            <a href="" class="menu-link">
                                 <div data-i18n="Notifications">Update Account</div>
                             </a>
                         </li>
@@ -288,136 +290,117 @@
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
-
                 <!-- Content -->
                 <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings /</span> Account</h4>
 
-                    <!-- Header -->
-                    <h3 class="mb-3 fw-bold text-primary text-center text-md-start">
-                        Follow the instructions to download the forms you need.
-                    </h3>
-                    <p class="text-muted text-center text-md-start mb-4">
-                        Download the necessary forms to get started with your application process.
-                    </p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i> Account</a>
+                                </li>
+                            </ul>
 
-                    <!-- Steps Section -->
-                    <div class="row g-3">
+                            <div class="card mb-4">
+                                <h5 class="card-header">Profile Details</h5>
+                                <!-- Account -->
+                                <hr class="my-0" />
 
-
-                        <!-- Other paper to upload in order to approve the building permit -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-primary fw-bold mb-1">Documents Guide</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">GUIDE</h6>
-                                    <p class="card-text text-muted small">
-                                        Guide papers
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.documents') }}" class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
+                                <!-- Display Success Message -->
+                                @if(session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
                                 </div>
-                            </div>
-                        </div>
+                                @endif
 
-                        <!-- Step 1 -->
-                        <div class="col-12 col-md-5 col-md-2 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-info fw-bold mb-1">Step 1</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Unified Form</h6>
-                                    <p class="card-text text-muted small">
-                                        Unified application form
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.unified-application-form') }}"
-                                        class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                                <div class="card-body">
+                                    <!-- Display validation errors -->
+                                    @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    @endif
 
-                        <!-- Step 2 -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-secondary fw-bold mb-1">Step 2</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Civil / Structural</h6>
-                                    <p class="card-text text-muted small">
-                                        Civil & structural permit
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.civil-permit') }}"
-                                        class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                                    <!-- Profile Update Form -->
+                                    <form action="{{ route('applicants.accounts.revise-accounts') }}"
+                                        method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
 
-                        <!-- Step 3 -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-success fw-bold mb-1">Step 3</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Architectural</h6>
-                                    <p class="card-text text-muted small">
-                                        Architectural permit
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.architectural-permit') }}"
-                                        class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                                        <!-- Name Field -->
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Name</label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="name"
+                                                name="name"
+                                                value="{{ old('name', Auth::user()->name) }}"
+                                                required>
+                                        </div>
 
-                        <!-- Step 4 -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-danger fw-bold mb-1">Step 4</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Electrical</h6>
-                                    <p class="card-text text-muted small">
-                                        Electrical permit
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.electrical-permit') }}" class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                                        <!-- Email Field -->
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input
+                                                type="email"
+                                                class="form-control"
+                                                id="email"
+                                                name="email"
+                                                value="{{ old('email', Auth::user()->email) }}"
+                                                required>
+                                        </div>
 
-                        <!-- Step 5 -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-warning fw-bold mb-1">Step 5</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Plumbing</h6>
-                                    <p class="card-text text-muted small">
-                                        Plumbing permit
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.plumbing-permit') }}" class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
+                                        <!-- Avatar Field -->
+                                        <div class="mb-3">
+                                            <label for="avatar" class="form-label">Profile Picture</label>
+
+                                            <input
+                                                type="file"
+                                                id="avatarInput"
+                                                name="avatar"
+                                                class="form-control mt-2"
+                                                accept="image/*">
+
+                                            <img
+                                                id="uploadedAvatar"
+                                                src="{{
+            Auth::user()->avatar
+                ? asset(Auth::user()->avatar)
+                : (Auth::user()->google_id
+                    ? session('google_avatar')
+                    : asset('sneat/img/avatars/1.png'))
+        }}"
+                                                alt="avatar"
+                                                class="d-block rounded mt-2"
+                                                width="100"
+                                                height="100" />
+
+                                        </div>
+
+
+                                        <!-- Submit Button -->
+                                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme mt-4">
-                    <div class="container-xxl d-flex flex-wrap justify-content-between py-2
-                    flex-md-row flex-column text-center text-md-start">
+                    <div
+                        class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column text-center text-md-start">
                         <div class="mb-2 mb-md-0">
-                            © <script>
+                            ©
+                            <script>
                                 document.write(new Date().getFullYear());
                             </script>,
                             <span class="fw-bold text-primary">Building Permit Management System</span>
@@ -429,10 +412,10 @@
                         </div>
                     </div>
                 </footer>
+                <!-- / Footer -->
 
                 <div class="content-backdrop fade"></div>
             </div>
-
 
 
             <!-- Content wrapper -->

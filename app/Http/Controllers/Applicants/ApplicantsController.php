@@ -5,14 +5,18 @@ namespace App\Http\Controllers\Applicants;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PermitApplication;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+use App\Models\LogsHistory;
 
 class ApplicantsController extends Controller
 {
     public function index()
     {
-        return view('Applicants.Dashboard.index');
+        $user = Auth::user();
+        return view('Applicants.Dashboard.index', compact('user'));
     }
 
     // Downloads Permits View
@@ -69,6 +73,15 @@ class ApplicantsController extends Controller
         ]);
     }
 
+    // Documents Guide Download
+    public function DocumentsGuideIndex()
+    {
+        return view('Applicants.Downloads.documents-guide', [
+            'ActiveTabMenu' => 'Documents',
+            'SubActiveTab' => 'Guide',
+        ]);
+    }
+
     // Apply Dashboard
     public function ApplyIndex()
     {
@@ -121,7 +134,10 @@ class ApplicantsController extends Controller
         $application->documents = json_encode($documentPaths); // store as JSON array
         $application->save();
 
-
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'You already applied the all the requirements.',
+        ]);
 
         return redirect()->back()
             ->with('success', 'Application submitted successfully!');
@@ -144,5 +160,66 @@ class ApplicantsController extends Controller
             'ActiveTabMenu' => 'View',
             'SubActiveTab' => 'Accounts'
         ], compact('accounts'));
+    }
+
+    // View Update Accounts Dashboard For Applicants
+    public function UpdateAccountsIndex()
+    {
+        $account = Auth::user();
+        return view('Applicants.Accounts.update', [
+            'ActiveTabMenu' => 'Update-Accounts',
+            'SubActiveMenu' => 'Dashboard'
+        ], compact('account'));
+    }
+
+    // Updating The Accounts Of The Users or Applicants
+    public function ReviseAccountsIndex(Request $request)
+    {
+        $accounts = Auth::user();
+
+        // Ensure $accounts is an instance of App\Models\User
+        if (!($accounts instanceof User)) {
+            $accounts = User::findOrFail(Auth::id());
+        }
+
+        // Validate request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $accounts->id,
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Update basic fields
+        $accounts->name = $request->name;
+        $accounts->email = $request->email;
+
+        // Handle avatar if uploaded
+        if ($request->hasFile('avatar')) {
+            $filename = time() . '.' . $request->avatar->extension();
+            $request->avatar->move(public_path('avatars'), $filename);
+            $accounts->avatar = 'avatars/' . $filename;
+        }
+
+        $accounts->save();
+
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Updated account profile information.',
+        ]);
+
+        return redirect()->back()->with('success', 'Profile updated successfully!');
+    }
+
+    // View The Logs History
+    public function LogsIndex()
+    {
+        $userId = Auth::id();
+        $logs = LogsHistory::where('user_id', $userId)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+        return view('Applicants.History.logs-history', [
+            'ActiveTabMenu' => 'Logs',
+            'SubActiveTab' => 'History'
+        ], compact('logs'));
     }
 }

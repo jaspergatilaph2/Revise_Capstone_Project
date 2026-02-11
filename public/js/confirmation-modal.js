@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     const radiusRange = document.getElementById("radiusRange");
     const radiusValue = document.getElementById("radiusValue");
     const confirmBtn = document.getElementById("confirmSubmitBtn");
@@ -8,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const input = document.getElementById('documents');
 
     let filesArray = [];
+    let modalMap = null; // ✅ Declare once only
 
     // 🔹 Live radius display
     radiusRange.addEventListener("input", function () {
@@ -24,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderFilePreview(container, allowRemove = false) {
         container.innerHTML = '';
+
         if (filesArray.length === 0) {
             container.innerHTML = '<p class="text-muted mb-0">No documents uploaded.</p>';
             return;
@@ -33,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         wrapper.classList.add('d-flex', 'flex-wrap', 'gap-2');
 
         filesArray.forEach((file, idx) => {
+
             const fileDiv = document.createElement('div');
             fileDiv.classList.add('border', 'p-2', 'text-center', 'rounded');
             fileDiv.style.width = '120px';
@@ -42,40 +46,54 @@ document.addEventListener("DOMContentLoaded", function () {
             const fileURL = URL.createObjectURL(file);
 
             if (fileType.startsWith('image/')) {
-                fileDiv.innerHTML = `<img src="${fileURL}" alt="${file.name}" style="width:100%;height:100px;object-fit:cover;" class="rounded">`;
-            } else if (fileType === 'application/pdf') {
-                fileDiv.innerHTML = `
-                    <i class="bi bi-file-earmark-pdf-fill text-danger" style="font-size:48px;"></i>
-                    <small class="text-truncate">${file.name}</small>`;
-            } else {
-                fileDiv.innerHTML = `
-                    <i class="bi bi-file-earmark-fill text-secondary" style="font-size:48px;"></i>
-                    <small class="text-truncate">${file.name}</small>`;
+                fileDiv.innerHTML =
+                    `<img src="${fileURL}" style="width:100%;height:100px;object-fit:cover;" class="rounded">`;
+            }
+            else if (fileType === 'application/pdf') {
+                fileDiv.innerHTML =
+                    `<i class="bi bi-file-earmark-pdf-fill text-danger" style="font-size:48px;"></i>
+                     <small class="text-truncate d-block">${file.name}</small>`;
+            }
+            else {
+                fileDiv.innerHTML =
+                    `<i class="bi bi-file-earmark-fill text-secondary" style="font-size:48px;"></i>
+                     <small class="text-truncate d-block">${file.name}</small>`;
             }
 
+            // Remove button
             if (allowRemove) {
                 const removeBtn = document.createElement('button');
                 removeBtn.innerHTML = '&times;';
                 removeBtn.classList.add('btn', 'btn-sm', 'btn-danger', 'position-absolute');
                 removeBtn.style.top = '2px';
                 removeBtn.style.right = '5px';
+
                 removeBtn.onclick = (e) => {
                     e.stopPropagation();
                     filesArray.splice(idx, 1);
                     renderFilePreview(container, true);
                 };
+
                 fileDiv.appendChild(removeBtn);
             }
 
+            // Preview modal
             fileDiv.onclick = () => {
                 const docPreview = document.getElementById('docPreviewContainer');
+
                 if (fileType.startsWith('image/')) {
-                    docPreview.innerHTML = `<img src="${fileURL}" class="img-fluid rounded">`;
-                } else if (fileType === 'application/pdf') {
-                    docPreview.innerHTML = `<iframe src="${fileURL}" width="100%" height="600" style="border:none;"></iframe>`;
-                } else {
-                    docPreview.innerHTML = `<p class="text-muted">Preview not available</p>`;
+                    docPreview.innerHTML =
+                        `<img src="${fileURL}" class="img-fluid rounded">`;
                 }
+                else if (fileType === 'application/pdf') {
+                    docPreview.innerHTML =
+                        `<iframe src="${fileURL}" width="100%" height="600" style="border:none;"></iframe>`;
+                }
+                else {
+                    docPreview.innerHTML =
+                        `<p class="text-muted">Preview not available</p>`;
+                }
+
                 new bootstrap.Modal(document.getElementById('docPreviewModal')).show();
             };
 
@@ -85,65 +103,85 @@ document.addEventListener("DOMContentLoaded", function () {
         container.appendChild(wrapper);
     }
 
+    // ✅ CONFIRM BUTTON
     confirmBtn.addEventListener('click', () => {
-        // Populate modal fields
-        document.getElementById('confirmProjectName').textContent = document.getElementById('project_name').value || 'N/A';
-        document.getElementById('confirmAddress').textContent = document.getElementById('address').value || 'N/A';
-        document.getElementById('confirmLocation').textContent = document.getElementById('location').value || 'N/A';
-        const cost = parseFloat(document.getElementById('project_cost').value) || 0;
-        document.getElementById('confirmProjectCost').textContent = `₱${cost.toLocaleString()}`;
-        document.getElementById('confirmRadius').textContent = document.getElementById('radiusRange').value || '0';
-        document.getElementById('confirmDescription').textContent = document.getElementById('description').value || 'N/A';
 
-        // Render files in modal (no remove buttons)
+        document.getElementById('confirmProjectName').textContent =
+            document.getElementById('project_name').value || 'N/A';
+
+        document.getElementById('confirmAddress').textContent =
+            document.getElementById('address').value || 'N/A';
+
+        document.getElementById('confirmLocation').textContent =
+            document.getElementById('location').value || 'N/A';
+
+        const cost = parseFloat(document.getElementById('project_cost').value) || 0;
+        document.getElementById('confirmProjectCost').textContent =
+            `₱${cost.toLocaleString()}`;
+
+        document.getElementById('confirmRadius').textContent =
+            document.getElementById('radiusRange').value || '0';
+
+        document.getElementById('confirmDescription').textContent =
+            document.getElementById('description').value || 'N/A';
+
         renderFilePreview(document.getElementById('confirmDocuments'), false);
 
-        // Show modal
-        const modal = new bootstrap.Modal(modalEl);
-        modal.show();
-
-        // After modal is fully visible, initialize map
-        modalEl.addEventListener('shown.bs.modal', () => {
-            const mapContainer = document.getElementById('confirmMap');
-            mapContainer.innerHTML = ''; // clear previous map if any
-
-            const lat = parseFloat(document.getElementById('latitude').value) || 14.5995;
-            const lng = parseFloat(document.getElementById('longitude').value) || 120.9842;
-            const radius = parseInt(document.getElementById('radiusRange').value) || 0;
-
-            const modalMap = L.map(mapContainer).setView([lat, lng], 15);
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-            }).addTo(modalMap);
-
-            // Add marker
-            L.marker([lat, lng]).addTo(modalMap).bindPopup("Project Location").openPopup();
-
-            // Add radius circle
-            if (radius > 0) {
-                L.circle([lat, lng], {
-                    radius: radius,
-                    color: "#007bff",
-                    fillColor: "#007bff",
-                    fillOpacity: 0.2,
-                }).addTo(modalMap);
-
-                // Fit bounds so circle is fully visible
-                modalMap.fitBounds([
-                    [lat + 0.01, lng + 0.01],
-                    [lat - 0.01, lng - 0.01]
-                ]);
-            }
-
-            // Fix Leaflet rendering inside hidden modal
-            setTimeout(() => modalMap.invalidateSize(), 300);
-        }, { once: true });
+        new bootstrap.Modal(modalEl).show();
     });
 
-    // 🔹 Final submit
+
+    // ✅ MAP INITIALIZATION AFTER MODAL SHOW
+    modalEl.addEventListener('shown.bs.modal', () => {
+
+        const mapContainer = document.getElementById('confirmMap');
+
+        const lat = parseFloat(document.getElementById('latitude').value) || 14.5995;
+        const lng = parseFloat(document.getElementById('longitude').value) || 120.9842;
+        const radius = parseInt(document.getElementById('radiusRange').value) || 0;
+        const locationText =
+            document.getElementById('location').value || "Project Location";
+
+        // Remove previous map safely
+        if (modalMap !== null) {
+            modalMap.remove();
+            modalMap = null;
+        }
+
+        // Create new map
+        modalMap = L.map(mapContainer).setView([lat, lng], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(modalMap);
+
+        // Marker
+        const marker = L.marker([lat, lng]).addTo(modalMap);
+        marker.bindPopup(`<b>${locationText}</b>`).openPopup();
+
+        // Radius circle
+        if (radius > 0) {
+            const circle = L.circle([lat, lng], {
+                radius: radius,
+                color: "#007bff",
+                fillColor: "#007bff",
+                fillOpacity: 0.2,
+            }).addTo(modalMap);
+
+            modalMap.fitBounds(circle.getBounds());
+        }
+
+        // Fix rendering inside modal
+        setTimeout(() => {
+            modalMap.invalidateSize();
+        }, 200);
+    });
+
+
+    // 🔹 FINAL SUBMIT
     finalSubmit.addEventListener('click', (e) => {
         e.preventDefault();
+
         finalSubmit.disabled = true;
         finalSubmit.textContent = 'Submitting...';
 
@@ -151,9 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
         filesArray.forEach(file => dataTransfer.items.add(file));
         input.files = dataTransfer.files;
 
-        form.submit(); // ✅ sends POST to /apply/store
+        form.submit();
     });
-
-
 
 });

@@ -8,16 +8,16 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="" class="app-brand-link">
+                <a href="{{ route('applicants.dashboard') }}" class="app-brand-link">
                     <span class="app-brand-logo demo">
                     </span>
                     <img src="{{asset('images/Logo.png')}}" alt="" style="width: 50px;">
                     <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform:uppercase">BPMS</span>
                 </a>
 
-                <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                    <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                </a>
+                <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                </a> -->
             </div>
 
             <div class="menu-inner-shadow"></div>
@@ -30,6 +30,7 @@
                         <div data-i18n="Analytics">Dashboard</div>
                     </a>
                 </li>
+
 
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -50,11 +51,12 @@
                                 <div data-i18n="Without navbar">Certificate</div>
                             </a>
                         </li>
+
                     </ul>
                 </li>
 
                 <!-- Layouts -->
-                <li class="menu-item {{ $ActiveTabMenu == 'Downloads' ? 'active' : '' }}">
+                <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon fa-solid fa-download"></i>
                         <div data-i18n="Layouts">Downloads</div>
@@ -62,8 +64,8 @@
 
                     <ul class="menu-sub">
 
-                        <li class="menu-item {{ $SubActiveMenu == 'Permits' ? 'active' : '' }}">
-                            <a href="" class="menu-link">
+                        <li class="menu-item">
+                            <a href="{{ route('applicants.downloads.index') }}" class="menu-link">
                                 <div data-i18n="Without navbar">Permits</div>
                             </a>
                         </li>
@@ -91,49 +93,49 @@
                 </li>
 
                 <!-- <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon fa-solid fa-receipt"></i>
-                        <div data-i18n="Layouts">Payments</div>
-                    </a>
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon fa-solid fa-receipt"></i>
+            <div data-i18n="Layouts">Payments</div>
+          </a>
 
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Pending Payments</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Paid</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Overdue</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Pending Payments</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Paid</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Overdue</div>
+              </a>
+            </li>
+          </ul>
+        </li> -->
 
                 <!-- <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon fa-solid fa-comment"></i>
-                        <div data-i18n="Layouts">Notification / Messages</div>
-                    </a>
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon fa-solid fa-comment"></i>
+            <div data-i18n="Layouts">Notification / Messages</div>
+          </a>
 
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Notifications</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">History Notification</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li> -->
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">Notifications</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="" class="menu-link">
+                <div data-i18n="Without navbar">History Notification</div>
+              </a>
+            </li>
+          </ul>
+        </li> -->
 
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">Accounts</span>
@@ -160,14 +162,14 @@
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">Miscellaneous</span>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item {{ $ActiveTabMenu === 'Logs' ? 'active' : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-file"></i>
                         <div data-i18n="Misc">Misc</div>
                     </a>
                     <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="{{ route('record.history.log-history') }}" class="menu-link">
+                        <li class="menu-item {{ $SubActiveTab === 'History' ? 'active' : ''}}">
+                            <a href="" class="menu-link">
                                 <div data-i18n="Under Maintenance">Logs</div>
                             </a>
                         </li>
@@ -207,7 +209,9 @@
                                 <div class="avatar avatar-online">
                                     <img
                                         src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }}"
-                                        alt class="w-px-120 h-px-120 rounded-circle" />
+                                        alt="User Avatar"
+                                        class="w-px-120 h-px-120 rounded-circle" />
+
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -258,7 +262,7 @@
                           </a>
                         </li> -->
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('record.history.log-history') }}">
+                                    <a class="dropdown-item" href="">
                                         <i class="menu-icon tf-icons bx bx-file"></i>
                                         <span class="align-middle">Logs</span>
                                     </a>
@@ -288,136 +292,105 @@
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
-
                 <!-- Content -->
                 <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Logs /</span>History</h4>
+                    <ul class="nav nav-pills flex-column flex-md-row mb-4">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="javascript:void(0);">
+                                <i class="fa-solid fa-clock-rotate-left"></i> Logs
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Logs History</h5>
 
-                    <!-- Header -->
-                    <h3 class="mb-3 fw-bold text-primary text-center text-md-start">
-                        Follow the instructions to download the forms you need.
-                    </h3>
-                    <p class="text-muted text-center text-md-start mb-4">
-                        Download the necessary forms to get started with your application process.
-                    </p>
-
-                    <!-- Steps Section -->
-                    <div class="row g-3">
-
-
-                        <!-- Other paper to upload in order to approve the building permit -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-primary fw-bold mb-1">Documents Guide</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">GUIDE</h6>
-                                    <p class="card-text text-muted small">
-                                        Guide papers
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.documents') }}" class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
                         </div>
+                        <div class="card-body">
+                            <div class="table-responsive text-nowrap">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Description</th>
+                                            <th>Date Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php $counter = ($logs->currentPage() - 1) * $logs->perPage() + 1; @endphp
+                                        @foreach($logs as $log)
+                                        <tr>
+                                            <td>{{ $counter++ }}</td>
+                                            <td>{{ $log->description }}</td>
+                                            <td>{{ $log->created_at->setTimezone(config('app.timezone'))->format('Y-m-d h:i A') }}</td>
+                                        </tr>
+                                        @endforeach
 
-                        <!-- Step 1 -->
-                        <div class="col-12 col-md-5 col-md-2 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-info fw-bold mb-1">Step 1</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Unified Form</h6>
-                                    <p class="card-text text-muted small">
-                                        Unified application form
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.unified-application-form') }}"
-                                        class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                                        @if($logs->isEmpty())
+                                        <tr>
+                                            <td colspan="3" class="text-center text-muted">No logs found.</td>
+                                        </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
 
-                        <!-- Step 2 -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-secondary fw-bold mb-1">Step 2</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Civil / Structural</h6>
-                                    <p class="card-text text-muted small">
-                                        Civil & structural permit
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.civil-permit') }}"
-                                        class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination pagination-m">
 
-                        <!-- Step 3 -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-success fw-bold mb-1">Step 3</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Architectural</h6>
-                                    <p class="card-text text-muted small">
-                                        Architectural permit
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.architectural-permit') }}"
-                                        class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                                            {{-- Previous Page Link --}}
+                                            @if ($logs->onFirstPage())
+                                            <li class="page-item disabled">
+                                                <span class="page-link">Previous</span>
+                                            </li>
+                                            @else
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $logs->previousPageUrl() }}">Previous</a>
+                                            </li>
+                                            @endif
 
-                        <!-- Step 4 -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-danger fw-bold mb-1">Step 4</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Electrical</h6>
-                                    <p class="card-text text-muted small">
-                                        Electrical permit
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.electrical-permit') }}" class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                                            {{-- Page Number Links --}}
+                                            @foreach ($logs->links()->elements as $element)
+                                            @if (is_array($element))
+                                            @foreach ($element as $page => $url)
+                                            <li class="page-item {{ $logs->currentPage() == $page ? 'active' : '' }}">
+                                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                            </li>
+                                            @endforeach
+                                            @endif
+                                            @endforeach
 
-                        <!-- Step 5 -->
-                        <div class="col-12 col-md-2 col-md-5 animate__animated animate__zoomIn">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-body text-center">
-                                    <div class="text-warning fw-bold mb-1">Step 5</div>
-                                    <i class="fa-solid fa-file-circle-plus text-primary mb-2" style="font-size: 2.2rem;"></i>
-                                    <h6 class="card-title">Plumbing</h6>
-                                    <p class="card-text text-muted small">
-                                        Plumbing permit
-                                    </p>
-                                    <a href="{{ route('applicants.downloads.plumbing-permit') }}" class="btn btn-success btn-sm">
-                                        Download
-                                    </a>
+                                            {{-- Next Page Link --}}
+                                            @if ($logs->hasMorePages())
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $logs->nextPageUrl() }}">Next</a>
+                                            </li>
+                                            @else
+                                            <li class="page-item disabled">
+                                                <span class="page-link">Next</span>
+                                            </li>
+                                            @endif
+
+                                        </ul>
+                                    </nav>
                                 </div>
+
                             </div>
                         </div>
                     </div>
 
+
                 </div>
+
 
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme mt-4">
-                    <div class="container-xxl d-flex flex-wrap justify-content-between py-2
-                    flex-md-row flex-column text-center text-md-start">
+                    <div
+                        class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column text-center text-md-start">
                         <div class="mb-2 mb-md-0">
-                            © <script>
+                            ©
+                            <script>
                                 document.write(new Date().getFullYear());
                             </script>,
                             <span class="fw-bold text-primary">Building Permit Management System</span>
@@ -429,10 +402,10 @@
                         </div>
                     </div>
                 </footer>
+                <!-- / Footer -->
 
                 <div class="content-backdrop fade"></div>
             </div>
-
 
 
             <!-- Content wrapper -->

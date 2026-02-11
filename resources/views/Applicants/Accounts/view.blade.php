@@ -8,7 +8,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="" class="app-brand-link">
+                <a href="{{ route('applicants.dashboard') }}" class="app-brand-link">
                     <span class="app-brand-logo demo">
                     </span>
                     <img src="{{asset('images/Logo.png')}}" alt="" style="width: 50px;">
@@ -25,7 +25,7 @@
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
                 <li class="menu-item">
-                    <a href="" class="menu-link">
+                    <a href="{{ route('applicants.dashboard') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
                     </a>
@@ -46,6 +46,11 @@
                             </a>
                         </li>
 
+                        <li class="menu-item">
+                            <a href="" class="menu-link">
+                                <div data-i18n="Without navbar">Certificate</div>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -146,7 +151,7 @@
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="" class="menu-link">
+                            <a href="{{ route('applicants.accounts.update-accounts') }}" class="menu-link">
                                 <div data-i18n="Notifications">Update Account</div>
                             </a>
                         </li>
@@ -163,7 +168,7 @@
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="" class="menu-link">
+                            <a href="{{ route('record.history.log-history') }}" class="menu-link">
                                 <div data-i18n="Under Maintenance">Logs</div>
                             </a>
                         </li>
@@ -202,7 +207,7 @@
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
                                     <img
-                                        src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('sneat/img/avatars/1.png') }}"
+                                        src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }}"
                                         alt class="w-px-120 h-px-120 rounded-circle" />
                                 </div>
                             </a>
@@ -213,7 +218,7 @@
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
                                                     <img
-                                                        src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('sneat/img/avatars/1.png') }}"
+                                                        src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }} "
                                                         alt class="w-px-120 h-px-120 rounded-circle" />
                                                 </div>
                                             </div>
@@ -254,7 +259,7 @@
                           </a>
                         </li> -->
                                 <li>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('record.history.log-history') }}">
                                         <i class="menu-icon tf-icons bx bx-file"></i>
                                         <span class="align-middle">Logs</span>
                                     </a>
@@ -325,12 +330,20 @@
                                     </div>
 
                                     <!-- Image Field -->
-                                    <div class="mb-3">
-                                        <label for="avatar" class="form-label">Profile Picture</label>
-                                        <img id="uploadedAvatar"
-                                            src="{{ session('google_avatar') ?? asset('sneat/img/avatars/1.png') }}"
-                                            alt="avatar" class="d-block rounded mt-2" width="100" height="100" />
-                                    </div>
+
+                                    <img
+                                        id="uploadedAvatar"
+                                        src="{{
+            Auth::user()->avatar
+                ? asset(Auth::user()->avatar)
+                : (Auth::user()->google_id
+                    ? session('google_avatar')
+                    : asset('sneat/img/avatars/1.png'))
+        }}"
+                                        alt="avatar"
+                                        class="d-block rounded mt-2"
+                                        width="100"
+                                        height="100" />
                                 </div>
 
                                 <!-- /Account -->
