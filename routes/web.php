@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Applicants\ApplicantsController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Engineer\EngineerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -68,6 +69,28 @@ Route::group(['middleware' => ['auth', 'IfUsers']], function () {
     Route::get('/electrical-permit', [ApplicantsController::class, 'ElectricalPermitIndex'])->name('electrical-permit');
     Route::get('/plumbing-permit', [ApplicantsController::class, 'PlumbingPermitIndex'])->name('plumbing-permit');
     Route::get('/documents-guide', [ApplicantsController::class, 'DocumentsGuideIndex'])->name('documents');
+  });
+});
+
+// Engineer Routes
+Route::group(['middleware' => ['auth', 'IfEngineer']], function(){
+  Route::get('/engineer-dashboard', [EngineerController::class, 'EngineerIndex'])->name('engineer.dashboard');
+
+  // Engineer View Accounts or Update Accounts
+  Route::prefix('/revamp')->name('revamp.accounts.')->group(function(){
+    Route::get('/view', [EngineerController::class, 'ViewAccountsIndex'])->name('view');
+    Route::get('/view-update', [EngineerController::class, 'ViewUpdateIndex'])->name('view-update');
+    Route::put('/update', [EngineerController::class, 'UpdateIndex'])->name('update');
+  });
+
+  //Engineer Get The Applicants
+  Route::prefix('/candidate')->name('candidate.applicants.')->group(function(){
+    Route::get('/view-applicants', [EngineerController::class, 'ViewApplicantsIndex'])->name('view');
+  });
+
+  // Engineer Recent Activities
+  Route::prefix('/activities')->name('recents.activities.')->group(function(){
+    Route::get('/activity', [EngineerController::class, 'ActvitiesIndex'])->name('view');
   });
 });
 

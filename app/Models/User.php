@@ -60,4 +60,9 @@ class User extends Authenticatable
         // 3️⃣ Default avatar
         return asset('sneat/img/avatars/1.png');
     }
+
+    public function permitApplications()
+    {
+        return $this->hasMany(PermitApplication::class);
+    }
 }
