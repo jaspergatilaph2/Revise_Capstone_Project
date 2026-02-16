@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PermitApplication;
 use App\Models\User;
+use App\Models\ArchitecturalPlan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
@@ -16,6 +17,7 @@ class ApplicantsController extends Controller
     public function index()
     {
         $user = Auth::user();
+
         return view('Applicants.Dashboard.index', compact('user'));
     }
 
@@ -221,5 +223,55 @@ class ApplicantsController extends Controller
             'ActiveTabMenu' => 'Logs',
             'SubActiveTab' => 'History'
         ], compact('logs'));
+    }
+
+    // View Architectural Uploaded Dashboard
+    public function ArchitecturalUploadIndex()
+    {
+        // You are ignoring $id anyway; maybe you want to use it later
+        $permit = PermitApplication::where('user_id', Auth::id())->first();
+
+        return view('Applicants.Apply.architectural-plan', [
+            'ActiveTabMenu' => 'Architectural-Upload',
+            'SubActiveTab' => 'Plan',
+            'permit' => $permit, // pass $permit here
+        ]);
+    }
+
+
+    // Store The Architectural Plan
+    public function ArchitecturalStoreIndex(Request $request)
+    {
+        
+        $request->validate([
+            'permit_application_id' => 'required|exists:permit_applications,id',
+            'plan_name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'documents' => 'required',
+            'documents.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120',
+        ]);
+
+        $uploadedFiles = [];
+
+        if ($request->hasFile('documents')) {
+            foreach ($request->file('documents') as $file) {
+                $path = $file->store('architectural_plans', 'public');
+                $uploadedFiles[] = $path;
+            }
+        }
+
+        $plan = ArchitecturalPlan::create([
+            'permit_application_id' => $request->permit_application_id,
+            'plan_name' => $request->plan_name,
+            'description' => $request->description,
+            'file_path' => $uploadedFiles, // store as array if column is JSON
+        ]);
+
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Uploaded Architectural Plan: ' . $plan->plan_name,
+        ]);
+
+        return redirect()->back()->with('success', 'Architectural Plan uploaded successfully.');
     }
 }

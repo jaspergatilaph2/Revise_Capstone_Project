@@ -85,6 +85,11 @@
               </a>
             </li>
             <li class="menu-item">
+              <a href="{{ route('apply.permit.view-architectural') }}" class="menu-link">
+                <div data-i18n="Without navbar">Architectural Plan Upload</div>
+              </a>
+            </li>
+            <li class="menu-item">
               <a href="" class="menu-link">
                 <div data-i18n="Without navbar">Issues</div>
               </a>

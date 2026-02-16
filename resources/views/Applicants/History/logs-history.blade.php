@@ -323,7 +323,9 @@
                                         <tr>
                                             <td>{{ $counter++ }}</td>
                                             <td>{{ $log->description }}</td>
-                                            <td>{{ $log->created_at->setTimezone(config('app.timezone'))->format('Y-m-d h:i A') }}</td>
+                                            <td>
+                                                {{ $log->created_at->setTimezone('Asia/Manila')->format('Y-m-d h:i A') }}
+                                            </td>
                                         </tr>
                                         @endforeach
 

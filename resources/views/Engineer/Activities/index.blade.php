@@ -41,7 +41,7 @@
 
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="" class="menu-link">
+                            <a href="{{ route('candidate.applicants.view') }}" class="menu-link">
                                 <div data-i18n="Without menu">View applicant details</div>
                             </a>
                         </li>
@@ -317,6 +317,12 @@
                                     <a class="dropdown-item" href="">
                                         <i class="bx bx-user me-2"></i>
                                         <span class="align-middle">My Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('recents.activities.view') }}">
+                                        <i class="fa-solid fa-chart-line me-2"></i>
+                                        <span class="align-middle">Recent Activities</span>
                                     </a>
                                 </li>
                                 <!-- <li>

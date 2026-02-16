@@ -35,6 +35,11 @@ class PermitApplication extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function architecturalPlans()
+    {
+        return $this->hasMany(ArchitecturalPlan::class);
+    }
+
     
     use HasFactory;
 }

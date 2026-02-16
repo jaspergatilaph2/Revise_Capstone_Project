@@ -319,6 +319,12 @@
                                         <span class="align-middle">My Profile</span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('recents.activities.view') }}">
+                                        <i class="fa-solid fa-chart-line me-2"></i>
+                                        <span class="align-middle">Recent Activities</span>
+                                    </a>
+                                </li>
                                 <!-- <li>
                   <a class="dropdown-item" href="">
                     <i class="bx bx-cog me-2"></i>

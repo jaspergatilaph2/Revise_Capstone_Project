@@ -58,6 +58,8 @@ Route::group(['middleware' => ['auth', 'IfUsers']], function () {
     Route::get('/index', [ApplicantsController::class, 'ApplyIndex'])->name('index');
     Route::post('/store', [ApplicantsController::class, 'ApplyPermitIndex'])->name('permit');
     Route::get('/pending', [ApplicantsController::class, 'PendingPermitIndex'])->name('pending');
+    Route::get('/architectural-uploaded', [ApplicantsController::class, 'ArchitecturalUploadIndex'])->name('view-architectural');
+    Route::post('/store-architectural', [ApplicantsController::class, 'ArchitecturalStoreIndex'])->name('store-architectural');
   });
 
   // Downloads Permits
@@ -86,6 +88,7 @@ Route::group(['middleware' => ['auth', 'IfEngineer']], function(){
   //Engineer Get The Applicants
   Route::prefix('/candidate')->name('candidate.applicants.')->group(function(){
     Route::get('/view-applicants', [EngineerController::class, 'ViewApplicantsIndex'])->name('view');
+    Route::get('/view-uploaded-documents', [EngineerController::class, 'ViewUploadedIndex'])->name('view-documents');
   });
 
   // Engineer Recent Activities

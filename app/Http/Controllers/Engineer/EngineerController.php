@@ -186,4 +186,57 @@ class EngineerController extends Controller
 
         return view('Engineer.Activities.index', compact('users', 'currentUser'));
     }
+
+    // View Uploaded Documents
+    public function ViewUploadedIndex()
+    {
+        $currentUser = Auth::user();
+        $users = User::with('permitApplications')
+            ->where('role', 'user')
+            ->latest()
+            ->get();
+
+        $permitApplications = PermitApplication::whereIn('status', ['pending', 'under_review', 'approved', 'rejected'])
+            ->select('id', 'user_id', 'project_name', 'location', 'address', 'radiusRange', 'status', 'documents', 'created_at', 'description')
+            ->get();
+
+        // Add document URLs safely
+        $users->each(function ($user) {
+            $user->permitApplications->transform(function ($permit) {
+                $documentUrls = [];
+
+                if ($permit->documents) {
+                    $docs = json_decode($permit->documents, true);
+
+                    // Ensure it's an array
+                    if (!is_array($docs)) {
+                        $docs = [$permit->documents];
+                    }
+
+                    foreach ($docs as $doc) {
+                        // Remove any escaped slashes or quotes
+                        $doc = str_replace(['\\', '"'], '', $doc);
+
+                        // Generate proper URL using 'public' disk
+                        $documentUrls[] = Storage::url($doc);
+                    }
+                }
+
+                $permit->document_urls = $documentUrls;
+
+                return $permit;
+            });
+
+            return $user;
+        });
+
+        return view(
+            'Engineer.Applicants.view-uploaded',
+            compact('currentUser', 'users', 'permitApplications'),
+            [
+                'ActiveTabMenu' => 'View-Uploaded',
+                'SubActiveTab' => 'Documents'
+            ]
+        );
+    }
 }

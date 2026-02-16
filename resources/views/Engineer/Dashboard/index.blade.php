@@ -46,7 +46,7 @@
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="" class="menu-link">
+                            <a href="{{ route('candidate.applicants.view-documents') }}" class="menu-link">
                                 <div data-i18n="Without menu">View uploaded plans/documents</div>
                             </a>
                         </li>
