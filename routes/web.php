@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth', 'IfUsers']], function () {
     Route::get('/pending', [ApplicantsController::class, 'PendingPermitIndex'])->name('pending');
     Route::get('/architectural-uploaded', [ApplicantsController::class, 'ArchitecturalUploadIndex'])->name('view-architectural');
     Route::post('/store-architectural', [ApplicantsController::class, 'ArchitecturalStoreIndex'])->name('store-architectural');
+    Route::get('/structural-uploaded', [ApplicantsController::class, 'StructuralPlanIndex'])->name('view-structrual-plan');
+    Route::post('/store-structural', [ApplicantsController::class, 'StoreStructuralPlanIndex'])->name('store-structural');
   });
 
   // Downloads Permits
@@ -75,25 +77,36 @@ Route::group(['middleware' => ['auth', 'IfUsers']], function () {
 });
 
 // Engineer Routes
-Route::group(['middleware' => ['auth', 'IfEngineer']], function(){
+Route::group(['middleware' => ['auth', 'IfEngineer']], function () {
   Route::get('/engineer-dashboard', [EngineerController::class, 'EngineerIndex'])->name('engineer.dashboard');
 
   // Engineer View Accounts or Update Accounts
-  Route::prefix('/revamp')->name('revamp.accounts.')->group(function(){
+  Route::prefix('/revamp')->name('revamp.accounts.')->group(function () {
     Route::get('/view', [EngineerController::class, 'ViewAccountsIndex'])->name('view');
     Route::get('/view-update', [EngineerController::class, 'ViewUpdateIndex'])->name('view-update');
     Route::put('/update', [EngineerController::class, 'UpdateIndex'])->name('update');
   });
 
   //Engineer Get The Applicants
-  Route::prefix('/candidate')->name('candidate.applicants.')->group(function(){
+  Route::prefix('/candidate')->name('candidate.applicants.')->group(function () {
     Route::get('/view-applicants', [EngineerController::class, 'ViewApplicantsIndex'])->name('view');
     Route::get('/view-uploaded-documents', [EngineerController::class, 'ViewUploadedIndex'])->name('view-documents');
   });
 
   // Engineer Recent Activities
-  Route::prefix('/activities')->name('recents.activities.')->group(function(){
+  Route::prefix('/activities')->name('recents.activities.')->group(function () {
     Route::get('/activity', [EngineerController::class, 'ActvitiesIndex'])->name('view');
+  });
+
+  // Engineer Review Plan
+  Route::prefix('review')->name('review.proposal.')->group(function () {
+    Route::get('/review-architectural-plan', [EngineerController::class, 'ReviewArchitecturalPlanIndex'])->name('review-architectural-plan');
+    Route::get('/review-structural-plan', [EngineerController::class, 'StructuralPlanIndex'])->name('review-structural-plan');
+  });
+
+  // Engineer Logs History
+  Route::prefix('/logs')->name('logs.history.')->group(function () {
+    Route::get('/view-history', [EngineerController::class, 'ViewHistoryIndex'])->name('view');
   });
 });
 

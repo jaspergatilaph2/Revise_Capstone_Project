@@ -81,12 +81,12 @@
 
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="" class="menu-link">
+                            <a href="{{ route('review.proposal.review-architectural-plan') }}" class="menu-link">
                                 <div data-i18n="Without menu">Review architectural plans</div>
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="" class="menu-link">
+                            <a href="{{ route('review.proposal.review-structural-plan') }}" class="menu-link">
                                 <div data-i18n="Without navbar">Review structural plans</div>
                             </a>
                         </li>
@@ -177,7 +177,7 @@
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="" class="menu-link">
+                            <a href="{{ route('revamp.accounts.view-update') }}" class="menu-link">
                                 <div data-i18n="Notifications">Update Account</div>
                             </a>
                         </li>
@@ -220,7 +220,7 @@
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="" class="menu-link">
+                            <a href="{{ route('logs.history.view') }}" class="menu-link">
                                 <div data-i18n="Under Maintenance">Logs</div>
                             </a>
                         </li>
@@ -314,7 +314,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('revamp.accounts.view') }}">
                                         <i class="bx bx-user me-2"></i>
                                         <span class="align-middle">My Profile</span>
                                     </a>
@@ -332,7 +332,7 @@
                   </a>
                 </li> -->
                                 <li>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('logs.history.view') }}">
                                         <i class="menu-icon tf-icons bx bx-file"></i>
                                         <span class="align-middle">Logs</span>
                                     </a>

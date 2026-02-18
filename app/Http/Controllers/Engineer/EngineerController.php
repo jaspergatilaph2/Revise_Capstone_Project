@@ -9,6 +9,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\StructuralPlan;
+use App\Models\LogsHistory;
 
 class EngineerController extends Controller
 {
@@ -111,10 +113,10 @@ class EngineerController extends Controller
 
         $accounts->save();
 
-        // LogsHistory::create([
-        //     'user_id' => Auth::id(),
-        //     'description' => 'Updated account profile information.',
-        // ]);
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Updated account profile information.',
+        ]);
 
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
@@ -239,4 +241,196 @@ class EngineerController extends Controller
             ]
         );
     }
+
+    // Review Architectural Plan
+    public function ReviewArchitecturalPlanIndex()
+    {
+        $currentUser = Auth::user();
+
+        $users = User::with([
+            'permitApplications:id,user_id,project_name,status',
+            'permitApplications.architecturalPlans:id,permit_application_id,plan_name,file_path'
+        ])
+            ->where('role', 'user')
+            ->latest()
+            ->get();
+
+
+        // Transform everything properly
+        $users->each(function ($user) {
+
+            $user->permitApplications->transform(function ($permit) {
+
+                // ===============================
+                // PERMIT DOCUMENTS
+                // ===============================
+                $documentUrls = [];
+
+                if ($permit->documents) {
+                    $docs = json_decode($permit->documents, true);
+
+                    if (!is_array($docs)) {
+                        $docs = [$permit->documents];
+                    }
+
+                    foreach ($docs as $doc) {
+                        $doc = str_replace(['\\', '"'], '', $doc);
+                        $documentUrls[] = Storage::url($doc);
+                    }
+                }
+
+                $permit->document_urls = $documentUrls;
+
+
+                // ===============================
+                // ARCHITECTURAL PLANS
+                // ===============================
+                $permit->architecturalPlans->transform(function ($plan) {
+
+                    $planUrls = [];
+
+                    if ($plan->file_path) {
+
+                        $files = is_array($plan->file_path)
+                            ? $plan->file_path
+                            : json_decode($plan->file_path, true);
+
+                        if (!is_array($files)) {
+                            $files = [$plan->file_path];
+                        }
+
+                        foreach ($files as $file) {
+                            $file = str_replace(['\\', '"'], '', $file);
+
+                            // If stored in storage/app/public
+                            $planUrls[] = Storage::url($file);
+                        }
+                    }
+
+                    $plan->file_urls = $planUrls;
+
+                    return $plan;
+                });
+
+                return $permit;
+            });
+
+            return $user;
+        });
+
+        return view(
+            'Engineer.Review.architectural-plan',
+            compact('currentUser', 'users'),
+            [
+                'ActiveTabMenu' => 'View-Architectural',
+                'SubActiveTab' => 'Plan'
+            ]
+        );
+    }
+
+    // View Structural Plan
+    public function StructuralPlanIndex()
+    {
+        $currentUser = Auth::user();
+
+        $users = User::with([
+            'permitApplications:id,user_id,project_name,status',
+            'permitApplications.structuralPlans:id,permit_application_id,plan_name,documents'
+        ])
+            ->where('role', 'user')
+            ->latest()
+            ->get();
+
+        // Transform everything properly
+        $users->each(function ($user) {
+
+            $user->permitApplications->transform(function ($permit) {
+
+                // ===============================
+                // PERMIT DOCUMENTS
+                // ===============================
+                $documentUrls = [];
+
+                if ($permit->documents) {
+                    $docs = json_decode($permit->documents, true);
+
+                    if (!is_array($docs)) {
+                        $docs = [$permit->documents];
+                    }
+
+                    foreach ($docs as $doc) {
+                        $doc = str_replace(['\\', '"'], '', $doc);
+                        $documentUrls[] = Storage::url($doc);
+                    }
+                }
+
+                $permit->document_urls = $documentUrls;
+
+
+                // ===============================
+                // ARCHITECTURAL PLANS
+                // ===============================
+                $permit->architecturalPlans->transform(function ($plan) {
+
+                    $planUrls = [];
+
+                    if ($plan->file_path) {
+
+                        $files = is_array($plan->file_path)
+                            ? $plan->file_path
+                            : json_decode($plan->file_path, true);
+
+                        if (!is_array($files)) {
+                            $files = [$plan->file_path];
+                        }
+
+                        foreach ($files as $file) {
+                            $file = str_replace(['\\', '"'], '', $file);
+
+                            // If stored in storage/app/public
+                            $planUrls[] = Storage::url($file);
+                        }
+                    }
+
+                    $plan->file_urls = $planUrls;
+
+                    return $plan;
+                });
+
+                return $permit;
+            });
+
+            return $user;
+        });
+
+        return view(
+            'Engineer.Review.structural-plan',
+            compact('currentUser', 'users'),
+            [
+                'ActiveTabMenu' => 'View-Structural',
+                'SubActiveTab' => 'Plan'
+            ]
+        );
+    }
+
+    // Engineer Logs History View
+    public function ViewHistoryIndex()
+    {
+        $currentUser = Auth::user();
+
+        $logs = LogsHistory::where('user_id', $currentUser->id)
+            ->latest()
+            ->paginate(10);
+
+        return view(
+            'Engineer.History.log-history',
+            [
+                'logs' => $logs,
+                'currentUser' => $currentUser,
+                'ActiveTabMenu' => 'View-Logs',
+                'SubActiveTab' => 'History'
+            ]
+        );
+    }
+
 }

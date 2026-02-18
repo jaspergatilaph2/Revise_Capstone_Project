@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use App\Models\LogsHistory;
+use App\Models\StructuralPlan;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicantsController extends Controller
 {
@@ -148,11 +150,129 @@ class ApplicantsController extends Controller
     // Pending Dashboard
     public function PendingPermitIndex()
     {
+        $userId = auth()->id(); // currently logged-in user ID
+
+        // Get permits for the logged-in user only
+        $permitApplications = PermitApplication::where('user_id', $userId)
+            ->whereIn('status', ['pending', 'under_review', 'approved', 'rejected'])
+            ->select(
+                'id',
+                'user_id',
+                'project_name',
+                'location',
+                'address',
+                'radiusRange',
+                'status',
+                'documents',
+                'created_at',
+                'description'
+            )
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Transform PermitApplication documents
+        $permitApplications->transform(function ($permit) {
+            $documentUrls = [];
+
+            if ($permit->documents) {
+                $docs = is_array($permit->documents)
+                    ? $permit->documents
+                    : json_decode($permit->documents, true);
+
+                if (!is_array($docs)) {
+                    $docs = [$permit->documents];
+                }
+
+                foreach ($docs as $doc) {
+                    $doc = str_replace(['\\', '"'], '', $doc);
+                    $documentUrls[] = asset('storage/' . $doc); // general permit documents
+                }
+            }
+
+            $permit->document_urls = $documentUrls;
+
+            return $permit;
+        });
+
+        // Architectural plans
+        $architecturalPlans = ArchitecturalPlan::whereIn('permit_application_id', $permitApplications->pluck('id'))
+            ->select('permit_application_id', 'plan_name', 'file_path')
+            ->get()
+            ->groupBy('permit_application_id');
+
+        // Attach architectural plans to each permit
+        $permitApplications->transform(function ($permit) use ($architecturalPlans) {
+            $plans = $architecturalPlans->get($permit->id) ?? collect();
+
+            $planNames = $plans->pluck('plan_name')->all();
+            $fileUrls = [];
+
+            foreach ($plans as $plan) {
+                if (!empty($plan->file_path)) {
+                    $files = is_array($plan->file_path)
+                        ? $plan->file_path
+                        : json_decode($plan->file_path, true);
+
+                    if (!is_array($files)) {
+                        $files = [$files];
+                    }
+
+                    foreach ($files as $file) {
+                        $cleanPath = str_replace(['\\', '"'], '', $file);
+                        $fileUrls[] = asset('storage/' . $cleanPath);
+                    }
+                }
+            }
+
+            $permit->plan_name = $planNames;
+            $permit->plan_files = $fileUrls;
+
+            return $permit;
+        });
+
+        // Structural plans
+        $structuralPlans = StructuralPlan::whereIn('permit_application_id', $permitApplications->pluck('id'))
+            ->select('permit_application_id', 'plan_name', 'documents')
+            ->get()
+            ->groupBy('permit_application_id');
+
+        // Attach structural plans to each permit
+        $permitApplications->transform(function ($permit) use ($structuralPlans) {
+            $plans = $structuralPlans->get($permit->id) ?? collect();
+
+            $planNames = $plans->pluck('plan_name')->all();
+            $fileUrls = [];
+
+            foreach ($plans as $plan) {
+                if (!empty($plan->documents)) {
+                    $files = is_array($plan->documents)
+                        ? $plan->documents
+                        : json_decode($plan->documents, true);
+
+                    if (!is_array($files)) {
+                        $files = [$files];
+                    }
+
+                    foreach ($files as $file) {
+                        $cleanPath = str_replace(['\\', '"'], '', $file);
+                        $fileUrls[] = asset('storage/' . $cleanPath);
+                    }
+                }
+            }
+
+            $permit->structural_plan_names = $planNames;
+            $permit->structural_plan_files = $fileUrls;
+
+            return $permit;
+        });
+
         return view('Applicants.Apply.pending-permit', [
             'ActiveTabMenu' => 'Pending',
-            'SubActiveTab' => 'Permit'
+            'SubActiveTab' => 'Permit',
+            'permitApplications' => $permitApplications
         ]);
     }
+
 
     // Applicants View Accounts
     public function AccountsViewIndex()
@@ -242,7 +362,7 @@ class ApplicantsController extends Controller
     // Store The Architectural Plan
     public function ArchitecturalStoreIndex(Request $request)
     {
-        
+
         $request->validate([
             'permit_application_id' => 'required|exists:permit_applications,id',
             'plan_name' => 'required|string|max:255',
@@ -274,4 +394,56 @@ class ApplicantsController extends Controller
 
         return redirect()->back()->with('success', 'Architectural Plan uploaded successfully.');
     }
+
+    // View Structural Plan Dashboard
+    public function StructuralPlanIndex()
+    {
+        $permit = PermitApplication::where('user_id', Auth::id())->first();
+        return view('Applicants.Apply.structural-plan', [
+            'ActiveTabMenu' => 'Structural-Upload',
+            'SubActiveTab' => 'Plan',
+            'permit' => $permit, // pass $permit here
+        ]);
+    }
+
+    // Store The Structural Plan
+    public function StoreStructuralPlanIndex(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'permit_application_id' => 'required|exists:permit_applications,id',
+            'plan_name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'documents' => 'required',
+            'documents.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120', // max 5MB
+        ]);
+
+        $uploadedFiles = [];
+
+        // Handle file uploads
+        if ($request->hasFile('documents')) {
+            foreach ($request->file('documents') as $file) {
+                // Store each file in 'storage/app/public/structural_plans'
+                $path = $file->store('structural_plans', 'public');
+                $uploadedFiles[] = $path;
+            }
+        }
+
+        // Create the StructuralPlan record
+        $plan = StructuralPlan::create([
+            'permit_application_id' => $request->permit_application_id,
+            'plan_name' => $request->plan_name,
+            'description' => $request->description,
+            'documents' => $uploadedFiles, // <-- fix: column name is 'documents'
+        ]);
+
+        // Log the action
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Uploaded Structural Plan: ' . $plan->plan_name,
+        ]);
+
+        return redirect()->back()->with('success', 'Structural plan uploaded successfully.');
+    }
+
 }

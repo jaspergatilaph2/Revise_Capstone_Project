@@ -17,15 +17,15 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-            </a> -->
+                          <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                        </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <li class="menu-item active">
+                    <li class="menu-item">
                         <a href="{{ route('engineer.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
@@ -41,40 +41,40 @@
                         </a>
 
                         <ul class="menu-sub">
-                            <li class="menu-item">
+                            <li class="menu-item ">
                                 <a href="{{ route('candidate.applicants.view') }}" class="menu-link">
                                     <div data-i18n="Without menu">View applicant details</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
+                            <li class="menu-item ">
                                 <a href="{{ route('candidate.applicants.view-documents') }}" class="menu-link">
                                     <div data-i18n="Without menu">View uploaded plans/documents</div>
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Under Review applications</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Approved applications</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Rejected applications</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Revenue from permit fees</div>
-                                </a>
-                            </li> -->
+                                            <a href="" class="menu-link">
+                                                <div data-i18n="Without menu">Under Review applications</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="" class="menu-link">
+                                                <div data-i18n="Without menu">Approved applications</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="" class="menu-link">
+                                                <div data-i18n="Without menu">Rejected applications</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="" class="menu-link">
+                                                <div data-i18n="Without menu">Revenue from permit fees</div>
+                                            </a>
+                                        </li> -->
                         </ul>
                     </li>
 
-                    <li class="menu-item">
+                    <li class="menu-item {{ $ActiveTabMenu === 'View-Structural' ? 'active' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon fa-solid fa-code-compare"></i>
                             <div data-i18n="Layouts">Plan Review</div>
@@ -86,8 +86,8 @@
                                     <div data-i18n="Without menu">Review architectural plans</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="{{ route('review.proposal.review-structural-plan') }}" class="menu-link">
+                            <li class="menu-item {{ $SubActiveTab === 'Plan' ? 'active' : '' }}">
+                                <a href="" class="menu-link">
                                     <div data-i18n="Without navbar">Review structural plans</div>
                                 </a>
                             </li>
@@ -133,33 +133,33 @@
                         </ul>
                     </li>
                     <!-- <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
-                            <div data-i18n="Account Settings">Payment Management</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Account">Application fees</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Renewal fees</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Pending Payments</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Completed Payments</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li> -->
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
+                                        <div data-i18n="Account Settings">Payment Management</div>
+                                    </a>
+                                    <ul class="menu-sub">
+                                        <li class="menu-item">
+                                            <a href="" class="menu-link">
+                                                <div data-i18n="Account">Application fees</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="" class="menu-link">
+                                                <div data-i18n="Notifications">Renewal fees</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="" class="menu-link">
+                                                <div data-i18n="Notifications">Pending Payments</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="" class="menu-link">
+                                                <div data-i18n="Notifications">Completed Payments</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li> -->
 
 
 
@@ -183,33 +183,33 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                  <a href="" class="menu-link">
-                    <div data-i18n="Notifications">Settings</div>
-                  </a>
-                </li> -->
+                              <a href="" class="menu-link">
+                                <div data-i18n="Notifications">Settings</div>
+                              </a>
+                            </li> -->
 
                         </ul>
                     </li>
 
 
                     <!-- <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-list-check"></i>
-                            <div data-i18n="Account Settings">User Management</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Account">Staff/Inspector</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Applicant</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li> -->
+                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                        <i class="menu-icon fa-solid fa-list-check"></i>
+                                        <div data-i18n="Account Settings">User Management</div>
+                                    </a>
+                                    <ul class="menu-sub">
+                                        <li class="menu-item">
+                                            <a href="" class="menu-link">
+                                                <div data-i18n="Account">Staff/Inspector</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="" class="menu-link">
+                                                <div data-i18n="Notifications">Applicant</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Miscellaneous</span>
@@ -316,7 +316,7 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('revamp.applicants.view-update') }}">
+                                        <a class="dropdown-item" href="">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
@@ -328,11 +328,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                      <a class="dropdown-item" href="">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Settings</span>
-                      </a>
-                    </li> -->
+                                  <a class="dropdown-item" href="">
+                                    <i class="bx bx-cog me-2"></i>
+                                    <span class="align-middle">Settings</span>
+                                  </a>
+                                </li> -->
                                     <li>
                                         <a class="dropdown-item" href="">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -366,8 +366,9 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Recent Activities /</span>Show All
-                            Activities
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Review Architectural Plan
+                                /</span>Show
+                            All Uploaded Documents
                         </h4>
 
                         <div class="row">
@@ -375,66 +376,73 @@
                                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="javascript:void(0);"><i
-                                                class="fa-solid fa-chart-line me-1"></i> All Activities</a>
+                                                class="menu-icon fa-solid fa-folder"></i> All Uploaded Documents</a>
                                     </li>
                                 </ul>
 
                                 <div class="card mb-4">
-                                    <h5 class="card-header">Recent Activities</h5>
+                                    <h5 class="card-header">Applicants Documents Viewer</h5>
                                     <hr class="my-0" />
 
                                     <div class="card-body">
-
                                         <div class="table-responsive">
-                                            <table class="table table-bordered table-hover align-middle">
+                                            <table class="table table-bordered table-striped text-center">
                                                 <thead class="table-light">
                                                     <tr>
-                                                        <th>#</th>
-                                                        <th>User</th>
-                                                        <th>Email</th>
-                                                        <th>Activity</th>
-                                                        <th>Status</th>
-                                                        <th>Date & Time</th>
+                                                        <th>Name</th>
+                                                        <th>Project Name</th>
+                                                        <th>Plan Name(s)</th>
+                                                        <th>Documents</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach($users as $user)
+                                                        @foreach($user->permitApplications as $permit)
+                                                            <tr>
+                                                                <!-- User Name -->
+                                                                <td>{{ $user->name }}</td>
 
-                                                    @forelse($users as $index => $user)
-                                                        <tr>
-                                                            <td>{{ $index + 1 }}</td>
-                                                            <td>{{ $user->name }}</td>
-                                                            <td>{{ $user->email }}</td>
+                                                                <!-- Project Name -->
+                                                                <td>{{ $permit->project_name }}</td>
 
-                                                            {{-- Activity --}}
-                                                            <td>
-                                                                @if($user->permitApplications->count() > 0)
-                                                                    Submitted Application
-                                                                @else
-                                                                    Registered Account
-                                                                @endif
-                                                            </td>
+                                                                <!-- Structural Plan Names -->
+                                                                <td>
+                                                                    @if($permit->structuralPlans->isNotEmpty())
+                                                                        <ul class="list-unstyled mb-0">
+                                                                            @foreach($permit->structuralPlans as $plan)
+                                                                                <li>{{ $plan->plan_name }}</li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    @else
+                                                                        <span class="text-secondary">No Structural Plan</span>
+                                                                    @endif
+                                                                </td>
 
-                                                            {{-- Permit Status --}}
-                                                            <td>
-                                                                @if($user->permitApplications->count() > 0)
-                                                                    {{ ucfirst($user->permitApplications->first()->status) }}
-                                                                @else
-                                                                    No application yet
-                                                                @endif
-                                                            </td>
-
-                                                            <td>{{ $user->created_at->format('M d, Y - h:i A') }}</td>
-                                                        </tr>
-                                                    @empty
-                                                        <tr>
-                                                            <td colspan="6" class="text-center text-muted">
-                                                                No records found
-                                                            </td>
-                                                        </tr>
-                                                    @endforelse
-
+                                                                <!-- Structural Documents -->
+                                                                <td>
+                                                                    @if($permit->structuralPlans->isNotEmpty())
+                                                                        <div class="d-flex flex-column">
+                                                                            @foreach($permit->structuralPlans as $plan)
+                                                                                @if(!empty($plan->documents))
+                                                                                    @foreach($plan->documents as $index => $file)
+                                                                                        <a href="{{ Storage::url($file) }}" target="_blank"
+                                                                                            class="btn btn-sm btn-primary mb-1">
+                                                                                            View File ({{ $index + 1 }})
+                                                                                        </a>
+                                                                                    @endforeach
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </div>
+                                                                    @else
+                                                                        <span class="text-secondary">No Documents</span>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endforeach
                                                 </tbody>
                                             </table>
+
                                         </div>
 
                                     </div>

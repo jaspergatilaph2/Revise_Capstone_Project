@@ -40,6 +40,10 @@ class PermitApplication extends Model
         return $this->hasMany(ArchitecturalPlan::class);
     }
 
-    
+    public function structuralPlans()
+    {
+        return $this->hasMany(StructuralPlan::class, 'permit_application_id');
+    }
+
     use HasFactory;
 }

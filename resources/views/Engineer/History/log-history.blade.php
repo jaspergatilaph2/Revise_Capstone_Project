@@ -17,15 +17,15 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-            </a> -->
+                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <li class="menu-item active">
+                    <li class="menu-item">
                         <a href="{{ route('engineer.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
@@ -52,25 +52,25 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Under Review applications</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Approved applications</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Rejected applications</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Revenue from permit fees</div>
-                                </a>
-                            </li> -->
+                                    <a href="" class="menu-link">
+                                        <div data-i18n="Without menu">Under Review applications</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="" class="menu-link">
+                                        <div data-i18n="Without menu">Approved applications</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="" class="menu-link">
+                                        <div data-i18n="Without menu">Rejected applications</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="" class="menu-link">
+                                        <div data-i18n="Without menu">Revenue from permit fees</div>
+                                    </a>
+                                </li> -->
                         </ul>
                     </li>
 
@@ -133,33 +133,33 @@
                         </ul>
                     </li>
                     <!-- <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
-                            <div data-i18n="Account Settings">Payment Management</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Account">Application fees</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Renewal fees</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Pending Payments</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Completed Payments</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li> -->
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
+                                <div data-i18n="Account Settings">Payment Management</div>
+                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item">
+                                    <a href="" class="menu-link">
+                                        <div data-i18n="Account">Application fees</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="" class="menu-link">
+                                        <div data-i18n="Notifications">Renewal fees</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="" class="menu-link">
+                                        <div data-i18n="Notifications">Pending Payments</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="" class="menu-link">
+                                        <div data-i18n="Notifications">Completed Payments</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li> -->
 
 
 
@@ -183,45 +183,45 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                  <a href="" class="menu-link">
-                    <div data-i18n="Notifications">Settings</div>
-                  </a>
-                </li> -->
+                      <a href="" class="menu-link">
+                        <div data-i18n="Notifications">Settings</div>
+                      </a>
+                    </li> -->
 
                         </ul>
                     </li>
 
 
                     <!-- <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-list-check"></i>
-                            <div data-i18n="Account Settings">User Management</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Account">Staff/Inspector</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Applicant</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li> -->
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon fa-solid fa-list-check"></i>
+                                <div data-i18n="Account Settings">User Management</div>
+                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item">
+                                    <a href="" class="menu-link">
+                                        <div data-i18n="Account">Staff/Inspector</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="" class="menu-link">
+                                        <div data-i18n="Notifications">Applicant</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Miscellaneous</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $ActiveTabMenu === 'View-Logs' ? 'active' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-file"></i>
                             <div data-i18n="Misc">Misc</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="{{ route('logs.history.view') }}" class="menu-link">
+                            <li class="menu-item {{ $SubActiveTab === 'History' ? 'active' : '' }}">
+                                <a href="" class="menu-link">
                                     <div data-i18n="Under Maintenance">Logs</div>
                                 </a>
                             </li>
@@ -316,7 +316,7 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('revamp.applicants.view-update') }}">
+                                        <a class="dropdown-item" href="">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
@@ -366,82 +366,97 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Recent Activities /</span>Show All
-                            Activities
-                        </h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Logs /</span>History</h4>
+                        <ul class="nav nav-pills flex-column flex-md-row mb-4">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="javascript:void(0);">
+                                    <i class="fa-solid fa-clock-rotate-left"></i> Logs
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="mb-0">Logs History</h5>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" href="javascript:void(0);"><i
-                                                class="fa-solid fa-chart-line me-1"></i> All Activities</a>
-                                    </li>
-                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Description</th>
+                                                <th>Date Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php $counter = ($logs->currentPage() - 1) * $logs->perPage() + 1; @endphp
+                                            @foreach($logs as $log)
+                                                <tr>
+                                                    <td>{{ $counter++ }}</td>
+                                                    <td>{{ $log->description }}</td>
+                                                    <td>
+                                                        {{ $log->created_at->setTimezone('Asia/Manila')->format('Y-m-d h:i A') }}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
 
-                                <div class="card mb-4">
-                                    <h5 class="card-header">Recent Activities</h5>
-                                    <hr class="my-0" />
+                                            @if($logs->isEmpty())
+                                                <tr>
+                                                    <td colspan="3" class="text-center text-muted">No logs found.</td>
+                                                </tr>
+                                            @endif
+                                        </tbody>
+                                    </table>
 
-                                    <div class="card-body">
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination pagination-m">
 
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-hover align-middle">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>User</th>
-                                                        <th>Email</th>
-                                                        <th>Activity</th>
-                                                        <th>Status</th>
-                                                        <th>Date & Time</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                                                {{-- Previous Page Link --}}
+                                                @if ($logs->onFirstPage())
+                                                    <li class="page-item disabled">
+                                                        <span class="page-link">Previous</span>
+                                                    </li>
+                                                @else
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="{{ $logs->previousPageUrl() }}">Previous</a>
+                                                    </li>
+                                                @endif
 
-                                                    @forelse($users as $index => $user)
-                                                        <tr>
-                                                            <td>{{ $index + 1 }}</td>
-                                                            <td>{{ $user->name }}</td>
-                                                            <td>{{ $user->email }}</td>
+                                                {{-- Page Number Links --}}
+                                                @foreach ($logs->links()->elements as $element)
+                                                    @if (is_array($element))
+                                                        @foreach ($element as $page => $url)
+                                                            <li class="page-item {{ $logs->currentPage() == $page ? 'active' : '' }}">
+                                                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
 
-                                                            {{-- Activity --}}
-                                                            <td>
-                                                                @if($user->permitApplications->count() > 0)
-                                                                    Submitted Application
-                                                                @else
-                                                                    Registered Account
-                                                                @endif
-                                                            </td>
+                                                {{-- Next Page Link --}}
+                                                @if ($logs->hasMorePages())
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="{{ $logs->nextPageUrl() }}">Next</a>
+                                                    </li>
+                                                @else
+                                                    <li class="page-item disabled">
+                                                        <span class="page-link">Next</span>
+                                                    </li>
+                                                @endif
 
-                                                            {{-- Permit Status --}}
-                                                            <td>
-                                                                @if($user->permitApplications->count() > 0)
-                                                                    {{ ucfirst($user->permitApplications->first()->status) }}
-                                                                @else
-                                                                    No application yet
-                                                                @endif
-                                                            </td>
-
-                                                            <td>{{ $user->created_at->format('M d, Y - h:i A') }}</td>
-                                                        </tr>
-                                                    @empty
-                                                        <tr>
-                                                            <td colspan="6" class="text-center text-muted">
-                                                                No records found
-                                                            </td>
-                                                        </tr>
-                                                    @endforelse
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-
+                                            </ul>
+                                        </nav>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
+
 
                     <!-- Footer -->
                     <footer class="content-footer footer bg-footer-theme mt-4">
@@ -461,6 +476,9 @@
                             </div>
                         </div>
                     </footer>
+                    <!-- / Footer -->
+
+                    <div class="content-backdrop fade"></div>
                 </div>
 
 
