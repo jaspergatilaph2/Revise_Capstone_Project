@@ -62,6 +62,8 @@ Route::group(['middleware' => ['auth', 'IfUsers']], function () {
     Route::post('/store-architectural', [ApplicantsController::class, 'ArchitecturalStoreIndex'])->name('store-architectural');
     Route::get('/structural-uploaded', [ApplicantsController::class, 'StructuralPlanIndex'])->name('view-structrual-plan');
     Route::post('/store-structural', [ApplicantsController::class, 'StoreStructuralPlanIndex'])->name('store-structural');
+    Route::get('/electrical-uploaded', [ApplicantsController::class, 'ElectricalPlanIndex'])->name('view-electrical-plan');
+    Route::post('/store-electrical', [ApplicantsController::class, 'StoreElectricalPlanIndex'])->name('store-electrical');
   });
 
   // Downloads Permits
@@ -91,6 +93,8 @@ Route::group(['middleware' => ['auth', 'IfEngineer']], function () {
   Route::prefix('/candidate')->name('candidate.applicants.')->group(function () {
     Route::get('/view-applicants', [EngineerController::class, 'ViewApplicantsIndex'])->name('view');
     Route::get('/view-uploaded-documents', [EngineerController::class, 'ViewUploadedIndex'])->name('view-documents');
+    Route::get('/view-approval', [EngineerController::class, 'ViewApprovalIndex'])->name('view-approval');
+    Route::post('/under-review/{id}', [EngineerController::class, 'MarkUnderReviewIndex'])->name('under-review');
   });
 
   // Engineer Recent Activities
@@ -102,6 +106,7 @@ Route::group(['middleware' => ['auth', 'IfEngineer']], function () {
   Route::prefix('review')->name('review.proposal.')->group(function () {
     Route::get('/review-architectural-plan', [EngineerController::class, 'ReviewArchitecturalPlanIndex'])->name('review-architectural-plan');
     Route::get('/review-structural-plan', [EngineerController::class, 'StructuralPlanIndex'])->name('review-structural-plan');
+    Route::get('/electrical-plan', [EngineerController::class, 'ElectricalPlanIndex'])->name('review-electrical-plan');
   });
 
   // Engineer Logs History

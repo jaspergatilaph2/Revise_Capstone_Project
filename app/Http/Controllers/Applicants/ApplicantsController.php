@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\PermitApplication;
 use App\Models\User;
 use App\Models\ArchitecturalPlan;
+use App\Models\ElectricalPlans;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
@@ -153,11 +154,13 @@ class ApplicantsController extends Controller
         $userId = auth()->id(); // currently logged-in user ID
 
         // Get permits for the logged-in user only
-        $permitApplications = PermitApplication::where('user_id', $userId)
+        $permitApplications = PermitApplication::with('reviewer')
+            ->where('user_id', $userId)
             ->whereIn('status', ['pending', 'under_review', 'approved', 'rejected'])
             ->select(
                 'id',
                 'user_id',
+                'reviewed_by', // ✅ ADD THIS
                 'project_name',
                 'location',
                 'address',
@@ -169,6 +172,7 @@ class ApplicantsController extends Controller
             )
             ->orderBy('created_at', 'desc')
             ->get();
+
 
         // Transform PermitApplication documents
         $permitApplications->transform(function ($permit) {
@@ -446,4 +450,54 @@ class ApplicantsController extends Controller
         return redirect()->back()->with('success', 'Structural plan uploaded successfully.');
     }
 
+    // View Electrical Plan
+    public function ElectricalPlanIndex()
+    {
+        $permit = PermitApplication::where('user_id', Auth::id())->first();
+        return view('Applicants.Apply.electrical-plan', [
+            'ActiveTabMenu' => 'Electrical-Upload',
+            'SubActiveTab' => 'Plan',
+            'permit' => $permit, // pass $permit here
+        ]);
+    }
+
+    // Store The Electrical Plan To The Database
+    public function StoreElectricalPlanIndex(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'permit_application_id' => 'required|exists:permit_applications,id',
+            'plan_name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'documents' => 'required',
+            'documents.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120', // max 5MB
+        ]);
+
+        $uploadedFiles = [];
+
+        // Handle file uploads
+        if ($request->hasFile('documents')) {
+            foreach ($request->file('documents') as $file) {
+                // Store each file in 'storage/app/public/structural_plans'
+                $path = $file->store('electrical_plans', 'public');
+                $uploadedFiles[] = $path;
+            }
+        }
+
+        // Create the StructuralPlan record
+        $plan = ElectricalPlans::create([
+            'permit_application_id' => $request->permit_application_id,
+            'plan_name' => $request->plan_name,
+            'description' => $request->description,
+            'documents' => $uploadedFiles, // <-- fix: column name is 'documents'
+        ]);
+
+        // Log the action
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Uploaded Electrical Plan: ' . $plan->plan_name,
+        ]);
+
+        return redirect()->back()->with('success', 'Electrical plan uploaded successfully.');
+    }
 }

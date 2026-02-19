@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                                                                                                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                                                                                                            </a> -->
+                                                                                                                                                      <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                                                                                                                                    </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -103,49 +103,49 @@
                     </li>
 
                     <!-- <li class="menu-item">
-                                                                                                      <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                                                                                        <i class="menu-icon fa-solid fa-receipt"></i>
-                                                                                                        <div data-i18n="Layouts">Payments</div>
-                                                                                                      </a>
+                                                                                                                                              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                                                                                                                <i class="menu-icon fa-solid fa-receipt"></i>
+                                                                                                                                                <div data-i18n="Layouts">Payments</div>
+                                                                                                                                              </a>
 
-                                                                                                      <ul class="menu-sub">
-                                                                                                        <li class="menu-item">
-                                                                                                          <a href="" class="menu-link">
-                                                                                                            <div data-i18n="Without navbar">Pending Payments</div>
-                                                                                                          </a>
-                                                                                                        </li>
-                                                                                                        <li class="menu-item">
-                                                                                                          <a href="" class="menu-link">
-                                                                                                            <div data-i18n="Without navbar">Paid</div>
-                                                                                                          </a>
-                                                                                                        </li>
-                                                                                                        <li class="menu-item">
-                                                                                                          <a href="" class="menu-link">
-                                                                                                            <div data-i18n="Without navbar">Overdue</div>
-                                                                                                          </a>
-                                                                                                        </li>
-                                                                                                      </ul>
-                                                                                                    </li> -->
+                                                                                                                                              <ul class="menu-sub">
+                                                                                                                                                <li class="menu-item">
+                                                                                                                                                  <a href="" class="menu-link">
+                                                                                                                                                    <div data-i18n="Without navbar">Pending Payments</div>
+                                                                                                                                                  </a>
+                                                                                                                                                </li>
+                                                                                                                                                <li class="menu-item">
+                                                                                                                                                  <a href="" class="menu-link">
+                                                                                                                                                    <div data-i18n="Without navbar">Paid</div>
+                                                                                                                                                  </a>
+                                                                                                                                                </li>
+                                                                                                                                                <li class="menu-item">
+                                                                                                                                                  <a href="" class="menu-link">
+                                                                                                                                                    <div data-i18n="Without navbar">Overdue</div>
+                                                                                                                                                  </a>
+                                                                                                                                                </li>
+                                                                                                                                              </ul>
+                                                                                                                                            </li> -->
 
                     <!-- <li class="menu-item">
-                                                                                                      <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                                                                                        <i class="menu-icon fa-solid fa-comment"></i>
-                                                                                                        <div data-i18n="Layouts">Notification / Messages</div>
-                                                                                                      </a>
+                                                                                                                                              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                                                                                                                <i class="menu-icon fa-solid fa-comment"></i>
+                                                                                                                                                <div data-i18n="Layouts">Notification / Messages</div>
+                                                                                                                                              </a>
 
-                                                                                                      <ul class="menu-sub">
-                                                                                                        <li class="menu-item">
-                                                                                                          <a href="" class="menu-link">
-                                                                                                            <div data-i18n="Without navbar">Notifications</div>
-                                                                                                          </a>
-                                                                                                        </li>
-                                                                                                        <li class="menu-item">
-                                                                                                          <a href="" class="menu-link">
-                                                                                                            <div data-i18n="Without navbar">History Notification</div>
-                                                                                                          </a>
-                                                                                                        </li>
-                                                                                                      </ul>
-                                                                                                    </li> -->
+                                                                                                                                              <ul class="menu-sub">
+                                                                                                                                                <li class="menu-item">
+                                                                                                                                                  <a href="" class="menu-link">
+                                                                                                                                                    <div data-i18n="Without navbar">Notifications</div>
+                                                                                                                                                  </a>
+                                                                                                                                                </li>
+                                                                                                                                                <li class="menu-item">
+                                                                                                                                                  <a href="" class="menu-link">
+                                                                                                                                                    <div data-i18n="Without navbar">History Notification</div>
+                                                                                                                                                  </a>
+                                                                                                                                                </li>
+                                                                                                                                              </ul>
+                                                                                                                                            </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Accounts</span>
@@ -262,11 +262,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                                                                                                      <a class="dropdown-item" href="">
-                                                                                                                        <i class="bx bx-cog me-2"></i>
-                                                                                                                        <span class="align-middle">Settings</span>
-                                                                                                                      </a>
-                                                                                                                    </li> -->
+                                                                                                                                                              <a class="dropdown-item" href="">
+                                                                                                                                                                <i class="bx bx-cog me-2"></i>
+                                                                                                                                                                <span class="align-middle">Settings</span>
+                                                                                                                                                              </a>
+                                                                                                                                                            </li> -->
                                     <li>
                                         <a class="dropdown-item" href="{{ route('record.history.log-history') }}">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -309,9 +309,18 @@
 
                                         <!-- STEP 1 -->
                                         <div class="position-relative mb-0 mb-md-4">
-                                            <div class="rounded-circle bg-primary text-white mx-auto d-flex align-items-center justify-content-center"
+                                            <div class="rounded-circle bg-secondary text-white mx-auto d-flex align-items-center justify-content-center"
                                                 style="width:36px; height:36px;">1</div>
                                             <div class="small mt-1">Consent</div>
+                                            <div class="d-none d-md-block position-absolute start-50 top-100 translate-middle-x"
+                                                style="width:3px; height:40px; background:#d1d5db;"></div>
+                                        </div>
+
+                                        <!-- STEP 1.5 (Active) -->
+                                        <div class="position-relative mb-0 mb-md-4">
+                                            <div class="rounded-circle bg-primary text-white mx-auto d-flex align-items-center justify-content-center 
+                                border border-primary border-3 animate-pulse" style="width:36px; height:36px;">1.5</div>
+                                            <div class="small mt-1">Pending</div>
                                             <div class="d-none d-md-block position-absolute start-50 top-100 translate-middle-x"
                                                 style="width:3px; height:40px; background:#d1d5db;"></div>
                                         </div>
@@ -333,6 +342,8 @@
                                         </div>
 
                                     </div>
+
+
                                 </div>
 
                                 <!-- ================= STEP CONTENT ================= -->
@@ -408,8 +419,9 @@
                                                                         <td>
                                                                             <div class="d-flex flex-wrap gap-1">
 
-                                                                                {{-- Permit Documents --}}
-                                                                                @if(!empty($permit->document_urls))
+                                                                                {{-- Permit Documents (only show if not under
+                                                                                review) --}}
+                                                                                @if($permit->status !== 'under_review' && !empty($permit->document_urls))
                                                                                     @foreach($permit->document_urls as $i => $docUrl)
                                                                                         <a href="{{ $docUrl }}" target="_blank"
                                                                                             class="btn btn-sm btn-primary text-truncate"
@@ -419,7 +431,7 @@
                                                                                     @endforeach
                                                                                 @endif
 
-                                                                                {{-- Architectural Files --}}
+                                                                                {{-- Architectural Files (always show) --}}
                                                                                 @if(!empty($permit->plan_files))
                                                                                     @foreach($permit->plan_files as $i => $url)
                                                                                         <a href="{{ $url }}" target="_blank"
@@ -430,7 +442,7 @@
                                                                                     @endforeach
                                                                                 @endif
 
-                                                                                {{-- Structural Files --}}
+                                                                                {{-- Structural Files (always show) --}}
                                                                                 @if(!empty($permit->structural_plan_files))
                                                                                     @foreach($permit->structural_plan_files as $i => $url)
                                                                                         <a href="{{ $url }}" target="_blank"
@@ -441,8 +453,10 @@
                                                                                     @endforeach
                                                                                 @endif
 
+                                                                                {{-- Show "No Documents" only if nothing is left
+                                                                                to show --}}
                                                                                 @if(
-                                                                                        empty($permit->document_urls) &&
+                                                                                        ($permit->status === 'under_review' || empty($permit->document_urls)) &&
                                                                                         empty($permit->plan_files) &&
                                                                                         empty($permit->structural_plan_files)
                                                                                     )
@@ -452,6 +466,7 @@
 
                                                                             </div>
                                                                         </td>
+
                                                                     </tr>
                                                                 @empty
                                                                     <tr>
@@ -473,10 +488,71 @@
                                         <div class="col-12">
                                             <div class="card shadow-sm">
                                                 <div class="card-body">
-                                                    <h5 class="fw-bold">Review / Encode Department</h5>
+                                                    <h5 class="fw-bold">Review By The Department</h5>
                                                     <p class="text-muted small">
-                                                        Your year-level adviser will input subjects and schedules.
+                                                        Department staff will check your submissions, verify documents, and
+                                                        update the status accordingly.
                                                     </p>
+
+                                                    @foreach($permitApplications as $index => $permit)
+                                                        <div class="card shadow-sm mb-3">
+
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                    class="table table-bordered table-striped align-middle mb-0">
+                                                                    <thead class="table-light">
+                                                                        <tr>
+                                                                            <th>#</th>
+                                                                            <th>Project Name</th>
+                                                                            <th>Description</th>
+                                                                            <th>Status</th>
+                                                                            <th>Reviewed By</th>
+                                                                            <th>Documents</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>{{ $index + 1 }}</td>
+                                                                            <td>{{ $permit->project_name }}</td>
+                                                                            <td>{{ $permit->description }}</td>
+                                                                            <td>
+                                                                                @if($permit->status === 'under_review')
+                                                                                    <span class="text-warning fw-bold">Under
+                                                                                        Review</span>
+                                                                                @elseif($permit->status === 'approved')
+                                                                                    <span
+                                                                                        class="text-success fw-bold">Approved</span>
+                                                                                @elseif($permit->status === 'rejected')
+                                                                                    <span
+                                                                                        class="text-danger fw-bold">Rejected</span>
+                                                                                @else
+                                                                                    <span
+                                                                                        class="text-secondary fw-bold">Pending</span>
+                                                                                @endif
+                                                                            </td>
+
+                                                                            <td>{{ $permit->reviewer?->name ?? '-' }}</td>
+
+                                                                            <td>
+                                                                                @if(!empty($permit->document_urls))
+                                                                                    <ul class="mb-0 ps-3">
+                                                                                        @foreach($permit->document_urls as $doc)
+                                                                                            <li><a href="{{ $doc }}"
+                                                                                                    target="_blank">View</a></li>
+                                                                                        @endforeach
+                                                                                    </ul>
+                                                                                @else
+                                                                                    -
+                                                                                @endif
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div> <!-- /.table-responsive -->
+
+                                                        </div> <!-- /.card mb-3 -->
+                                                    @endforeach
+
                                                 </div>
                                             </div>
                                         </div>

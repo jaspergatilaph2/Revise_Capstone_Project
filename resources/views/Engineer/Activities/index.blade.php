@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-            </a> -->
+                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                            </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -52,25 +52,25 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Under Review applications</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Approved applications</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Rejected applications</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Revenue from permit fees</div>
-                                </a>
-                            </li> -->
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Without menu">Under Review applications</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Without menu">Approved applications</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Without menu">Rejected applications</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Without menu">Revenue from permit fees</div>
+                                                </a>
+                                            </li> -->
                         </ul>
                     </li>
 
@@ -92,7 +92,7 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('review.proposal.review-electrical-plan') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Review electrical / plumbing plans</div>
                                 </a>
                             </li>
@@ -133,33 +133,33 @@
                         </ul>
                     </li>
                     <!-- <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
-                            <div data-i18n="Account Settings">Payment Management</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Account">Application fees</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Renewal fees</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Pending Payments</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Completed Payments</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li> -->
+                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                            <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
+                                            <div data-i18n="Account Settings">Payment Management</div>
+                                        </a>
+                                        <ul class="menu-sub">
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Account">Application fees</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Renewal fees</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Pending Payments</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Completed Payments</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li> -->
 
 
 
@@ -183,33 +183,33 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                  <a href="" class="menu-link">
-                    <div data-i18n="Notifications">Settings</div>
-                  </a>
-                </li> -->
+                                  <a href="" class="menu-link">
+                                    <div data-i18n="Notifications">Settings</div>
+                                  </a>
+                                </li> -->
 
                         </ul>
                     </li>
 
 
                     <!-- <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-list-check"></i>
-                            <div data-i18n="Account Settings">User Management</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Account">Staff/Inspector</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Applicant</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li> -->
+                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                            <i class="menu-icon fa-solid fa-list-check"></i>
+                                            <div data-i18n="Account Settings">User Management</div>
+                                        </a>
+                                        <ul class="menu-sub">
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Account">Staff/Inspector</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Applicant</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Miscellaneous</span>
@@ -316,7 +316,7 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('revamp.applicants.view-update') }}">
+                                        <a class="dropdown-item" href="{{ route('revamp.accounts.view') }}">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
@@ -328,13 +328,13 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                      <a class="dropdown-item" href="">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Settings</span>
-                      </a>
-                    </li> -->
+                                      <a class="dropdown-item" href="">
+                                        <i class="bx bx-cog me-2"></i>
+                                        <span class="align-middle">Settings</span>
+                                      </a>
+                                    </li> -->
                                     <li>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{ route('logs.history.view') }}">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
                                             <span class="align-middle">Logs</span>
                                         </a>
@@ -395,36 +395,79 @@
                                                         <th>Activity</th>
                                                         <th>Status</th>
                                                         <th>Date & Time</th>
+                                                        <!-- <th>Architectural Plan Name</th>
+                                                                <th>Structural Plan Name</th>
+                                                                <th>Electrical Plan Name</th> -->
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
                                                     @forelse($users as $index => $user)
-                                                        <tr>
-                                                            <td>{{ $index + 1 }}</td>
-                                                            <td>{{ $user->name }}</td>
-                                                            <td>{{ $user->email }}</td>
 
-                                                            {{-- Activity --}}
-                                                            <td>
-                                                                @if($user->permitApplications->count() > 0)
-                                                                    Submitted Application
-                                                                @else
-                                                                    Registered Account
-                                                                @endif
-                                                            </td>
+                                                        @if($user->permitApplications->count() > 0)
 
-                                                            {{-- Permit Status --}}
-                                                            <td>
-                                                                @if($user->permitApplications->count() > 0)
-                                                                    {{ ucfirst($user->permitApplications->first()->status) }}
-                                                                @else
-                                                                    No application yet
-                                                                @endif
-                                                            </td>
+                                                            @foreach($user->permitApplications as $permit)
+                                                                <tr>
+                                                                    <td>{{ $index + 1 }}</td>
+                                                                    <td>{{ $user->name }}</td>
+                                                                    <td>{{ $user->email }}</td>
 
-                                                            <td>{{ $user->created_at->format('M d, Y - h:i A') }}</td>
-                                                        </tr>
+                                                                    {{-- Activity Column --}}
+                                                                    <td>
+                                                                        <strong>Submitted Application</strong><br>
+                                                                        <span class="fw-semibold">{{ $permit->project_name }}</span>
+
+                                                                        {{-- Architectural Plans --}}
+                                                                        @if($permit->architecturalPlans->count())
+                                                                            <div class="mt-2 small text-muted">
+                                                                                <i class="fa-solid fa-drafting-compass text-info me-1"></i>
+                                                                                <strong>Architectural:</strong>
+                                                                                {{ $permit->architecturalPlans->pluck('plan_name')->implode(', ') }}
+                                                                            </div>
+                                                                        @endif
+
+                                                                        {{-- Structural Plans --}}
+                                                                        @if($permit->structuralPlans->count())
+                                                                            <div class="small text-muted">
+                                                                                <i class="fa-solid fa-building text-warning me-1"></i>
+                                                                                <strong>Structural:</strong>
+                                                                                {{ $permit->structuralPlans->pluck('plan_name')->implode(', ') }}
+                                                                            </div>
+                                                                        @endif
+
+                                                                        {{-- Electrical Plans --}}
+                                                                        @if($permit->electricalPlans->count())
+                                                                            <div class="small text-muted">
+                                                                                <i class="fa-solid fa-bolt text-danger me-1"></i>
+                                                                                <strong>Electrical:</strong>
+                                                                                {{ $permit->electricalPlans->pluck('plan_name')->implode(', ') }}
+                                                                            </div>
+                                                                        @endif
+                                                                    </td>
+
+                                                                    {{-- Status --}}
+                                                                    <td>
+                                                                        {{ ucwords(str_replace('_', ' ', $permit->status)) }}
+                                                                    </td>
+
+
+                                                                    {{-- Date --}}
+                                                                    <td>
+                                                                        {{ $permit->created_at->format('M d, Y - h:i A') }}
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+
+                                                        @else
+                                                            <tr>
+                                                                <td>{{ $index + 1 }}</td>
+                                                                <td>{{ $user->name }}</td>
+                                                                <td>{{ $user->email }}</td>
+                                                                <td>Registered Account</td>
+                                                                <td>No application yet</td>
+                                                                <td>{{ $user->created_at->format('M d, Y - h:i A') }}</td>
+                                                            </tr>
+                                                        @endif
+
                                                     @empty
                                                         <tr>
                                                             <td colspan="6" class="text-center text-muted">
@@ -432,8 +475,9 @@
                                                             </td>
                                                         </tr>
                                                     @endforelse
-
                                                 </tbody>
+
+
                                             </table>
                                         </div>
 

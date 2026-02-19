@@ -148,6 +148,8 @@
     <script src="{{ asset('js/proceed-countdown.js') }}"></script>
     <script src="{{ asset('js/activityChart.js') }}"></script>
     <script src="{{ asset('js/architectural-plan.js') }}"></script>
+    <script src="{{ asset('js/underReview.js') }}"></script>
+    <script src="{{ asset('js/anotherTable.js') }}"></script>
     <script src="{{ asset('js/confirmation-modal.js') }}"></script>
 </body>
 

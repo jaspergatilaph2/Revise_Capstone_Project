@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                          <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                        </a> -->
+                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                            </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -52,25 +52,25 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without menu">Under Review applications</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without menu">Approved applications</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without menu">Rejected applications</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without menu">Revenue from permit fees</div>
-                                            </a>
-                                        </li> -->
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Without menu">Under Review applications</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Without menu">Approved applications</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Without menu">Rejected applications</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Without menu">Revenue from permit fees</div>
+                                                </a>
+                                            </li> -->
                         </ul>
                     </li>
 
@@ -92,7 +92,7 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('review.proposal.review-electrical-plan') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Review electrical / plumbing plans</div>
                                 </a>
                             </li>
@@ -133,33 +133,33 @@
                         </ul>
                     </li>
                     <!-- <li class="menu-item">
-                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                        <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
-                                        <div data-i18n="Account Settings">Payment Management</div>
-                                    </a>
-                                    <ul class="menu-sub">
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Account">Application fees</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Notifications">Renewal fees</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Notifications">Pending Payments</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Notifications">Completed Payments</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li> -->
+                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                            <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
+                                            <div data-i18n="Account Settings">Payment Management</div>
+                                        </a>
+                                        <ul class="menu-sub">
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Account">Application fees</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Renewal fees</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Pending Payments</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Completed Payments</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li> -->
 
 
 
@@ -183,33 +183,33 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                              <a href="" class="menu-link">
-                                <div data-i18n="Notifications">Settings</div>
-                              </a>
-                            </li> -->
+                                  <a href="" class="menu-link">
+                                    <div data-i18n="Notifications">Settings</div>
+                                  </a>
+                                </li> -->
 
                         </ul>
                     </li>
 
 
                     <!-- <li class="menu-item">
-                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                        <i class="menu-icon fa-solid fa-list-check"></i>
-                                        <div data-i18n="Account Settings">User Management</div>
-                                    </a>
-                                    <ul class="menu-sub">
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Account">Staff/Inspector</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Notifications">Applicant</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li> -->
+                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                            <i class="menu-icon fa-solid fa-list-check"></i>
+                                            <div data-i18n="Account Settings">User Management</div>
+                                        </a>
+                                        <ul class="menu-sub">
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Account">Staff/Inspector</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Applicant</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Miscellaneous</span>
@@ -316,7 +316,7 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{ route('revamp.accounts.views') }}">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
@@ -328,13 +328,13 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                  <a class="dropdown-item" href="">
-                                    <i class="bx bx-cog me-2"></i>
-                                    <span class="align-middle">Settings</span>
-                                  </a>
-                                </li> -->
+                                      <a class="dropdown-item" href="">
+                                        <i class="bx bx-cog me-2"></i>
+                                        <span class="align-middle">Settings</span>
+                                      </a>
+                                    </li> -->
                                     <li>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{ route('logs.history.view') }}">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
                                             <span class="align-middle">Logs</span>
                                         </a>
@@ -366,7 +366,7 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Review Architectural Plan
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Review Structural Plan
                                 /</span>Show
                             All Uploaded Documents
                         </h4>
