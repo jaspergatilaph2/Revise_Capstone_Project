@@ -135,7 +135,6 @@
     <script src="{{ asset('js/point.js') }}"></script>
     <script src="{{ asset('js/pinpoint.js') }}"></script>
     <script src="{{ asset('js/view-map.js') }}"></script>
-    <script src="{{ asset('js/confirmation-modal.js') }}"></script>
     <!-- <script src="{{ asset('js/multiple-files.js')}}"></script> -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="{{ asset('js/appearNextButton.js') }}"></script>
@@ -149,6 +148,9 @@
     <script src="{{ asset('js/proceed-countdown.js') }}"></script>
     <script src="{{ asset('js/activityChart.js') }}"></script>
     <script src="{{ asset('js/architectural-plan.js') }}"></script>
+    <script src="{{ asset('js/underReview.js') }}"></script>
+    <script src="{{ asset('js/anotherTable.js') }}"></script>
+    <script src="{{ asset('js/confirmation-modal.js') }}"></script>
 </body>
 
 </html>

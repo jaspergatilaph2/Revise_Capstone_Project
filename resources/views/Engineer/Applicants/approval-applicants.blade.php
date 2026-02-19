@@ -41,7 +41,7 @@
                         </a>
 
                         <ul class="menu-sub">
-                            <li class="menu-item {{ $SubActiveTab === 'Dashboard' ? 'active' : '' }}">
+                            <li class="menu-item ">
                                 <a href="" class="menu-link">
                                     <div data-i18n="Without menu">View applicant details</div>
                                 </a>
@@ -49,6 +49,11 @@
                             <li class="menu-item">
                                 <a href="{{ route('candidate.applicants.view-documents') }}" class="menu-link">
                                     <div data-i18n="Without menu">View uploaded plans/documents</div>
+                                </a>
+                            </li>
+                            <li class="menu-item {{ $SubActiveTab === 'Dashboard' ? 'active' : '' }}">
+                                <a href="" class="menu-link">
+                                    <div data-i18n="Without menu">View approval documents</div>
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
@@ -372,6 +377,13 @@
 
                         <div class="row">
                             <div class="col-md-12">
+                                @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
                                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="javascript:void(0);"><i
@@ -392,6 +404,7 @@
                                                         <th>Email</th>
                                                         <th>Avatar</th>
                                                         <th>Applications</th>
+                                                        <th>Approval</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -449,6 +462,7 @@
                                                                                                     <th>Documents</th>
                                                                                                     <th>Status</th>
                                                                                                     <th>Submitted On</th>
+                                                                                                    
                                                                                                 </tr>
                                                                                             </thead>
                                                                                             <tbody>
@@ -513,6 +527,29 @@
                                                                         <span class="text-secondary">No Application</span>
                                                                     @endif
                                                                 </td>
+                                                               <td class="text-center">
+    <!-- Under Review Button (POST Form) -->
+    <form action="{{ route('candidate.applicants.under-review', $permit->id) }}" method="POST" class="d-inline">
+    @csrf
+    <button type="submit" class="btn btn-warning btn-sm"
+        {{ $permit->status === 'under_review' ? 'disabled' : '' }}>
+        <i class="bx bx-hourglass me-1"></i>
+        {{ $permit->status === 'under_review' ? 'Under Review' : 'Mark as Under Review' }}
+    </button>
+</form>
+
+
+    <!-- Approve Button -->
+    <button type="button" class="btn btn-success btn-sm me-1">
+        <i class="fa-solid fa-check me-1"></i> Approve
+    </button>
+
+    <!-- Reject Button -->
+    <button type="button" class="btn btn-danger btn-sm">
+        <i class="fa-solid fa-xmark me-1"></i> Reject
+    </button>
+</td>
+
                                                             </tr>
                                                         @endif
                                                     @endforeach

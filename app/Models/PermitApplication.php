@@ -21,7 +21,8 @@ class PermitApplication extends Model
         'status',
         'avatar',
         'seen',
-        'images'
+        'images',
+        'reviewed_by'
     ];
     protected $casts = [
         'documents' => 'array', // Automatically cast JSON to array
@@ -40,6 +41,20 @@ class PermitApplication extends Model
         return $this->hasMany(ArchitecturalPlan::class);
     }
 
-    
+    public function structuralPlans()
+    {
+        return $this->hasMany(StructuralPlan::class, 'permit_application_id');
+    }
+
+    public function electricalPlans()
+    {
+        return $this->hasMany(ElectricalPlans::class, 'permit_application_id');
+    }
+
+    public function reviewer()
+    {
+        return $this->belongsTo(User::class, 'reviewed_by');
+    }
+
     use HasFactory;
 }
