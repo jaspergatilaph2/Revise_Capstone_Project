@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                          <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                        </a> -->
+                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                            </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -57,25 +57,25 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without menu">Under Review applications</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without menu">Approved applications</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without menu">Rejected applications</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without menu">Revenue from permit fees</div>
-                                            </a>
-                                        </li> -->
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Without menu">Under Review applications</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Without menu">Approved applications</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Without menu">Rejected applications</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Without menu">Revenue from permit fees</div>
+                                                </a>
+                                            </li> -->
                         </ul>
                     </li>
 
@@ -98,7 +98,12 @@
                             </li>
                             <li class="menu-item">
                                 <a href="{{ route('review.proposal.review-electrical-plan') }}" class="menu-link">
-                                    <div data-i18n="Without navbar">Review electrical / plumbing plans</div>
+                                    <div data-i18n="Without navbar">Review electrical plans</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('review.proposal.review-plumbing-plan') }}" class="menu-link">
+                                    <div data-i18n="Without navbar">Review plumbing plans</div>
                                 </a>
                             </li>
                         </ul>
@@ -138,33 +143,33 @@
                         </ul>
                     </li>
                     <!-- <li class="menu-item">
-                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                        <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
-                                        <div data-i18n="Account Settings">Payment Management</div>
-                                    </a>
-                                    <ul class="menu-sub">
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Account">Application fees</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Notifications">Renewal fees</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Notifications">Pending Payments</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Notifications">Completed Payments</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li> -->
+                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                            <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
+                                            <div data-i18n="Account Settings">Payment Management</div>
+                                        </a>
+                                        <ul class="menu-sub">
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Account">Application fees</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Renewal fees</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Pending Payments</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Completed Payments</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li> -->
 
 
 
@@ -188,33 +193,33 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                              <a href="" class="menu-link">
-                                <div data-i18n="Notifications">Settings</div>
-                              </a>
-                            </li> -->
+                                  <a href="" class="menu-link">
+                                    <div data-i18n="Notifications">Settings</div>
+                                  </a>
+                                </li> -->
 
                         </ul>
                     </li>
 
 
                     <!-- <li class="menu-item">
-                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                        <i class="menu-icon fa-solid fa-list-check"></i>
-                                        <div data-i18n="Account Settings">User Management</div>
-                                    </a>
-                                    <ul class="menu-sub">
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Account">Staff/Inspector</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Notifications">Applicant</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li> -->
+                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                            <i class="menu-icon fa-solid fa-list-check"></i>
+                                            <div data-i18n="Account Settings">User Management</div>
+                                        </a>
+                                        <ul class="menu-sub">
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Account">Staff/Inspector</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Applicant</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Miscellaneous</span>
@@ -333,11 +338,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                  <a class="dropdown-item" href="">
-                                    <i class="bx bx-cog me-2"></i>
-                                    <span class="align-middle">Settings</span>
-                                  </a>
-                                </li> -->
+                                      <a class="dropdown-item" href="">
+                                        <i class="bx bx-cog me-2"></i>
+                                        <span class="align-middle">Settings</span>
+                                      </a>
+                                    </li> -->
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logs.history.view') }}">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -441,15 +446,15 @@
 
                                 <!-- Revenue Collected -->
                                 <!-- <div class="col-12 col-sm-6 col-lg-3">
-                                                <div class="card shadow-sm border-0 h-100">
-                                                    <div class="card-body text-center">
-                                                        <i class="fa-solid fa-peso-sign fa-2x text-info mb-2"></i>
-                                                        <h6 class="fw-bold text-uppercase small">Revenue Collected</h6>
-                                                        <h3 class="fw-bolder text-info mb-1" id="totalRevenue">₱120,500</h3>
-                                                        <p class="text-muted small mb-0">Total fees collected</p>
+                                                    <div class="card shadow-sm border-0 h-100">
+                                                        <div class="card-body text-center">
+                                                            <i class="fa-solid fa-peso-sign fa-2x text-info mb-2"></i>
+                                                            <h6 class="fw-bold text-uppercase small">Revenue Collected</h6>
+                                                            <h3 class="fw-bolder text-info mb-1" id="totalRevenue">₱120,500</h3>
+                                                            <p class="text-muted small mb-0">Total fees collected</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div> -->
+                                                </div> -->
                             </div>
 
                             <!-- Quick Stats Section -->
@@ -555,6 +560,19 @@
                                                                                     </div>
                                                                                 @endif
 
+                                                                                <!-- Plumbing Plans -->
+                                                                                @if($permit->plumbingPlan->count() > 0)
+                                                                                    <div class="small text-muted ps-3 mt-1">
+                                                                                        <i class="fa-solid fa-water text-danger me-1"></i>
+                                                                                        Electrical Plan(s):
+                                                                                        <ul class="mb-1 ps-3">
+                                                                                            @foreach($permit->plumbingPlan as $plan)
+                                                                                                <li>{{ $plan->plan_name }}</li>
+                                                                                            @endforeach
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                @endif
+
                                                                             </li>
                                                                         @endforeach
 
@@ -596,49 +614,49 @@
 
                             <!-- User Management Table -->
                             <!-- <div class="row mt-4">
-                                            <div class="col-12">
-                                                <div class="card shadow-sm border-0">
-                                                    <div class="card-body">
-                                                        <h5 class="fw-bold mb-3">
-                                                            <i class="fa-solid fa-users-gear me-2 text-primary"></i> User Management
-                                                        </h5>
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped table-hover mb-0">
-                                                                <thead class="table-light">
-                                                                    <tr>
-                                                                        <th>Name</th>
-                                                                        <th>Role</th>
-                                                                        <th>Status</th>
-                                                                        <th>Last Seen</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
+                                                <div class="col-12">
+                                                    <div class="card shadow-sm border-0">
+                                                        <div class="card-body">
+                                                            <h5 class="fw-bold mb-3">
+                                                                <i class="fa-solid fa-users-gear me-2 text-primary"></i> User Management
+                                                            </h5>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped table-hover mb-0">
+                                                                    <thead class="table-light">
+                                                                        <tr>
+                                                                            <th>Name</th>
+                                                                            <th>Role</th>
+                                                                            <th>Status</th>
+                                                                            <th>Last Seen</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
 
-                                                                    <tr>
-                                                                        <td>John Doe</td>
-                                                                        <td>User</td>
-                                                                        <td>
-                                                                            <span class="px-3 py-2 rounded-pill shadow-sm fw-semibold small text-white bg-success" style="letter-spacing: 0.5px;">
-                                                                                Active
-                                                                            </span>
-
-
-                                                                        </td>
-                                                                        <td>Yesterday</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="4" class="text-center text-muted">No users found</td>
-                                                                    </tr>
-
-                                                                </tbody>
-                                                            </table>
+                                                                        <tr>
+                                                                            <td>John Doe</td>
+                                                                            <td>User</td>
+                                                                            <td>
+                                                                                <span class="px-3 py-2 rounded-pill shadow-sm fw-semibold small text-white bg-success" style="letter-spacing: 0.5px;">
+                                                                                    Active
+                                                                                </span>
 
 
+                                                                            </td>
+                                                                            <td>Yesterday</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="4" class="text-center text-muted">No users found</td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+
+
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div> -->
+                                            </div> -->
                         </div>
                     </div>
 

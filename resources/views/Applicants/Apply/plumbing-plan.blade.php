@@ -71,7 +71,7 @@
 
                         </ul>
                     </li>
-                    <li class="menu-item {{ $ActiveTabMenu === 'Architectural-Upload' ? 'active' : '' }}">
+                    <li class="menu-item {{ $ActiveTabMenu === 'Plumbing-Upload' ? 'active' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon fa-solid fa-ticket"></i>
                             <div data-i18n="Layouts">Apply for Permit</div>
@@ -83,23 +83,23 @@
                                     <div data-i18n="Without navbar">Apply Now</div>
                                 </a>
                             </li>
-                            <li class="menu-item {{ $SubActiveTab === 'Plan' ? 'active' : '' }}">
-                                <a href="" class="menu-link">
+                            <li class="menu-item">
+                                <a href="{{ route('apply.permit.view-architectural') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Architectural Plan Upload</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{ route('apply.permit.view-structural-plan') }}" class="menu-link">
+                                <a href="" class="menu-link">
                                     <div data-i18n="Without navbar">Structural Plan Upload</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="{{ route('apply.permit.view-electrical-plan') }}" class="menu-link">
-                                    <div data-i18n="Without navbar">Electrical Plan Upload</div>
+                                    <div data-i18n="Without navbar">Elcetrical Plan Upload</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="{{ route('apply.permit.view-plumbing-plan') }}" class="menu-link">
+                            <li class="menu-item {{ $SubActiveTab === 'Plan' ? 'active' : '' }}">
+                                <a href="" class="menu-link">
                                     <div data-i18n="Without navbar">Plumbing Plan Upload</div>
                                 </a>
                             </li>
@@ -311,7 +311,7 @@
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4">
-                            <span class="text-muted fw-light">Building Permit /</span> Upload Architectural Plan
+                            <span class="text-muted fw-light">Building Permit /</span> Upload Plumbing Plan
                         </h4>
 
                         <div class="row">
@@ -320,14 +320,14 @@
                                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="javascript:void(0);">
-                                            <i class="bx bx-file me-1"></i> New Architectural Plan
+                                            <i class="bx bx-file me-1"></i> New Plumbing Plan
                                         </a>
                                     </li>
                                 </ul>
 
                                 <!-- Permit Application Card -->
                                 <div class="card mb-4">
-                                    <h5 class="card-header">Architectural Plan</h5>
+                                    <h5 class="card-header">Plumbing Plan</h5>
                                     <hr class="my-0" />
 
                                     <!-- Download Required Forms -->
@@ -360,7 +360,7 @@
                                         @endif
 
 
-                                        <form id="permitForm" action="{{ route('apply.permit.store-architectural') }}"
+                                        <form id="permitForm" action="{{ route('apply.permit.store-plumbing-plan')}}"
                                             method="POST" enctype="multipart/form-data">
                                             @csrf
 

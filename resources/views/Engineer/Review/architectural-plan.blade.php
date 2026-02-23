@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                            </a> -->
+                                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                            </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -52,25 +52,25 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Without menu">Under Review applications</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Without menu">Approved applications</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Without menu">Rejected applications</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Without menu">Revenue from permit fees</div>
-                                                </a>
-                                            </li> -->
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Without menu">Under Review applications</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Without menu">Approved applications</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Without menu">Rejected applications</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Without menu">Revenue from permit fees</div>
+                                                                </a>
+                                                            </li> -->
                         </ul>
                     </li>
 
@@ -93,7 +93,12 @@
                             </li>
                             <li class="menu-item">
                                 <a href="{{ route('review.proposal.review-electrical-plan') }}" class="menu-link">
-                                    <div data-i18n="Without navbar">Review electrical / plumbing plans</div>
+                                    <div data-i18n="Without navbar">Review electrical plans</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('review.proposal.review-plumbing-plan') }}" class="menu-link">
+                                    <div data-i18n="Without navbar">Review plumbing plans</div>
                                 </a>
                             </li>
                         </ul>
@@ -133,33 +138,33 @@
                         </ul>
                     </li>
                     <!-- <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                            <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
-                                            <div data-i18n="Account Settings">Payment Management</div>
-                                        </a>
-                                        <ul class="menu-sub">
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Account">Application fees</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Notifications">Renewal fees</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Notifications">Pending Payments</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Notifications">Completed Payments</div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li> -->
+                                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                            <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
+                                                            <div data-i18n="Account Settings">Payment Management</div>
+                                                        </a>
+                                                        <ul class="menu-sub">
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Account">Application fees</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Notifications">Renewal fees</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Notifications">Pending Payments</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Notifications">Completed Payments</div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </li> -->
 
 
 
@@ -183,33 +188,33 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                  <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Settings</div>
-                                  </a>
-                                </li> -->
+                                                  <a href="" class="menu-link">
+                                                    <div data-i18n="Notifications">Settings</div>
+                                                  </a>
+                                                </li> -->
 
                         </ul>
                     </li>
 
 
                     <!-- <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                            <i class="menu-icon fa-solid fa-list-check"></i>
-                                            <div data-i18n="Account Settings">User Management</div>
-                                        </a>
-                                        <ul class="menu-sub">
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Account">Staff/Inspector</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Notifications">Applicant</div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li> -->
+                                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                            <i class="menu-icon fa-solid fa-list-check"></i>
+                                                            <div data-i18n="Account Settings">User Management</div>
+                                                        </a>
+                                                        <ul class="menu-sub">
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Account">Staff/Inspector</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Notifications">Applicant</div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Miscellaneous</span>
@@ -316,7 +321,7 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('revamp.accouunts.view') }}">
+                                        <a class="dropdown-item" href="{{ route('revamp.accounts.view') }}">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
@@ -328,11 +333,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                      <a class="dropdown-item" href="">
-                                        <i class="bx bx-cog me-2"></i>
-                                        <span class="align-middle">Settings</span>
-                                      </a>
-                                    </li> -->
+                                                      <a class="dropdown-item" href="">
+                                                        <i class="bx bx-cog me-2"></i>
+                                                        <span class="align-middle">Settings</span>
+                                                      </a>
+                                                    </li> -->
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logs.history.view') }}">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -393,6 +398,7 @@
                                                         <th>Project Name</th>
                                                         <th>Plan Name(s)</th>
                                                         <th>Documents</th>
+                                                        <th>Approval</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -437,6 +443,20 @@
                                                                         @else
                                                                             <span class="text-secondary">No Architectural Plan</span>
                                                                         @endif
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <button type="submit" class="btn btn-warning btn-sm">
+                                                                            <i class="fa-solid fa-hourglass-half me-1"></i> Under Review
+                                                                        </button>
+
+                                                                        <button type="submit" class="btn btn-success btn-sm">
+                                                                            <i class="fa-solid fa-check me-1"></i> Approve
+                                                                        </button>
+
+                                                                        <button type="submit" class="btn btn-danger btn-sm">
+                                                                            <i class="fa-solid fa-hourglass-half me-1"></i> Delete
+                                                                        </button>
                                                                     </td>
 
                                                                 </tr>

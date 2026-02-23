@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                            </a> -->
+                                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -92,8 +92,18 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{ route('apply.permit.view-structrual-plan') }}" class="menu-link">
+                                <a href="{{ route('apply.permit.view-structural-plan') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Structural Plan Upload</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('apply.permit.view-electrical-plan') }}" class="menu-link">
+                                    <div data-i18n="Without navbar">Electrical Plan Upload</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('apply.permit.view-plumbing-plan') }}" class="menu-link">
+                                    <div data-i18n="Without navbar">Plumbing Plan Upload</div>
                                 </a>
                             </li>
                             <li class="menu-item">
@@ -105,49 +115,49 @@
                     </li>
 
                     <!-- <li class="menu-item">
-                      <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon fa-solid fa-receipt"></i>
-                        <div data-i18n="Layouts">Payments</div>
-                      </a>
+                          <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon fa-solid fa-receipt"></i>
+                            <div data-i18n="Layouts">Payments</div>
+                          </a>
 
-                      <ul class="menu-sub">
-                        <li class="menu-item">
-                          <a href="" class="menu-link">
-                            <div data-i18n="Without navbar">Pending Payments</div>
-                          </a>
-                        </li>
-                        <li class="menu-item">
-                          <a href="" class="menu-link">
-                            <div data-i18n="Without navbar">Paid</div>
-                          </a>
-                        </li>
-                        <li class="menu-item">
-                          <a href="" class="menu-link">
-                            <div data-i18n="Without navbar">Overdue</div>
-                          </a>
-                        </li>
-                      </ul>
-                    </li> -->
+                          <ul class="menu-sub">
+                            <li class="menu-item">
+                              <a href="" class="menu-link">
+                                <div data-i18n="Without navbar">Pending Payments</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="" class="menu-link">
+                                <div data-i18n="Without navbar">Paid</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="" class="menu-link">
+                                <div data-i18n="Without navbar">Overdue</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </li> -->
 
                     <!-- <li class="menu-item">
-                      <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon fa-solid fa-comment"></i>
-                        <div data-i18n="Layouts">Notification / Messages</div>
-                      </a>
+                          <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon fa-solid fa-comment"></i>
+                            <div data-i18n="Layouts">Notification / Messages</div>
+                          </a>
 
-                      <ul class="menu-sub">
-                        <li class="menu-item">
-                          <a href="" class="menu-link">
-                            <div data-i18n="Without navbar">Notifications</div>
-                          </a>
-                        </li>
-                        <li class="menu-item">
-                          <a href="" class="menu-link">
-                            <div data-i18n="Without navbar">History Notification</div>
-                          </a>
-                        </li>
-                      </ul>
-                    </li> -->
+                          <ul class="menu-sub">
+                            <li class="menu-item">
+                              <a href="" class="menu-link">
+                                <div data-i18n="Without navbar">Notifications</div>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="" class="menu-link">
+                                <div data-i18n="Without navbar">History Notification</div>
+                              </a>
+                            </li>
+                          </ul>
+                        </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Accounts</span>
@@ -265,11 +275,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                      <a class="dropdown-item" href="">
-                                        <i class="bx bx-cog me-2"></i>
-                                        <span class="align-middle">Settings</span>
-                                      </a>
-                                    </li> -->
+                                          <a class="dropdown-item" href="">
+                                            <i class="bx bx-cog me-2"></i>
+                                            <span class="align-middle">Settings</span>
+                                          </a>
+                                        </li> -->
                                     <li>
                                         <a class="dropdown-item" href="">
                                             <i class="menu-icon tf-icons bx bx-file"></i>

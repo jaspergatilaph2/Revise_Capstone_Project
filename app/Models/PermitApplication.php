@@ -51,6 +51,11 @@ class PermitApplication extends Model
         return $this->hasMany(ElectricalPlans::class, 'permit_application_id');
     }
 
+    public function plumbingPlan()
+    {
+        return $this->hasMany(PlumbingPlan::class, 'permit_application_id');
+    }
+
     public function reviewer()
     {
         return $this->belongsTo(User::class, 'reviewed_by');

@@ -48,6 +48,7 @@ class EngineerController extends Controller
             'permitApplications.architecturalPlans',
             'permitApplications.structuralPlans',
             'permitApplications.electricalPlans',
+            'permitApplications.plumbingPlan'
         ])
             ->where('role', 'user')
             ->latest()
@@ -197,6 +198,7 @@ class EngineerController extends Controller
             'permitApplications.architecturalPlans',
             'permitApplications.structuralPlans',
             'permitApplications.electricalPlans',
+            'permitApplications.plumbingPlan'
         ])
             ->where('role', 'user')
             ->latest()
@@ -609,5 +611,92 @@ class EngineerController extends Controller
         $permit->save();
 
         return redirect()->back()->with('success', 'Permit marked as Under Review.');
+    }
+
+    // Engineer View Plumbing Plan
+    public function PlumbingPlanIndex()
+    {
+        $currentUser = Auth::user();
+        $users = User::with([
+            'permitApplications:id,user_id,project_name,status',
+            'permitApplications.plumbingPlan:id,permit_application_id,plan_name,documents'
+        ])
+            ->where('role', 'user')
+            ->latest()
+            ->get();
+
+        // Transform everything properly
+        $users->each(function ($user) {
+
+            $user->permitApplications->transform(function ($permit) {
+
+                // ===============================
+                // PERMIT DOCUMENTS
+                // ===============================
+                $documentUrls = [];
+
+                if ($permit->documents) {
+                    $docs = json_decode($permit->documents, true);
+
+                    if (!is_array($docs)) {
+                        $docs = [$permit->documents];
+                    }
+
+                    foreach ($docs as $doc) {
+                        $doc = str_replace(['\\', '"'], '', $doc);
+                        $documentUrls[] = Storage::url($doc);
+                    }
+                }
+
+                $permit->document_urls = $documentUrls;
+
+
+
+                // ===============================
+// ELECTRICAL PLANS
+// ===============================
+                $permit->plumbingPlan->transform(function ($plan) {
+
+                    $planUrls = [];
+
+                    if ($plan->documents) {
+
+                        $files = is_array($plan->documents)
+                            ? $plan->documents
+                            : json_decode($plan->documents, true);
+
+                        if (!is_array($files)) {
+                            $files = [$plan->documents];
+                        }
+
+                        foreach ($files as $file) {
+
+                            $file = str_replace(['\\', '"'], '', $file);
+
+                            // If files are stored inside:
+                            // storage/app/public/electrical_plans/
+                            $planUrls[] = Storage::url('plumbing_plans/' . $file);
+                        }
+                    }
+
+                    $plan->file_urls = $planUrls;
+
+                    return $plan;
+                });
+
+                return $permit;
+            });
+
+            return $user;
+        });
+
+        return view(
+            'Engineer.Review.plumbing-plan',
+            compact('currentUser', 'users'),
+            [
+                'ActiveTabMenu' => 'View-Plumbing',
+                'SubActiveTab' => 'Plan'
+            ]
+        );
     }
 }

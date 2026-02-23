@@ -60,10 +60,12 @@ Route::group(['middleware' => ['auth', 'IfUsers']], function () {
     Route::get('/pending', [ApplicantsController::class, 'PendingPermitIndex'])->name('pending');
     Route::get('/architectural-uploaded', [ApplicantsController::class, 'ArchitecturalUploadIndex'])->name('view-architectural');
     Route::post('/store-architectural', [ApplicantsController::class, 'ArchitecturalStoreIndex'])->name('store-architectural');
-    Route::get('/structural-uploaded', [ApplicantsController::class, 'StructuralPlanIndex'])->name('view-structrual-plan');
+    Route::get('/structural-uploaded', [ApplicantsController::class, 'StructuralPlanIndex'])->name('view-structural-plan');
     Route::post('/store-structural', [ApplicantsController::class, 'StoreStructuralPlanIndex'])->name('store-structural');
     Route::get('/electrical-uploaded', [ApplicantsController::class, 'ElectricalPlanIndex'])->name('view-electrical-plan');
     Route::post('/store-electrical', [ApplicantsController::class, 'StoreElectricalPlanIndex'])->name('store-electrical');
+    Route::get('/plumbing-plan', [ApplicantsController::class, 'PlumbingPlanIndex'])->name('view-plumbing-plan');
+    Route::post('/store-plumbing-plan', [ApplicantsController::class, 'StorePlumbingPlanIndex'])->name('store-plumbing-plan');
   });
 
   // Downloads Permits
@@ -107,6 +109,7 @@ Route::group(['middleware' => ['auth', 'IfEngineer']], function () {
     Route::get('/review-architectural-plan', [EngineerController::class, 'ReviewArchitecturalPlanIndex'])->name('review-architectural-plan');
     Route::get('/review-structural-plan', [EngineerController::class, 'StructuralPlanIndex'])->name('review-structural-plan');
     Route::get('/electrical-plan', [EngineerController::class, 'ElectricalPlanIndex'])->name('review-electrical-plan');
+    Route::get('/plumbing-plan', [EngineerController::class, 'PlumbingPlanIndex'])->name('review-plumbing-plan');
   });
 
   // Engineer Logs History

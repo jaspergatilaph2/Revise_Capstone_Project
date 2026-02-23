@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use App\Models\LogsHistory;
+use App\Models\PlumbingPlan;
 use App\Models\StructuralPlan;
 use Illuminate\Support\Facades\Storage;
 
@@ -270,6 +271,78 @@ class ApplicantsController extends Controller
             return $permit;
         });
 
+        // Electrical Plans
+        $electricalPlans = ElectricalPlans::whereIn('permit_application_id', $permitApplications->pluck('id'))
+            ->select('permit_application_id', 'plan_name', 'documents')
+            ->get()
+            ->groupBy('permit_application_id');
+
+        // Attach structural plans to each permit
+        $permitApplications->transform(function ($permit) use ($electricalPlans) {
+            $plans = $electricalPlans->get($permit->id) ?? collect();
+
+            $planNames = $plans->pluck('plan_name')->all();
+            $fileUrls = [];
+
+            foreach ($plans as $plan) {
+                if (!empty($plan->documents)) {
+                    $files = is_array($plan->documents)
+                        ? $plan->documents
+                        : json_decode($plan->documents, true);
+
+                    if (!is_array($files)) {
+                        $files = [$files];
+                    }
+
+                    foreach ($files as $file) {
+                        $cleanPath = str_replace(['\\', '"'], '', $file);
+                        $fileUrls[] = asset('storage/' . $cleanPath);
+                    }
+                }
+            }
+
+            $permit->electrical_plan_names = $planNames;
+            $permit->electrical_plan_files = $fileUrls;
+
+            return $permit;
+        });
+
+        // Plumbing Plans
+        $plumbingPlans = PlumbingPlan::whereIn('permit_application_id', $permitApplications->pluck('id'))
+            ->select('permit_application_id', 'plan_name', 'documents')
+            ->get()
+            ->groupBy('permit_application_id');
+
+        // Attach structural plans to each permit
+        $permitApplications->transform(function ($permit) use ($plumbingPlans) {
+            $plans = $plumbingPlans->get($permit->id) ?? collect();
+
+            $planNames = $plans->pluck('plan_name')->all();
+            $fileUrls = [];
+
+            foreach ($plans as $plan) {
+                if (!empty($plan->documents)) {
+                    $files = is_array($plan->documents)
+                        ? $plan->documents
+                        : json_decode($plan->documents, true);
+
+                    if (!is_array($files)) {
+                        $files = [$files];
+                    }
+
+                    foreach ($files as $file) {
+                        $cleanPath = str_replace(['\\', '"'], '', $file);
+                        $fileUrls[] = asset('storage/' . $cleanPath);
+                    }
+                }
+            }
+
+            $permit->plumbing_plan_names = $planNames;
+            $permit->plumbing_plan_files = $fileUrls;
+
+            return $permit;
+        });
+
         return view('Applicants.Apply.pending-permit', [
             'ActiveTabMenu' => 'Pending',
             'SubActiveTab' => 'Permit',
@@ -499,5 +572,56 @@ class ApplicantsController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Electrical plan uploaded successfully.');
+    }
+
+    // View Plumbing Plan Dashboard
+    public function PlumbingPlanIndex()
+    {
+        $permit = PermitApplication::where('user_id', Auth::id())->first();
+        return view('Applicants.Apply.plumbing-plan', [
+            'ActiveTabMenu' => 'Plumbing-Upload',
+            'SubActiveTab' => 'Plan',
+            'permit' => $permit, // pass $permit here
+        ]);
+    }
+
+    // Store Plumbing Plan
+    public function StorePlumbingPlanIndex(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'permit_application_id' => 'required|exists:permit_applications,id',
+            'plan_name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'documents' => 'required',
+            'documents.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120', // max 5MB
+        ]);
+
+        $uploadedFiles = [];
+
+        // Handle file uploads
+        if ($request->hasFile('documents')) {
+            foreach ($request->file('documents') as $file) {
+                // Store each file in 'storage/app/public/structural_plans'
+                $path = $file->store('plumbing_plans', 'public');
+                $uploadedFiles[] = $path;
+            }
+        }
+
+        // Create the StructuralPlan record
+        $plan = PlumbingPlan::create([
+            'permit_application_id' => $request->permit_application_id,
+            'plan_name' => $request->plan_name,
+            'description' => $request->description,
+            'documents' => $uploadedFiles, // <-- fix: column name is 'documents'
+        ]);
+
+        // Log the action
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Uploaded Plumbing Plan: ' . $plan->plan_name,
+        ]);
+
+        return redirect()->back()->with('success', 'Plumbing plan uploaded successfully.');
     }
 }
