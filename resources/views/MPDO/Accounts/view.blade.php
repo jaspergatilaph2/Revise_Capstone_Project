@@ -8,7 +8,7 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="{{ route('engineer.dashboard') }}" class="app-brand-link">
+                    <a href="{{ route('mpdo.dashboard') }}" class="app-brand-link">
                         <span class="app-brand-logo demo">
                         </span>
                         <img src="{{asset('images/Logo.png')}}" alt="" style="width: 50px;">
@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                      <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                    </a> -->
+                                      <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                    </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -26,7 +26,7 @@
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item">
-                        <a href="{{ route('engineer.dashboard') }}" class="menu-link">
+                        <a href="{{ route('mpdo.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -34,133 +34,122 @@
 
                     <!-- Layouts -->
 
-                    <li class="menu-item {{ $ActiveTabMenu === 'View-Uploaded' ? 'active' : '' }}">
+                    <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon fa-solid fa-file"></i>
                             <div data-i18n="Layouts">Permit Applications</div>
                         </a>
 
                         <ul class="menu-sub">
-                            <li class="menu-item ">
-                                <a href="{{ route('candidate.applicants.view') }}" class="menu-link">
-                                    <div data-i18n="Without menu">View applicant details</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ $SubActiveTab === 'Documents' ? 'active' : '' }}">
+                            <li class="menu-item">
                                 <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">View uploaded plans/documents</div>
+                                    <div data-i18n="Without menu">Under Review</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{ route('candidate.applicants.view-approval') }}" class="menu-link">
-                                    <div data-i18n="Without menu">View approval documents</div>
+                                <a href="" class="menu-link">
+                                    <div data-i18n="Without menu">Approved Permits</div>
                                 </a>
                             </li>
-                            <!-- <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Without menu">Under Review applications</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Without menu">Approved applications</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Without menu">Rejected applications</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Without menu">Revenue from permit fees</div>
-                                        </a>
-                                    </li> -->
+                            <li class="menu-item">
+                                <a href="" class="menu-link">
+                                    <div data-i18n="Without menu">Rejected Permits</div>
+                                </a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="" class="menu-link">
+                                    <div data-i18n="Without menu">Archived Applications</div>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-code-compare"></i>
-                            <div data-i18n="Layouts">Plan Review</div>
-                        </a>
-
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="{{ route('review.proposal.review-architectural-plan') }}" class="menu-link">
-                                    <div data-i18n="Without menu">Review architectural plans</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ route('review.proposal.review-structural-plan') }}" class="menu-link">
-                                    <div data-i18n="Without navbar">Review structural plans</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ route('review.proposal.review-electrical-plan') }}" class="menu-link">
-                                    <div data-i18n="Without navbar">Review electrical / plumbing plans</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-binoculars"></i>
-                            <div data-i18n="Layouts">Inspections</div>
+                            <i class="menu-icon fa-solid fa-hourglass"></i>
+                            <div data-i18n="Layouts">Project Monitoring</div>
                         </a>
 
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Scheduled inspections</div>
+                                    <div data-i18n="Without menu"> Ongoing Projects</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Inspection checklist</div>
+                                    <div data-i18n="Without navbar">Completed Projects</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Add inspection findings</div>
+                                    <div data-i18n="Without navbar">Infrastructure Projects</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Upload site photos</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Mark as Passed / Failed</div>
+                                    <div data-i18n="Without navbar">Private Developments</div>
                                 </a>
                             </li>
                         </ul>
                     </li>
+
                     <!-- <li class="menu-item">
                                 <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                    <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
-                                    <div data-i18n="Account Settings">Payment Management</div>
+                                    <i class="menu-icon fa-solid fa-building"></i>
+                                    <div data-i18n="Layouts">Development Projects</div>
                                 </a>
+
                                 <ul class="menu-sub">
                                     <li class="menu-item">
                                         <a href="" class="menu-link">
-                                            <div data-i18n="Account">Application fees</div>
+                                            <div data-i18n="Without navbar">All Projects</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
                                         <a href="" class="menu-link">
-                                            <div data-i18n="Notifications">Renewal fees</div>
+                                            <div data-i18n="Without navbar">Ongoing</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
                                         <a href="" class="menu-link">
-                                            <div data-i18n="Notifications">Pending Payments</div>
+                                            <div data-i18n="Without navbar">Completed</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
                                         <a href="" class="menu-link">
-                                            <div data-i18n="Notifications">Completed Payments</div>
+                                            <div data-i18n="Without navbar">Proposed</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li> -->
+
+                    <!-- <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <i class="menu-icon fa-solid fa-chart-simple"></i>
+                                    <div data-i18n="Layouts">Reports & Analytics</div>
+                                </a>
+
+                                <ul class="menu-sub">
+                                    <li class="menu-item">
+                                        <a href="" class="menu-link">
+                                            <div data-i18n="Without navbar">Annual investment plans (AIP)</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="" class="menu-link">
+                                            <div data-i18n="Without navbar">Budget allocation and utilization</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="" class="menu-link">
+                                            <div data-i18n="Without navbar">Infrastructure development progress</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="" class="menu-link">
+                                            <div data-i18n="Without navbar">Population and demographic analysis</div>
                                         </a>
                                     </li>
                                 </ul>
@@ -169,52 +158,32 @@
 
 
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Accounts Settings / User Management</span>
+                        <span class="menu-header-text">Accounts</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $ActiveTabMenu === 'View' ? 'active' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon fa-solid fa-user"></i>
                             <div data-i18n="Account Settings">Account Settings</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="{{ route('revamp.accounts.view') }}" class="menu-link">
+                            <li class="menu-item {{ $SubActiveTab === 'Accounts' ? 'active' : '' }}">
+                                <a href="" class="menu-link">
                                     <div data-i18n="Account">Account</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{ route('revamp.accounts.view-update') }}" class="menu-link">
+                                <a href="{{ route('details.accounts.update') }}" class="menu-link">
                                     <div data-i18n="Notifications">Update Account</div>
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                          <a href="" class="menu-link">
-                            <div data-i18n="Notifications">Settings</div>
-                          </a>
-                        </li> -->
+                                          <a href="" class="menu-link">
+                                            <div data-i18n="Notifications">Settings</div>
+                                          </a>
+                                        </li> -->
 
                         </ul>
                     </li>
-
-
-                    <!-- <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                    <i class="menu-icon fa-solid fa-list-check"></i>
-                                    <div data-i18n="Account Settings">User Management</div>
-                                </a>
-                                <ul class="menu-sub">
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Account">Staff/Inspector</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Notifications">Applicant</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Miscellaneous</span>
@@ -226,7 +195,7 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="{{ route('logs.history.view') }}" class="menu-link">
+                                <a href="" class="menu-link">
                                     <div data-i18n="Under Maintenance">Logs</div>
                                 </a>
                             </li>
@@ -264,7 +233,7 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }}"
+                                        <img src="{{ $currentUser->avatar ? asset('storage/' . $currentUser->avatar) : asset('sneat/img/avatars/1.png') }}"
                                             alt class="w-px-120 h-px-120 rounded-circle" />
                                     </div>
                                 </a>
@@ -274,7 +243,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }}"
+                                                        <img src="{{ $currentUser->avatar ? asset('storage/' . $currentUser->avatar) : asset('sneat/img/avatars/1.png') }}"
                                                             alt class="w-px-120 h-px-120 rounded-circle" />
                                                     </div>
                                                 </div>
@@ -312,7 +281,6 @@
                                                             class="px-2 py-1 rounded text-white {{ $currentUser->status === 'active' ? 'bg-success' : 'bg-secondary' }}">
                                                             {{ ucfirst($currentUser->status) }}
                                                         </span>
-                                                    </small>
                                                 </div>
                                             </div>
                                         </a>
@@ -321,25 +289,19 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('revamp.accounts.view') }}">
+                                        <a class="dropdown-item" href="">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('recents.activities.view') }}">
-                                            <i class="fa-solid fa-chart-line me-2"></i>
-                                            <span class="align-middle">Recent Activities</span>
-                                        </a>
-                                    </li>
                                     <!-- <li>
-                              <a class="dropdown-item" href="">
-                                <i class="bx bx-cog me-2"></i>
-                                <span class="align-middle">Settings</span>
-                              </a>
-                            </li> -->
+                                          <a class="dropdown-item" href="">
+                                            <i class="bx bx-cog me-2"></i>
+                                            <span class="align-middle">Settings</span>
+                                          </a>
+                                        </li> -->
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('logs.history.view') }}">
+                                        <a class="dropdown-item" href="">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
                                             <span class="align-middle">Logs</span>
                                         </a>
@@ -371,8 +333,8 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Applicants Management /</span>Show
-                            All Uploaded Documents
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Applicants Account Settings
+                                /</span>Show Account
                         </h4>
 
                         <div class="row">
@@ -380,60 +342,54 @@
                                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="javascript:void(0);"><i
-                                                class="menu-icon fa-solid fa-folder"></i> All Uploaded Documents</a>
+                                                class="bx bx-user me-1"></i> Account</a>
                                     </li>
                                 </ul>
 
                                 <div class="card mb-4">
-                                    <h5 class="card-header">Applicants Documents Viewer</h5>
+                                    <h5 class="card-header">Profile Details</h5>
+                                    <!-- Account -->
                                     <hr class="my-0" />
 
                                     <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped text-center">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Project Name</th>
-                                                        <th>Documents</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach($users as $user)
-                                                        @if($user->role === 'user')
-                                                            @foreach($user->permitApplications as $permit)
-                                                                <tr>
-                                                                    <!-- User Name -->
-                                                                    <td>{{ $user->name }}</td>
+                                        <!-- User Data -->
+                                        <div class="row">
+                                            <!-- Name Field -->
+                                            <div class="mb-3 col-md-6">
+                                                <label for="name" class="form-label">Name</label>
+                                                <input class="form-control" type="text" id="name" name="name"
+                                                    value="{{ $currentUser->name }}" readonly />
+                                            </div>
 
-                                                                    <!-- Project Name -->
-                                                                    <td>{{ $permit->project_name }}</td>
+                                            <!-- Email Field -->
+                                            <div class="mb-3 col-md-6">
+                                                <label for="email" class="form-label">E-mail</label>
+                                                <input class="form-control" type="email" id="email" name="email"
+                                                    value="{{ $currentUser->email }}" readonly />
+                                            </div>
 
-                                                                    <!-- Documents -->
-                                                                    <td>
-                                                                        @if(!empty($permit->document_urls))
-                                                                            <div class="d-flex flex-column">
-                                                                                @foreach($permit->document_urls as $index => $docUrl)
-                                                                                    <a href="{{ $docUrl }}" target="_blank"
-                                                                                        class="btn btn-sm btn-primary mb-1">
-                                                                                        View Document ({{ $index + 1 }})
-                                                                                    </a>
-                                                                                @endforeach
-                                                                            </div>
-                                                                        @else
-                                                                            <span class="text-secondary">No Document</span>
-                                                                        @endif
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                            <!-- Role Field -->
+                                            <div class="mb-3 col-md-6">
+                                                <label for="role" class="form-label">Role</label>
+                                                <input class="form-control" type="text" id="role" name="role"
+                                                    value="{{ $currentUser->role }}" readonly />
+                                            </div>
                                         </div>
 
+                                        <!-- Image Field -->
+
+                                        <img id="uploadedAvatar" src="{{
+        Auth::user()->avatar
+        ? asset(Auth::user()->avatar)
+        : (Auth::user()->google_id
+            ? session('google_avatar')
+            : asset('sneat/img/avatars/1.png'))
+                            }}" alt="avatar" class="d-block rounded mt-2" width="100" height="100" />
                                     </div>
+
+                                    <!-- /Account -->
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -456,6 +412,9 @@
                             </div>
                         </div>
                     </footer>
+                    <!-- / Footer -->
+
+                    <div class="content-backdrop fade"></div>
                 </div>
 
 

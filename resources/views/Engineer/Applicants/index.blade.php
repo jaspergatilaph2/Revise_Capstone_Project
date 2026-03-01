@@ -51,6 +51,11 @@
                                     <div data-i18n="Without menu">View uploaded plans/documents</div>
                                 </a>
                             </li>
+                            <li class="menu-item">
+                                <a href="{{ route('candidate.applicants.view-approval') }}" class="menu-link">
+                                    <div data-i18n="Without menu">View approval documents</div>
+                                </a>
+                            </li>s
                             <!-- <li class="menu-item">
                                     <a href="" class="menu-link">
                                         <div data-i18n="Without menu">Under Review applications</div>

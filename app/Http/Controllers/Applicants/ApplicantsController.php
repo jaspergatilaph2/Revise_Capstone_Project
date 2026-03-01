@@ -343,10 +343,13 @@ class ApplicantsController extends Controller
             return $permit;
         });
 
+        $user = auth()->user();
+
         return view('Applicants.Apply.pending-permit', [
             'ActiveTabMenu' => 'Pending',
             'SubActiveTab' => 'Permit',
-            'permitApplications' => $permitApplications
+            'permitApplications' => $permitApplications,
+            'user' => $user,
         ]);
     }
 

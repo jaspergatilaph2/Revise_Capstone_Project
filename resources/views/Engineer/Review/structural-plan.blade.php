@@ -444,19 +444,46 @@
                                                                     @endif
                                                                 </td>
 
-                                                                <td>
-                                                                    <button type="submit" class="btn btn-warning btn-sm">
-                                                                        <i class="fa-solid fa-hourglass-half me-1"></i> Under Review
-                                                                    </button>
+                                                                <td class="text-center">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
 
-                                                                    <button type="submit" class="btn btn-success btn-sm">
-                                                                        <i class="fa-solid fa-check me-1"></i> Approve
-                                                                    </button>
+        <!-- Under Review Button -->
+        @foreach ($user->strucrturalPlan ?? [] as $permit)
+    <form action="{{ route('review.proposal.under-review-structural', $permit->id) }}" method="POST" class="w-100 w-md-auto">
+        @csrf
+        <button type="submit" class="btn btn-warning btn-sm w-100 w-md-auto"
+            {{ $permit->status === 'under_review' ? 'disabled' : '' }}>
+            <i class="bx bx-hourglass me-1"></i>
+            {{ $permit->status === 'under_review' ? 'Under Review' : 'Mark as Under Review' }}
+        </button>
+    </form>
+@endforeach
 
-                                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                                        <i class="fa-solid fa-hourglass-half me-1"></i> Delete
-                                                                    </button>
-                                                                </td>
+        <!-- Approve Button -->
+        @foreach ( $user->strucrturalPlan ?? [] as $permit )
+        <form action="{{ route('review.proposal.approve-structural', $permit->id) }}" method="POST" class="w-100 w-md-auto">
+        @csrf
+        <button type="submit" class="btn btn-success btn-m w-100 w-md-auto"
+                {{ $permit->status === 'approved' ? 'disabled' : '' }}>
+            <i class="bx bx-check me-1"></i>
+            {{ $permit->status === 'approved' ? 'Approved' : 'Approve' }}
+        </button>
+    </form>
+        @endforeach
+
+        <!-- Delete Button -->
+         @foreach ( $user->strucrturalPlan ?? [] as $permit )
+         <form action="{{ route('review.proposal.delete-structural', $permit->id) }}" method="POST" class="w-100 w-md-auto" onsubmit="return confirm('Are you sure you want to delete this permit?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger btn-m w-100 w-md-auto">
+                <i class="fa-solid fa-trash me-1"></i> Delete
+            </button>
+        </form>
+            @endforeach
+
+    </div>
+</td>
                                                             </tr>
                                                         @endforeach
                                                     @endforeach

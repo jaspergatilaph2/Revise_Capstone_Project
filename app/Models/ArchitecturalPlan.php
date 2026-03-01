@@ -11,7 +11,10 @@ class ArchitecturalPlan extends Model
         'permit_application_id',
         'plan_name',
         'description',
-        'file_path'
+        'file_path',
+        'reviewed_by',
+        'status',
+
     ];
 
     protected $table = 'architectural_plans';
@@ -24,6 +27,11 @@ class ArchitecturalPlan extends Model
     public function permitApplication()
     {
         return $this->belongsTo(PermitApplication::class);
+    }
+
+    public function reviewer()
+    {
+        return $this->belongsTo(User::class, 'reviewed_by');
     }
     use HasFactory;
 }

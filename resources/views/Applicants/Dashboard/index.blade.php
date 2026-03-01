@@ -489,7 +489,7 @@
                         </div>
 
                         <div class="flex-fill">
-                          <a href="" class="btn btn-outline-warning w-100">
+                          <a href="{{ route('apply.permit.pending') }}" class="btn btn-outline-warning w-100">
                             <i class="fa-solid fa-bell me-1"></i> View Notifications
                           </a>
                         </div>

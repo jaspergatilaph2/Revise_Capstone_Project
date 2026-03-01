@@ -27,6 +27,11 @@ class PermitApplication extends Model
     protected $casts = [
         'documents' => 'array', // Automatically cast JSON to array
         'seen' => 'boolean',
+        'document_urls' => 'array',
+        'plan_files' => 'array',
+        'structural_plan_files' => 'array',
+        'electrical_plan_files' => 'array',
+        'plumbing_plan_files' => 'array',
     ];
 
     protected $table = "permit_applications";

@@ -421,7 +421,7 @@
                                                                                 @endforeach
                                                                             </ul>
                                                                         @else
-                                                                            <span class="text-secondary">No Plan</span>
+                                                                            <span class="text-secondary">No Architectural Plan</span>
                                                                         @endif
                                                                     </td>
 
@@ -445,19 +445,49 @@
                                                                         @endif
                                                                     </td>
 
-                                                                    <td>
-                                                                        <button type="submit" class="btn btn-warning btn-sm">
-                                                                            <i class="fa-solid fa-hourglass-half me-1"></i> Under Review
-                                                                        </button>
+                                                                   <td class="text-center">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center flex-column">
+        @if($permit->architecturalPlans && $permit->architecturalPlans->count() > 0)
+            @foreach($permit->architecturalPlans as $plan)
+                <div class="d-flex gap-2 mb-1">
 
-                                                                        <button type="submit" class="btn btn-success btn-sm">
-                                                                            <i class="fa-solid fa-check me-1"></i> Approve
-                                                                        </button>
+                    <!-- Under Review -->
+                    <form action="{{ route('review.proposal.under-review', $plan->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-warning btn-sm"
+                            @if($plan->status === 'under_review') disabled @endif>
+                            <i class="bx bx-hourglass me-1"></i>
+                            {{ $plan->status === 'under_review' ? 'Under Review' : 'Mark as Under Review' }}
+                        </button>
+                    </form>
 
-                                                                        <button type="submit" class="btn btn-danger btn-sm">
-                                                                            <i class="fa-solid fa-hourglass-half me-1"></i> Delete
-                                                                        </button>
-                                                                    </td>
+                    <!-- Approve -->
+                    <form action="{{ route('review.proposal.approve', $plan->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-success btn-sm"
+                            @if($plan->status === 'approved') disabled @endif>
+                            <i class="bx bx-check me-1"></i>
+                            {{ $plan->status === 'approved' ? 'Approved' : 'Approve' }}
+                        </button>
+                    </form>
+
+                    <!-- Delete -->
+                    <form action="{{ route('review.proposal.delete', $plan->id) }}" method="POST" class="d-inline"
+                          onsubmit="return confirm('Are you sure you want to delete this plan?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i class="fa-solid fa-trash me-1"></i> Delete
+                        </button>
+                    </form>
+
+                </div>
+            @endforeach
+        @else
+            <span class="text-secondary">No Plans to Approve</span>
+        @endif
+    </div>
+</td>
 
                                                                 </tr>
                                                             @endforeach

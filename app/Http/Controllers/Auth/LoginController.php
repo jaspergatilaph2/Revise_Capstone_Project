@@ -50,8 +50,8 @@ class LoginController extends Controller
             case 'engineer':
                 return redirect()->route('engineer.dashboard');
 
-            case 'bfp':
-                return redirect()->route('bfp.dashboard');
+            case 'mpdo':
+                return redirect()->route('mpdo.dashboard');
 
             case 'user':
                 return redirect()->route('applicants.dashboard');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Engineer;
 
 use App\Http\Controllers\Controller;
+use App\Models\ArchitecturalPlan;
 use App\Models\User;
 use App\Models\PermitApplication;
 use Carbon\Carbon;
@@ -11,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\StructuralPlan;
 use App\Models\LogsHistory;
+use App\Models\DeletedPlanFile;
+use App\Models\ElectricalPlans;
+use App\Models\PlumbingPlan;
+use PhpParser\Node\Expr\BinaryOp\Plus;
 
 class EngineerController extends Controller
 {
@@ -599,18 +604,20 @@ class EngineerController extends Controller
     public function MarkUnderReviewIndex($id)
     {
         $currentUser = Auth::user();
-        $permit = PermitApplication::find($id);
 
-        $permit->status = 'under_review';
+        $permit = PermitApplication::findOrFail($id);
 
-        if ($currentUser->role === 'engineer') {
-            // Additional logic for MPDO role
-            $permit->reviewed_by = $currentUser->id;
+        if ($permit->status !== 'under_review') {
+
+            $permit->update([
+                'status' => 'under_review',
+                'reviewed_by' => $currentUser->role === 'engineer'
+                    ? $currentUser->id
+                    : $permit->reviewed_by
+            ]);
         }
 
-        $permit->save();
-
-        return redirect()->back()->with('success', 'Permit marked as Under Review.');
+        return back()->with('success', 'Permit marked as Under Review.');
     }
 
     // Engineer View Plumbing Plan
@@ -698,5 +705,237 @@ class EngineerController extends Controller
                 'SubActiveTab' => 'Plan'
             ]
         );
+    }
+
+    // Engineer Mark Under Review Achitectural Plan
+    public function UnderReviewIndex($id)
+    {
+        $currentUser = Auth::user();
+        $permit = ArchitecturalPlan::findOrFail($id);
+
+        if ($permit->status !== 'under_review') {
+            $permit->update([
+                'status' => 'under_review',
+                'reviewed_by' => $currentUser->role === 'engineer' ? $currentUser->id : $permit->reviewed_by
+            ]);
+        }
+
+        return back()->with('success', 'Permit marked under review successfully.');
+    }
+
+    // Engineer Mark Approved Architectural Plan
+    public function ApproveIndex($id)
+    {
+        $currentUser = Auth::user();
+
+        $permit = ArchitecturalPlan::findOrFail($id);
+
+        if ($permit->status !== 'approved') {
+
+            $permit->update([
+                'status' => 'approved',
+                'reviewed_by' => $currentUser->role === 'engineer'
+                    ? $currentUser->id
+                    : $permit->reviewed_by
+            ]);
+        }
+
+        return back()->with('success', 'Permit approved successfully.');
+    }
+
+    // Engineer Delete Architectural Plan
+    public function DeleteIndex($id)
+    {
+        $plan = ArchitecturalPlan::findOrFail($id); // change model accordingly
+
+        // Save deleted plan info to new table
+        DeletedPlanFile::create([
+            'permit_application_id' => $plan->permit_application_id,
+            'plan_name' => $plan->plan_name,
+            'file_path' => $plan->file_path, // you can store JSON if multiple files
+            'deleted_by' => Auth::id(),
+        ]);
+
+        // Delete original plan
+        $plan->delete();
+
+        return back()->with('success', 'Plan deleted and logged successfully.');
+    }
+
+    // Engineer Mark Under Review Structural Plan
+    public function UnderReviewStructuralIndex($id)
+    {
+        $currentUser = Auth::user();
+
+        $permit = StructuralPlan::findOrFail($id);
+
+        if ($permit->status !== 'under_review') {
+
+            $permit->update([
+                'status' => 'under_review',
+                'reviewed_by' => $currentUser->role === 'engineer'
+                    ? $currentUser->id
+                    : $permit->reviewed_by
+            ]);
+        }
+
+        return back()->with('success', 'Permit marked under review successfully.');
+    }
+
+    // Engineer Mark Approved Structural Plan
+    public function ApproveStructuralIndex($id)
+    {
+        $currentUser = Auth::user();
+
+        $permit = StructuralPlan::findOrFail($id);
+
+        if ($permit->status !== 'approved') {
+
+            $permit->update([
+                'status' => 'approved',
+                'reviewed_by' => $currentUser->role === 'engineer'
+                    ? $currentUser->id
+                    : $permit->reviewed_by
+            ]);
+        }
+
+        return back()->with('success', 'Permit approved successfully.');
+    }
+
+    // Engineer Delete Structural Plan
+    public function DeleteStructuralIndex($id)
+    {
+        $plan = StructuralPlan::findOrFail($id); // change model accordingly
+
+        // Save deleted plan info to new table
+        DeletedPlanFile::create([
+            'permit_application_id' => $plan->permit_application_id,
+            'plan_name' => $plan->plan_name,
+            'file_path' => $plan->file_path, // you can store JSON if multiple files
+            'deleted_by' => Auth::id(),
+        ]);
+
+        // Delete original plan
+        $plan->delete();
+
+        return back()->with('success', 'Plan deleted and logged successfully.');
+    }
+
+    // Engineer Mark Under Review Electrical Plan
+    public function UnderReviewElectricalIndex($id)
+    {
+        $currentUser = Auth::user();
+
+        $permit = ElectricalPlans::findOrFail($id);
+
+        if ($permit->status !== 'under_review') {
+
+            $permit->update([
+                'status' => 'under_review',
+                'reviewed_by' => $currentUser->role === 'engineer'
+                    ? $currentUser->id
+                    : $permit->reviewed_by
+            ]);
+        }
+
+        return back()->with('success', 'Permit marked under review successfully.');
+    }
+
+    // Engineer Mark Approved Electrical Plan
+    public function ApproveElectricalIndex($id)
+    {
+        $currentUser = Auth::user();
+
+        $permit = ElectricalPlans::findOrFail($id);
+
+        if ($permit->status !== 'approved') {
+
+            $permit->update([
+                'status' => 'approved',
+                'reviewed_by' => $currentUser->role === 'engineer'
+                    ? $currentUser->id
+                    : $permit->reviewed_by
+            ]);
+        }
+
+        return back()->with('success', 'Permit approved successfully.');
+    }
+
+    // Engineer Delete Electrical Plan
+    public function DeleteElectricalIndex($id)
+    {
+        $plan = ElectricalPlans::findOrFail($id); // change model accordingly
+
+        // Save deleted plan info to new table
+        DeletedPlanFile::create([
+            'permit_application_id' => $plan->permit_application_id,
+            'plan_name' => $plan->plan_name,
+            'file_path' => $plan->file_path, // you can store JSON if multiple files
+            'deleted_by' => Auth::id(),
+        ]);
+
+        // Delete original plan
+        $plan->delete();
+
+        return back()->with('success', 'Plan deleted and logged successfully.');
+    }
+
+    // Engineer Mark Under Review Plumbing Plan
+    public function UnderReviewPlumbingIndex($id)
+    {
+        $currentUser = Auth::user();
+
+        $permit = PlumbingPlan::findOrFail($id);
+
+        if ($permit->status !== 'under_review') {
+
+            $permit->update([
+                'status' => 'under_review',
+                'reviewed_by' => $currentUser->role === 'engineer'
+                    ? $currentUser->id
+                    : $permit->reviewed_by
+            ]);
+        }
+
+        return back()->with('success', 'Permit marked under review successfully.');
+    }
+
+    // Engineer Mark Approved Plumbing Plan
+    public function ApprovePlumbingIndex($id)
+    {
+        $currentUser = Auth::user();
+
+        $permit = PlumbingPlan::findOrFail($id);
+
+        if ($permit->status !== 'approved') {
+
+            $permit->update([
+                'status' => 'approved',
+                'reviewed_by' => $currentUser->role === 'engineer'
+                    ? $currentUser->id
+                    : $permit->reviewed_by
+            ]);
+        }
+
+        return back()->with('success', 'Permit approved successfully.');
+    }
+
+    // Engineer Delete Plumbing Plan
+    public function DeletePlumbingIndex($id)
+    {
+        $plan = PlumbingPlan::findOrFail($id); // change model accordingly
+
+        // Save deleted plan info to new table
+        DeletedPlanFile::create([
+            'permit_application_id' => $plan->permit_application_id,
+            'plan_name' => $plan->plan_name,
+            'file_path' => $plan->file_path, // you can store JSON if multiple files
+            'deleted_by' => Auth::id(),
+        ]);
+
+        // Delete original plan
+        $plan->delete();
+
+        return back()->with('success', 'Plan deleted and logged successfully.');
     }
 }

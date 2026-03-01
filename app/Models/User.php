@@ -65,4 +65,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(PermitApplication::class);
     }
+
+    public function architecturalPlans()
+    {
+        return $this->hasMany(ArchitecturalPlan::class, 'permit_application_id', 'id');
+    }
 }

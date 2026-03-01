@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Applicants\ApplicantsController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Engineer\EngineerController;
+use App\Http\Controllers\Mpdo\MpdoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -110,11 +111,39 @@ Route::group(['middleware' => ['auth', 'IfEngineer']], function () {
     Route::get('/review-structural-plan', [EngineerController::class, 'StructuralPlanIndex'])->name('review-structural-plan');
     Route::get('/electrical-plan', [EngineerController::class, 'ElectricalPlanIndex'])->name('review-electrical-plan');
     Route::get('/plumbing-plan', [EngineerController::class, 'PlumbingPlanIndex'])->name('review-plumbing-plan');
+    // Architectural Plan Review Actions
+    Route::post('/under-review/{id}', [EngineerController::class, 'UnderReviewIndex'])->name('under-review');
+    Route::post('/approve/{id}', [EngineerController::class, 'ApproveIndex'])->name('approve');
+    Route::delete('/delete/{id}', [EngineerController::class, 'DeleteIndex'])->name('delete');
+    // Structural Plan Review Actions
+    Route::post('/under-review-structural/{id}', [EngineerController::class, 'UnderReviewStructuralIndex'])->name('under-review-structural');
+    Route::post('/approve-structural/{id}', [EngineerController::class, 'ApproveStructuralIndex'])->name('approve-electrical');
+    Route::delete('/delete-structural/{id}', [EngineerController::class, 'DeleteStructuralIndex'])->name('delete-structural');
+    // Electrical Plan Review Actions
+    Route::post('/under-review-electrical/{id}', [EngineerController::class, 'UnderReviewElectricalIndex'])->name('under-review-electrical');
+    Route::post('/approve-electrical/{id}', [EngineerController::class, 'ApproveElectricalIndex'])->name('approve-electrical');
+    Route::delete('/delete-electrical/{id}', [EngineerController::class, 'DeleteElectricalIndex'])->name('delete-electrical');
+    // Plumbing Plan Review Actions
+    Route::post('/under-review-plumbing/{id}', [EngineerController::class, 'UnderReviewPlumbingIndex'])->name('under-review-plumbing');
+    Route::post('/approve-plumbing/{id}', [EngineerController::class, 'ApprovePlumbingIndex'])->name('approve-plumbing');
+    Route::delete('/delete-plumbing/{id}', [EngineerController::class, 'DeletePlumbingIndex'])->name('delete-plumbing');
   });
 
   // Engineer Logs History
   Route::prefix('/logs')->name('logs.history.')->group(function () {
     Route::get('/view-history', [EngineerController::class, 'ViewHistoryIndex'])->name('view');
+  });
+});
+
+// MPDO ROUTES
+Route::group(['middleware' => 'auth', 'IfMpdo'], function () {
+  Route::get('/Mpdo-dashboard', [MpdoController::class, 'MpdoIndex'])->name('mpdo.dashboard');
+
+  // MPDO View Accounts
+  Route::prefix('details')->name('details.accounts.')->group(function () {
+    Route::get('/view-accounts', [MpdoController::class, 'ViewAccoutsIndex'])->name('view');
+    Route::get('/update-accounts', [MpdoController::class, 'UpdateAccountsIndex'])->name('update');
+    Route::put('/revise-accounts', [MpdoController::class, 'ReviseAccountsIndex'])->name('revise');
   });
 });
 

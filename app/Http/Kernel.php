@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'IfAdmin' => \App\Http\Middleware\IfAdmin::class,
         'IfUsers' => \App\Http\Middleware\IfUsers::class,
         'IfEngineer' => \App\Http\Middleware\IfEngineer::class,
+        'IfMpdo' => \App\Http\Middleware\IfMpdo::class
     ];
 }

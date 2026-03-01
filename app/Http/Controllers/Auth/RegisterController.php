@@ -79,6 +79,8 @@ class RegisterController extends Controller
             return redirect()->route('mpdo.dashboard');
         } elseif ($user->role === 'bfp') {
             return redirect()->route('bfp.dashboard');
+        } elseif ($user->role === 'mpdo') {
+            return redirect()->route('mpdo.dashboard');
         }
 
         // Default: applicant/user dashboard

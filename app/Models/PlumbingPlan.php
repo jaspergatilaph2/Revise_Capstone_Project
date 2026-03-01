@@ -13,6 +13,8 @@ class PlumbingPlan extends Model
         'plan_name',
         'description',
         'documents',
+        'reviewed_by',
+        'status',
     ];
 
     protected $casts = [
@@ -24,6 +26,11 @@ class PlumbingPlan extends Model
     public function permitApplication()
     {
         return $this->belongsTo(PermitApplication::class);
+    }
+
+     public function reviewer()
+    {
+        return $this->belongsTo(User::class, 'reviewed_by');
     }
     use HasFactory;
 }
