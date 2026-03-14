@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                                      <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                                    </a> -->
+                                                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                                            </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -42,18 +42,34 @@
 
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Under Review</div>
+                                <a href="{{ route('reviews.permits.view-permits') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Permit Review</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Approved Permits</div>
+                                <a href="{{ route('reviews.permits.view-architectural') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Architectural Plans</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Rejected Permits</div>
+                                <a href="{{ route('reviews.permits.view-structural') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Structural Plans</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('reviews.permits.view-electrical') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Electrical Plans</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('reviews.permits.view-plumbing') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Plumbing Plans</div>
+                                </a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="{{ route('reviews.permits.view-certificate') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Certificate</div>
                                 </a>
                             </li>
 
@@ -96,64 +112,64 @@
                     </li>
 
                     <!-- <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                    <i class="menu-icon fa-solid fa-building"></i>
-                                    <div data-i18n="Layouts">Development Projects</div>
-                                </a>
+                                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                            <i class="menu-icon fa-solid fa-building"></i>
+                                                            <div data-i18n="Layouts">Development Projects</div>
+                                                        </a>
 
-                                <ul class="menu-sub">
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Without navbar">All Projects</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Without navbar">Ongoing</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Without navbar">Completed</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Without navbar">Proposed</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> -->
+                                                        <ul class="menu-sub">
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Without navbar">All Projects</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Without navbar">Ongoing</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Without navbar">Completed</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Without navbar">Proposed</div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </li> -->
 
                     <!-- <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                    <i class="menu-icon fa-solid fa-chart-simple"></i>
-                                    <div data-i18n="Layouts">Reports & Analytics</div>
-                                </a>
+                                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                            <i class="menu-icon fa-solid fa-chart-simple"></i>
+                                                            <div data-i18n="Layouts">Reports & Analytics</div>
+                                                        </a>
 
-                                <ul class="menu-sub">
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Without navbar">Annual investment plans (AIP)</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Without navbar">Budget allocation and utilization</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Without navbar">Infrastructure development progress</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="" class="menu-link">
-                                            <div data-i18n="Without navbar">Population and demographic analysis</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> -->
+                                                        <ul class="menu-sub">
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Without navbar">Annual investment plans (AIP)</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Without navbar">Budget allocation and utilization</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Without navbar">Infrastructure development progress</div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a href="" class="menu-link">
+                                                                    <div data-i18n="Without navbar">Population and demographic analysis</div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </li> -->
 
 
 
@@ -177,10 +193,10 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                          <a href="" class="menu-link">
-                                            <div data-i18n="Notifications">Settings</div>
-                                          </a>
-                                        </li> -->
+                                                                  <a href="" class="menu-link">
+                                                                    <div data-i18n="Notifications">Settings</div>
+                                                                  </a>
+                                                                </li> -->
 
                         </ul>
                     </li>
@@ -233,7 +249,7 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ $currentUser->avatar ? asset('storage/' . $currentUser->avatar) : asset('sneat/img/avatars/1.png') }}"
+                                        <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }}"
                                             alt class="w-px-120 h-px-120 rounded-circle" />
                                     </div>
                                 </a>
@@ -243,7 +259,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="{{ $currentUser->avatar ? asset('storage/' . $currentUser->avatar) : asset('sneat/img/avatars/1.png') }}"
+                                                        <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }}"
                                                             alt class="w-px-120 h-px-120 rounded-circle" />
                                                     </div>
                                                 </div>
@@ -295,11 +311,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                          <a class="dropdown-item" href="">
-                                            <i class="bx bx-cog me-2"></i>
-                                            <span class="align-middle">Settings</span>
-                                          </a>
-                                        </li> -->
+                                                                  <a class="dropdown-item" href="">
+                                                                    <i class="bx bx-cog me-2"></i>
+                                                                    <span class="align-middle">Settings</span>
+                                                                  </a>
+                                                                </li> -->
                                     <li>
                                         <a class="dropdown-item" href="">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -330,10 +346,10 @@
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
-                <div class="content-wrapper">
+                <div class="content-wrapper d-flex flex-column min-vh-100">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Applicants Account Settings
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> MPDO Account Settings
                                 /</span>Show Account
                         </h4>
 
@@ -342,7 +358,7 @@
                                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="javascript:void(0);"><i
-                                                class="bx bx-user me-1"></i> Account</a>
+                                                class="bx bx-user me-1"></i>View Account</a>
                                     </li>
                                 </ul>
 
@@ -384,7 +400,8 @@
         : (Auth::user()->google_id
             ? session('google_avatar')
             : asset('sneat/img/avatars/1.png'))
-                            }}" alt="avatar" class="d-block rounded mt-2" width="100" height="100" />
+                                                    }}" alt="avatar" class="d-block rounded mt-2" width="100"
+                                            height="100" />
                                     </div>
 
                                     <!-- /Account -->

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-dashboard')
 
 @section('content')
 
@@ -16,8 +16,8 @@
           </a>
 
           <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                                </a> -->
+                                          <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                        </a> -->
         </div>
 
         <div class="menu-inner-shadow"></div>
@@ -113,49 +113,49 @@
           </li>
 
           <!-- <li class="menu-item">
-                          <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-receipt"></i>
-                            <div data-i18n="Layouts">Payments</div>
-                          </a>
+                                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <i class="menu-icon fa-solid fa-receipt"></i>
+                                    <div data-i18n="Layouts">Payments</div>
+                                  </a>
 
-                          <ul class="menu-sub">
-                            <li class="menu-item">
-                              <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Pending Payments</div>
-                              </a>
-                            </li>
-                            <li class="menu-item">
-                              <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Paid</div>
-                              </a>
-                            </li>
-                            <li class="menu-item">
-                              <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Overdue</div>
-                              </a>
-                            </li>
-                          </ul>
-                        </li> -->
+                                  <ul class="menu-sub">
+                                    <li class="menu-item">
+                                      <a href="" class="menu-link">
+                                        <div data-i18n="Without navbar">Pending Payments</div>
+                                      </a>
+                                    </li>
+                                    <li class="menu-item">
+                                      <a href="" class="menu-link">
+                                        <div data-i18n="Without navbar">Paid</div>
+                                      </a>
+                                    </li>
+                                    <li class="menu-item">
+                                      <a href="" class="menu-link">
+                                        <div data-i18n="Without navbar">Overdue</div>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </li> -->
 
           <!-- <li class="menu-item">
-                          <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-comment"></i>
-                            <div data-i18n="Layouts">Notification / Messages</div>
-                          </a>
+                                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <i class="menu-icon fa-solid fa-comment"></i>
+                                    <div data-i18n="Layouts">Notification / Messages</div>
+                                  </a>
 
-                          <ul class="menu-sub">
-                            <li class="menu-item">
-                              <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">Notifications</div>
-                              </a>
-                            </li>
-                            <li class="menu-item">
-                              <a href="" class="menu-link">
-                                <div data-i18n="Without navbar">History Notification</div>
-                              </a>
-                            </li>
-                          </ul>
-                        </li> -->
+                                  <ul class="menu-sub">
+                                    <li class="menu-item">
+                                      <a href="" class="menu-link">
+                                        <div data-i18n="Without navbar">Notifications</div>
+                                      </a>
+                                    </li>
+                                    <li class="menu-item">
+                                      <a href="" class="menu-link">
+                                        <div data-i18n="Without navbar">History Notification</div>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </li> -->
 
           <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Accounts</span>
@@ -174,6 +174,20 @@
               <li class="menu-item">
                 <a href="{{ route('applicants.accounts.update-accounts') }}" class="menu-link">
                   <div data-i18n="Notifications">Update Account</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon fa-solid fa-gear"></i>
+              <div data-i18n="Account Settings">Options</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item">
+                <a href="{{ route('user.options.view-dark-mode') }}" class="menu-link">
+                  <div data-i18n="Account">Settings</div>
                 </a>
               </li>
             </ul>
@@ -293,12 +307,12 @@
                       <span class="align-middle">My Profile</span>
                     </a>
                   </li>
-                  <!-- <li>
-                                          <a class="dropdown-item" href="">
-                                            <i class="bx bx-cog me-2"></i>
-                                            <span class="align-middle">Settings</span>
-                                          </a>
-                                        </li> -->
+                  <li>
+                    <a class="dropdown-item" href="{{ route('user.maintenance.view-under-maintenance') }}">
+                      <i class="bx bx-cog me-2"></i>
+                      <span class="align-middle">Options</span>
+                    </a>
+                  </li>
                   <li>
                     <a class="dropdown-item" href="{{ route('record.history.log-history') }}">
                       <i class="menu-icon tf-icons bx bx-file"></i>
@@ -372,10 +386,17 @@
                 <div class="col-12 col-md-5 col-md-2 animate__animated animate__bounceIn">
                   <div class="card shadow-sm h-100">
                     <div class="card-body text-center">
+
                       <i class="fa-solid fa-clock text-warning mb-3" style="font-size: 2.5rem;"></i>
+
                       <h6 class="card-title">Pending</h6>
+
                       <p class="card-text text-muted small">Waiting</p>
-                      <strong style="font-size: 2rem;"></strong>
+
+                      <strong style="font-size: 2rem;">
+                        {{ $totalPending }}
+                      </strong>
+
                     </div>
                   </div>
                 </div>
@@ -387,7 +408,7 @@
                       <i class="fa-solid fa-hourglass-half text-info mb-3" style="font-size: 2.5rem;"></i>
                       <h6 class="card-title">Review</h6>
                       <p class="card-text text-muted small">In progress</p>
-                      <strong style="font-size: 2rem;"></strong>
+                      <strong style="font-size: 2rem;">{{ $totalUnderReview}}</strong>
                     </div>
                   </div>
                 </div>
@@ -399,7 +420,7 @@
                       <i class="fa-solid fa-circle-check text-success mb-3" style="font-size: 2.5rem;"></i>
                       <h6 class="card-title">Approved</h6>
                       <p class="card-text text-muted small">Accepted</p>
-                      <strong style="font-size: 2rem;"></strong>
+                      <strong style="font-size: 2rem;">{{$totalApprove}}</strong>
                     </div>
                   </div>
                 </div>
@@ -504,23 +525,27 @@
           </div>
 
           <!-- Footer -->
-          <footer class="content-footer footer bg-footer-theme mt-4">
+          <footer class="content-footer footer mt-4 border-top">
             <div
-              class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column text-center text-md-start">
+              class="container-xxl d-flex flex-wrap justify-content-between py-3 flex-md-row flex-column text-center text-md-start">
+
               <div class="mb-2 mb-md-0">
-                ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>,
+                © <span id="year"></span>,
                 <span class="fw-bold text-primary">Building Permit Management System</span>
               </div>
+
               <div>
-                <a href="#" class="footer-link me-3">Documentation</a>
-                <a href="#" class="footer-link me-3">Support</a>
-                <a href="#" class="footer-link">Contact</a>
+                <a href="#" class="footer-link me-3 nav-link d-inline">Documentation</a>
+                <a href="#" class="footer-link me-3 nav-link d-inline">Support</a>
+                <a href="#" class="footer-link nav-link d-inline">Contact</a>
               </div>
+
             </div>
           </footer>
+
+          <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+          </script>
           <!-- / Footer -->
 
           <div class="content-backdrop fade"></div>

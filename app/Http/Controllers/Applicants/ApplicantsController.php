@@ -22,52 +22,126 @@ class ApplicantsController extends Controller
     {
         $user = Auth::user();
 
-        return view('Applicants.Dashboard.index', compact('user'));
+        // Pending Permits For User ID
+        $pendingPermits = PermitApplication::where('user_id', $user->id)
+            ->where('status', 'pending')
+            ->count();
+
+        // Pending plans (total, not per user)
+        $pendingStructural = StructuralPlan::where('status', 'pending')->count();
+        $pendingArchitectural = ArchitecturalPlan::where('status', 'pending')->count();
+        $pendingElectrical = ElectricalPlans::where('status', 'pending')->count();
+        $pendingPlumbing = PlumbingPlan::where('status', 'pending')->count();
+        // Total Pending
+        $totalPending = $pendingPermits +
+            $pendingStructural +
+            $pendingArchitectural +
+            $pendingElectrical +
+            $pendingPlumbing;
+
+        // Under Review For Users ID
+        $underReview = PermitApplication::where('user_id', $user->id)
+            ->where('status', 'under_review')
+            ->count();
+        // Under Review For Plans
+        $underReviewStructural = StructuralPlan::where('status', 'under_review')->count();
+        $underReviewArchitectural = ArchitecturalPlan::where('status', 'under_review')->count();
+        $underReviewElectrical = ElectricalPlans::where('status', 'under_review')->count();
+        $underReviewPlumbing = PlumbingPlan::where('status', 'under_review')->count();
+
+        // Under Review Total
+        $totalUnderReview = $underReview +
+            $underReviewStructural +
+            $underReviewArchitectural +
+            $underReviewElectrical +
+            $underReviewPlumbing;
+
+        // Approve For User ID
+        $approve = PermitApplication::where('user_id', $user->id)
+            ->where('status', 'approved')
+            ->count();
+        //Approve For Plans
+        $approveStructural =  StructuralPlan::where('status', 'approved')->count();
+        $approveArchitectural = ArchitecturalPlan::where('status', 'approved')->count();
+        $approveElectrical =  ElectricalPlans::where('status', 'approved')->count();
+        $approveplumbing = PlumbingPlan::where('status', 'approved')->count();
+        // Totol Approve
+        $totalApprove = $approve +
+        $approveStructural +
+        $approveArchitectural +
+        $approveElectrical +
+        $approveplumbing;
+
+        return view('Applicants.Dashboard.index', compact(
+            'user',
+            'pendingPermits',
+            'pendingStructural',
+            'pendingArchitectural',
+            'pendingElectrical',
+            'pendingPlumbing',
+            'totalPending',
+            'underReview',
+            'underReviewStructural',
+            'underReviewArchitectural',
+            'underReviewElectrical',
+            'underReviewPlumbing',
+            'totalUnderReview',
+            'approve',
+            'approveArchitectural',
+            'approveElectrical',
+            'approveplumbing',
+            'totalApprove'
+        ));
     }
 
     // Downloads Permits View
     public function DownloadsIndex()
     {
+        $user = Auth::user();
         return view('Applicants.Downloads.index', [
             'ActiveTabMenu' => 'Downloads',
             'SubActiveMenu' => 'Permits'
-        ]);
+        ], compact('user'));
     }
 
     //Unified Application Form Download
     public function UnifiedApplicationFormDownload()
     {
+        $user = Auth::user();
         return view('Applicants.Downloads.unified-application-form', [
             'ActiveTabMenu' => 'Unified-Application-Form',
             'SubActiveMenu' => 'Permits'
-        ]);
+        ], compact('user'));
     }
 
     // Civil Permit Download
     public function CivilPermitDownload()
     {
+        $user = Auth::user();
         return view('Applicants.Downloads.civil-permit', [
             'ActiveTabMenu' => 'Civil-Permit',
             'SubActiveMenu' => 'Permits'
-        ]);
+        ], compact('user'));
     }
 
     // Architectural Permit Download
     public function ArchitecturalPermitDownload()
     {
+        $user = Auth::user();
         return view('Applicants.Downloads.architectural-permit', [
             'ActiveTabMenu' => 'Architectural-Permit',
             'SubActiveMenu' => 'Permits'
-        ]);
+        ], compact('user'));
     }
 
     // Electecal Permit Download
     public function ElectricalPermitIndex()
     {
+        $user = Auth::user();
         return view('Applicants.Downloads.electrical-permit', [
             'ActiveTabMenu' => 'Electrical',
             'SubActiveMenu' => 'Permit'
-        ]);
+        ], compact('user'));
     }
 
     // Plumbing Permit Download
@@ -82,19 +156,21 @@ class ApplicantsController extends Controller
     // Documents Guide Download
     public function DocumentsGuideIndex()
     {
+        $user = Auth::user();
         return view('Applicants.Downloads.documents-guide', [
             'ActiveTabMenu' => 'Documents',
             'SubActiveTab' => 'Guide',
-        ]);
+        ], compact('user'));
     }
 
     // Apply Dashboard
     public function ApplyIndex()
     {
+        $user = Auth::user();
         return view('Applicants.Apply.index', [
             'ActiveTabMenu' => 'Apply',
             'SubActiveMenu' => 'index',
-        ]);
+        ], compact('user'));
     }
 
 
@@ -416,18 +492,20 @@ class ApplicantsController extends Controller
     public function LogsIndex()
     {
         $userId = Auth::id();
+        $user = Auth::user();
         $logs = LogsHistory::where('user_id', $userId)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
         return view('Applicants.History.logs-history', [
             'ActiveTabMenu' => 'Logs',
             'SubActiveTab' => 'History'
-        ], compact('logs'));
+        ], compact('logs', 'user'));
     }
 
     // View Architectural Uploaded Dashboard
     public function ArchitecturalUploadIndex()
     {
+        $user = Auth::user();
         // You are ignoring $id anyway; maybe you want to use it later
         $permit = PermitApplication::where('user_id', Auth::id())->first();
 
@@ -435,6 +513,7 @@ class ApplicantsController extends Controller
             'ActiveTabMenu' => 'Architectural-Upload',
             'SubActiveTab' => 'Plan',
             'permit' => $permit, // pass $permit here
+            'user' => $user, // pass $user here
         ]);
     }
 
@@ -478,11 +557,13 @@ class ApplicantsController extends Controller
     // View Structural Plan Dashboard
     public function StructuralPlanIndex()
     {
+        $user = Auth::user();
         $permit = PermitApplication::where('user_id', Auth::id())->first();
         return view('Applicants.Apply.structural-plan', [
             'ActiveTabMenu' => 'Structural-Upload',
             'SubActiveTab' => 'Plan',
             'permit' => $permit, // pass $permit here
+            'user' => $user, // pass $user here
         ]);
     }
 
@@ -529,11 +610,13 @@ class ApplicantsController extends Controller
     // View Electrical Plan
     public function ElectricalPlanIndex()
     {
+        $user = Auth::user();
         $permit = PermitApplication::where('user_id', Auth::id())->first();
         return view('Applicants.Apply.electrical-plan', [
             'ActiveTabMenu' => 'Electrical-Upload',
             'SubActiveTab' => 'Plan',
             'permit' => $permit, // pass $permit here
+            'user' => $user, // pass $user here
         ]);
     }
 
@@ -626,5 +709,20 @@ class ApplicantsController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Plumbing plan uploaded successfully.');
+    }
+
+    // View Under Maintenance
+    public function ViewUnderMaintenanceIndex(){
+        $user = Auth::user();
+        return view('Applicants.Maintenance.app-under-maintenance', compact('user'));
+    }
+
+    // User Options Dark Mode
+    public function ViewDarkModeOptionsIndex(){
+        $user = Auth::user();
+        return view('Applicants.Options.dark-mode', compact('user'), [
+            'ActiveTabMenu' => 'Dark-Mode',
+            'SubActiveTab' => 'Options'
+        ]);
     }
 }

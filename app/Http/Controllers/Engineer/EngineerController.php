@@ -25,7 +25,7 @@ class EngineerController extends Controller
         $currentUser = Auth::user();
 
         // ===============================
-        // Counting
+        // Counting Applications
         // ===============================
         $totalApplications = PermitApplication::count();
         $PendingApplications = PermitApplication::where('status', 'pending')->count();
@@ -40,9 +40,11 @@ class EngineerController extends Controller
         for ($i = 6; $i >= 0; $i--) {
             $date = Carbon::today()->subDays($i);
 
+            $count = PermitApplication::whereDate('created_at', $date)->count();
+
             $weeklyApplications[] = [
                 'date' => $date->format('D'), // Mon, Tue, etc.
-                'count' => PermitApplication::whereDate('created_at', $date)->count(),
+                'count' => $count, // always default 0 if no applications
             ];
         }
 
@@ -53,7 +55,7 @@ class EngineerController extends Controller
             'permitApplications.architecturalPlans',
             'permitApplications.structuralPlans',
             'permitApplications.electricalPlans',
-            'permitApplications.plumbingPlan'
+            'permitApplications.plumbingPlan', // fixed plural
         ])
             ->where('role', 'user')
             ->latest()
@@ -392,9 +394,9 @@ class EngineerController extends Controller
 
 
                 // ===============================
-                // ARCHITECTURAL PLANS
+                // STRUCTURAL PLANS
                 // ===============================
-                $permit->architecturalPlans->transform(function ($plan) {
+                $permit->structuralPlans->transform(function ($plan) {
 
                     $planUrls = [];
 
@@ -600,7 +602,7 @@ class EngineerController extends Controller
         );
     }
 
-    // Engineer Mark Under Review
+    // Engineer Mark Under Review Permit
     public function MarkUnderReviewIndex($id)
     {
         $currentUser = Auth::user();
@@ -618,6 +620,26 @@ class EngineerController extends Controller
         }
 
         return back()->with('success', 'Permit marked as Under Review.');
+    }
+
+    // Engineer Mark Approved Permit
+    public function MarkApproveIndex($id)
+    {
+        $currentUser = Auth::user();
+
+        $permit = PermitApplication::findOrFail($id);
+
+        if ($permit->status !== 'approved') {
+
+            $permit->update([
+                'status' => 'approved',
+                'reviewed_by' => $currentUser->role === 'engineer'
+                    ? $currentUser->id
+                    : $permit->reviewed_by
+            ]);
+        }
+
+        return back()->with('success', 'Permit marked as Approved.');
     }
 
     // Engineer View Plumbing Plan
@@ -937,5 +959,75 @@ class EngineerController extends Controller
         $plan->delete();
 
         return back()->with('success', 'Plan deleted and logged successfully.');
+    }
+
+
+    // Engineer Under Maintenance
+    public function UnderMaintenanceIndex()
+    {
+        $currentUser = Auth::user();
+        return view(
+            'Engineer.Maintenance.under-maintenance',
+            compact('currentUser'),
+            [
+                'ActiveTabMenu' => 'Under-Maintenance',
+                'SubActiveTab' => 'Index'
+            ]
+        );
+    }
+
+    // Engineer View upload Inspections
+    public function ViewInspectionsIndex()
+    {
+        $currentUser = Auth::user();
+        return view(
+            'Engineer.Inspections.upload-site-photo',
+            compact('currentUser'),
+            [
+                'ActiveTabMenu' => 'View-Inspections',
+                'SubActiveTab' => 'Index'
+            ]
+        );
+    }
+
+
+    // Engineer View Scheduled Calendar
+    public function ViewScheduledCalendarIndex()
+    {
+        $currentUser = Auth::user();
+        return view('Engineer.Inspections.scheduled-inspections', compact('currentUser'), [
+            'ActiveTabMenu' => 'View-Inspections',
+            'SubActiveTab' => 'Calendar'
+        ]);
+    }
+
+    // Engineer View Inspections Checklist
+    public function ViewInspectionsChecklistIndex()
+    {
+        $currentUser = Auth::user();
+        return view('Engineer.Inspections.inspections-checklist', compact('currentUser'), [
+            'ActiveTabMenu' => 'View-Inspections',
+            'SubActiveTab' => 'Checklist'
+        ]);
+    }
+
+    // Engineer View Inspections Finding
+    public function ViewInspectionsFindingIndex()
+    {
+        $currentUser = Auth::user();
+        return view('Engineer.Inspections.add-inspections-finding', compact('currentUser'), [
+            'ActiveTabMenu' => 'View-Inspections',
+            'SubActiveTab' => 'Finding'
+        ]);
+    }
+
+    // Engineer View Inspections Mark Failed
+    public function ViewInspectionsMarkFailedIndex()
+    {
+        $currentUser = Auth::user();
+        return view('Engineer.Inspections.mark-failed', compact('currentUser'), [
+            'ActiveTabMenu' => 'View-Inspections',
+            'SubActiveTab' => 'Mark-Failed'
+        ]);
     }
 }

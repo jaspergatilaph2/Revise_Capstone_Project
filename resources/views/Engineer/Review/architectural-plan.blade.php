@@ -51,6 +51,11 @@
                                     <div data-i18n="Without menu">View uploaded plans/documents</div>
                                 </a>
                             </li>
+                            <li class="menu-item">
+                                <a href="{{ route('candidate.applicants.view-approval') }}" class="menu-link">
+                                    <div data-i18n="Without menu">View approval documents</div>
+                                </a>
+                            </li>
                             <!-- <li class="menu-item">
                                                                 <a href="" class="menu-link">
                                                                     <div data-i18n="Without menu">Under Review applications</div>
@@ -111,27 +116,27 @@
 
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('engineer.inspections.view-calendar') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Scheduled inspections</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('under.maintenance.index') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Inspection checklist</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('under.maintenance.index') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Add inspection findings</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('engineer.inspections.view') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Upload site photos</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('under.maintenance.index') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Mark as Passed / Failed</div>
                                 </a>
                             </li>
@@ -452,14 +457,14 @@
                 <div class="d-flex gap-2 mb-1">
 
                     <!-- Under Review -->
-                    <form action="{{ route('review.proposal.under-review', $plan->id) }}" method="POST" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btn-warning btn-sm"
-                            @if($plan->status === 'under_review') disabled @endif>
-                            <i class="bx bx-hourglass me-1"></i>
-                            {{ $plan->status === 'under_review' ? 'Under Review' : 'Mark as Under Review' }}
-                        </button>
-                    </form>
+                    <form action="{{ route('candidate.applicants.under-review', $permit->id) }}" method="POST" class="w-100 w-md-auto">
+        @csrf
+        <button type="submit" class="btn btn-warning btn-sm w-100 w-md-auto"
+                {{ $permit->status === 'under_review' ? 'disabled' : '' }}>
+            <i class="bx bx-hourglass me-1"></i>
+            {{ $permit->status === 'under_review' ? 'Under Review' : 'Mark as Under Review' }}
+        </button>
+    </form>
 
                     <!-- Approve -->
                     <form action="{{ route('review.proposal.approve', $plan->id) }}" method="POST" class="d-inline">

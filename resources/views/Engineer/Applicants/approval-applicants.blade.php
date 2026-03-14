@@ -111,27 +111,27 @@
 
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('engineer.inspections.view-calendar') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Scheduled inspections</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('under.maintenance.index') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Inspection checklist</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('under.maintenance.index') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Add inspection findings</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('engineer.inspections.view') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Upload site photos</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('under.maintenance.index') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Mark as Passed / Failed</div>
                                 </a>
                             </li>
@@ -543,12 +543,22 @@
 @endforeach
 
         <!-- Approve Button -->
-        <form action="" method="POST" class="w-100 w-md-auto">
+         @foreach($user->permitApplications as $permit)
+            @if($permit->status === 'under_review')
+                <form action="{{ route('candidate.applicants.approve', $permit->id) }}" method="POST" class="w-100 w-md-auto">
+                    @csrf
+                    <button type="submit" class="btn btn-success btn-sm w-100 w-md-auto">
+                        Approve
+                    </button>
+                </form>
+            @endif
+         @endforeach
+        <!-- <form action="" method="POST" class="w-100 w-md-auto">
             @csrf
             <button type="submit" class="btn btn-success btn-m w-100 w-md-auto">
                 <i class="fa-solid fa-check me-1"></i> Approve
             </button>
-        </form>
+        </form> -->
 
         <!-- Reject Button -->
         <form action="" method="POST" class="w-100 w-md-auto">

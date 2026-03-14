@@ -76,6 +76,8 @@
     <link rel="stylesheet" href="{{ asset('css/unified.css') }}">
     <link rel="stylesheet" href="{{ asset('css/civil.css') }}">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/dark-mode.css') }}">
 </head>
 
 <body>
@@ -149,8 +151,17 @@
     <script src="{{ asset('js/architectural-plan.js') }}"></script>
     <script src="{{ asset('js/underReview.js') }}"></script>
     <script src="{{ asset('js/anotherTable.js') }}"></script>
-    <script src="{{ asset('js/activityChart.js') }}"></script>
+    <script src="{{ asset('js/capture.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
     <script src="{{ asset('js/confirmation-modal.js') }}"></script>
+    <script src="{{ asset('js/calendar.js') }}"></script>
+    <script src="{{ asset('js/warning-colors.js') }}"></script>
+    <script src="{{ asset('js/mark-failed.js') }}"></script>
+    <script src="{{ asset('js/activityChart.js') }}"></script>
+    <script src="{{asset('js/permits-plans.js')}}"></script>
+    <script src="{{asset('js/monthlyChart.js')}}"></script>
+    <script src="{{asset('js/password-generate.js')}}"></script>
+    <script src="{{ asset('js/dark-mode.js') }}"></script>
 </body>
 
 </html>

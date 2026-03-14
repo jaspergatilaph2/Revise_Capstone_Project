@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                            </a> -->
+                                                                                                    <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                                                                                    </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -42,21 +42,35 @@
 
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Under Review</div>
+                                <a href="{{ route('reviews.permits.view-permits') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Permit Review</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Approved Permits</div>
+                                <a href="{{ route('reviews.permits.view-architectural') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Architectural Plans</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without menu">Rejected Permits</div>
+                                <a href="{{ route('reviews.permits.view-structural') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Structural Plans</div>
                                 </a>
                             </li>
-
+                            <li class="menu-item">
+                                <a href="{{ route('reviews.permits.view-electrical') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Electrical Plans</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('reviews.permits.view-plumbing') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Plumbing Plans</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('reviews.permits.view-certificate') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Certificate</div>
+                                </a>
+                            </li>
                             <li class="menu-item">
                                 <a href="" class="menu-link">
                                     <div data-i18n="Without menu">Archived Applications</div>
@@ -95,68 +109,25 @@
                         </ul>
                     </li>
 
-                    <!-- <li class="menu-item">
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">MPDO Staff</span>
+                    </li>
+
+                    <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-building"></i>
-                            <div data-i18n="Layouts">Development Projects</div>
+                            <i class="menu-icon fa-solid fa-person fa-2x"></i>
+                            <div data-i18n="Layouts">Staff Or Employee</div>
                         </a>
 
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">All Projects</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Ongoing</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Completed</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Proposed</div>
+                                <a href="{{route('staff.management.view-staff')}}" class="menu-link">
+                                    <div data-i18n="Without navbar">Adding Staff</div>
                                 </a>
                             </li>
                         </ul>
-                    </li> -->
-
-                    <!-- <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-chart-simple"></i>
-                            <div data-i18n="Layouts">Reports & Analytics</div>
-                        </a>
-
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Annual investment plans (AIP)</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Budget allocation and utilization</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Infrastructure development progress</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Population and demographic analysis</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li> -->
-
-
-
+                    </li>
+                    
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Accounts</span>
                     </li>
@@ -177,10 +148,10 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                  <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Settings</div>
-                                  </a>
-                                </li> -->
+                                                                                                        <a href="" class="menu-link">
+                                                                                                            <div data-i18n="Notifications">Settings</div>
+                                                                                                        </a>
+                                                                                                        </li> -->
 
                         </ul>
                     </li>
@@ -295,11 +266,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                      <a class="dropdown-item" href="">
-                                        <i class="bx bx-cog me-2"></i>
-                                        <span class="align-middle">Settings</span>
-                                      </a>
-                                    </li> -->
+                                                                                                            <a class="dropdown-item" href="">
+                                                                                                                <i class="bx bx-cog me-2"></i>
+                                                                                                                <span class="align-middle">Settings</span>
+                                                                                                            </a>
+                                                                                                            </li> -->
                                     <li>
                                         <a class="dropdown-item" href="">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -354,13 +325,14 @@
                                             </div>
                                             <h6 class="fw-bold text-uppercase text-muted">Total Applicants</h6>
                                             <h1 class="fw-bold text-success" style="font-size: 3.5rem;">
+                                                <span class="text-primary">{{$totalApplicants}}</span>
                                             </h1>
                                             <p class="text-muted small mb-0">Registered for building permits</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Total Approved -->
+                                <!-- Total Under Review -->
                                 <div class="col-md-4 col-sm-6 col-12">
                                     <div class="card shadow-sm border-0 animate__animated animate__bounceIn">
                                         <div class="card-body text-center">
@@ -369,6 +341,7 @@
                                             </div>
                                             <h6 class="fw-bold text-uppercase text-muted">Under Review</h6>
                                             <h1 class="fw-bold text-primary" style="font-size: 3.5rem;">
+                                                <span>{{ $underReviewCount ?? 0 }}</span>
                                             </h1>
                                             <p class="text-muted small mb-0">Successfully processed permits</p>
                                         </div>
@@ -382,8 +355,9 @@
                                             <div class="text-primary mb-2">
                                                 <i class="fa-solid fa-file-circle-check fa-3x"></i>
                                             </div>
-                                            <h6 class="fw-bold text-uppercase text-muted">Approved Permits</h6>
+                                            <h6 class="fw-bold text-uppercase text-muted">Approved Permits/Plans</h6>
                                             <h1 class="fw-bold text-primary" style="font-size: 3.5rem;">
+                                                <span>{{ $approvedCount ?? 0 }}</span>
                                             </h1>
                                             <p class="text-muted small mb-0">Successfully processed permits</p>
                                         </div>
@@ -415,10 +389,10 @@
                                 <div class="col-lg-8 col-12">
                                     <div class="card shadow-sm border-0">
                                         <div class="card-header bg-success text-white fw-bold">
-                                            Permit Status Overview
+                                            Permit/Plans Status Overview
                                         </div>
                                         <div class="card-body">
-                                            <canvas id="statusChart" height="150" data-chart-data=''></canvas>
+                                            <canvas id="permitsOverviewChart" height="250"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -432,15 +406,16 @@
                                         <div class="card-body">
                                             <ul class="list-unstyled mb-0">
                                                 <li class="mb-2">
-                                                    <i class="fa-solid fa-circle text-success me-2"></i> 70% Permits
-                                                    Approved
+                                                    <i class="fa-solid fa-circle text-success me-2"></i>
+                                                    {{ $approvedPercent }}% Permits Approved
                                                 </li>
                                                 <li class="mb-2">
-                                                    <i class="fa-solid fa-circle text-warning me-2"></i> 20% Pending Review
+                                                    <i class="fa-solid fa-circle text-warning me-2"></i>
+                                                    {{ $underReviewPercent }}% Pending Review
                                                 </li>
                                                 <li>
-                                                    <i class="fa-solid fa-circle text-danger me-2"></i> 10% Declined or
-                                                    Returned
+                                                    <i class="fa-solid fa-circle text-danger me-2"></i>
+                                                    {{ $declinedPercent }}% Declined or Returned
                                                 </li>
                                             </ul>
                                         </div>
@@ -453,7 +428,9 @@
                                             Monthly Permit Applications Overview
                                         </div>
                                         <div class="card-body">
-                                            <canvas id="monthChart" height="150" data-chart-data=''></canvas>
+                                            <canvas id="monthChart" height="150" data-labels='@json($monthLabels)'
+                                                data-data='@json($monthData)'>
+                                            </canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -478,20 +455,18 @@
                     <!-- Footer -->
                     <footer class="content-footer footer bg-footer-theme mt-4">
                         <div
-                            class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column small">
+                            class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column text-center text-md-start">
                             <div class="mb-2 mb-md-0">
                                 ©
                                 <script>
                                     document.write(new Date().getFullYear());
-                                </script>
-                                <span class="fw-bold text-secondary">Municipal Planning and Development Office Dashboard
-                                </span>
+                                </script>,
+                                <span class="fw-bold text-primary">Building Permit Management System</span>
                             </div>
                             <div>
-                                <a href="#" class="footer-link me-4">License</a>
-                                <a href="#" class="footer-link me-4">Contact</a>
-                                <a href="#" class="footer-link me-4">Documentation</a>
-                                <a href="#" class="footer-link me-4">Support</a>
+                                <a href="#" class="footer-link me-3">Documentation</a>
+                                <a href="#" class="footer-link me-3">Support</a>
+                                <a href="#" class="footer-link">Contact</a>
                             </div>
                         </div>
                     </footer>
@@ -510,3 +485,6 @@
     </div>
     <!-- / Layout wrapper -->
 @endsection
+<!-- Hidden JSON data for JS -->
+<span id="permitsChartLabels" class="d-none" hidden>{{ json_encode($chartLabels) }}</span>
+<span id="permitsChartData" class="d-none" hidden>{{ json_encode($chartData) }}</span>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-dashboard')
 
 @section('content')
 
@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                                                                                                                                                                                                                      <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                                                                                                                                                                                                                    </a> -->
+                                                                                                                                                                                                                                                                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                                                                                                                                                                                                                                                </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -112,51 +112,6 @@
                         </ul>
                     </li>
 
-                    <!-- <li class="menu-item">
-                                                                                                                                                                                                              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                                                                                                                                                                                                <i class="menu-icon fa-solid fa-receipt"></i>
-                                                                                                                                                                                                                <div data-i18n="Layouts">Payments</div>
-                                                                                                                                                                                                              </a>
-
-                                                                                                                                                                                                              <ul class="menu-sub">
-                                                                                                                                                                                                                <li class="menu-item">
-                                                                                                                                                                                                                  <a href="" class="menu-link">
-                                                                                                                                                                                                                    <div data-i18n="Without navbar">Pending Payments</div>
-                                                                                                                                                                                                                  </a>
-                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                                <li class="menu-item">
-                                                                                                                                                                                                                  <a href="" class="menu-link">
-                                                                                                                                                                                                                    <div data-i18n="Without navbar">Paid</div>
-                                                                                                                                                                                                                  </a>
-                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                                <li class="menu-item">
-                                                                                                                                                                                                                  <a href="" class="menu-link">
-                                                                                                                                                                                                                    <div data-i18n="Without navbar">Overdue</div>
-                                                                                                                                                                                                                  </a>
-                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                              </ul>
-                                                                                                                                                                                                            </li> -->
-
-                    <!-- <li class="menu-item">
-                                                                                                                                                                                                              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                                                                                                                                                                                                <i class="menu-icon fa-solid fa-comment"></i>
-                                                                                                                                                                                                                <div data-i18n="Layouts">Notification / Messages</div>
-                                                                                                                                                                                                              </a>
-
-                                                                                                                                                                                                              <ul class="menu-sub">
-                                                                                                                                                                                                                <li class="menu-item">
-                                                                                                                                                                                                                  <a href="" class="menu-link">
-                                                                                                                                                                                                                    <div data-i18n="Without navbar">Notifications</div>
-                                                                                                                                                                                                                  </a>
-                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                                <li class="menu-item">
-                                                                                                                                                                                                                  <a href="" class="menu-link">
-                                                                                                                                                                                                                    <div data-i18n="Without navbar">History Notification</div>
-                                                                                                                                                                                                                  </a>
-                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                              </ul>
-                                                                                                                                                                                                            </li> -->
-
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Accounts</span>
                     </li>
@@ -174,6 +129,20 @@
                             <li class="menu-item">
                                 <a href="{{ route('applicants.accounts.update-accounts') }}" class="menu-link">
                                     <div data-i18n="Notifications">Update Account</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon fa-solid fa-gear"></i>
+                            <div data-i18n="Account Settings">Options</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ route('user.options.view-dark-mode') }}" class="menu-link">
+                                    <div data-i18n="Account">Settings</div>
                                 </a>
                             </li>
                         </ul>
@@ -243,21 +212,39 @@
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <span class="fw-semibold d-block">{{Auth::user()->name}}</span>
-                                                    <small class="text-muted"> @php
-                                                        $role = strtolower(auth()->user()->role);
-                                                        if ($role === 'bfp') {
-                                                            $roleLabel = 'BFP';
-                                                        } elseif ($role === 'admin') {
-                                                            $roleLabel = 'Admin';
-                                                        } elseif ($role === 'mpdo') {
-                                                            $roleLabel = 'MPDO';
-                                                        } elseif ($role === 'treasurer') {
-                                                            $roleLabel = 'Treasurer';
-                                                        } else {
-                                                            $roleLabel = 'User';
-                                                        }
-                                                    @endphp
-                                                        {{ $roleLabel }}</small>
+                                                    <small class="text-muted">
+                            @php
+                              $role = strtolower($user->role); // use $user instead of auth()->user()
+
+                              if ($role === 'bfp') {
+                                $roleLabel = 'BFP';
+                              } elseif ($role === 'admin') {
+                                $roleLabel = 'Admin';
+                              } elseif ($role === 'mpdo') {
+                                $roleLabel = 'MPDO';
+                              } elseif ($role === 'treasurer') {
+                                $roleLabel = 'Treasurer';
+                              } else {
+                                $roleLabel = 'User';
+                              }
+
+                              // Status label
+                              $statusLabel = strtolower($user->status ?? 'inactive');
+                              if ($statusLabel === 'active') {
+                                $statusLabel = 'Active';
+                              } elseif ($statusLabel === 'inactive') {
+                                $statusLabel = 'Inactive';
+                              } else {
+                                $statusLabel = ucfirst($statusLabel);
+                              }
+                            @endphp
+
+                            {{ $roleLabel }} ||
+                            <span
+                              class="px-2 py-1 rounded text-white {{ $user->status === 'active' ? 'bg-success' : 'bg-secondary' }}">
+                              {{ ucfirst($user->status) }}
+                            </span>
+                          </small>
                                                 </div>
                                             </div>
                                         </a>
@@ -271,12 +258,13 @@
                                             <span class="align-middle">My Profile</span>
                                         </a>
                                     </li>
-                                    <!-- <li>
-                                                                                                                                                                                                                              <a class="dropdown-item" href="">
-                                                                                                                                                                                                                                <i class="bx bx-cog me-2"></i>
-                                                                                                                                                                                                                                <span class="align-middle">Settings</span>
-                                                                                                                                                                                                                              </a>
-                                                                                                                                                                                                                            </li> -->
+                                    <li>
+                                        <a class="dropdown-item" href="">
+                                            <i class="bx bx-cog me-2"></i>
+                                            <span class="align-middle">Options</span>
+                                        </a>
+                                    </li>
+                                    
                                     <li>
                                         <a class="dropdown-item" href="{{ route('record.history.log-history') }}">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -315,9 +303,18 @@
 
                                 <!-- ================= STEPS INDICATOR ================= -->
                                 <div class="col-12 col-md-3">
+                                    <!-- ================= STEPS INDICATOR ================= -->
                                     @php
                                         $latestPermit = $user->permitApplications->sortByDesc('created_at')->first();
+                                        $consentGiven = $latestPermit?->consent ?? false; // Replace with your actual consent field
                                         $status = $latestPermit ? strtolower($latestPermit->status) : null;
+
+                                        // Determine step highlights
+                                        $stepHighlight = [
+                                            'consent' => $consentGiven,
+                                            'review' => !$consentGiven || in_array($status, ['pending', 'under_review']),
+                                            'approve' => $status === 'approved',
+                                        ];
                                     @endphp
 
                                     <div class="d-flex d-md-block justify-content-between align-items-center text-center">
@@ -325,8 +322,8 @@
                                         <!-- STEP 1: Consent -->
                                         <div class="position-relative mb-0 mb-md-4">
                                             <div class="rounded-circle 
-                                        {{ $latestPermit ? 'bg-success text-white' : 'bg-secondary text-white' }} 
-                                        mx-auto d-flex align-items-center justify-content-center"
+                                                                                    {{$stepHighlight['consent'] ? 'bg-success text-white' : 'bg-secondary text-white' }} 
+                                                                                    mx-auto d-flex align-items-center justify-content-center"
                                                 style="width:36px; height:36px;">
                                                 1
                                             </div>
@@ -335,24 +332,11 @@
                                                 style="width:3px; height:40px; background:#d1d5db;"></div>
                                         </div>
 
-                                        <!-- STEP 1.5: Pending -->
-                                        <div class="position-relative mb-0 mb-md-4">
-                                            <div class="rounded-circle 
-                                        {{ $status === 'pending' ? 'bg-primary border border-primary border-3 animate-pulse text-white' : 'bg-secondary text-white' }} 
-                                        mx-auto d-flex align-items-center justify-content-center"
-                                                style="width:36px; height:36px;">
-                                                1.5
-                                            </div>
-                                            <div class="small mt-1">Pending</div>
-                                            <div class="d-none d-md-block position-absolute start-50 top-100 translate-middle-x"
-                                                style="width:3px; height:40px; background:#d1d5db;"></div>
-                                        </div>
-
                                         <!-- STEP 2: Review -->
                                         <div class="position-relative mb-0 mb-md-4">
                                             <div class="rounded-circle 
-                                        {{ $status === 'under_review' ? 'bg-primary border border-primary border-3 animate-pulse text-white' : 'bg-secondary text-white' }} 
-                                        mx-auto d-flex align-items-center justify-content-center"
+                                                                                    {{$stepHighlight['review'] ? 'bg-primary border border-primary border-3 animate-pulse text-white' : 'bg-secondary text-white' }} 
+                                                                                    mx-auto d-flex align-items-center justify-content-center"
                                                 style="width:36px; height:36px;">
                                                 2
                                             </div>
@@ -364,8 +348,8 @@
                                         <!-- STEP 3: Approve -->
                                         <div class="position-relative">
                                             <div class="rounded-circle 
-                                        {{ $status === 'approved' ? 'bg-primary border border-primary border-3 animate-pulse text-white' : 'bg-secondary text-white' }} 
-                                        mx-auto d-flex align-items-center justify-content-center"
+                                                                                    {{ $stepHighlight['approve'] ? 'bg-primary border border-primary border-3 animate-pulse text-white' : 'bg-secondary text-white' }} 
+                                                                                    mx-auto d-flex align-items-center justify-content-center"
                                                 style="width:36px; height:36px;">
                                                 3
                                             </div>
@@ -406,61 +390,41 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @forelse($permitApplications as $index => $permit)
+                                                                @forelse($permitApplications->where('status', 'pending') as $index => $permit)
                                                                     <tr>
                                                                         <td>{{ $index + 1 }}</td>
 
+                                                                        {{-- Project Name --}}
                                                                         <td class="text-truncate" style="max-width:150px;">
-
-                                                                            @if($permit->status === 'under_review')
-                                                                                <span class="text-secondary small">-</span>
-                                                                            @else
-                                                                                {{ $permit->project_name }}
-                                                                            @endif
-
+                                                                            {{ $permit->project_name }}
                                                                         </td>
 
+                                                                        {{-- Location --}}
                                                                         <td class="d-none d-lg-table-cell text-truncate"
                                                                             style="max-width:120px;">
-                                                                            @if ($permit->status === 'under_review')
-                                                                                <span class="text-secondary small">-</span>
-                                                                            @else
-                                                                                {{ $permit->location }}
-                                                                            @endif
+                                                                            {{ $permit->location }}
                                                                         </td>
 
+                                                                        {{-- Status --}}
                                                                         <td class="d-none d-lg-table-cell text-truncate"
                                                                             style="max-width:120px;">
-                                                                            @if ($permit->status === 'under_review')
-                                                                                <span class="text-secondary small">-</span>
-                                                                            @else
-                                                                                {{ ucfirst($permit->status) }}
-                                                                            @endif
+                                                                            {{ ucfirst($permit->status) }}
                                                                         </td>
 
+                                                                        {{-- Created At --}}
                                                                         <td class="d-none d-lg-table-cell text-truncate"
                                                                             style="max-width:120px;">
-                                                                            @if ($permit->status === 'under_review')
-                                                                                <span class="text-secondary small">-</span>
-                                                                            @else
-                                                                                {{ $permit->created_at->format('M d, Y') }}
-                                                                            @endif
+                                                                            {{ $permit->created_at->format('M d, Y') }}
                                                                         </td>
 
                                                                         {{-- Architectural Plans --}}
                                                                         <td class="text-truncate" style="max-width:200px;">
-
-                                                                            @if($permit->status === 'under_review')
-                                                                                {{-- Empty when already under review --}}
-                                                                                <span class="text-secondary small">-</span>
-
-                                                                            @elseif(!empty($permit->plan_name))
+                                                                            @if(!empty($permit->plan_name))
                                                                                 {{ implode(', ', $permit->plan_name) }}
-
                                                                             @else
-                                                                                <span class="text-secondary small">No Architectural Plans</span>
+                                                                                <span class="text-secondary small">No Architectural
+                                                                                    Plans</span>
                                                                             @endif
-
                                                                         </td>
 
                                                                         {{-- Structural Plans --}}
@@ -473,22 +437,22 @@
                                                                             @endif
                                                                         </td>
 
-                                                                        <!-- Electrical Plans -->
-                                                                        <td class="text-truncate" style="max-width:200px;">
-                                                                            @if(!empty($permit->plumbing_plan_names))
-                                                                                {{ implode(', ', $permit->plumbing_plan_names) }}
-                                                                            @else
-                                                                                <span class="text-secondary small">No Plumbing Plans
-                                                                                    Plans</span>
-                                                                            @endif
-                                                                        </td>
-
-                                                                        <!-- Plumbing Plans -->
+                                                                        {{-- Electrical Plans --}}
                                                                         <td class="text-truncate" style="max-width:200px;">
                                                                             @if(!empty($permit->electrical_plan_names))
                                                                                 {{ implode(', ', $permit->electrical_plan_names) }}
                                                                             @else
-                                                                                <span class="text-secondary small">No Plumbing Plans
+                                                                                <span class="text-secondary small">No Electrical
+                                                                                    Plans</span>
+                                                                            @endif
+                                                                        </td>
+
+                                                                        {{-- Plumbing Plans --}}
+                                                                        <td class="text-truncate" style="max-width:200px;">
+                                                                            @if(!empty($permit->plumbing_plan_names))
+                                                                                {{ implode(', ', $permit->plumbing_plan_names) }}
+                                                                            @else
+                                                                                <span class="text-secondary small">No Plumbing
                                                                                     Plans</span>
                                                                             @endif
                                                                         </td>
@@ -497,9 +461,8 @@
                                                                         <td>
                                                                             <div class="d-flex flex-wrap gap-1">
 
-                                                                                {{-- Permit Documents (only show if not under
-                                                                                review) --}}
-                                                                                @if($permit->status !== 'under_review' && !empty($permit->document_urls))
+                                                                                {{-- Permit Documents --}}
+                                                                                @if(!empty($permit->document_urls))
                                                                                     @foreach($permit->document_urls as $i => $docUrl)
                                                                                         <a href="{{ $docUrl }}" target="_blank"
                                                                                             class="btn btn-sm btn-primary text-truncate"
@@ -507,12 +470,10 @@
                                                                                             Permit {{ $i + 1 }}
                                                                                         </a>
                                                                                     @endforeach
-                                                                                @else
-                                                                                    <span class="text-secondary small">-</span>
                                                                                 @endif
 
-                                                                                {{-- Architectural Files (always show) --}}
-                                                                                @if($permit->status !== 'under_review' && !empty($permit->plan_files))
+                                                                                {{-- Architectural Files --}}
+                                                                                @if(!empty($permit->plan_files))
                                                                                     @foreach($permit->plan_files as $i => $url)
                                                                                         <a href="{{ $url }}" target="_blank"
                                                                                             class="btn btn-sm btn-success text-truncate"
@@ -520,11 +481,9 @@
                                                                                             Archit {{ $i + 1 }}
                                                                                         </a>
                                                                                     @endforeach
-                                                                                @else
-                                                                                    <span class="text-secondary small">-</span>
                                                                                 @endif
 
-                                                                                {{-- Structural Files (always show) --}}
+                                                                                {{-- Structural Files --}}
                                                                                 @if(!empty($permit->structural_plan_files))
                                                                                     @foreach($permit->structural_plan_files as $i => $url)
                                                                                         <a href="{{ $url }}" target="_blank"
@@ -535,34 +494,35 @@
                                                                                     @endforeach
                                                                                 @endif
 
-                                                                                <!-- Electrical Files -->
+                                                                                {{-- Electrical Files --}}
                                                                                 @if(!empty($permit->electrical_plan_files))
                                                                                     @foreach ($permit->electrical_plan_files as $i => $url)
                                                                                         <a href="{{ $url }}" target="_blank"
-                                                                                            class="btn btn-sm btn-warning text-truncate"
+                                                                                            class="btn btn-sm btn-info text-truncate"
                                                                                             style="max-width:120px;">
                                                                                             Electr {{ $i + 1 }}
                                                                                         </a>
                                                                                     @endforeach
                                                                                 @endif
 
-                                                                                <!-- Plumbing Files -->
+                                                                                {{-- Plumbing Files --}}
                                                                                 @if(!empty($permit->plumbing_plan_files))
                                                                                     @foreach ($permit->plumbing_plan_files as $i => $url)
                                                                                         <a href="{{ $url }}" target="_blank"
-                                                                                            class="btn btn-sm btn-warning text-truncate"
+                                                                                            class="btn btn-sm btn-dark text-truncate"
                                                                                             style="max-width:120px;">
                                                                                             Plumb {{ $i + 1 }}
                                                                                         </a>
                                                                                     @endforeach
                                                                                 @endif
 
-                                                                                {{-- Show "No Documents" only if nothing is left
-                                                                                to show --}}
+                                                                                {{-- No Documents --}}
                                                                                 @if(
-                                                                                        ($permit->status === 'under_review' || empty($permit->document_urls)) &&
+                                                                                        empty($permit->document_urls) &&
                                                                                         empty($permit->plan_files) &&
-                                                                                        empty($permit->structural_plan_files)
+                                                                                        empty($permit->structural_plan_files) &&
+                                                                                        empty($permit->electrical_plan_files) &&
+                                                                                        empty($permit->plumbing_plan_files)
                                                                                     )
                                                                                     <span class="text-secondary small">No
                                                                                         Documents</span>
@@ -574,8 +534,8 @@
                                                                     </tr>
                                                                 @empty
                                                                     <tr>
-                                                                        <td colspan="8" class="text-center text-muted">
-                                                                            No permit applications found.
+                                                                        <td colspan="11" class="text-center text-muted">
+                                                                            No pending permit applications found.
                                                                         </td>
                                                                     </tr>
                                                                 @endforelse
@@ -610,7 +570,7 @@
                                                                             <th>Project Name</th>
                                                                             <th>Description</th>
                                                                             <th>Status</th>
-                                                                            <th>Reviewed By</th>
+                                                                            <!-- <th>Reviewed By</th> -->
                                                                             <th>Documents</th>
                                                                         </tr>
                                                                     </thead>
@@ -620,28 +580,94 @@
                                                                             <td>{{ $permit->project_name }}</td>
                                                                             <td>{{ $permit->description }}</td>
                                                                             <td>
-                                                                                @if($permit->status === 'under_review')
-                                                                                    <span class="text-warning fw-bold">Under
-                                                                                        Review</span>
-                                                                                @elseif($permit->status === 'approved')
-                                                                                    <span
-                                                                                        class="text-success fw-bold">Approved</span>
-                                                                                @elseif($permit->status === 'rejected')
-                                                                                    <span
-                                                                                        class="text-danger fw-bold">Rejected</span>
-                                                                                @else
-                                                                                    <span
-                                                                                        class="text-secondary fw-bold">Pending</span>
-                                                                                @endif
+                                                                                <div class="d-flex flex-column gap-1">
+
+                                                                                    {{-- Permit Status --}}
+                                                                                    @if($permit->status === 'under_review')
+                                                                                        @php
+                                                                                            $statusClass = 'text-warning fw-bold';
+                                                                                            $engineerName = $permit->reviewer->name ?? 'N/A';
+                                                                                        @endphp
+                                                                                        <span class="{{ $statusClass }}">
+                                                                                            Permit: Under Review — Reviewed by:
+                                                                                            {{ $engineerName }}
+                                                                                        </span>
+                                                                                    @endif
+
+                                                                                    {{-- Architectural Plans --}}
+                                                                                    @if(!empty($permit->architecturalPlans))
+                                                                                        @foreach($permit->architecturalPlans as $i => $plan)
+                                                                                            @if($plan->status === 'under_review')
+                                                                                                @php
+                                                                                                    $statusClass = 'text-warning fw-bold';
+                                                                                                    $reviewedBy = $plan->reviewer->name ?? 'N/A';
+                                                                                                @endphp
+                                                                                                <span class="{{ $statusClass }}">
+                                                                                                    Architectural Plan {{ $i + 1 }}: Under
+                                                                                                    Review — Reviewed by: {{ $reviewedBy }}
+                                                                                                </span>
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    @endif
+
+                                                                                    {{-- Structural Plans --}}
+                                                                                    @if(!empty($permit->structuralPlans))
+                                                                                        @foreach($permit->structuralPlans as $i => $plan)
+                                                                                            @if($plan->status === 'under_review')
+                                                                                                @php
+                                                                                                    $statusClass = 'text-warning fw-bold';
+                                                                                                    $reviewedBy = $plan->reviewer->name ?? 'N/A';
+                                                                                                @endphp
+                                                                                                <span class="{{ $statusClass }}">
+                                                                                                    Structural Plan {{ $i + 1 }}: Under
+                                                                                                    Review — Reviewed by: {{ $reviewedBy }}
+                                                                                                </span>
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    @endif
+
+                                                                                    {{-- Electrical Plans --}}
+                                                                                    @if(!empty($permit->electricalPlans))
+                                                                                        @foreach($permit->electricalPlans as $i => $plan)
+                                                                                            @if($plan->status === 'under_review')
+                                                                                                @php
+                                                                                                    $statusClass = 'text-warning fw-bold';
+                                                                                                    $reviewedBy = $plan->reviewer->name ?? 'N/A';
+                                                                                                @endphp
+                                                                                                <span class="{{ $statusClass }}">
+                                                                                                    Electrical Plan {{ $i + 1 }}: Under
+                                                                                                    Review — Reviewed by: {{ $reviewedBy }}
+                                                                                                </span>
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    @endif
+
+                                                                                    {{-- Plumbing Plans --}}
+                                                                                    @if(!empty($permit->plumbingPlans))
+                                                                                        @foreach($permit->plumbingPlans as $i => $plan)
+                                                                                            @if($plan->status === 'under_review')
+                                                                                                @php
+                                                                                                    $statusClass = 'text-warning fw-bold';
+                                                                                                    $reviewedBy = $plan->reviewer->name ?? 'N/A';
+                                                                                                @endphp
+                                                                                                <span class="{{ $statusClass }}">
+                                                                                                    Plumbing Plan {{ $i + 1 }}: Under Review
+                                                                                                    — Reviewed by: {{ $reviewedBy }}
+                                                                                                </span>
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    @endif
+
+                                                                                </div>
                                                                             </td>
 
-                                                                            <td>{{ $permit->reviewer?->name ?? '-' }}</td>
+                                                                            <!-- <td>{{ $permit->reviewer?->name ?? '-' }}</td> -->
 
                                                                             <td>
                                                                                 <div class="d-flex flex-wrap gap-1">
 
                                                                                     {{-- Permit Documents --}}
-                                                                                    @if(!empty($permit->document_urls))
+                                                                                    @if(!empty($permit->document_urls) && $permit->status === 'under_review')
                                                                                         @foreach($permit->document_urls as $i => $doc)
                                                                                             <a href="{{ $doc }}" target="_blank"
                                                                                                 class="btn btn-sm btn-primary">
@@ -651,52 +677,72 @@
                                                                                     @endif
 
                                                                                     {{-- Architectural Plans --}}
-                                                                                    @if(!empty($permit->plan_files))
+                                                                                    @if(!empty($permit->plan_files) && !empty($permit->architecturalPlans))
                                                                                         @foreach($permit->plan_files as $i => $plan)
-                                                                                            <a href="{{ $plan }}" target="_blank"
-                                                                                                class="btn btn-sm btn-success">
-                                                                                                Archite{{ $i + 1 }}
-                                                                                            </a>
+                                                                                            @php
+                                                                                                $planStatus = $permit->architecturalPlans[$i]->status ?? 'pending';
+                                                                                            @endphp
+                                                                                            @if($planStatus === 'under_review')
+                                                                                                <a href="{{ $plan }}" target="_blank"
+                                                                                                    class="btn btn-sm btn-success">
+                                                                                                    Archite{{ $i + 1 }}
+                                                                                                </a>
+                                                                                            @endif
                                                                                         @endforeach
                                                                                     @endif
 
                                                                                     {{-- Structural Plans --}}
-                                                                                    @if(!empty($permit->structural_plan_files))
+                                                                                    @if(!empty($permit->structural_plan_files) && !empty($permit->structuralPlans))
                                                                                         @foreach($permit->structural_plan_files as $i => $plan)
-                                                                                            <a href="{{ $plan }}" target="_blank"
-                                                                                                class="btn btn-sm btn-warning">
-                                                                                                Structural {{ $i + 1 }}
-                                                                                            </a>
+                                                                                            @php
+                                                                                                $planStatus = $permit->structuralPlans[$i]->status ?? 'pending';
+                                                                                            @endphp
+                                                                                            @if($planStatus === 'under_review')
+                                                                                                <a href="{{ $plan }}" target="_blank"
+                                                                                                    class="btn btn-sm btn-warning">
+                                                                                                    Structural {{ $i + 1 }}
+                                                                                                </a>
+                                                                                            @endif
                                                                                         @endforeach
                                                                                     @endif
 
                                                                                     {{-- Electrical Plans --}}
-                                                                                    @if(!empty($permit->electrical_plan_files))
+                                                                                    @if(!empty($permit->electrical_plan_files) && !empty($permit->electricalPlans))
                                                                                         @foreach($permit->electrical_plan_files as $i => $plan)
-                                                                                            <a href="{{ $plan }}" target="_blank"
-                                                                                                class="btn btn-sm btn-info">
-                                                                                                Electrical {{ $i + 1 }}
-                                                                                            </a>
+                                                                                            @php
+                                                                                                $planStatus = $permit->electricalPlans[$i]->status ?? 'pending';
+                                                                                            @endphp
+                                                                                            @if($planStatus === 'under_review')
+                                                                                                <a href="{{ $plan }}" target="_blank"
+                                                                                                    class="btn btn-sm btn-info">
+                                                                                                    Electrical {{ $i + 1 }}
+                                                                                                </a>
+                                                                                            @endif
                                                                                         @endforeach
                                                                                     @endif
 
                                                                                     {{-- Plumbing Plans --}}
-                                                                                    @if(!empty($permit->plumbing_plan_files))
+                                                                                    @if(!empty($permit->plumbing_plan_files) && !empty($permit->plumbingPlans))
                                                                                         @foreach($permit->plumbing_plan_files as $i => $plan)
-                                                                                            <a href="{{ $plan }}" target="_blank"
-                                                                                                class="btn btn-sm btn-dark">
-                                                                                                Plumbing {{ $i + 1 }}
-                                                                                            </a>
+                                                                                            @php
+                                                                                                $planStatus = $permit->plumbingPlans[$i]->status ?? 'pending';
+                                                                                            @endphp
+                                                                                            @if($planStatus === 'under_review')
+                                                                                                <a href="{{ $plan }}" target="_blank"
+                                                                                                    class="btn btn-sm btn-dark">
+                                                                                                    Plumbing {{ $i + 1 }}
+                                                                                                </a>
+                                                                                            @endif
                                                                                         @endforeach
                                                                                     @endif
 
-                                                                                    {{-- If no files at all --}}
+                                                                                    {{-- If no files are under review --}}
                                                                                     @if(
-                                                                                            empty($permit->document_urls) &&
-                                                                                            empty($permit->plan_files) &&
-                                                                                            empty($permit->structural_plan_files) &&
-                                                                                            empty($permit->electrical_plan_files) &&
-                                                                                            empty($permit->plumbing_plan_files)
+                                                                                            (empty($permit->document_urls) || $permit->status !== 'under_review') &&
+                                                                                            (empty($permit->plan_files) || collect($permit->architecturalPlans)->every(fn($p) => $p->status !== 'under_review')) &&
+                                                                                            (empty($permit->structural_plan_files) || collect($permit->structuralPlans)->every(fn($p) => $p->status !== 'under_review')) &&
+                                                                                            (empty($permit->electrical_plan_files) || collect($permit->electricalPlans)->every(fn($p) => $p->status !== 'under_review')) &&
+                                                                                            (empty($permit->plumbing_plan_files) || collect($permit->plumbingPlans)->every(fn($p) => $p->status !== 'under_review'))
                                                                                         )
                                                                                         <span class="text-muted">-</span>
                                                                                     @endif
@@ -723,6 +769,173 @@
                                                     <p class="text-muted small">
                                                         This section will be available after department review.
                                                     </p>
+
+
+                                                    @foreach($permitApplications as $index => $permit)
+                                                        @if(
+                                                                $permit->status === 'approved' ||
+                                                                collect($permit->architecturalPlans)->contains(fn($p) => $p->status === 'approved') ||
+                                                                collect($permit->structuralPlans)->contains(fn($p) => $p->status === 'approved') ||
+                                                                collect($permit->electricalPlans)->contains(fn($p) => $p->status === 'approved') ||
+                                                                collect($permit->plumbingPlans)->contains(fn($p) => $p->status === 'approved')
+                                                            )
+
+                                                            <div class="card shadow-sm mb-3">
+                                                                <div class="table-responsive">
+                                                                    <table
+                                                                        class="table table-bordered table-striped align-middle mb-0">
+                                                                        <thead class="table-light">
+                                                                            <tr>
+                                                                                <th>#</th>
+                                                                                <th>Project Name</th>
+                                                                                <th>Description</th>
+                                                                                <th>Status</th>
+                                                                                <th>Documents</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>{{ $index + 1 }}</td>
+                                                                                <td>{{ $permit->project_name }}</td>
+                                                                                <td>{{ $permit->description }}</td>
+                                                                                <td>
+                                                                                    <div class="d-flex flex-column gap-1">
+
+                                                                                        {{-- Permit Status --}}
+                                                                                        @if($permit->status === 'approved')
+                                                                                            @php
+                                                                                                $statusClass = 'text-success fw-bold';
+                                                                                                $engineerName = $permit->reviewer->name ?? 'N/A';
+                                                                                            @endphp
+                                                                                            <span class="{{ $statusClass }}">
+                                                                                                Permit: Approved — Reviewed by:
+                                                                                                {{ $engineerName }}
+                                                                                            </span>
+                                                                                        @endif
+
+                                                                                        {{-- Function to display plan statuses --}}
+                                                                                        @php
+                                                                                            $planTypes = [
+                                                                                                'Architectural' => $permit->architecturalPlans ?? [],
+                                                                                                'Structural' => $permit->structuralPlans ?? [],
+                                                                                                'Electrical' => $permit->electricalPlans ?? [],
+                                                                                                'Plumbing' => $permit->plumbingPlans ?? [],
+                                                                                            ];
+                                                                                        @endphp
+
+                                                                                        @foreach($planTypes as $type => $plans)
+                                                                                            @foreach($plans as $i => $plan)
+                                                                                                @if($plan->status === 'approved')
+                                                                                                    @php
+                                                                                                        $statusClass = 'text-success fw-bold';
+                                                                                                        $reviewedBy = $plan->reviewer->name ?? 'N/A';
+                                                                                                    @endphp
+                                                                                                    <span class="{{ $statusClass }}">
+                                                                                                        {{ $type }} Plan {{ $i + 1 }}: Approved
+                                                                                                        — Reviewed by: {{ $reviewedBy }}
+                                                                                                    </span>
+                                                                                                @endif
+                                                                                            @endforeach
+                                                                                        @endforeach
+
+                                                                                    </div>
+                                                                                </td>
+
+                                                                                {{-- Documents --}}
+                                                                                <td>
+                                                                                    <div class="d-flex flex-wrap gap-1">
+
+                                                                                        {{-- Permit Documents --}}
+                                                                                        @if(!empty($permit->document_urls) && $permit->status !== 'under_review')
+                                                                                            @foreach($permit->document_urls as $i => $doc)
+                                                                                                <a href="{{ $doc }}" target="_blank"
+                                                                                                    class="btn btn-sm btn-primary">
+                                                                                                    Permit {{ $i + 1 }}
+                                                                                                </a>
+                                                                                            @endforeach
+                                                                                        @endif
+
+                                                                                        {{-- Architectural Plans --}}
+                                                                                        @if(!empty($permit->plan_files) && !empty($permit->architecturalPlans))
+                                                                                            @foreach($permit->plan_files as $i => $plan)
+                                                                                                @php
+                                                                                                    $planStatus = $permit->architecturalPlans[$i]->status ?? 'pending';
+                                                                                                @endphp
+                                                                                                @if($planStatus !== 'under_review')
+                                                                                                    <a href="{{ $plan }}" target="_blank"
+                                                                                                        class="btn btn-sm btn-success">
+                                                                                                        Archite{{ $i + 1 }}
+                                                                                                    </a>
+                                                                                                @endif
+                                                                                            @endforeach
+                                                                                        @endif
+
+                                                                                        {{-- Structural Plans --}}
+                                                                                        @if(!empty($permit->structural_plan_files) && !empty($permit->structuralPlans))
+                                                                                            @foreach($permit->structural_plan_files as $i => $plan)
+                                                                                                @php
+                                                                                                    $planStatus = $permit->structuralPlans[$i]->status ?? 'pending';
+                                                                                                @endphp
+                                                                                                @if($planStatus !== 'under_review')
+                                                                                                    <a href="{{ $plan }}" target="_blank"
+                                                                                                        class="btn btn-sm btn-warning">
+                                                                                                        Structural {{ $i + 1 }}
+                                                                                                    </a>
+                                                                                                @endif
+                                                                                            @endforeach
+                                                                                        @endif
+
+                                                                                        {{-- Electrical Plans --}}
+                                                                                        @if(!empty($permit->electrical_plan_files) && !empty($permit->electricalPlans))
+                                                                                            @foreach($permit->electrical_plan_files as $i => $plan)
+                                                                                                @php
+                                                                                                    $planStatus = $permit->electricalPlans[$i]->status ?? 'pending';
+                                                                                                @endphp
+                                                                                                @if($planStatus !== 'under_review')
+                                                                                                    <a href="{{ $plan }}" target="_blank"
+                                                                                                        class="btn btn-sm btn-info">
+                                                                                                        Electrical {{ $i + 1 }}
+                                                                                                    </a>
+                                                                                                @endif
+                                                                                            @endforeach
+                                                                                        @endif
+
+                                                                                        {{-- Plumbing Plans --}}
+                                                                                        @if(!empty($permit->plumbing_plan_files) && !empty($permit->plumbingPlans))
+                                                                                            @foreach($permit->plumbing_plan_files as $i => $plan)
+                                                                                                @php
+                                                                                                    $planStatus = $permit->plumbingPlans[$i]->status ?? 'pending';
+                                                                                                @endphp
+                                                                                                @if($planStatus !== 'under_review')
+                                                                                                    <a href="{{ $plan }}" target="_blank"
+                                                                                                        class="btn btn-sm btn-dark">
+                                                                                                        Plumbing {{ $i + 1 }}
+                                                                                                    </a>
+                                                                                                @endif
+                                                                                            @endforeach
+                                                                                        @endif
+
+                                                                                        {{-- If no files at all (after filtering out
+                                                                                        under_review) --}}
+                                                                                        @if(
+                                                                                                (empty($permit->document_urls) || $permit->status === 'under_review') &&
+                                                                                                (empty($permit->plan_files) || empty($permit->architecturalPlans)) &&
+                                                                                                (empty($permit->structural_plan_files) || empty($permit->structuralPlans)) &&
+                                                                                                (empty($permit->electrical_plan_files) || empty($permit->electricalPlans)) &&
+                                                                                                (empty($permit->plumbing_plan_files) || empty($permit->plumbingPlans))
+                                                                                            )
+                                                                                            <span class="text-muted">-</span>
+                                                                                        @endif
+
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
