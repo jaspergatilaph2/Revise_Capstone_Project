@@ -995,23 +995,23 @@
                     <!-- /Content -->
 
                     <!-- Footer -->
-                    <footer class="content-footer footer bg-footer-theme mt-4">
-                        <div
-                            class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column text-center text-md-start">
-                            <div class="mb-2 mb-md-0">
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script>,
-                                <span class="fw-bold text-primary">Building Permit Management System</span>
-                            </div>
-                            <div>
-                                <a href="#" class="footer-link me-3">Documentation</a>
-                                <a href="#" class="footer-link me-3">Support</a>
-                                <a href="#" class="footer-link">Contact</a>
-                            </div>
-                        </div>
-                    </footer>
+                    <footer class="content-footer footer mt-4 border-top">
+            <div
+              class="container-xxl d-flex flex-wrap justify-content-between py-3 flex-md-row flex-column text-center text-md-start">
+
+              <div class="mb-2 mb-md-0">
+                © <span id="year"></span>,
+                <span class="fw-bold text-primary">Building Permit Management System</span>
+              </div>
+
+              <div>
+                <a href="#" class="footer-link me-3 nav-link d-inline">Documentation</a>
+                <a href="#" class="footer-link me-3 nav-link d-inline">Support</a>
+                <a href="#" class="footer-link nav-link d-inline">Contact</a>
+              </div>
+
+            </div>
+          </footer>
                     <!-- /Footer -->
 
                     <div class="content-backdrop fade"></div>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-dashboard')
 
 @section('content')
 
@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                                                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                                                </a> -->
+                                                                                                                                <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                                                                                                                </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -34,7 +34,7 @@
 
                     <!-- Layouts -->
 
-                    <li class="menu-item {{ $ActiveTabMenu === 'Reviews' ? 'active' : '' }}">
+                    <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon fa-solid fa-file"></i>
                             <div data-i18n="Layouts">Permit Applications</div>
@@ -56,7 +56,7 @@
                                     <div data-i18n="Without menu">Structural Plans</div>
                                 </a>
                             </li>
-                            <li class="menu-item {{ $SubActiveTab === 'Electrical' ? 'active' : '' }}">
+                            <li class="menu-item">
                                 <a href="{{ route('reviews.permits.view-electrical') }}" class="menu-link">
                                     <div data-i18n="Without menu">Electrical Plans</div>
                                 </a>
@@ -66,13 +66,11 @@
                                     <div data-i18n="Without menu">Plumbing Plans</div>
                                 </a>
                             </li>
-
                             <li class="menu-item">
                                 <a href="{{ route('reviews.permits.view-certificate') }}" class="menu-link">
                                     <div data-i18n="Without menu">Certificate</div>
                                 </a>
                             </li>
-
                             <li class="menu-item">
                                 <a href="" class="menu-link">
                                     <div data-i18n="Without menu">Archived Applications</div>
@@ -111,7 +109,9 @@
                         </ul>
                     </li>
 
-                   @php
+
+
+                    @php
                         use Illuminate\Support\Facades\Auth;
 
                         $staffCount = App\Models\User::where('role', 'mpdo_staff')->count();
@@ -154,8 +154,6 @@
                         </li>
                     @endif
 
-
-
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Accounts</span>
                     </li>
@@ -176,10 +174,10 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                                      <a href="" class="menu-link">
-                                                        <div data-i18n="Notifications">Settings</div>
-                                                      </a>
-                                                    </li> -->
+                                                                                                                                    <a href="" class="menu-link">
+                                                                                                                                        <div data-i18n="Notifications">Settings</div>
+                                                                                                                                    </a>
+                                                                                                                                    </li> -->
 
                         </ul>
                     </li>
@@ -187,14 +185,14 @@
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Miscellaneous</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $ActiveTabMenu == 'Logs' ? 'active' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-file"></i>
                             <div data-i18n="Misc">Misc</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
+                            <li class="menu-item {{ $SubActiveTab == 'View Logs' ? 'active' : '' }}">
+                                <a href="{{ route('mpdo.logs.view-logs') }}" class="menu-link">
                                     <div data-i18n="Under Maintenance">Logs</div>
                                 </a>
                             </li>
@@ -260,7 +258,10 @@
                                                                 $roleLabel = 'MPDO';
                                                             } elseif ($role === 'treasurer') {
                                                                 $roleLabel = 'Treasurer';
-                                                            } else {
+                                                            } elseif ($role === 'mpdo_staff') {
+                                                                $roleLabel = 'MPDO STAFF';
+                                                            }
+                                                            else {
                                                                 $roleLabel = 'User';
                                                             }
 
@@ -294,11 +295,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                                          <a class="dropdown-item" href="">
-                                                            <i class="bx bx-cog me-2"></i>
-                                                            <span class="align-middle">Settings</span>
-                                                          </a>
-                                                        </li> -->
+                                                                                                                                        <a class="dropdown-item" href="">
+                                                                                                                                            <i class="bx bx-cog me-2"></i>
+                                                                                                                                            <span class="align-middle">Settings</span>
+                                                                                                                                        </a>
+                                                                                                                                        </li> -->
                                     <li>
                                         <a class="dropdown-item" href="">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -329,161 +330,88 @@
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
-                <div class="content-wrapper d-flex flex-column min-vh-100">
+                <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Review Electrical Plan
-                                /</span>Show Uploaded Documents
-                        </h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Logs /</span>History</h4>
+                        <ul class="nav nav-pills flex-column flex-md-row mb-4">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="javascript:void(0);">
+                                    <i class="fa-solid fa-clock-rotate-left"></i> Logs
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="mb-0">Logs History</h5>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" href="javascript:void(0);"><i
-                                                class="menu-icon fa-solid fa-folder"></i> Electrical Plan Documents
-                                            Details</a>
-                                    </li>
-                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive text-nowrap bg-white rounded-3 p-3 shadow-sm">
+    <h5 class="fw-bold mb-3">MPDO Logs</h5>
 
-                                <div class="card mb-4">
-                                    <h5 class="card-header">Applicants Documents Viewer</h5>
-                                    <hr class="my-0" />
+    <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+            <tr>
+                <th class="text-center" style="width: 5%;">#</th>
+                <th>Description</th>
+                <th class="text-center" style="width: 20%;">Date & Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php $counter = ($logs->currentPage() - 1) * $logs->perPage() + 1; @endphp
 
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped text-center">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Project Name</th>
-                                                        <th>Plan Name(s)</th>
-                                                        <th>Documents</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
+            @forelse($logs as $log)
+                <tr>
+                    <td class="text-center">{{ $counter++ }}</td>
+                    <td>
+                        <i class="fa-solid fa-file-lines text-primary me-2"></i>
+                        {{ $log->description }}
+                    </td>
+                    <td class="text-center text-muted small">
+                        {{ $log->created_at->setTimezone('Asia/Manila')->format('Y-m-d h:i A') }}
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="3" class="text-center text-muted fst-italic">No MPDO logs found.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
 
-                                                <tbody>
-                                                    @foreach($users as $user)
-                                                        @foreach($user->permitApplications as $permit)
-                                                            <tr>
-
-                                                                <!-- User Name -->
-                                                                <td>{{ $user->name }}</td>
-
-                                                                <!-- Project Name -->
-                                                                <td>{{ $permit->project_name }}</td>
-
-                                                                <!-- Plan Names -->
-                                                                <td>
-                                                                    @if($permit->electricalPlans && $permit->electricalPlans->count() > 0)
-                                                                        <ul class="list-unstyled mb-0">
-                                                                            @foreach($permit->electricalPlans as $plan)
-                                                                                <li>{{ $plan->plan_name }}</li>
-                                                                            @endforeach
-                                                                        </ul>
-                                                                    @else
-                                                                        <span class="text-secondary">No Electrical Plan</span>
-                                                                    @endif
-                                                                </td>
-
-                                                                <!-- Documents -->
-                                                                <td>
-                                                                    @if($permit->electricalPlans && $permit->electricalPlans->count() > 0)
-                                                                        <div class="d-flex flex-column">
-
-                                                                            @foreach($permit->electricalPlans as $plan)
-
-                                                                                @if(!empty($plan->file_urls))
-                                                                                    @foreach($plan->file_urls as $index => $url)
-
-                                                                                        <a href="{{ $url }}" target="_blank"
-                                                                                            class="btn btn-sm btn-primary mb-1">
-                                                                                            View File ({{ $index + 1 }})
-                                                                                        </a>
-
-                                                                                    @endforeach
-                                                                                @else
-                                                                                    <span class="text-secondary">No File</span>
-                                                                                @endif
-
-                                                                            @endforeach
-
-                                                                        </div>
-                                                                    @else
-                                                                        <span class="text-secondary">No Electrical Plan</span>
-                                                                    @endif
-                                                                </td>
-
-                                                                <!-- Actions -->
-                                                                <td>
-                                                                    <div class="d-flex justify-content-center gap-2">
-
-                                                                        <!-- Under Review -->
-                                                                        <button class="btn btn-sm btn-warning" disabled>
-                                                                            <i class="fa-solid fa-hourglass-half me-1"></i>
-                                                                            Under Review
-                                                                        </button>
-
-                                                                        <!-- Approve -->
-                                                                        <form action="" method="POST">
-                                                                            @csrf
-                                                                            <button class="btn btn-sm btn-success" disabled>
-                                                                                <i class="fa-solid fa-check me-1"></i>
-                                                                                Approve
-                                                                            </button>
-                                                                        </form>
-
-                                                                        <!-- Delete -->
-                                                                        <form action="" method="POST"
-                                                                            onsubmit="return confirm('Delete this permit?')">
-                                                                            @csrf
-                                                                            @method('DELETE')
-
-                                                                            <button class="btn btn-sm btn-danger" disabled>
-                                                                                <i class="fa-solid fa-trash me-1"></i>
-                                                                                Delete
-                                                                            </button>
-                                                                        </form>
-
-                                                                    </div>
-                                                                </td>
-
-                                                            </tr>
-                                                        @endforeach
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-
-                                    </div>
-                                </div>
+    <div class="d-flex justify-content-center mt-4">
+        {{ $logs->links('pagination::bootstrap-5') }}
+    </div>
+</div>
                             </div>
                         </div>
+
+
                     </div>
 
+
                     <!-- Footer -->
-                    <footer class="content-footer footer bg-footer-theme mt-auto">
+                    <footer class="content-footer footer mt-4 border-top">
                         <div
                             class="container-xxl d-flex flex-wrap justify-content-between py-3 flex-md-row flex-column text-center text-md-start">
 
                             <div class="mb-2 mb-md-0">
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script>
+                                © <span id="year"></span>,
                                 <span class="fw-bold text-primary">Building Permit Management System</span>
                             </div>
 
                             <div>
-                                <a href="#" class="footer-link me-3">Documentation</a>
-                                <a href="#" class="footer-link me-3">Support</a>
-                                <a href="#" class="footer-link">Contact</a>
+                                <a href="#" class="footer-link me-3 nav-link d-inline">Documentation</a>
+                                <a href="#" class="footer-link me-3 nav-link d-inline">Support</a>
+                                <a href="#" class="footer-link nav-link d-inline">Contact</a>
                             </div>
 
                         </div>
                     </footer>
+                    <!-- / Footer -->
+
+                    <div class="content-backdrop fade"></div>
                 </div>
 
 

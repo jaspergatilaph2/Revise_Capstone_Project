@@ -65,6 +65,9 @@ class LoginController extends Controller
             case 'bfp_inspector':
                 return redirect()->route('bfp.dashboard');
 
+            case 'mpdo_staff':
+                return redirect()->route('mpdo.dashboard');
+
             default:
                 return redirect()->route('login'); // 👈 changed from 'home'
         }

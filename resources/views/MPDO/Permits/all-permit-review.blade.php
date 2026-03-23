@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                                                                                                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                                                                                                            </a> -->
+                                                                                                                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                                                                                                </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -111,65 +111,48 @@
                         </ul>
                     </li>
 
-                    <!-- <li class="menu-item">
-                                                                                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                                                                                            <i class="menu-icon fa-solid fa-building"></i>
-                                                                                                            <div data-i18n="Layouts">Development Projects</div>
-                                                                                                        </a>
+                    @php
+                        use Illuminate\Support\Facades\Auth;
 
-                                                                                                        <ul class="menu-sub">
-                                                                                                            <li class="menu-item">
-                                                                                                                <a href="" class="menu-link">
-                                                                                                                    <div data-i18n="Without navbar">All Projects</div>
-                                                                                                                </a>
-                                                                                                            </li>
-                                                                                                            <li class="menu-item">
-                                                                                                                <a href="" class="menu-link">
-                                                                                                                    <div data-i18n="Without navbar">Ongoing</div>
-                                                                                                                </a>
-                                                                                                            </li>
-                                                                                                            <li class="menu-item">
-                                                                                                                <a href="" class="menu-link">
-                                                                                                                    <div data-i18n="Without navbar">Completed</div>
-                                                                                                                </a>
-                                                                                                            </li>
-                                                                                                            <li class="menu-item">
-                                                                                                                <a href="" class="menu-link">
-                                                                                                                    <div data-i18n="Without navbar">Proposed</div>
-                                                                                                                </a>
-                                                                                                            </li>
-                                                                                                        </ul>
-                                                                                                    </li> -->
+                        $staffCount = App\Models\User::where('role', 'mpdo_staff')->count();
+                    @endphp
 
-                    <!-- <li class="menu-item">
-                                                                                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                                                                                            <i class="menu-icon fa-solid fa-chart-simple"></i>
-                                                                                                            <div data-i18n="Layouts">Reports & Analytics</div>
-                                                                                                        </a>
+                    @if(Auth::user()->role == 'mpdo')
+                        <li class="menu-header small text-uppercase">
+                            <span class="menu-header-text">MPDO Staff</span>
+                        </li>
 
-                                                                                                        <ul class="menu-sub">
-                                                                                                            <li class="menu-item">
-                                                                                                                <a href="" class="menu-link">
-                                                                                                                    <div data-i18n="Without navbar">Annual investment plans (AIP)</div>
-                                                                                                                </a>
-                                                                                                            </li>
-                                                                                                            <li class="menu-item">
-                                                                                                                <a href="" class="menu-link">
-                                                                                                                    <div data-i18n="Without navbar">Budget allocation and utilization</div>
-                                                                                                                </a>
-                                                                                                            </li>
-                                                                                                            <li class="menu-item">
-                                                                                                                <a href="" class="menu-link">
-                                                                                                                    <div data-i18n="Without navbar">Infrastructure development progress</div>
-                                                                                                                </a>
-                                                                                                            </li>
-                                                                                                            <li class="menu-item">
-                                                                                                                <a href="" class="menu-link">
-                                                                                                                    <div data-i18n="Without navbar">Population and demographic analysis</div>
-                                                                                                                </a>
-                                                                                                            </li>
-                                                                                                        </ul>
-                                                                                                    </li> -->
+                        <li class="menu-item">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon fa-solid fa-person fa-2x"></i>
+                                <div>Staff Or Employee</div>
+                            </a>
+
+                            <ul class="menu-sub">
+
+                                {{-- Show Add Staff only if no staff exists --}}
+                                @php
+                                    $staffCount = App\Models\User::where('role', 'mpdo_staff')->count();
+                                @endphp
+
+                                {{-- Only show Adding Staff if the logged-in user is main MPDO admin --}}
+                                @if(Auth::user()->role == 'mpdo')
+                                    <li class="menu-item">
+                                        <a href="{{ route('staff.management.view-staff') }}" class="menu-link">
+                                            <div>Adding Staff</div>
+                                        </a>
+                                    </li>
+                                @endif
+
+                                <li class="menu-item">
+                                    <a href="{{ route('staff.management.view-add-staff') }}" class="menu-link">
+                                        <div>View Staff</div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    @endif
 
 
 
@@ -193,10 +176,10 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                                                                                                  <a href="" class="menu-link">
-                                                                                                                    <div data-i18n="Notifications">Settings</div>
-                                                                                                                  </a>
-                                                                                                                </li> -->
+                                                                                                                      <a href="" class="menu-link">
+                                                                                                                        <div data-i18n="Notifications">Settings</div>
+                                                                                                                      </a>
+                                                                                                                    </li> -->
 
                         </ul>
                     </li>
@@ -311,11 +294,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                                                                                                      <a class="dropdown-item" href="">
-                                                                                                                        <i class="bx bx-cog me-2"></i>
-                                                                                                                        <span class="align-middle">Settings</span>
-                                                                                                                      </a>
-                                                                                                                    </li> -->
+                                                                                                                          <a class="dropdown-item" href="">
+                                                                                                                            <i class="bx bx-cog me-2"></i>
+                                                                                                                            <span class="align-middle">Settings</span>
+                                                                                                                          </a>
+                                                                                                                        </li> -->
                                     <li>
                                         <a class="dropdown-item" href="">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -357,6 +340,13 @@
 
                         <div class="row">
                             <div class="col-md-12">
+                                @if(session('success'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ session('success') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endif
                                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="javascript:void(0);">
@@ -371,80 +361,113 @@
 
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-bordered table-striped text-center">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Project Name</th>
-                                                        <th>Documents</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-striped text-center align-middle">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th style="width: 5%;">#</th>
+                                                            <th style="width: 15%;">Name</th>
+                                                            <th style="width: 20%;">Project Name</th>
+                                                            <th style="width: 25%;">Documents</th>
+                                                            <th style="width: 15%;">Status</th>
+                                                            <th style="width: 20%;">Actions</th>
+                                                        </tr>
+                                                    </thead>
 
-                                                <tbody>
-                                                    @foreach($users as $user)
-                                                        @if($user->role === 'user')
+                                                    <tbody>
+                                                        @foreach($users as $user)
                                                             @foreach($user->permitApplications as $permit)
                                                                 <tr>
+                                                                    <td>{{ $loop->parent->iteration }}</td>
                                                                     <td>{{ $user->name }}</td>
                                                                     <td>{{ $permit->project_name }}</td>
-
                                                                     <td>
                                                                         @if(!empty($permit->document_urls))
-                                                                            <div class="d-flex flex-column">
-                                                                                @foreach($permit->document_urls as $index => $docUrl)
-                                                                                    <a href="{{ $docUrl }}" target="_blank"
-                                                                                        class="btn btn-sm btn-primary mb-1">
-                                                                                        View Document ({{ $index + 1 }})
-                                                                                    </a>
-                                                                                @endforeach
-                                                                            </div>
+                                                                            @foreach($permit->document_urls as $index => $docUrl)
+                                                                                <a href="{{ $docUrl }}" target="_blank"
+                                                                                    class="btn btn-sm btn-primary mb-1 w-100">
+                                                                                    View Document ({{ $index + 1 }})
+                                                                                </a>
+                                                                            @endforeach
                                                                         @else
                                                                             <span class="text-secondary">No Document</span>
                                                                         @endif
                                                                     </td>
                                                                     <td>
-                                                                        <div class="d-flex justify-content-center gap-2">
+                                                                        @if(is_null($permit->reviewed_by))
+                                                                            <span class="text-warning">Pending Review</span>
+                                                                        @else
+                                                                            <span class="text-success">
+                                                                                Reviewed by
+                                                                                {{ App\Models\User::find($permit->reviewed_by)->name }}
+                                                                            </span>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        <div
+                                                                            class="d-flex justify-content-center align-items-center gap-2 flex-nowrap">
 
                                                                             <!-- Under Review -->
-                                                                            <a href="" class="btn btn-sm btn-warning">
-                                                                                <span class="text-dark">
-                                                                                    <i class="fa-solid fa-hourglass-half me-1"></i>
-                                                                                    Under Review
+                                                                            <form
+                                                                                action="{{ route('reviews.permits.under-review-update-status', $permit->id) }}"
+                                                                                method="POST" class="m-0">
+                                                                                @csrf
+                                                                                @method('PUT')
+                                                                                <input type="hidden" name="status"
+                                                                                    value="under_review">
+
+                                                                                @php
+                                                                                    $isDisabled = $permit->status === 'under_review' && optional($permit->reviewer)->role === 'mpdo';
+                                                                                @endphp
+
+                                                                                <!-- Wrap in span so tooltip works even if button is disabled -->
+                                                                                <span @if($isDisabled) data-bs-toggle="tooltip"
+                                                                                    data-bs-placement="top"
+                                                                                title="Already under review by MPDO" @endif>
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-sm btn-warning"
+                                                                                        @if($isDisabled) disabled @endif>
+                                                                                        <i
+                                                                                            class="fa-solid fa-hourglass-half me-1"></i>
+                                                                                        Under Review
+                                                                                    </button>
                                                                                 </span>
-                                                                            </a>
+                                                                            </form>
 
                                                                             <!-- Approve -->
-                                                                            <a href="" class="btn btn-sm btn-success">
-                                                                                <span class="text-dark">
+                                                                            <form
+                                                                                action="{{ route('reviews.permits.approved-update-status', $permit->id) }}"
+                                                                                method="POST" class="m-0">
+                                                                                @csrf
+                                                                                @method('PUT')
+                                                                                <input type="hidden" name="status" value="approved">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-sm btn-success">
                                                                                     <i class="fa-solid fa-check me-1"></i> Approve
-                                                                                </span>
-                                                                            </a>
+                                                                                </button>
+                                                                            </form>
 
                                                                             <!-- Delete -->
-                                                                            <form action="" method="POST"
-                                                                                onsubmit="return confirm('Delete this permit?')">
+                                                                            <form
+                                                                                action="{{ route('reviews.permits.delete', $permit->id) }}"
+                                                                                method="POST"
+                                                                                onsubmit="return confirm('Delete this permit?')"
+                                                                                class="m-0">
                                                                                 @csrf
                                                                                 @method('DELETE')
-
-                                                                                <button class="btn btn-sm btn-danger">
-                                                                                    <span class="text-dark">
-                                                                                        <i class="fa-solid fa-trash me-1"></i>Delete
-                                                                                    </span>
+                                                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                                                    <i class="fa-solid fa-trash me-1"></i> Delete
                                                                                 </button>
                                                                             </form>
 
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-
                                                             @endforeach
-                                                        @endif
-                                                    @endforeach
-
-                                                </tbody>
-
-                                            </table>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

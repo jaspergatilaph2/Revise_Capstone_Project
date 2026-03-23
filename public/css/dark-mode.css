@@ -1,3 +1,4 @@
+
 /* BODY */
 .applicant-dashboard.dark-mode {
     background-color: #121212;
@@ -50,7 +51,7 @@
     color: #ffffff;
 }
 
-.applicant-dashboard.dark-mode .layout-menu .menu-item.active > .menu-link {
+.applicant-dashboard.dark-mode .layout-menu .menu-item.active>.menu-link {
     background-color: #2f2f2f;
     color: #ffffff;
 }
@@ -85,7 +86,7 @@
     color: #ffffff;
 }
 
-.applicant-dashboard.dark-mode .table-striped > tbody > tr:nth-of-type(odd) {
+.applicant-dashboard.dark-mode .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: #1a1a1a;
 }
 
@@ -93,4 +94,54 @@
 .applicant-dashboard.dark-mode .content-footer {
     background-color: #1e1e1e;
     color: #ffffff;
+}
+
+/* FORMS */
+.applicant-dashboard.dark-mode .form-control {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+    border-color: #444 !important;
+}
+
+/* INPUT FOCUS */
+.applicant-dashboard.dark-mode .form-control:focus {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+    border-color: #666 !important;
+    box-shadow: none !important;
+}
+
+/* PLACEHOLDER TEXT */
+.applicant-dashboard.dark-mode .form-control::placeholder {
+    color: #bbbbbb !important;
+}
+
+/* DISABLED INPUT */
+.applicant-dashboard.dark-mode .form-control:disabled,
+.applicant-dashboard.dark-mode .form-control[readonly] {
+    background-color: #2a2a2a !important;
+    color: #aaaaaa !important;
+}
+
+/* SELECT INPUT */
+.applicant-dashboard.dark-mode select.form-control {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+}
+
+/* TEXTAREA */
+.applicant-dashboard.dark-mode textarea.form-control {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+}
+
+/* FIX CHROME AUTOFILL (VERY IMPORTANT) */
+.applicant-dashboard.dark-mode input:-webkit-autofill,
+.applicant-dashboard.dark-mode input:-webkit-autofill:hover,
+.applicant-dashboard.dark-mode input:-webkit-autofill:focus,
+.applicant-dashboard.dark-mode textarea:-webkit-autofill,
+.applicant-dashboard.dark-mode select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #2a2a2a inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    transition: background-color 5000s ease-in-out 0s;
 }

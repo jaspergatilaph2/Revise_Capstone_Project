@@ -532,19 +532,21 @@
 
         <!-- Under Review Button (POST Form) -->
         @foreach($user->permitApplications as $permit)
-    <form action="{{ route('candidate.applicants.under-review', $permit->id) }}" method="POST" class="w-100 w-md-auto">
-        @csrf
-        <button type="submit" class="btn btn-warning btn-sm w-100 w-md-auto"
-                {{ $permit->status === 'under_review' ? 'disabled' : '' }}>
-            <i class="bx bx-hourglass me-1"></i>
-            {{ $permit->status === 'under_review' ? 'Under Review' : 'Mark as Under Review' }}
-        </button>
-    </form>
-@endforeach
+            @if(!($permit->status === 'under_review' && auth()->user()->role === 'mpdo'))
+                <form action="{{ route('candidate.applicants.under-review', $permit->id) }}" method="POST" class="w-100 w-md-auto">
+                    @csrf
+                    <button type="submit" class="btn btn-warning btn-sm w-100 w-md-auto"
+                            {{ $permit->status === 'under_review' ? 'disabled' : '' }}>
+                        <i class="bx bx-hourglass me-1"></i>
+                        {{ $permit->status === 'under_review' ? 'Under Review' : 'Mark as Under Review' }}
+                    </button>
+                </form>
+            @endif
+        @endforeach
 
         <!-- Approve Button -->
-         @foreach($user->permitApplications as $permit)
-            @if($permit->status === 'under_review')
+        @foreach($user->permitApplications as $permit)
+            @if($permit->status === 'under_review'  && auth()->user()->role === 'mpdo')
                 <form action="{{ route('candidate.applicants.approve', $permit->id) }}" method="POST" class="w-100 w-md-auto">
                     @csrf
                     <button type="submit" class="btn btn-success btn-sm w-100 w-md-auto">
@@ -552,21 +554,15 @@
                     </button>
                 </form>
             @endif
-         @endforeach
-        <!-- <form action="" method="POST" class="w-100 w-md-auto">
-            @csrf
-            <button type="submit" class="btn btn-success btn-m w-100 w-md-auto">
-                <i class="fa-solid fa-check me-1"></i> Approve
-            </button>
-        </form> -->
+        @endforeach
 
         <!-- Reject Button -->
-        <form action="" method="POST" class="w-100 w-md-auto">
+        <!-- <form action="" method="POST" class="w-100 w-md-auto">
             @csrf
             <button type="submit" class="btn btn-danger btn-m w-100 w-md-auto">
                 <i class="fa-solid fa-xmark me-1"></i> Reject
             </button>
-        </form>
+        </form> -->
 
     </div>
 </td>

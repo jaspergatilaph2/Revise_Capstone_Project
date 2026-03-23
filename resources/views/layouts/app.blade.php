@@ -162,6 +162,8 @@
     <script src="{{asset('js/monthlyChart.js')}}"></script>
     <script src="{{asset('js/password-generate.js')}}"></script>
     <script src="{{ asset('js/dark-mode.js') }}"></script>
+    <script src="{{ asset('js/tooltip.js') }}"></script>
+    <script src="{{ asset('js/maintenance-timer.js') }}"></script>
 </body>
 
 </html>

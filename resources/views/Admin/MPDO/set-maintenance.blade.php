@@ -17,15 +17,15 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                </a> -->
+                                      <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                    </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <li class="menu-item active">
+                    <li class="menu-item">
                         <a href="{{ route('admin.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
@@ -94,15 +94,15 @@
                         </ul>
                     </li>
 
-                    <li class="menu-item">
+                    <li class="menu-item {{ $ActiveTabMenu === 'Countdown' ? 'active' : ''}}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon fa-solid fa-hammer"></i>
                             <div data-i18n="Layouts">Maintenance</div>
                         </a>
 
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="{{ route('countdown.maintenance.view-countdown') }}" class="menu-link">
+                            <li class="menu-item {{ $SubActiveTab === 'Tab' ? 'active' : '' }}">
+                                <a href="" class="menu-link">
                                     <div data-i18n="Without navbar">MPDO Maintencance</div>
                                 </a>
                             </li>
@@ -130,10 +130,10 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                      <a href="" class="menu-link">
-                        <div data-i18n="Notifications">Settings</div>
-                      </a>
-                    </li> -->
+                                          <a href="" class="menu-link">
+                                            <div data-i18n="Notifications">Settings</div>
+                                          </a>
+                                        </li> -->
 
                         </ul>
                     </li>
@@ -251,11 +251,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                          <a class="dropdown-item" href="">
-                            <i class="bx bx-cog me-2"></i>
-                            <span class="align-middle">Settings</span>
-                          </a>
-                        </li> -->
+                                              <a class="dropdown-item" href="">
+                                                <i class="bx bx-cog me-2"></i>
+                                                <span class="align-middle">Settings</span>
+                                              </a>
+                                            </li> -->
                                     <li>
                                         <a class="dropdown-item" href="">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -289,188 +289,76 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <div class="container">
-                            <!-- Page Title -->
-                            <div class="mb-4 text-center text-md-start">
-                                <h4 class="fw-bold text-dark">
-                                    <i class="fa-solid fa-tachometer-alt me-2 text-primary"></i>
-                                    Super Admin Dashboard
-                                </h4>
-                                <p class="text-muted mb-0">Overview of system performance and key building permit stats.</p>
-                            </div>
+                        <div class="container-xxl container-p-y d-flex align-items-center justify-content-center"
+                            style="min-height: 100vh;">
+                            <div class="card shadow-sm mx-auto" style="max-width: 500px;">
+                                <div class="card-body text-center">
 
-                            <!-- Summary Cards -->
-                            <div class="row g-4">
-                                <!-- Total Applications -->
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
-                                        <div class="card-body text-center">
-                                            <i class="fa-solid fa-file-circle-plus fa-2x text-primary mb-2"></i>
-                                            <h6 class="fw-bold text-uppercase small">Total Applications</h6>
-                                            <h3 class="fw-bolder text-primary mb-1" id="totalApplications"></h3>
-                                            <p class="text-muted small mb-0">All applications submitted</p>
+                                    <!-- Page Title -->
+                                    <h4 class="mb-4">
+                                        <i class="fa-solid fa-tools me-2 text-primary"></i>
+                                        Set Maintenance Schedule
+                                    </h4>
+
+                                    <!-- Success Message -->
+                                    @if(session('success'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ session('success') }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
                                         </div>
-                                    </div>
-                                </div>
+                                    @endif
 
-                                <!-- Pending Approvals -->
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
-                                        <div class="card-body text-center">
-                                            <i class="fa-solid fa-hourglass-half fa-2x text-warning mb-2"></i>
-                                            <h6 class="fw-bold text-uppercase small">Pending Approvals</h6>
-                                            <h3 class="fw-bolder text-warning mb-1" id="pendingApprovals"></h3>
-                                            <p class="text-muted small mb-0">Awaiting review</p>
+                                    <!-- Maintenance Form -->
+                                    <form action="{{ route('countdown.maintenance.update-countdown') }}" method="POST">
+                                        @csrf
+
+                                        <!-- Department Input -->
+                                        <div class="mb-3 text-start">
+                                            <label for="department" class="form-label fw-bold">Department</label>
+                                            <input type="text" name="department" id="department" class="form-control"
+                                                value="{{ $maintenance->department ?? 'MPDO' }}" required>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <!-- Under Review -->
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
-                                        <div class="card-body text-center">
-                                            <i class="fa-solid fa-magnifying-glass fa-2x text-warning mb-2"></i>
-                                            <h6 class="fw-bold text-uppercase small">Under Review</h6>
-                                            <h3 class="fw-bolder text-warning mb-1" id="pendingApprovals"></h3>
-                                            <p class="text-muted small mb-0">Awaiting review</p>
+                                        <div class="mb-3 text-start">
+                                            <label for="target_tab" class="form-label fw-bold">Target MPDO Tab</label>
+                                            <select name="target_tab" id="target_tab" class="form-select" required>
+                                                <option value="ongoing_projects" {{ ($maintenance->target_tab ?? '') == 'ongoing_projects' ? 'selected' : '' }}>
+                                                    Ongoing Projects
+                                                </option>
+                                                <option value="completed_projects" {{ ($maintenance->target_tab ?? '') == 'completed_projects' ? 'selected' : '' }}>
+                                                    Completed Projects
+                                                </option>
+                                                <option value="infrastructure_projects" {{ ($maintenance->target_tab ?? '') == 'infrastructure_projects' ? 'selected' : '' }}>
+                                                    Infrastructure Projects
+                                                </option>
+                                                <option value="private_developments" {{ ($maintenance->target_tab ?? '') == 'private_developments' ? 'selected' : '' }}>
+                                                    Private Developments
+                                                </option>
+                                            </select>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <!-- Approved Permits -->
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
-                                        <div class="card-body text-center">
-                                            <i class="fa-solid fa-circle-check fa-2x text-success mb-2"></i>
-                                            <h6 class="fw-bold text-uppercase small">Approved Permits</h6>
-                                            <h3 class="fw-bolder text-success mb-1" id="approvedPermits"></h3>
-                                            <p class="text-muted small mb-0">Successfully issued permits</p>
+                                        <!-- Finish Date/Time Input -->
+                                        <div class="mb-3 text-start">
+                                            <label for="finish_at" class="form-label fw-bold">Expected Finish Date &
+                                                Time</label>
+                                            <input type="datetime-local" name="finish_at" id="finish_at"
+                                                class="form-control" value="{{ $maintenance && $maintenance->finish_at
+        ? \Carbon\Carbon::parse($maintenance->finish_at)->format('Y-m-d\TH:i')
+        : '' }}" required>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <!-- Revenue Collected -->
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100">
-                                        <div class="card-body text-center">
-                                            <i class="fa-solid fa-peso-sign fa-2x text-info mb-2"></i>
-                                            <h6 class="fw-bold text-uppercase small">Revenue Collected</h6>
-                                            <h3 class="fw-bolder text-info mb-1" id="totalRevenue">₱120,500</h3>
-                                            <p class="text-muted small mb-0">Total fees collected</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Submit Button -->
+                                        <button type="submit" class="btn btn-success w-100">
+                                            <i class="fa-solid fa-check me-2"></i> Save Schedule
+                                        </button>
+                                    </form>
 
-                            <!-- Quick Stats Section -->
-                            <div class="row mt-4 g-4">
-                                <!-- System Activity -->
-                                <div class="col-12 col-lg-8">
-                                    <div class="card shadow-sm border-0 h-100">
-                                        <div class="card-body">
-                                            <h5 class="fw-bold mb-3">
-                                                <i class="fa-solid fa-chart-line me-2 text-info"></i> System Activity
-                                            </h5>
-                                            <p class="text-muted small mb-3">Overview of weekly permit activities.</p>
-                                            <div id="activityChart" style="height: 300px;"
-                                                class="d-flex align-items-center justify-content-center">
-                                                <p class="text-center text-muted">[Activity chart coming soon]</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <!-- Optional Info -->
+                                    <p class="mt-3 text-muted small">
+                                        This schedule will be displayed on the MPDO dashboard maintenance page.
+                                    </p>
 
-                                <!-- Recent Activities -->
-                                <div class="col-12 col-lg-4">
-                                    <div class="card shadow-sm border-0 h-100">
-                                        <div class="card-body">
-                                            <h5 class="fw-bold mb-3">
-                                                <i class="fa-solid fa-clock-rotate-left me-2 text-secondary"></i> Recent
-                                                Activities
-                                            </h5>
-                                            <ul class="list-group list-group-flush small">
-                                                <li class="list-group-item">
-                                                    <i class="fa-solid fa-user-plus text-primary me-2"></i>
-                                                    New applicant registered
-                                                    <span class="text-muted float-end">2 mins ago</span>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <i class="fa-solid fa-file-signature text-success me-2"></i>
-                                                    Permit approved for Building #123
-                                                    <span class="text-muted float-end">15 mins ago</span>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <i class="fa-solid fa-file-pen text-warning me-2"></i>
-                                                    Application pending for review
-                                                    <span class="text-muted float-end">1 hour ago</span>
-                                                </li>
-                                                <li class="list-group-item text-center">
-                                                    <a href="#" class="text-primary small fw-bold">View All</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- User Management Table -->
-                            <div class="row mt-4">
-                                <div class="col-12">
-                                    <div class="card shadow-sm border-0">
-                                        <div class="card-body">
-                                            <h5 class="fw-bold mb-3">
-                                                <i class="fa-solid fa-users-gear me-2 text-primary"></i> User Management
-                                            </h5>
-                                            <div class="table-responsive">
-                                                <table class="table table-striped table-hover mb-0">
-                                                    <thead class="table-light">
-                                                        <tr>
-                                                            <th>Name</th>
-                                                            <th>Role</th>
-                                                            <th>Status</th>
-                                                            <th>Last Seen</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @forelse ($users as $user)
-                                                            <tr>
-                                                                <td>{{ $user->name }}</td>
-                                                                <td>{{ ucfirst($user->role) }}</td>
-                                                                <td>
-                                                                    @if($user->is_active)
-                                                                        <span
-                                                                            class="px-3 py-2 rounded-pill shadow-sm fw-semibold small text-white bg-success"
-                                                                            style="letter-spacing: 0.5px;">
-                                                                            Active
-                                                                        </span>
-                                                                    @else
-                                                                        <span
-                                                                            class="px-3 py-2 rounded-pill shadow-sm fw-semibold small text-white bg-secondary"
-                                                                            style="letter-spacing: 0.5px;">
-                                                                            Inactive
-                                                                        </span>
-                                                                    @endif
-                                                                </td>
-                                                                <td>
-    {{ $user->last_seen 
-        ? \Carbon\Carbon::parse($user->last_seen)->diffForHumans() 
-        : 'Never' 
-    }}
-</td>
-                                                            </tr>
-                                                        @empty
-                                                            <tr>
-                                                                <td colspan="4" class="text-center text-muted">No users found
-                                                                </td>
-                                                            </tr>
-                                                        @endforelse
-                                                    </tbody>
-                                                </table>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -482,9 +370,7 @@
                             class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column text-center text-md-start">
                             <div class="mb-2 mb-md-0">
                                 ©
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script>,
+                                <script>document.write(new Date().getFullYear());</script>,
                                 <span class="fw-bold text-primary">Building Permit Management System</span>
                             </div>
                             <div>

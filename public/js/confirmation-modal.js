@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const input = document.getElementById('documents');
 
     let filesArray = [];
-    let modalMap = null; // ✅ Declare once only
+    let modalMap = null;
 
     // 🔹 Live radius display
     radiusRange.addEventListener("input", function () {
@@ -36,11 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
         wrapper.classList.add('d-flex', 'flex-wrap', 'gap-2');
 
         filesArray.forEach((file, idx) => {
-
             const fileDiv = document.createElement('div');
             fileDiv.classList.add('border', 'p-2', 'text-center', 'rounded');
             fileDiv.style.width = '120px';
             fileDiv.style.position = 'relative';
+            fileDiv.style.wordBreak = 'break-word'; // ✅ Fix overflow on mobile
 
             const fileType = file.type;
             const fileURL = URL.createObjectURL(file);
@@ -48,52 +48,39 @@ document.addEventListener("DOMContentLoaded", function () {
             if (fileType.startsWith('image/')) {
                 fileDiv.innerHTML =
                     `<img src="${fileURL}" style="width:100%;height:100px;object-fit:cover;" class="rounded">`;
-            }
-            else if (fileType === 'application/pdf') {
+            } else if (fileType === 'application/pdf') {
                 fileDiv.innerHTML =
                     `<i class="bi bi-file-earmark-pdf-fill text-danger" style="font-size:48px;"></i>
                      <small class="text-truncate d-block">${file.name}</small>`;
-            }
-            else {
+            } else {
                 fileDiv.innerHTML =
                     `<i class="bi bi-file-earmark-fill text-secondary" style="font-size:48px;"></i>
                      <small class="text-truncate d-block">${file.name}</small>`;
             }
 
-            // Remove button
             if (allowRemove) {
                 const removeBtn = document.createElement('button');
                 removeBtn.innerHTML = '&times;';
                 removeBtn.classList.add('btn', 'btn-sm', 'btn-danger', 'position-absolute');
                 removeBtn.style.top = '2px';
                 removeBtn.style.right = '5px';
-
                 removeBtn.onclick = (e) => {
                     e.stopPropagation();
                     filesArray.splice(idx, 1);
                     renderFilePreview(container, true);
                 };
-
                 fileDiv.appendChild(removeBtn);
             }
 
-            // Preview modal
             fileDiv.onclick = () => {
                 const docPreview = document.getElementById('docPreviewContainer');
-
                 if (fileType.startsWith('image/')) {
-                    docPreview.innerHTML =
-                        `<img src="${fileURL}" class="img-fluid rounded">`;
+                    docPreview.innerHTML = `<img src="${fileURL}" class="img-fluid rounded">`;
+                } else if (fileType === 'application/pdf') {
+                    docPreview.innerHTML = `<iframe src="${fileURL}" width="100%" height="600" style="border:none;"></iframe>`;
+                } else {
+                    docPreview.innerHTML = `<p class="text-muted">Preview not available</p>`;
                 }
-                else if (fileType === 'application/pdf') {
-                    docPreview.innerHTML =
-                        `<iframe src="${fileURL}" width="100%" height="600" style="border:none;"></iframe>`;
-                }
-                else {
-                    docPreview.innerHTML =
-                        `<p class="text-muted">Preview not available</p>`;
-                }
-
                 new bootstrap.Modal(document.getElementById('docPreviewModal')).show();
             };
 
@@ -108,10 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.getElementById('confirmProjectName').textContent =
             document.getElementById('project_name').value || 'N/A';
-
         document.getElementById('confirmAddress').textContent =
             document.getElementById('address').value || 'N/A';
-
         document.getElementById('confirmLocation').textContent =
             document.getElementById('location').value || 'N/A';
 
@@ -127,20 +112,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         renderFilePreview(document.getElementById('confirmDocuments'), false);
 
-        new bootstrap.Modal(modalEl).show();
+        // ✅ Show modal with fullscreen for small devices
+        const bsModal = new bootstrap.Modal(modalEl, {
+            backdrop: 'static',
+            keyboard: false
+        });
+        bsModal.show();
     });
-
 
     // ✅ MAP INITIALIZATION AFTER MODAL SHOW
     modalEl.addEventListener('shown.bs.modal', () => {
-
         const mapContainer = document.getElementById('confirmMap');
 
         const lat = parseFloat(document.getElementById('latitude').value) || 14.5995;
         const lng = parseFloat(document.getElementById('longitude').value) || 120.9842;
         const radius = parseInt(document.getElementById('radiusRange').value) || 0;
-        const locationText =
-            document.getElementById('location').value || "Project Location";
+        const locationText = document.getElementById('location').value || "Project Location";
 
         // Remove previous map safely
         if (modalMap !== null) {
@@ -155,11 +142,9 @@ document.addEventListener("DOMContentLoaded", function () {
             maxZoom: 19,
         }).addTo(modalMap);
 
-        // Marker
         const marker = L.marker([lat, lng]).addTo(modalMap);
         marker.bindPopup(`<b>${locationText}</b>`).openPopup();
 
-        // Radius circle
         if (radius > 0) {
             const circle = L.circle([lat, lng], {
                 radius: radius,
@@ -167,21 +152,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 fillColor: "#007bff",
                 fillOpacity: 0.2,
             }).addTo(modalMap);
-
             modalMap.fitBounds(circle.getBounds());
         }
 
-        // Fix rendering inside modal
+        // Fix rendering inside modal on mobile
         setTimeout(() => {
             modalMap.invalidateSize();
-        }, 200);
+        }, 300);
     });
-
 
     // 🔹 FINAL SUBMIT
     finalSubmit.addEventListener('click', (e) => {
         e.preventDefault();
-
         finalSubmit.disabled = true;
         finalSubmit.textContent = 'Submitting...';
 

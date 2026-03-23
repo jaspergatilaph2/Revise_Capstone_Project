@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                                                                      <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                                                                    </a> -->
+                                                                                                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                                                                                            </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -34,7 +34,7 @@
 
                     <!-- Layouts -->
 
-                    <li class="menu-item {{ $ActiveTabMenu === 'Reviews' ? 'active' : '' }}">
+                    <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon fa-solid fa-file"></i>
                             <div data-i18n="Layouts">Permit Applications</div>
@@ -46,7 +46,7 @@
                                     <div data-i18n="Without menu">Permit Review</div>
                                 </a>
                             </li>
-                            <li class="menu-item {{ $SubActiveTab === 'Architectural' ? 'active' : '' }}">
+                            <li class="menu-item">
                                 <a href="{{ route('reviews.permits.view-architectural') }}" class="menu-link">
                                     <div data-i18n="Without menu">Architectural Plans</div>
                                 </a>
@@ -62,11 +62,10 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('reviews.permits.view-plumbing')}}" class="menu-link">
                                     <div data-i18n="Without menu">Plumbing Plans</div>
                                 </a>
                             </li>
-
                             <li class="menu-item">
                                 <a href="{{ route('reviews.permits.view-certificate') }}" class="menu-link">
                                     <div data-i18n="Without menu">Certificate</div>
@@ -111,49 +110,29 @@
                         </ul>
                     </li>
 
-                    @php
-                        use Illuminate\Support\Facades\Auth;
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">MPDO Staff</span>
+                    </li>
 
-                        $staffCount = App\Models\User::where('role', 'mpdo_staff')->count();
-                    @endphp
+                    <li class="menu-item {{ $ActiveTabMenu === 'Staff' ? 'active' : '' }}">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon fa-solid fa-person fa-2x"></i>
+                            <div data-i18n="Layouts">Staff Or Employee</div>
+                        </a>
 
-                    @if(Auth::user()->role == 'mpdo')
-                        <li class="menu-header small text-uppercase">
-                            <span class="menu-header-text">MPDO Staff</span>
-                        </li>
-
-                        <li class="menu-item">
-                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                <i class="menu-icon fa-solid fa-person fa-2x"></i>
-                                <div>Staff Or Employee</div>
-                            </a>
-
-                            <ul class="menu-sub">
-
-                                {{-- Show Add Staff only if no staff exists --}}
-                                @php
-                                    $staffCount = App\Models\User::where('role', 'mpdo_staff')->count();
-                                @endphp
-
-                                {{-- Only show Adding Staff if the logged-in user is main MPDO admin --}}
-                                @if(Auth::user()->role == 'mpdo')
-                                    <li class="menu-item">
-                                        <a href="{{ route('staff.management.view-staff') }}" class="menu-link">
-                                            <div>Adding Staff</div>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                <li class="menu-item">
-                                    <a href="{{ route('staff.management.view-add-staff') }}" class="menu-link">
-                                        <div>View Staff</div>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
-                    @endif
-
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{route('staff.management.view-staff')}}" class="menu-link">
+                                    <div data-i18n="Without navbar">Adding Staff</div>
+                                </a>
+                            </li>
+                            <li class="menu-item {{ $SubActiveTab === 'Add Staff' ? 'active' : '' }}">
+                                <a href="{{route('staff.management.view-staff')}}" class="menu-link">
+                                    <div data-i18n="Without navbar">View Staff</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
 
                     <li class="menu-header small text-uppercase">
@@ -171,15 +150,15 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{ route('details.accounts.update') }}" class="menu-link">
+                                <a href="" class="menu-link">
                                     <div data-i18n="Notifications">Update Account</div>
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                                                          <a href="" class="menu-link">
-                                                                            <div data-i18n="Notifications">Settings</div>
-                                                                          </a>
-                                                                        </li> -->
+                                                                                                                  <a href="" class="menu-link">
+                                                                                                                    <div data-i18n="Notifications">Settings</div>
+                                                                                                                  </a>
+                                                                                                                </li> -->
 
                         </ul>
                     </li>
@@ -232,7 +211,7 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }}"
+                                        <img src="{{Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }}"
                                             alt class="w-px-120 h-px-120 rounded-circle" />
                                     </div>
                                 </a>
@@ -294,11 +273,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                                                              <a class="dropdown-item" href="">
-                                                                                <i class="bx bx-cog me-2"></i>
-                                                                                <span class="align-middle">Settings</span>
-                                                                              </a>
-                                                                            </li> -->
+                                                                                                                  <a class="dropdown-item" href="">
+                                                                                                                    <i class="bx bx-cog me-2"></i>
+                                                                                                                    <span class="align-middle">Settings</span>
+                                                                                                                  </a>
+                                                                                                                </li> -->
                                     <li>
                                         <a class="dropdown-item" href="">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -332,195 +311,98 @@
                 <div class="content-wrapper d-flex flex-column min-vh-100">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Review Architectural Plan
-                                /</span>Show Uploaded Documents
-                        </h4>
-
                         <div class="row">
                             <div class="col-md-12">
-                                @if(session('success'))
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        {{ session('success') }}
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                            aria-label="Close"></button>
-                                    </div>
-                                @endif
+
+                                <h4 class="fw-bold py-3 mb-4">
+                                    <span class="text-muted fw-light">MPDO Departments /</span> Staff List
+                                </h4>
+
                                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="javascript:void(0);"><i
-                                                class="menu-icon fa-solid fa-folder"></i> Architectural Plan Documents
-                                            Details</a>
+                                        <a class="nav-link active" href="#">
+                                            <i class="fa-solid fa-users me-1"></i> View Staff
+                                        </a>
                                     </li>
                                 </ul>
 
-                                <div class="card mb-4">
-                                    <h5 class="card-header">Applicants Documents Viewer</h5>
-                                    <hr class="my-0" />
+                                <div class="card">
+                                    <h5 class="card-header">Staff Members</h5>
+
+                                    <!-- Success Message (Hidden by default) -->
+                                    <div class="alert alert-success m-3" style="display:none;">
+                                        Staff status updated successfully.
+                                    </div>
 
                                     <div class="card-body">
+
                                         <div class="table-responsive">
-                                            <table class="table table-bordered table-striped text-center">
+                                            <table class="table table-bordered table-striped">
                                                 <thead class="table-light">
                                                     <tr>
-                                                        <th>Name</th>
-                                                        <th>Project Name</th>
-                                                        <th>Plan Name(s)</th>
-                                                        <th>Documents</th>
+                                                        <th>#</th>
+                                                        <th>Full Name</th>
+                                                        <th>Email</th>
+                                                        <th>Department</th>
+                                                        <th>Role</th>
                                                         <th>Status</th>
-                                                        <th>Actions</th>
                                                     </tr>
                                                 </thead>
+
                                                 <tbody>
-                                                    @foreach($users as $user)
-                                                        @if($user->role === 'user')
-                                                            @foreach($user->permitApplications as $permit)
-                                                                <tr>
-                                                                    <!-- User Name -->
-                                                                    <td>{{ $user->name }}</td>
+                                                    @php
+                                                        // Fetch MPDO staff
+                                                        $mpdoStaffs = \App\Models\User::where('role', 'mpdo_staff')->get();
+                                                    @endphp
 
-                                                                    <!-- Project Name -->
-                                                                    <td>{{ $permit->project_name }}</td>
+                                                    @forelse($mpdoStaffs as $index => $staff)
+                                                        <tr>
+                                                            <td>{{ $index + 1 }}</td>
+                                                            <td>{{ $staff->name }}</td>
+                                                            <td>{{ $staff->email }}</td>
+                                                            <td>{{ strtoupper($staff->department) }}</td>
+                                                            <td>{{ str_replace('_', ' ', ucfirst($staff->role)) }}</td>
+                                                            <td>
+                                                                @if($staff->is_active)
+                                                                    <i class="fa-solid fa-circle-check text-success"></i> Active
+                                                                @else
+                                                                    <i class="fa-solid fa-circle-xmark text-danger"></i> Inactive
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td colspan="6" class="text-center">No MPDO staff found.</td>
+                                                        </tr>
+                                                    @endforelse
 
-                                                                    <!-- Plan Names -->
-                                                                    <td>
-                                                                        @if($permit->architecturalPlans->count() > 0)
-                                                                            <ul class="list-unstyled mb-0">
-                                                                                @foreach($permit->architecturalPlans as $plan)
-                                                                                    <li>{{ $plan->plan_name }}</li>
-                                                                                @endforeach
-                                                                            </ul>
-                                                                        @else
-                                                                            <span class="text-secondary">No Architectural Plan</span>
-                                                                        @endif
-                                                                    </td>
-
-                                                                    <!-- Documents -->
-                                                                    <td>
-                                                                        @if($permit->architecturalPlans->count() > 0)
-                                                                            <div class="d-flex flex-column">
-                                                                                @foreach($permit->architecturalPlans as $plan)
-                                                                                    @if(!empty($plan->file_path))
-                                                                                        @foreach($plan->file_path as $index => $url)
-                                                                                            <a href="{{ $url }}" target="_blank"
-                                                                                                class="btn btn-sm btn-primary mb-1">
-                                                                                                View File ({{ $index + 1 }})
-                                                                                            </a>
-                                                                                        @endforeach
-                                                                                    @endif
-                                                                                @endforeach
-                                                                            </div>
-                                                                        @else
-                                                                            <span class="text-secondary">No Architectural Plan</span>
-                                                                        @endif
-                                                                    </td>
-
-                                                                    <!-- Reviewer Status -->
-                                                                    <td>
-                                                                        @if($plan->reviewer)
-                                                                            @if($plan->reviewer->role === 'engineer')
-                                                                                <span class="text-success">
-                                                                                    Reviewed by Engr. {{ $plan->reviewer->name }}
-                                                                                </span>
-                                                                                <br>
-                                                                                <span class="text-warning">
-                                                                                    Pending MPDO Approval
-                                                                                </span>
-                                                                            @elseif($plan->reviewer->role === 'mpdo')
-                                                                                <span class="text-success">
-                                                                                    Reviewed by MPDO Dept. {{ $plan->reviewer->name }}
-                                                                                </span>
-                                                                            @endif
-                                                                        @else
-                                                                            <span class="text-warning">Pending Review</span>
-                                                                        @endif
-                                                                    </td>   
-
-                                                                    <!-- Action Buttons -->
-                                                                    <td>
-                                                                        @if($permit->architecturalPlans->count() > 0)
-                                                                            @foreach($permit->architecturalPlans as $plan)
-                                                                                <div class="d-flex gap-2 mb-1">
-
-                                                                                    <!-- Under Review -->
-                                                                                    <form
-                                                                                        action="{{ route('reviews.permits.architectural-under-review', $plan->id) }}"
-                                                                                        method="POST" class="w-100 w-md-auto">
-                                                                                        @csrf
-                                                                                        @method('PUT')
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-warning btn-sm w-100 w-md-auto"
-                                                                                            @if($plan->status === 'under_review') disabled
-                                                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                                                title="Already under review by {{ optional($plan->reviewer)->name ?? 'Engineer' }}"
-                                                                                            @endif>
-                                                                                            <i class="bx bx-hourglass me-1"></i>
-                                                                                            {{ $plan->status === 'under_review' ? 'Under Review' : 'Mark as Under Review' }}
-                                                                                        </button>
-                                                                                    </form>
-
-                                                                                    <!-- Approve -->
-                                                                                    <form
-                                                                                        action="{{ route('reviews.permits.architectural-approved', $plan->id) }}"
-                                                                                        method="POST" class="d-inline">
-                                                                                        @csrf
-                                                                                        <button type="submit" class="btn btn-success btn-sm" {{ $plan->status === 'approved' ? 'disabled' : '' }}>
-                                                                                            <i class="bx bx-check me-1"></i>
-                                                                                            {{ $plan->status === 'approved' ? 'Approved' : 'Approve' }}
-                                                                                        </button>
-                                                                                    </form>
-
-                                                                                    <!-- Delete -->
-                                                                                    <form
-                                                                                        action="{{ route('review.proposal.delete', $plan->id) }}"
-                                                                                        method="POST" class="d-inline"
-                                                                                        onsubmit="return confirm('Are you sure you want to delete this plan?');">
-                                                                                        @csrf
-                                                                                        @method('DELETE')
-                                                                                        <button type="submit" class="btn btn-danger btn-sm">
-                                                                                            <i class="fa-solid fa-trash me-1"></i> Delete
-                                                                                        </button>
-                                                                                    </form>
-
-                                                                                </div>
-                                                                            @endforeach
-                                                                        @else
-                                                                            <span class="text-secondary">No Plans to Approve</span>
-                                                                        @endif
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        @endif
-                                                    @endforeach
                                                 </tbody>
                                             </table>
-
                                         </div>
 
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
 
                     <!-- Footer -->
-                    <footer class="content-footer footer bg-footer-theme mt-auto">
+                    <footer class="content-footer footer bg-footer-theme mt-4">
                         <div
-                            class="container-xxl d-flex flex-wrap justify-content-between py-3 flex-md-row flex-column text-center text-md-start">
-
+                            class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column text-center text-md-start">
                             <div class="mb-2 mb-md-0">
                                 ©
                                 <script>
                                     document.write(new Date().getFullYear());
-                                </script>
+                                </script>,
                                 <span class="fw-bold text-primary">Building Permit Management System</span>
                             </div>
-
                             <div>
                                 <a href="#" class="footer-link me-3">Documentation</a>
                                 <a href="#" class="footer-link me-3">Support</a>
                                 <a href="#" class="footer-link">Contact</a>
                             </div>
-
                         </div>
                     </footer>
                 </div>

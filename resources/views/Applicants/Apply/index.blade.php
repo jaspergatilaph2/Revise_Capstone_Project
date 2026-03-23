@@ -112,49 +112,49 @@
                     </li>
 
                     <!-- <li class="menu-item">
-                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                                <i class="menu-icon fa-solid fa-receipt"></i>
-                                                <div data-i18n="Layouts">Payments</div>
-                                            </a>
+                                                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                                            <i class="menu-icon fa-solid fa-receipt"></i>
+                                                                            <div data-i18n="Layouts">Payments</div>
+                                                                        </a>
 
-                                            <ul class="menu-sub">
-                                                <li class="menu-item">
-                                                    <a href="" class="menu-link">
-                                                        <div data-i18n="Without navbar">Pending Payments</div>
-                                                    </a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="" class="menu-link">
-                                                        <div data-i18n="Without navbar">Paid</div>
-                                                    </a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="" class="menu-link">
-                                                        <div data-i18n="Without navbar">Overdue</div>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li> -->
+                                                                        <ul class="menu-sub">
+                                                                            <li class="menu-item">
+                                                                                <a href="" class="menu-link">
+                                                                                    <div data-i18n="Without navbar">Pending Payments</div>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="menu-item">
+                                                                                <a href="" class="menu-link">
+                                                                                    <div data-i18n="Without navbar">Paid</div>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="menu-item">
+                                                                                <a href="" class="menu-link">
+                                                                                    <div data-i18n="Without navbar">Overdue</div>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li> -->
 
                     <!-- <li class="menu-item">
-                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                                <i class="menu-icon fa-solid fa-comment"></i>
-                                                <div data-i18n="Layouts">Notification / Messages</div>
-                                            </a>
+                                                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                                            <i class="menu-icon fa-solid fa-comment"></i>
+                                                                            <div data-i18n="Layouts">Notification / Messages</div>
+                                                                        </a>
 
-                                            <ul class="menu-sub">
-                                                <li class="menu-item">
-                                                    <a href="" class="menu-link">
-                                                        <div data-i18n="Without navbar">Notifications</div>
-                                                    </a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="" class="menu-link">
-                                                        <div data-i18n="Without navbar">History Notification</div>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li> -->
+                                                                        <ul class="menu-sub">
+                                                                            <li class="menu-item">
+                                                                                <a href="" class="menu-link">
+                                                                                    <div data-i18n="Without navbar">Notifications</div>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="menu-item">
+                                                                                <a href="" class="menu-link">
+                                                                                    <div data-i18n="Without navbar">History Notification</div>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Accounts</span>
@@ -364,21 +364,21 @@
 
                                     <!-- Download Required Forms -->
                                     <!-- <div class="mb-2 p-3">
-                                                            <h6 class="fw-bold">Download Guide Building Permit</h6>
-                                                            <ul class="list-unstyled">
-                                                                <li>
-                                                                    <a href="{{ asset('downloads/Building-Application-Form-Permit.pdf') }}"
-                                                                        class="btn btn-outline-primary btn-sm" download>
-                                                                        <i class="bx bx-download me-1"></i>Download Guide Form
-                                                                    </a>
-                                                                </li>
+                                                                                        <h6 class="fw-bold">Download Guide Building Permit</h6>
+                                                                                        <ul class="list-unstyled">
+                                                                                            <li>
+                                                                                                <a href="{{ asset('downloads/Building-Application-Form-Permit.pdf') }}"
+                                                                                                    class="btn btn-outline-primary btn-sm" download>
+                                                                                                    <i class="bx bx-download me-1"></i>Download Guide Form
+                                                                                                </a>
+                                                                                            </li>
 
-                                                            </ul>
-                                                            <small class="text-muted">
-                                                                Application Guide: Follow the steps below to download, complete, and upload the required forms.
-                                                            </small>
+                                                                                        </ul>
+                                                                                        <small class="text-muted">
+                                                                                            Application Guide: Follow the steps below to download, complete, and upload the required forms.
+                                                                                        </small>
 
-                                                        </div> -->
+                                                                                    </div> -->
 
                                     <hr class="my-0" />
 
@@ -496,34 +496,43 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
+                                                        <!-- Project Information -->
                                                         <h6 class="fw-bold">Project Information</h6>
-                                                        <table class="table table-borderless">
-                                                            <tr>
-                                                                <th>Project Name:</th>
-                                                                <td id="confirmProjectName"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Address:</th>
-                                                                <td id="confirmAddress"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Project Location:</th>
-                                                                <td id="confirmLocation"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Project Cost:</th>
-                                                                <td id="confirmProjectCost"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Radius:</th>
-                                                                <td id="confirmRadius"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Description:</th>
-                                                                <td id="confirmDescription"></td>
-                                                            </tr>
-                                                        </table>
+                                                        <div class="mb-3">
+                                                            <div class="row mb-2">
+                                                                <div class="col-12 col-md-4 fw-semibold">Project Name:</div>
+                                                                <div class="col-12 col-md-8 text-break"
+                                                                    id="confirmProjectName"></div>
+                                                            </div>
+                                                            <div class="row mb-2">
+                                                                <div class="col-12 col-md-4 fw-semibold">Address:</div>
+                                                                <div class="col-12 col-md-8 text-break" id="confirmAddress">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-2">
+                                                                <div class="col-12 col-md-4 fw-semibold">Project Location:
+                                                                </div>
+                                                                <div class="col-12 col-md-8 text-break"
+                                                                    id="confirmLocation"></div>
+                                                            </div>
+                                                            <div class="row mb-2">
+                                                                <div class="col-12 col-md-4 fw-semibold">Project Cost:</div>
+                                                                <div class="col-12 col-md-8 text-break"
+                                                                    id="confirmProjectCost"></div>
+                                                            </div>
+                                                            <div class="row mb-2">
+                                                                <div class="col-12 col-md-4 fw-semibold">Radius:</div>
+                                                                <div class="col-12 col-md-8 text-break" id="confirmRadius">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-2">
+                                                                <div class="col-12 col-md-4 fw-semibold">Description:</div>
+                                                                <div class="col-12 col-md-8 text-break"
+                                                                    id="confirmDescription"></div>
+                                                            </div>
+                                                        </div>
 
+                                                        <!-- Uploaded Documents -->
                                                         <h6 class="fw-bold mt-3">Uploaded Documents</h6>
                                                         <div id="confirmDocuments"
                                                             class="d-flex flex-wrap gap-2 border p-2 rounded"
@@ -531,9 +540,9 @@
                                                             <p class="text-muted mb-0">No documents uploaded.</p>
                                                         </div>
 
+                                                        <!-- Project Area Map -->
                                                         <h6 class="fw-bold mt-3">Project Area Map</h6>
-                                                        <div id="confirmMap" style="height:300px; border:1px solid #ccc;">
-                                                        </div>
+                                                        <div class="ratio ratio-16x9 border" id="confirmMap"></div>
                                                     </div>
 
                                                     <div class="modal-footer">
@@ -545,7 +554,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
 
 
 
@@ -561,7 +569,7 @@
                     <!-- Footer -->
                     <footer class="content-footer footer bg-footer-theme mt-4">
                         <div class="container-xxl d-flex flex-wrap justify-content-between py-2
-                                            flex-md-row flex-column text-center text-md-start">
+                                                                        flex-md-row flex-column text-center text-md-start">
                             <div class="mb-2 mb-md-0">
                                 ©
                                 <script>

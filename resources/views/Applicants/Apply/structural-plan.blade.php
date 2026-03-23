@@ -453,7 +453,7 @@
                                                         <h6 class="fw-bold">Architectural Plan Information</h6>
                                                         <table class="table table-borderless">
                                                             <tr>
-                                                                <th>Plan Name</th>
+                                                                <th>Plan Name:</th>
                                                                 <td id="confirmPlanName"></td>
                                                             </tr>
                                                             <tr>

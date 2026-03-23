@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Mpdo;
 
 use App\Http\Controllers\Controller;
+use App\Models\ArchitecturalPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\LogsHistory;
 use App\Models\PermitApplication;
+use Illuminate\Support\Facades\Hash;
+use PhpParser\Builder\Function_;
 
 class MpdoController extends Controller
 {
@@ -20,150 +23,70 @@ class MpdoController extends Controller
         // Total Applicants
         $totalApplicants = User::where('role', 'user')->count();
 
-        // ===============================
-        // Counts for Dashboard
-        // ===============================
-        $underReviewCount = User::with(
-            'permitApplications.architecturalPlans',
-            'permitApplications.structuralPlans',
-            'permitApplications.electricalPlans',
-            'permitApplications.plumbingPlan' // fixed plural
-        )
-            ->where('role', 'user')
+        // Fetch all permits with related plans
+        $permits = User::where('role', 'user')
+            ->with([
+                'permitApplications.architecturalPlans',
+                'permitApplications.structuralPlans',
+                'permitApplications.electricalPlans',
+                'permitApplications.plumbingPlan', // corrected plural
+            ])
             ->get()
-            ->flatMap(fn($user) => $user->permitApplications)
-            ->filter(function ($permit) {
-                if ($permit->status !== 'under_review')
-                    return false;
-
-                $allReviewed = collect([
-                    $permit->architecturalPlans,
-                    $permit->structuralPlans,
-                    $permit->electricalPlans,
-                    $permit->plumbingPlans
-                ])->flatten()
-                    ->every(fn($plan) => $plan->status !== 'pending' && $plan->status !== 'under_review');
-
-                return $allReviewed;
-            })
-            ->count();
-
-        $approvedCount = User::with(
-            'permitApplications.architecturalPlans',
-            'permitApplications.structuralPlans',
-            'permitApplications.electricalPlans',
-            'permitApplications.plumbingPlan' // fixed plural
-        )
-            ->where('role', 'user')
-            ->get()
-            ->flatMap(fn($user) => $user->permitApplications)
-            ->filter(function ($permit) {
-                if ($permit->status === 'approved')
-                    return true;
-
-                $planTypes = [
-                    $permit->architecturalPlans,
-                    $permit->structuralPlans,
-                    $permit->electricalPlans,
-                    $permit->plumbingPlans,
-                ];
-
-                foreach ($planTypes as $plans) {
-                    if (!empty($plans) && collect($plans)->contains(fn($p) => $p->status === 'approved')) {
-                        return true;
-                    }
-                }
-
-                return false;
-            })
-            ->count();
-
-        // ===============================
-        // Permits / Plans Overview Chart
-        // ===============================
-        $pendingCount = User::with(
-            'permitApplications.architecturalPlans',
-            'permitApplications.structuralPlans',
-            'permitApplications.electricalPlans',
-            'permitApplications.plumbingPlan'
-        )
-            ->where('role', 'user')
-            ->get()
-            ->flatMap(fn($user) => $user->permitApplications)
-            ->filter(fn($permit) => $permit->status === 'pending')
-            ->count();
-
-        $chartLabels = ['Pending', 'Under Review', 'Approved'];
-        $chartData = [$pendingCount, $underReviewCount, $approvedCount];
-
-        // ===============================
-        // Oversight for Declined Permits/Plans
-        // ===============================
-        $permits = User::with(
-            'permitApplications.architecturalPlans',
-            'permitApplications.structuralPlans',
-            'permitApplications.electricalPlans',
-            'permitApplications.plumbingPlan'
-        )
-            ->where('role', 'user')
-            ->get()
-            ->flatMap(fn($user) => $user->permitApplications);
+            ->flatMap(fn($user) => $user->permitApplications ?? collect());
 
         $totalPermits = $permits->count();
+
+        // Approved count
         $approvedCount = $permits->filter(function ($permit) {
-            if ($permit->status === 'approved')
+            if (optional($permit)->status === 'approved') {
                 return true;
-
-            $planTypes = [
-                $permit->architecturalPlans,
-                $permit->structuralPlans,
-                $permit->electricalPlans,
-                $permit->plumbingPlans,
-            ];
-
-            foreach ($planTypes as $plans) {
-                if (!empty($plans) && collect($plans)->contains(fn($p) => $p->status === 'approved')) {
-                    return true;
-                }
             }
-            return false;
+
+            $plans = collect([
+                $permit->architecturalPlans ?? collect(),
+                $permit->structuralPlans ?? collect(),
+                $permit->electricalPlans ?? collect(),
+                $permit->plumbingPlans ?? collect(),
+            ])->flatten();
+
+            return $plans->contains(fn($plan) => optional($plan)->status === 'approved');
         })->count();
 
+        // Under Review count
         $underReviewCount = $permits->filter(function ($permit) {
-            if ($permit->status !== 'under_review')
-                return false;
+            if (optional($permit)->status === 'under_review') {
+                return true;
+            }
 
-            $allReviewed = collect([
-                $permit->architecturalPlans,
-                $permit->structuralPlans,
-                $permit->electricalPlans,
-                $permit->plumbingPlans
-            ])->flatten()
-                ->every(fn($plan) => $plan->status !== 'pending' && $plan->status !== 'under_review');
+            $plans = collect([
+                $permit->architecturalPlans ?? collect(),
+                $permit->structuralPlans ?? collect(),
+                $permit->electricalPlans ?? collect(),
+                $permit->plumbingPlans ?? collect(),
+            ])->flatten();
 
-            return $allReviewed;
+            return $plans->contains(fn($plan) => optional($plan)->status === 'under_review');
         })->count();
+
+        // Declined count (everything else)
         $declinedCount = $totalPermits - ($approvedCount + $underReviewCount);
 
-        // Calculate percentages safely
+        // Percentages
         $approvedPercent = $totalPermits ? round(($approvedCount / $totalPermits) * 100) : 0;
         $underReviewPercent = $totalPermits ? round(($underReviewCount / $totalPermits) * 100) : 0;
         $declinedPercent = $totalPermits ? round(($declinedCount / $totalPermits) * 100) : 0;
 
-        // ===============================
-        // Monthly Oversight Permits Or Plans Chart
-        // ===============================
+        // Chart data
+        $chartLabels = ['Pending', 'Under Review', 'Approved'];
+        $pendingCount = $permits->filter(fn($permit) => optional($permit)->status === 'pending')->count();
+        $chartData = [$pendingCount, $underReviewCount, $approvedCount];
+
+        // Monthly data
         $monthLabels = [];
         $monthData = [];
-
         for ($m = 1; $m <= 12; $m++) {
             $monthLabels[] = date('M', mktime(0, 0, 0, $m, 1));
-
-            $count = $permits->filter(function ($permit) use ($m) {
-                return $permit->created_at->month == $m;
-            })->count();
-
-            $monthData[] = $count;
+            $monthData[] = $permits->filter(fn($permit) => optional($permit->created_at)->month == $m)->count();
         }
 
         return view('MPDO.Dashboard.index', compact(
@@ -173,8 +96,6 @@ class MpdoController extends Controller
             'approvedCount',
             'chartLabels',
             'chartData',
-            'approvedCount',
-            'underReviewCount',
             'declinedCount',
             'approvedPercent',
             'underReviewPercent',
@@ -305,7 +226,9 @@ class MpdoController extends Controller
 
         // Fetch users with permits and their architectural plans
         $users = User::where('role', 'user')
-            ->with(['permitApplications.architecturalPlans'])
+            ->with([
+                'permitApplications.architecturalPlans.reviewer' // ✅ FIX HERE
+            ])
             ->get();
 
         // Loop through each user and their permits
@@ -601,12 +524,170 @@ class MpdoController extends Controller
     }
 
     // MPDO View Staff Index
-    public function ViewStaffIndex(){
+    public function ViewStaffIndex()
+    {
         $currentUser = Auth::user();
 
         return view('MPDO.Staff.add-staff', compact('currentUser'), [
             'ActiveTabMenu' => 'Staff',
             'SubActiveTab' => 'View Staff'
         ]);
+    }
+
+    // MPDO View Add Staff Index
+    public function ViewAddStaffIndex()
+    {
+        $currentUser = Auth::user();
+
+        return view('MPDO.Staff.view-staff', compact('currentUser'), [
+            'ActiveTabMenu' => 'Staff',
+            'SubActiveTab' => 'Add Staff'
+        ]);
+    }
+
+    // MPDO Store New Staff or Employees
+    public function StoreStaffIndex(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'department' => 'required',
+            'role' => 'required',
+            'password' => 'required|min:6'
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'department' => $request->department,
+            'role' => $request->role,
+            'password' => Hash::make($request->password),
+            'status' => 1
+        ]);
+
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Already save the new staff member.',
+        ]);
+
+        return back()->with('success', 'Staff added successfully!');
+    }
+
+    // MPDO View Logs History Index
+    public function ViewLogsIndex()
+    {
+        $currentUser = Auth::user();
+
+        $logs = LogsHistory::whereHas('user', function ($query) {
+            $query->whereIn('role', ['mpdo', 'mpdo_staff']);
+        })->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('MPDO.Logs.view-logs', compact('currentUser', 'logs'), [
+            'ActiveTabMenu' => 'Logs',
+            'SubActiveTab' => 'View Logs'
+        ]);
+    }
+
+    //MPDO Update the permit Status
+    public function UnderReviewUpdateStatus(Request $request, $id)
+    {
+        $currentUser = Auth::user();
+        $permit = PermitApplication::findOrFail($id);
+
+        // Prevent updating if the permit is already approved
+        if ($permit->status === 'under_review') {
+            return redirect()->back()->with('error', 'This permit has already been approved and cannot be modified.');
+        }
+
+        // Update only if status is not already 'under_review'
+        if ($permit->status !== 'under_review') {
+            $permit->status = 'under_review';
+
+            // Set reviewed_by only if current user is MPDO
+            if ($currentUser->role === 'mpdo') {
+                $permit->reviewed_by = $currentUser->id;
+            }
+
+            $permit->save();
+        }
+
+        return redirect()->back()->with('success', 'Permit status updated successfully.');
+    }
+
+    // MPDO Approve the permit Status
+    public function ApprovedUpdateStatus(Request $request, $id)
+    {
+        $currentUser = Auth::user();
+        $permit = PermitApplication::findOrFail($id);
+
+        if ($permit->status !== 'approved') {
+            $permit->update([
+                'status' => 'approved',
+                'reviewed_by' => $currentUser->role === 'mdpo' ? $currentUser->id : $permit->reviewed_by
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Permit status updated successfully.');
+    }
+
+    // MPDO Update the Architectural Plans Status
+    public function UnderReviewArchitecturalUpdateStatus(Request $request, $id)
+    {
+        $currentUser = Auth::user();
+
+        // Find the architectural plan
+        $permit = ArchitecturalPlan::findOrFail($id);
+
+        if ($permit->status !== 'under_review') {
+            $permit->update([
+                'status' => 'under_review',
+                'reviewed_by' => $currentUser->role === 'mpdo' ? $currentUser->id : $permit->reviewed_by
+            ]);
+        }
+
+        return back()->with('success', 'Permit marked under review successfully.');
+    }
+
+
+    // MPDO Approve the Architectural Plans Status
+    public function ApprovedArchitecturalUpdateStatus(Request $request, $id)
+    {
+        $currentUser = Auth::user();
+
+        // Find the architectural plan using the foreign key permit_application_id
+        $permit = ArchitecturalPlan::with([
+            'permitApplication:id,user_id,reviewd_by,status'
+        ])
+            ->whereHas('permitApplication', function ($query) use ($id) {
+                $query->where('id', $id);
+            })
+            ->first();
+
+        if (!$permit) {
+            return back()->with('error', 'No architectural plan found for this permit application.');
+        }
+
+        // Prevent updating if already approved
+        if ($permit->status === 'approved') {
+            return back()->with('error', 'This architectural plan has already been approved and cannot be modified.');
+        }
+
+        // Update status to 'approved'
+        $permit->status = 'approved';
+
+        // Set reviewed_by only if current user is MPDO
+        if ($currentUser->role === 'mpdo') {
+            $permit->reviewed_by = $currentUser->id;
+        }
+
+        $permit->save();
+
+        return back()->with('success', 'Architectural plan status updated successfully.');
+    }
+
+    // View Maintenance in MPDO
+    public function ViewMaintenanceIndex(){
+        $currentUser = Auth::user();
+        return view('MPDO.Maintenance.maintenance', compact('currentUser'));
     }
 }

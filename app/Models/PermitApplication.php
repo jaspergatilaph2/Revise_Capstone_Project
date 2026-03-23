@@ -43,7 +43,7 @@ class PermitApplication extends Model
 
     public function architecturalPlans()
     {
-        return $this->hasMany(ArchitecturalPlan::class);
+        return $this->hasMany(ArchitecturalPlan::class, 'permit_application_id');
     }
 
     public function structuralPlans()
@@ -65,6 +65,12 @@ class PermitApplication extends Model
     {
         return $this->belongsTo(User::class, 'reviewed_by');
     }
+
+    // PermitApplication.php
+    // public function architecturalPlan()
+    // {
+    //     return $this->hasOne(ArchitecturalPlan::class, 'permit_application_id');
+    // }
 
     use HasFactory;
 }

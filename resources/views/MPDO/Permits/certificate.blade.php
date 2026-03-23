@@ -115,65 +115,48 @@
                         </ul>
                     </li>
 
-                    <!-- <li class="menu-item">
-                                                                                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                                                                                                <i class="menu-icon fa-solid fa-building"></i>
-                                                                                                                <div data-i18n="Layouts">Development Projects</div>
-                                                                                                            </a>
+                    @php
+                        use Illuminate\Support\Facades\Auth;
 
-                                                                                                            <ul class="menu-sub">
-                                                                                                                <li class="menu-item">
-                                                                                                                    <a href="" class="menu-link">
-                                                                                                                        <div data-i18n="Without navbar">All Projects</div>
-                                                                                                                    </a>
-                                                                                                                </li>
-                                                                                                                <li class="menu-item">
-                                                                                                                    <a href="" class="menu-link">
-                                                                                                                        <div data-i18n="Without navbar">Ongoing</div>
-                                                                                                                    </a>
-                                                                                                                </li>
-                                                                                                                <li class="menu-item">
-                                                                                                                    <a href="" class="menu-link">
-                                                                                                                        <div data-i18n="Without navbar">Completed</div>
-                                                                                                                    </a>
-                                                                                                                </li>
-                                                                                                                <li class="menu-item">
-                                                                                                                    <a href="" class="menu-link">
-                                                                                                                        <div data-i18n="Without navbar">Proposed</div>
-                                                                                                                    </a>
-                                                                                                                </li>
-                                                                                                            </ul>
-                                                                                                        </li> -->
+                        $staffCount = App\Models\User::where('role', 'mpdo_staff')->count();
+                    @endphp
 
-                    <!-- <li class="menu-item">
-                                                                                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                                                                                                <i class="menu-icon fa-solid fa-chart-simple"></i>
-                                                                                                                <div data-i18n="Layouts">Reports & Analytics</div>
-                                                                                                            </a>
+                    @if(Auth::user()->role == 'mpdo')
+                        <li class="menu-header small text-uppercase">
+                            <span class="menu-header-text">MPDO Staff</span>
+                        </li>
 
-                                                                                                            <ul class="menu-sub">
-                                                                                                                <li class="menu-item">
-                                                                                                                    <a href="" class="menu-link">
-                                                                                                                        <div data-i18n="Without navbar">Annual investment plans (AIP)</div>
-                                                                                                                    </a>
-                                                                                                                </li>
-                                                                                                                <li class="menu-item">
-                                                                                                                    <a href="" class="menu-link">
-                                                                                                                        <div data-i18n="Without navbar">Budget allocation and utilization</div>
-                                                                                                                    </a>
-                                                                                                                </li>
-                                                                                                                <li class="menu-item">
-                                                                                                                    <a href="" class="menu-link">
-                                                                                                                        <div data-i18n="Without navbar">Infrastructure development progress</div>
-                                                                                                                    </a>
-                                                                                                                </li>
-                                                                                                                <li class="menu-item">
-                                                                                                                    <a href="" class="menu-link">
-                                                                                                                        <div data-i18n="Without navbar">Population and demographic analysis</div>
-                                                                                                                    </a>
-                                                                                                                </li>
-                                                                                                            </ul>
-                                                                                                        </li> -->
+                        <li class="menu-item">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon fa-solid fa-person fa-2x"></i>
+                                <div>Staff Or Employee</div>
+                            </a>
+
+                            <ul class="menu-sub">
+
+                                {{-- Show Add Staff only if no staff exists --}}
+                                @php
+    $staffCount = App\Models\User::where('role', 'mpdo_staff')->count();
+@endphp
+
+{{-- Only show Adding Staff if the logged-in user is main MPDO admin --}}
+@if(Auth::user()->role == 'mpdo')
+    <li class="menu-item">
+        <a href="{{ route('staff.management.view-staff') }}" class="menu-link">
+            <div>Adding Staff</div>
+        </a>
+    </li>
+@endif
+
+                                <li class="menu-item">
+                                    <a href="{{ route('staff.management.view-add-staff') }}" class="menu-link">
+                                        <div>View Staff</div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    @endif
 
 
 

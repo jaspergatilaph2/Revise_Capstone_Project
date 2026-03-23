@@ -36,6 +36,17 @@ Auth::routes();
 //Admin Routes
 Route::group(['middleware' => ['auth', 'IfAdmin']], function () {
   Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+  // View The Staff And Edit The staff Role
+  Route::prefix('admin')->name('staff.employees.')->group(function(){
+    Route::get('/view-staff', [AdminController::class, 'ViewStaffIndex'])->name('staff-view');
+  });
+
+  // Set The Maintenance Countdown
+  Route::prefix('set-countdown')->name('countdown.maintenance.')->group(function(){
+    Route::get('/view-countdown',[AdminController::class, 'ViewCountdownIndex'])->name('view-countdown');
+    Route::post('/view-countdown/update', [AdminController::class, 'UpdateCountdownIndex'])->name('update-countdown');
+  });
 });
 
 // Users Or Applicants Routes
@@ -79,14 +90,14 @@ Route::group(['middleware' => ['auth', 'IfUsers']], function () {
     Route::get('/plumbing-permit', [ApplicantsController::class, 'PlumbingPermitIndex'])->name('plumbing-permit');
     Route::get('/documents-guide', [ApplicantsController::class, 'DocumentsGuideIndex'])->name('documents');
   });
-  
+
   // User Under Maintenance 
-  Route::prefix('under-maintenance')->name('user.maintenance.')->group(function(){
+  Route::prefix('under-maintenance')->name('user.maintenance.')->group(function () {
     Route::get('/view-under-maintenance', [ApplicantsController::class, 'ViewUnderMaintenanceIndex'])->name('view-under-maintenance');
   });
 
 
-  Route::prefix('options')->name('user.options.')->group(function(){
+  Route::prefix('options')->name('user.options.')->group(function () {
     Route::get('/view-dark-mode-options', [ApplicantsController::class, 'ViewDarkModeOptionsIndex'])->name('view-dark-mode');
   });
 });
@@ -151,7 +162,7 @@ Route::group(['middleware' => ['auth', 'IfEngineer']], function () {
   });
 
   // Engineer Inspections
-  Route::prefix('/inspections')->name('engineer.inspections.')->group(function(){
+  Route::prefix('/inspections')->name('engineer.inspections.')->group(function () {
     Route::get('/view-inspections', [EngineerController::class, 'ViewInspectionsIndex'])->name('view');
     Route::get('/view-scheduled-calendar', [EngineerController::class, 'ViewScheduledCalendarIndex'])->name('view-calendar');
     Route::get('/view-inspections-checklist', [EngineerController::class, 'ViewInspectionsChecklistIndex'])->name('view-checklist');
@@ -172,18 +183,43 @@ Route::group(['middleware' => 'auth', 'IfMpdo'], function () {
   });
 
   // MPDO All Permits Reviews
-  Route::prefix('reviews')->name('reviews.permits.')->group(function(){
+  Route::prefix('reviews')->name('reviews.permits.')->group(function () {
     Route::get('/view-all-permits', [MpdoController::class, 'ViewAllPermitsIndex'])->name('view-permits');
     Route::get('/view-architectural-plans', [MpdoController::class, 'ViewArchitecturalPlansIndex'])->name('view-architectural');
     Route::get('/view-structural-plans', [MpdoController::class, 'ViewStructuralPlansIndex'])->name('view-structural');
     Route::get('/view-electrical-plans', [MpdoController::class, 'ViewElectricalPlansIndex'])->name('view-electrical');
     Route::get('/view-plumbing-plans', [MpdoController::class, 'ViewPlumbingPlansIndex'])->name('view-plumbing');
     Route::get('/view-certificate-app', [MpdoController::class, 'ViewCertificateAppIndex'])->name('view-certificate');
+
+    // Update the Status of the Permits to Under Review, Approved, and Disapproved
+    Route::put('/under-review/update-status/{id}', [MpdoController::class, 'UnderReviewUpdateStatus'])->name('under-review-update-status');
+    Route::put('/approved/update-status/{id}', [MpdoController::class, 'ApprovedUpdateStatus'])->name('approved-update-status');
+    Route::delete('/delete-permit/{id}', [MpdoController::class, 'delete'])->name('delete');
+
+    // MPDO Statuses in Architectural Plans
+    Route::put('/under-review-architectural/update-status/{id}', [MpdoController::class, 'UnderReviewArchitecturalUpdateStatus'])
+    ->name('architectural-under-review');
+    Route::put('/approved-architectural/update-status/{id}', [MpdoController::class, 'ApprovedArchitecturalUpdateStatus'])
+    ->name('architectural-approved');
   });
 
   // MPDO Adding Staff or Employees
   Route::prefix('staff')->name('staff.management.')->group(function () {
     Route::get('/view-staff', [MpdoController::class, 'ViewStaffIndex'])->name('view-staff');
+    Route::get('/view-add-staff', [MpdoController::class, 'ViewAddStaffIndex'])->name('view-add-staff');
+
+    // MPDO Store New Staff or Employees
+    Route::post('/store-staff', [MpdoController::class, 'StoreStaffIndex'])->name('add-staff');
+  });
+
+  // MPDO View Logs History
+  Route::prefix('logs')->name('mpdo.logs.')->group(function () {
+    Route::get('/view-logs', [MpdoController::class, 'ViewLogsIndex'])->name('view-logs');
+  });
+
+  // MPDO Maintennace View
+  Route::prefix('maintenance')->name('mpdo.maintenance.')->group(function(){
+    Route::get('/view-maintenance', [MpdoController::class, 'ViewMaintenanceIndex'])->name('view-maintenance');
   });
 });
 

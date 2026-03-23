@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                                                                                                    <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                                                                                                    </a> -->
+                                                                                                                                <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                                                                                                                </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -87,7 +87,7 @@
 
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('mpdo.maintenance.view-maintenance') }}" class="menu-link">
                                     <div data-i18n="Without menu"> Ongoing Projects</div>
                                 </a>
                             </li>
@@ -109,25 +109,51 @@
                         </ul>
                     </li>
 
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">MPDO Staff</span>
-                    </li>
 
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-person fa-2x"></i>
-                            <div data-i18n="Layouts">Staff Or Employee</div>
-                        </a>
 
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="{{route('staff.management.view-staff')}}" class="menu-link">
-                                    <div data-i18n="Without navbar">Adding Staff</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    
+                    @php
+                        use Illuminate\Support\Facades\Auth;
+
+                        $staffCount = App\Models\User::where('role', 'mpdo_staff')->count();
+                    @endphp
+
+                    @if(Auth::user()->role == 'mpdo')
+                        <li class="menu-header small text-uppercase">
+                            <span class="menu-header-text">MPDO Staff</span>
+                        </li>
+
+                        <li class="menu-item">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon fa-solid fa-person fa-2x"></i>
+                                <div>Staff Or Employee</div>
+                            </a>
+
+                            <ul class="menu-sub">
+
+                                {{-- Show Add Staff only if no staff exists --}}
+                                @php
+    $staffCount = App\Models\User::where('role', 'mpdo_staff')->count();
+@endphp
+
+{{-- Only show Adding Staff if the logged-in user is main MPDO admin --}}
+@if(Auth::user()->role == 'mpdo')
+    <li class="menu-item">
+        <a href="{{ route('staff.management.view-staff') }}" class="menu-link">
+            <div>Adding Staff</div>
+        </a>
+    </li>
+@endif
+
+                                <li class="menu-item">
+                                    <a href="{{ route('staff.management.view-add-staff') }}" class="menu-link">
+                                        <div>View Staff</div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    @endif
+
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Accounts</span>
                     </li>
@@ -148,10 +174,10 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                                                                                        <a href="" class="menu-link">
-                                                                                                            <div data-i18n="Notifications">Settings</div>
-                                                                                                        </a>
-                                                                                                        </li> -->
+                                                                                                                                    <a href="" class="menu-link">
+                                                                                                                                        <div data-i18n="Notifications">Settings</div>
+                                                                                                                                    </a>
+                                                                                                                                    </li> -->
 
                         </ul>
                     </li>
@@ -166,7 +192,7 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('mpdo.logs.view-logs') }}" class="menu-link">
                                     <div data-i18n="Under Maintenance">Logs</div>
                                 </a>
                             </li>
@@ -232,7 +258,10 @@
                                                                 $roleLabel = 'MPDO';
                                                             } elseif ($role === 'treasurer') {
                                                                 $roleLabel = 'Treasurer';
-                                                            } else {
+                                                            } elseif ($role === 'mpdo_staff') {
+                                                                $roleLabel = 'MPDO STAFF';
+                                                            }
+                                                            else {
                                                                 $roleLabel = 'User';
                                                             }
 
@@ -260,19 +289,19 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{ route('mpdo.logs.view-logs') }}">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
                                     </li>
                                     <!-- <li>
-                                                                                                            <a class="dropdown-item" href="">
-                                                                                                                <i class="bx bx-cog me-2"></i>
-                                                                                                                <span class="align-middle">Settings</span>
-                                                                                                            </a>
-                                                                                                            </li> -->
+                                                                                                                                        <a class="dropdown-item" href="">
+                                                                                                                                            <i class="bx bx-cog me-2"></i>
+                                                                                                                                            <span class="align-middle">Settings</span>
+                                                                                                                                        </a>
+                                                                                                                                        </li> -->
                                     <li>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{ route('mpdo.logs.view-logs') }}">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
                                             <span class="align-middle">Logs</span>
                                         </a>

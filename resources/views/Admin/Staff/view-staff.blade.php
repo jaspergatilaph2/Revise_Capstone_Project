@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                </a> -->
+                                                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                                            </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -94,21 +94,6 @@
                         </ul>
                     </li>
 
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon fa-solid fa-hammer"></i>
-                            <div data-i18n="Layouts">Maintenance</div>
-                        </a>
-
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="{{ route('countdown.maintenance.view-countdown') }}" class="menu-link">
-                                    <div data-i18n="Without navbar">MPDO Maintencance</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Accounts Settings / User Management</span>
@@ -130,10 +115,10 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                      <a href="" class="menu-link">
-                        <div data-i18n="Notifications">Settings</div>
-                      </a>
-                    </li> -->
+                                                                  <a href="" class="menu-link">
+                                                                    <div data-i18n="Notifications">Settings</div>
+                                                                  </a>
+                                                                </li> -->
 
                         </ul>
                     </li>
@@ -146,7 +131,7 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="{{ route('staff.employees.staff-view') }}" class="menu-link">
+                                <a href="" class="menu-link">
                                     <div data-i18n="Account">Staff/Inspector</div>
                                 </a>
                             </li>
@@ -251,11 +236,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                          <a class="dropdown-item" href="">
-                            <i class="bx bx-cog me-2"></i>
-                            <span class="align-middle">Settings</span>
-                          </a>
-                        </li> -->
+                                                                      <a class="dropdown-item" href="">
+                                                                        <i class="bx bx-cog me-2"></i>
+                                                                        <span class="align-middle">Settings</span>
+                                                                      </a>
+                                                                    </li> -->
                                     <li>
                                         <a class="dropdown-item" href="">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -286,192 +271,142 @@
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
-                <div class="content-wrapper">
+                <div class="content-wrapper d-flex flex-column min-vh-100">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <div class="container">
-                            <!-- Page Title -->
-                            <div class="mb-4 text-center text-md-start">
-                                <h4 class="fw-bold text-dark">
-                                    <i class="fa-solid fa-tachometer-alt me-2 text-primary"></i>
-                                    Super Admin Dashboard
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <h4 class="fw-bold py-3 mb-4">
+                                    <span class="text-muted fw-light">MPDO Departments /</span> Staff List
                                 </h4>
-                                <p class="text-muted mb-0">Overview of system performance and key building permit stats.</p>
-                            </div>
 
-                            <!-- Summary Cards -->
-                            <div class="row g-4">
-                                <!-- Total Applications -->
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
-                                        <div class="card-body text-center">
-                                            <i class="fa-solid fa-file-circle-plus fa-2x text-primary mb-2"></i>
-                                            <h6 class="fw-bold text-uppercase small">Total Applications</h6>
-                                            <h3 class="fw-bolder text-primary mb-1" id="totalApplications"></h3>
-                                            <p class="text-muted small mb-0">All applications submitted</p>
-                                        </div>
+                                <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#">
+                                            <i class="fa-solid fa-users me-1"></i> View Staff
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="card">
+                                    <h5 class="card-header">Staff Members</h5>
+
+                                    <!-- Success Message (Hidden by default) -->
+                                    <div class="alert alert-success m-3" style="display:none;">
+                                        Staff status updated successfully.
                                     </div>
-                                </div>
 
-                                <!-- Pending Approvals -->
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
-                                        <div class="card-body text-center">
-                                            <i class="fa-solid fa-hourglass-half fa-2x text-warning mb-2"></i>
-                                            <h6 class="fw-bold text-uppercase small">Pending Approvals</h6>
-                                            <h3 class="fw-bolder text-warning mb-1" id="pendingApprovals"></h3>
-                                            <p class="text-muted small mb-0">Awaiting review</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <div class="card-body">
 
-                                <!-- Under Review -->
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
-                                        <div class="card-body text-center">
-                                            <i class="fa-solid fa-magnifying-glass fa-2x text-warning mb-2"></i>
-                                            <h6 class="fw-bold text-uppercase small">Under Review</h6>
-                                            <h3 class="fw-bolder text-warning mb-1" id="pendingApprovals"></h3>
-                                            <p class="text-muted small mb-0">Awaiting review</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Full Name</th>
+                                                        <th>Email</th>
+                                                        <th>Department</th>
+                                                        <th>Role</th>
+                                                        <th>Change Role</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
 
-                                <!-- Approved Permits -->
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
-                                        <div class="card-body text-center">
-                                            <i class="fa-solid fa-circle-check fa-2x text-success mb-2"></i>
-                                            <h6 class="fw-bold text-uppercase small">Approved Permits</h6>
-                                            <h3 class="fw-bolder text-success mb-1" id="approvedPermits"></h3>
-                                            <p class="text-muted small mb-0">Successfully issued permits</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Revenue Collected -->
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100">
-                                        <div class="card-body text-center">
-                                            <i class="fa-solid fa-peso-sign fa-2x text-info mb-2"></i>
-                                            <h6 class="fw-bold text-uppercase small">Revenue Collected</h6>
-                                            <h3 class="fw-bolder text-info mb-1" id="totalRevenue">₱120,500</h3>
-                                            <p class="text-muted small mb-0">Total fees collected</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Quick Stats Section -->
-                            <div class="row mt-4 g-4">
-                                <!-- System Activity -->
-                                <div class="col-12 col-lg-8">
-                                    <div class="card shadow-sm border-0 h-100">
-                                        <div class="card-body">
-                                            <h5 class="fw-bold mb-3">
-                                                <i class="fa-solid fa-chart-line me-2 text-info"></i> System Activity
-                                            </h5>
-                                            <p class="text-muted small mb-3">Overview of weekly permit activities.</p>
-                                            <div id="activityChart" style="height: 300px;"
-                                                class="d-flex align-items-center justify-content-center">
-                                                <p class="text-center text-muted">[Activity chart coming soon]</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Recent Activities -->
-                                <div class="col-12 col-lg-4">
-                                    <div class="card shadow-sm border-0 h-100">
-                                        <div class="card-body">
-                                            <h5 class="fw-bold mb-3">
-                                                <i class="fa-solid fa-clock-rotate-left me-2 text-secondary"></i> Recent
-                                                Activities
-                                            </h5>
-                                            <ul class="list-group list-group-flush small">
-                                                <li class="list-group-item">
-                                                    <i class="fa-solid fa-user-plus text-primary me-2"></i>
-                                                    New applicant registered
-                                                    <span class="text-muted float-end">2 mins ago</span>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <i class="fa-solid fa-file-signature text-success me-2"></i>
-                                                    Permit approved for Building #123
-                                                    <span class="text-muted float-end">15 mins ago</span>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <i class="fa-solid fa-file-pen text-warning me-2"></i>
-                                                    Application pending for review
-                                                    <span class="text-muted float-end">1 hour ago</span>
-                                                </li>
-                                                <li class="list-group-item text-center">
-                                                    <a href="#" class="text-primary small fw-bold">View All</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- User Management Table -->
-                            <div class="row mt-4">
-                                <div class="col-12">
-                                    <div class="card shadow-sm border-0">
-                                        <div class="card-body">
-                                            <h5 class="fw-bold mb-3">
-                                                <i class="fa-solid fa-users-gear me-2 text-primary"></i> User Management
-                                            </h5>
-                                            <div class="table-responsive">
-                                                <table class="table table-striped table-hover mb-0">
-                                                    <thead class="table-light">
+                                                <tbody>
+                                                    <tr class="table-primary text-center">
+                                                        <td colspan="7"><strong>MPDO Staff</strong></td>
+                                                    </tr>
+                                                    @php
+                                                        $mpdoStaffs = \App\Models\User::where('role', 'mpdo_staff')->get();
+                                                    @endphp
+                                                    @forelse($mpdoStaffs as $index => $staff)
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <th>Role</th>
-                                                            <th>Status</th>
-                                                            <th>Last Seen</th>
+                                                            <td>{{ $index + 1 }}</td>
+                                                            <td>{{ $staff->name }}</td>
+                                                            <td>{{ $staff->email }}</td>
+                                                            <td>{{ strtoupper($staff->department ?? 'N/A') }}</td>
+                                                            <td>{{ str_replace('_', ' ', ucfirst($staff->role)) }}</td>
+                                                            <td>
+                                                                <form action="" method="POST" class="d-flex">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <select name="role" class="form-select form-select-sm"
+                                                                        onchange="this.form.submit()">
+                                                                        <option value="mpdo_staff" {{ ($staff->role ?? 'engineer') == 'mpdo_staff' ? 'selected' : '' }}>MPDO
+                                                                            Staff</option>
+                                                                        <option value="engineer" {{ ($staff->role ?? 'engineer') == 'engineer' ? 'selected' : '' }}>
+                                                                            Engineer</option>
+                                                                    </select>
+                                                                </form>
+                                                            </td>
+                                                            <td class="d-flex align-items-center" style="gap: 0.3rem;">
+                                                                @php
+                                                                    $statusColor = $staff->is_active ? 'text-success' : 'text-danger';
+                                                                    $statusIcon = $staff->is_active ? 'fa-circle-check' : 'fa-circle-xmark';
+                                                                    $statusText = $staff->is_active ? 'Active' : 'Inactive';
+                                                                @endphp
+                                                                <i class="fa-solid {{ $statusIcon }} {{ $statusColor }}"></i>
+                                                                <span
+                                                                    class="{{ $statusColor }} fw-semibold">{{ $statusText }}</span>
+                                                            </td>
                                                         </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @forelse ($users as $user)
-                                                            <tr>
-                                                                <td>{{ $user->name }}</td>
-                                                                <td>{{ ucfirst($user->role) }}</td>
-                                                                <td>
-                                                                    @if($user->is_active)
-                                                                        <span
-                                                                            class="px-3 py-2 rounded-pill shadow-sm fw-semibold small text-white bg-success"
-                                                                            style="letter-spacing: 0.5px;">
-                                                                            Active
-                                                                        </span>
-                                                                    @else
-                                                                        <span
-                                                                            class="px-3 py-2 rounded-pill shadow-sm fw-semibold small text-white bg-secondary"
-                                                                            style="letter-spacing: 0.5px;">
-                                                                            Inactive
-                                                                        </span>
-                                                                    @endif
-                                                                </td>
-                                                                <td>
-    {{ $user->last_seen 
-        ? \Carbon\Carbon::parse($user->last_seen)->diffForHumans() 
-        : 'Never' 
-    }}
-</td>
-                                                            </tr>
-                                                        @empty
-                                                            <tr>
-                                                                <td colspan="4" class="text-center text-muted">No users found
-                                                                </td>
-                                                            </tr>
-                                                        @endforelse
-                                                    </tbody>
-                                                </table>
+                                                    @empty
+                                                        <tr>
+                                                            <td colspan="6" class="text-center">No MPDO staff found.</td>
+                                                        </tr>
+                                                    @endforelse
 
-
-                                            </div>
+                                                    <tr style="height: 2rem;"></tr> <!-- empty row as vertical gap -->
+                                                    <tr class="table-primary text-center">
+                                                        <td colspan="7"><strong>Engineers</strong></td>
+                                                    </tr>
+                                                    @php
+                                                        $engineers = \App\Models\User::where('role', 'engineer')->get();
+                                                    @endphp
+                                                    @forelse($engineers as $index => $engineer)
+                                                        <tr>
+                                                            <td>{{ $index + 1 }}</td>
+                                                            <td>{{ $engineer->name }}</td>
+                                                            <td>{{ $engineer->email }}</td>
+                                                            <td>{{ strtoupper($engineer->department ?? 'N/A') }}</td>
+                                                            <td>{{ str_replace('_', ' ', ucfirst($engineer->role)) }}</td>
+                                                            <td>
+                                                                <form action="" method="POST" class="d-flex">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <select name="role" class="form-select form-select-sm"
+                                                                        onchange="this.form.submit()">
+                                                                        <option value="mpdo_staff" {{ ($staff->role ?? 'engineer') == 'mpdo_staff' ? 'selected' : '' }}>MPDO
+                                                                            Staff</option>
+                                                                        <option value="engineer" {{ ($staff->role ?? 'engineer') == 'engineer' ? 'selected' : '' }}>
+                                                                            Engineer</option>
+                                                                    </select>
+                                                                </form>
+                                                            </td>
+                                                            <td class="d-flex align-items-center" style="gap: 0.3rem;">
+                                                                @php
+                                                                    $statusColor = $staff->is_active ? 'text-success' : 'text-danger';
+                                                                    $statusIcon = $staff->is_active ? 'fa-circle-check' : 'fa-circle-xmark';
+                                                                    $statusText = $staff->is_active ? 'Active' : 'Inactive';
+                                                                @endphp
+                                                                <i class="fa-solid {{ $statusIcon }} {{ $statusColor }}"></i>
+                                                                <span
+                                                                    class="{{ $statusColor }} fw-semibold">{{ $statusText }}</span>
+                                                            </td>
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td colspan="6" class="text-center">No engineers found.</td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
                                         </div>
+
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
