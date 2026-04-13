@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                                                                                                                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                                                                                                                </a> -->
+                                                                                                                                                      <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                                                                                                                                    </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -176,10 +176,10 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                                                                                                      <a href="" class="menu-link">
-                                                                                                                        <div data-i18n="Notifications">Settings</div>
-                                                                                                                      </a>
-                                                                                                                    </li> -->
+                                                                                                                                                          <a href="" class="menu-link">
+                                                                                                                                                            <div data-i18n="Notifications">Settings</div>
+                                                                                                                                                          </a>
+                                                                                                                                                        </li> -->
 
                         </ul>
                     </li>
@@ -294,11 +294,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                                                                                                          <a class="dropdown-item" href="">
-                                                                                                                            <i class="bx bx-cog me-2"></i>
-                                                                                                                            <span class="align-middle">Settings</span>
-                                                                                                                          </a>
-                                                                                                                        </li> -->
+                                                                                                                                                              <a class="dropdown-item" href="">
+                                                                                                                                                                <i class="bx bx-cog me-2"></i>
+                                                                                                                                                                <span class="align-middle">Settings</span>
+                                                                                                                                                              </a>
+                                                                                                                                                            </li> -->
                                     <li>
                                         <a class="dropdown-item" href="">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -378,88 +378,212 @@
                                                         @foreach($users as $user)
                                                             @foreach($user->permitApplications as $permit)
                                                                 <tr>
+                                                                    <!-- Loop Index -->
                                                                     <td>{{ $loop->parent->iteration }}</td>
+
+                                                                    <!-- User Name -->
                                                                     <td>{{ $user->name }}</td>
+
+                                                                    <!-- Project Name -->
                                                                     <td>{{ $permit->project_name }}</td>
+
+                                                                    <!-- Documents -->
                                                                     <td>
                                                                         @if(!empty($permit->document_urls))
-                                                                            @foreach($permit->document_urls as $index => $docUrl)
-                                                                                <a href="{{ $docUrl }}" target="_blank"
-                                                                                    class="btn btn-sm btn-primary mb-1 w-100">
-                                                                                    View Document ({{ $index + 1 }})
-                                                                                </a>
-                                                                            @endforeach
+                                                                            <div class="d-flex flex-column">
+                                                                                @foreach($permit->document_urls as $index => $docUrl)
+                                                                                    <a href="{{ $docUrl }}" target="_blank"
+                                                                                        class="btn btn-sm btn-primary mb-1 w-100">
+                                                                                        View Document ({{ $index + 1 }})
+                                                                                    </a>
+                                                                                @endforeach
+                                                                            </div>
                                                                         @else
                                                                             <span class="text-secondary">No Document</span>
                                                                         @endif
                                                                     </td>
+
+                                                                    <!-- Reviewed By -->
                                                                     <td>
                                                                         @if(is_null($permit->reviewed_by))
                                                                             <span class="text-warning">Pending Review</span>
                                                                         @else
+                                                                            @php
+                                                                                $reviewer = App\Models\User::find($permit->reviewed_by);
+                                                                            @endphp
                                                                             <span class="text-success">
-                                                                                Reviewed by
-                                                                                {{ App\Models\User::find($permit->reviewed_by)->name }}
+                                                                                Reviewed by {{ $reviewer->name }}
+                                                                                @if(!empty($reviewer->department))
+                                                                                    ({{ $reviewer->department }})
+                                                                                @endif
                                                                             </span>
                                                                         @endif
                                                                     </td>
-                                                                    <td>
-                                                                        <div
-                                                                            class="d-flex justify-content-center align-items-center gap-2 flex-nowrap">
 
-                                                                            <!-- Under Review -->
-                                                                            <form
-                                                                                action="{{ route('reviews.permits.under-review-update-status', $permit->id) }}"
-                                                                                method="POST" class="m-0">
-                                                                                @csrf
-                                                                                @method('PUT')
-                                                                                <input type="hidden" name="status"
-                                                                                    value="under_review">
+                                                                    <!-- Actions -->
+                                                                    <td class="text-center">
+                                                                        <div class="d-flex flex-wrap gap-2 justify-content-center permit-wrapper"
+                                                                            data-user-id="{{ $user->id }}">
+                                                                            @foreach($user->permitApplications as $permit)
 
-                                                                                @php
-                                                                                    $isDisabled = $permit->status === 'under_review' && optional($permit->reviewer)->role === 'mpdo';
-                                                                                @endphp
+                                                                                @if(auth()->user()->role === 'mpdo')
 
-                                                                                <!-- Wrap in span so tooltip works even if button is disabled -->
-                                                                                <span @if($isDisabled) data-bs-toggle="tooltip"
-                                                                                    data-bs-placement="top"
-                                                                                title="Already under review by MPDO" @endif>
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-sm btn-warning"
-                                                                                        @if($isDisabled) disabled @endif>
-                                                                                        <i
-                                                                                            class="fa-solid fa-hourglass-half me-1"></i>
-                                                                                        Under Review
-                                                                                    </button>
-                                                                                </span>
-                                                                            </form>
+                                                                                    <div class="d-flex gap-2 permit-item"
+                                                                                        data-permit-id="{{ $permit->id }}"
+                                                                                        data-user-id="{{ $user->id }}">
 
-                                                                            <!-- Approve -->
-                                                                            <form
-                                                                                action="{{ route('reviews.permits.approved-update-status', $permit->id) }}"
-                                                                                method="POST" class="m-0">
-                                                                                @csrf
-                                                                                @method('PUT')
-                                                                                <input type="hidden" name="status" value="approved">
-                                                                                <button type="submit"
-                                                                                    class="btn btn-sm btn-success">
-                                                                                    <i class="fa-solid fa-check me-1"></i> Approve
-                                                                                </button>
-                                                                            </form>
+                                                                                        {{-- UNDER REVIEW (ONLY FROM PENDING) --}}
+                                                                                        @if($permit->status === 'pending')
+                                                                                            <form
+                                                                                                action="{{ route('reviews.permits.under-review-update-status', $permit->id) }}"
+                                                                                                method="POST">
+                                                                                                @csrf
+                                                                                                @method('PUT')
+                                                                                                <button type="submit"
+                                                                                                    class="btn btn-info btn-sm"
+                                                                                                    style="min-width: 140px;">
+                                                                                                    <i class="bx bx-hourglass me-1"></i>
+                                                                                                    Mark as Under Review
+                                                                                                </button>
+                                                                                            </form>
+                                                                                        @else
+                                                                                            <button class="btn btn-info btn-sm" disabled
+                                                                                                style="min-width: 140px;">
+                                                                                                Under Review
+                                                                                            </button>
+                                                                                        @endif
 
-                                                                            <!-- Delete -->
-                                                                            <form
-                                                                                action="{{ route('reviews.permits.delete', $permit->id) }}"
-                                                                                method="POST"
-                                                                                onsubmit="return confirm('Delete this permit?')"
-                                                                                class="m-0">
-                                                                                @csrf
-                                                                                @method('DELETE')
-                                                                                <button type="submit" class="btn btn-sm btn-danger">
-                                                                                    <i class="fa-solid fa-trash me-1"></i> Delete
-                                                                                </button>
-                                                                            </form>
 
+                                                                                        {{-- APPROVE (ONLY FROM UNDER REVIEW) --}}
+                                                                                        @if($permit->status === 'under_review')
+                                                                                            <form
+                                                                                                action="{{ route('reviews.permits.approved-update-status', $permit->id) }}"
+                                                                                                method="POST">
+                                                                                                @csrf
+                                                                                                @method('PUT')
+                                                                                                <button type="submit"
+                                                                                                    class="btn btn-success btn-sm"
+                                                                                                    style="min-width: 100px;">
+                                                                                                    <i class="bx bx-check-circle me-1"></i>
+                                                                                                    Approve
+                                                                                                </button>
+                                                                                            </form>
+                                                                                        @else
+                                                                                            <button class="btn btn-success btn-sm" disabled
+                                                                                                style="min-width: 100px;">
+                                                                                                Approve
+                                                                                            </button>
+                                                                                        @endif
+
+
+                                                                                        {{-- REJECT --}}
+                                                                                        {{-- REJECT --}}
+                                                                                        @if(in_array($permit->status, ['pending', 'under_review']))
+                                                                                            <button type="button" class="btn btn-warning btn-sm"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#rejectModal{{ $permit->id }}"
+                                                                                                style="min-width: 100px;">
+                                                                                                <i class="fa-solid fa-xmark me-1"></i> Reject
+                                                                                            </button>
+                                                                                        @else
+                                                                                            <button class="btn btn-warning btn-sm" disabled
+                                                                                                style="min-width: 100px;">
+                                                                                                Reject
+                                                                                            </button>
+                                                                                        @endif
+
+
+                                                                                        {{-- REJECT MODAL --}}
+                                                                                        <div class="modal fade"
+                                                                                            id="rejectModal{{ $permit->id }}" tabindex="-1"
+                                                                                            aria-labelledby="rejectModalLabel{{ $permit->id }}"
+                                                                                            aria-hidden="true">
+
+                                                                                            <div class="modal-dialog">
+
+                                                                                                <form
+                                                                                                    action="{{ route('reviews.permits.reject', $permit->id) }}"
+                                                                                                    method="POST">
+                                                                                                    @csrf
+                                                                                                    @method('PATCH')
+
+                                                                                                    <div class="modal-content">
+
+                                                                                                        <div class="modal-header">
+                                                                                                            <h5 class="modal-title"
+                                                                                                                id="rejectModalLabel{{ $permit->id }}">
+                                                                                                                Reject Permit
+                                                                                                            </h5>
+                                                                                                            <button type="button"
+                                                                                                                class="btn-close"
+                                                                                                                data-bs-dismiss="modal"></button>
+                                                                                                        </div>
+
+                                                                                                        <div class="modal-body">
+
+                                                                                                            {{-- COMMENT FIELD --}}
+                                                                                                            <div class="mb-3">
+                                                                                                                <label
+                                                                                                                    for="reject_comment{{ $permit->id }}"
+                                                                                                                    class="form-label">
+                                                                                                                    Comment / Reason for
+                                                                                                                    Rejection
+                                                                                                                </label>
+
+                                                                                                                <textarea
+                                                                                                                    name="rejection_comment"
+                                                                                                                    id="reject_comment{{ $permit->id }}"
+                                                                                                                    class="form-control"
+                                                                                                                    rows="4"
+                                                                                                                    placeholder="Enter reason for rejection..."
+                                                                                                                    required></textarea>
+                                                                                                            </div>
+
+                                                                                                        </div>
+
+                                                                                                        <div class="modal-footer">
+                                                                                                            <button type="button"
+                                                                                                                class="btn btn-secondary btn-sm"
+                                                                                                                data-bs-dismiss="modal">
+                                                                                                                Cancel
+                                                                                                            </button>
+
+                                                                                                            <button type="submit"
+                                                                                                                class="btn btn-danger btn-sm">
+                                                                                                                Submit Reject
+                                                                                                            </button>
+                                                                                                        </div>
+
+                                                                                                    </div>
+                                                                                                </form>
+
+                                                                                            </div>
+                                                                                        </div>
+
+
+                                                                                        {{-- ARCHIVE (ONLY AFTER APPROVED) --}}
+                                                                                        @if($permit->status === 'approved')
+                                                                                            <button type="button" class="btn btn-danger btn-sm"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#archivePlanModal{{ $permit->id }}"
+                                                                                                style="min-width: 100px;">
+                                                                                                <i class="fa-solid fa-archive me-1"></i> Archive
+                                                                                            </button>
+                                                                                        @else
+                                                                                            <button class="btn btn-danger btn-sm" disabled
+                                                                                                style="min-width: 100px;">
+                                                                                                Archive
+                                                                                            </button>
+                                                                                        @endif
+
+                                                                                    </div>
+
+                                                                                @else
+                                                                                    <span class="text-secondary">Waiting for Engineer
+                                                                                        Approval</span>
+                                                                                @endif
+
+                                                                            @endforeach
                                                                         </div>
                                                                     </td>
                                                                 </tr>

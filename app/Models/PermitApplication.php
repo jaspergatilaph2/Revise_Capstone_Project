@@ -22,7 +22,11 @@ class PermitApplication extends Model
         'avatar',
         'seen',
         'images',
-        'reviewed_by'
+        'reviewed_by',
+        'created_at',
+        'updated_at',
+        'rejection_comment',
+        'rejected_by',
     ];
     protected $casts = [
         'documents' => 'array', // Automatically cast JSON to array
@@ -43,7 +47,7 @@ class PermitApplication extends Model
 
     public function architecturalPlans()
     {
-        return $this->hasMany(ArchitecturalPlan::class, 'permit_application_id');
+        return $this->hasMany(ArchitecturalPlan::class, 'permit_application_id')->where('archived', false); ;
     }
 
     public function structuralPlans()
@@ -64,6 +68,11 @@ class PermitApplication extends Model
     public function reviewer()
     {
         return $this->belongsTo(User::class, 'reviewed_by');
+    }
+
+    public function rejectedBy()
+    {
+        return $this->belongsTo(User::class, 'rejected_by');
     }
 
     // PermitApplication.php

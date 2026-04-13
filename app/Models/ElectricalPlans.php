@@ -13,7 +13,12 @@ class ElectricalPlans extends Model
         'description',
         'documents',
         'reviewed_by',
-        'status'
+        'status',
+        'created_at',
+        'updated_at',
+        'rejected_by',
+        'rejection_comment',
+        'archived'
     ];
 
     protected $casts = [

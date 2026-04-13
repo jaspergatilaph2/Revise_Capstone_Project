@@ -120,12 +120,12 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('admin.accounts.view-admin-accounts') }}" class="menu-link">
                                     <div data-i18n="Account">Account</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('admin.accounts.view-update-admin-accounts') }}" class="menu-link">
                                     <div data-i18n="Notifications">Update Account</div>
                                 </a>
                             </li>
@@ -151,7 +151,7 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('staff.employees.view-applicants') }}" class="menu-link">
                                     <div data-i18n="Notifications">Applicant</div>
                                 </a>
                             </li>
@@ -206,7 +206,7 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ $currentUser->avatar ? asset('storage/' . $currentUser->avatar) : asset('sneat/img/avatars/1.png') }}"
+                                        <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }}"
                                             alt class="w-px-120 h-px-120 rounded-circle" />
                                     </div>
                                 </a>
@@ -216,7 +216,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="{{ $currentUser->avatar ? asset('storage/' . $currentUser->avatar) : asset('sneat/img/avatars/1.png') }}"
+                                                        <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png') }}"
                                                             alt class="w-px-120 h-px-120 rounded-circle" />
                                                     </div>
                                                 </div>
@@ -303,28 +303,40 @@
                             <div class="row g-4">
                                 <!-- Total Applications -->
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
-                                        <div class="card-body text-center">
-                                            <i class="fa-solid fa-file-circle-plus fa-2x text-primary mb-2"></i>
-                                            <h6 class="fw-bold text-uppercase small">Total Applications</h6>
-                                            <h3 class="fw-bolder text-primary mb-1" id="totalApplications"></h3>
-                                            <p class="text-muted small mb-0">All applications submitted</p>
-                                        </div>
-                                    </div>
-                                </div>
+    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn hover-card">
+        <div class="card-body text-center">
+            <i class="fa-solid fa-file-circle-plus fa-2x text-primary mb-2"></i>
+            <h6 class="fw-bold text-uppercase small">Total Applications</h6>
+            <h3 class="fw-bolder text-primary mb-1" id="totalApplications">{{ $applicantsCounts }}</h3>
+            <p class="text-muted small mb-0">All applications submitted</p>
+        </div>
+    </div>
+</div>
 
                                 <!-- Pending Approvals -->
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
-                                        <div class="card-body text-center">
-                                            <i class="fa-solid fa-hourglass-half fa-2x text-warning mb-2"></i>
-                                            <h6 class="fw-bold text-uppercase small">Pending Approvals</h6>
-                                            <h3 class="fw-bolder text-warning mb-1" id="pendingApprovals"></h3>
-                                            <p class="text-muted small mb-0">Awaiting review</p>
-                                        </div>
-                                    </div>
-                                </div>
+    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
+        <div class="card-body text-center">
+            <i class="fa-solid fa-hourglass-half fa-2x text-warning mb-2"></i>
+            <h6 class="fw-bold text-uppercase small">Pending Approvals</h6>
 
+            <!-- Total Pending Count -->
+            <h3  class="fw-bolder text-primary mb-1" id="totalApplications">{{ $pendingCount }}</h3>
+            <small>
+                Permit: {{ $pemitCountPer }},
+                Arch: {{ $pendingCountArch }},
+                Struct: {{ $pendingCountStruct }},
+                Elec: {{ $pendingCountElec }},
+                Plumb: {{ $pendingCountPlumb }}
+            </small>
+
+            <!-- Pending permits details -->
+            
+
+            <p class="text-muted small mb-0">Awaiting review</p>
+        </div>
+    </div>
+</div>
                                 <!-- Under Review -->
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
@@ -339,11 +351,18 @@
 
                                 <!-- Approved Permits -->
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
+                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn hover-card">
                                         <div class="card-body text-center">
                                             <i class="fa-solid fa-circle-check fa-2x text-success mb-2"></i>
                                             <h6 class="fw-bold text-uppercase small">Approved Permits</h6>
-                                            <h3 class="fw-bolder text-success mb-1" id="approvedPermits"></h3>
+                                            <h3 class="fw-bolder text-success mb-1" id="approvedPermits">{{ $applicantscountsPermit }}</h3>
+                                            <small>
+                                                Permit: {{ $applicantscountsPermit }},
+                Arch: {{ $approvedCountArch }},
+                Struct: {{ $approvedCountStruct }},
+                Elec: {{ $approvedCountElec }},
+                Plumb: {{ $approvedCountPlumb }}
+            </small>
                                             <p class="text-muted small mb-0">Successfully issued permits</p>
                                         </div>
                                     </div>
@@ -366,19 +385,18 @@
                             <div class="row mt-4 g-4">
                                 <!-- System Activity -->
                                 <div class="col-12 col-lg-8">
-                                    <div class="card shadow-sm border-0 h-100">
-                                        <div class="card-body">
-                                            <h5 class="fw-bold mb-3">
-                                                <i class="fa-solid fa-chart-line me-2 text-info"></i> System Activity
-                                            </h5>
-                                            <p class="text-muted small mb-3">Overview of weekly permit activities.</p>
-                                            <div id="activityChart" style="height: 300px;"
-                                                class="d-flex align-items-center justify-content-center">
-                                                <p class="text-center text-muted">[Activity chart coming soon]</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+    <div class="card shadow-sm border-0 h-100">
+        <div class="card-body">
+            <h5 class="fw-bold mb-3">
+                <i class="fa-solid fa-chart-line me-2 text-info"></i> System Activity (April 2026)
+            </h5>
+            <p class="text-muted small mb-3">Overview of daily permit activities for April 2026.</p>
+            <canvas id="activityChart" height="300"></canvas>
+        </div>
+    </div>
+</div>
+
+
 
                                 <!-- Recent Activities -->
                                 <div class="col-12 col-lg-4">
@@ -419,7 +437,7 @@
                                     <div class="card shadow-sm border-0">
                                         <div class="card-body">
                                             <h5 class="fw-bold mb-3">
-                                                <i class="fa-solid fa-users-gear me-2 text-primary"></i> User Management
+                                                <i class="fa-solid fa-users-gear me-2 text-primary"></i> Staff Management
                                             </h5>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-hover mb-0">
@@ -437,7 +455,67 @@
                                                                 <td>{{ $user->name }}</td>
                                                                 <td>{{ ucfirst($user->role) }}</td>
                                                                 <td>
-                                                                    @if($user->is_active)
+                                                                    @if($user->status === 'active')
+                                                                        <span
+                                                                            class="px-3 py-2 rounded-pill shadow-sm fw-semibold small text-white bg-success"
+                                                                            style="letter-spacing: 0.5px;">
+                                                                            Active
+                                                                        </span>
+                                                                    @else
+                                                                        <span
+                                                                            class="px-3 py-2 rounded-pill shadow-sm fw-semibold small text-white bg-secondary"
+                                                                            style="letter-spacing: 0.5px;">
+                                                                            Inactive
+                                                                        </span>
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+    {{ $user->last_seen 
+        ? \Carbon\Carbon::parse($user->last_seen)->diffForHumans() 
+        : 'Never' 
+    }}
+</td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="4" class="text-center text-muted">No users found
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <div class="card shadow-sm border-0">
+                                        <div class="card-body">
+                                            <h5 class="fw-bold mb-3">
+                                                <i class="fa-solid fa-users-gear me-2 text-primary"></i> Applicants Management
+                                            </h5>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover mb-0">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Role</th>
+                                                            <th>Status</th>
+                                                            <th>Last Seen</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @forelse ($applicants as $user)
+                                                            <tr>
+                                                                <td>{{ $user->name }}</td>
+                                                                <td>{{ ucfirst($user->role) }}</td>
+                                                                <td>
+                                                                    @if($user->status === 'active')
                                                                         <span
                                                                             class="px-3 py-2 rounded-pill shadow-sm fw-semibold small text-white bg-success"
                                                                             style="letter-spacing: 0.5px;">
@@ -506,4 +584,5 @@
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
+
 @endsection

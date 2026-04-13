@@ -38,14 +38,21 @@ Route::group(['middleware' => ['auth', 'IfAdmin']], function () {
   Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
   // View The Staff And Edit The staff Role
-  Route::prefix('admin')->name('staff.employees.')->group(function(){
+  Route::prefix('admin')->name('staff.employees.')->group(function () {
     Route::get('/view-staff', [AdminController::class, 'ViewStaffIndex'])->name('staff-view');
+    Route::get('/view-applicants', [AdminController::class, 'ViewApplicantsIndex'])->name('view-applicants');
   });
 
   // Set The Maintenance Countdown
-  Route::prefix('set-countdown')->name('countdown.maintenance.')->group(function(){
-    Route::get('/view-countdown',[AdminController::class, 'ViewCountdownIndex'])->name('view-countdown');
+  Route::prefix('set-countdown')->name('countdown.maintenance.')->group(function () {
+    Route::get('/view-countdown', [AdminController::class, 'ViewCountdownIndex'])->name('view-countdown');
     Route::post('/view-countdown/update', [AdminController::class, 'UpdateCountdownIndex'])->name('update-countdown');
+  });
+
+  Route::prefix('admin-accounts')->name('admin.accounts.')->group(function () {
+    Route::get('/admin-view-accounts', [AdminController::class, 'ViewAdminAccountsIndex'])->name('view-admin-accounts');
+    Route::get('/admin-view-update-accounts', [AdminController::class, 'ViewAdminUpdateAccountsIndex'])->name('view-update-admin-accounts');
+    Route::put('/admin-update-accounts', [AdminController::class, 'UpdateAdminAccountsIndex'])->name('update-admin-accounts');
   });
 });
 
@@ -78,6 +85,12 @@ Route::group(['middleware' => ['auth', 'IfUsers']], function () {
     Route::post('/store-electrical', [ApplicantsController::class, 'StoreElectricalPlanIndex'])->name('store-electrical');
     Route::get('/plumbing-plan', [ApplicantsController::class, 'PlumbingPlanIndex'])->name('view-plumbing-plan');
     Route::post('/store-plumbing-plan', [ApplicantsController::class, 'StorePlumbingPlanIndex'])->name('store-plumbing-plan');
+  });
+
+
+  // View the Rejection of the Applicants Permit And Plans
+  Route::prefix('rejection')->name('permit.rejections.')->group(function () {
+    Route::get('/view-rejected', [ApplicantsController::class, 'ViewRejectedIndex'])->name('view-rejected');
   });
 
   //User Downloads Permits
@@ -120,6 +133,9 @@ Route::group(['middleware' => ['auth', 'IfEngineer']], function () {
     Route::get('/view-approval', [EngineerController::class, 'ViewApprovalIndex'])->name('view-approval');
     Route::post('/under-review/{id}', [EngineerController::class, 'MarkUnderReviewIndex'])->name('under-review');
     Route::post('/approve/{id}', [EngineerController::class, 'MarkApproveIndex'])->name('approve');
+    Route::patch('/reject/{id}', [EngineerController::class, 'MarkRejectIndex'])->name('reject');
+    Route::patch('/archive/{id}', [EngineerController::class, 'MarkArchiveIndex'])->name('archive');
+    Route::get('/view-archive', [EngineerController::class, 'ViewArchiveIndex'])->name('view-archive');
   });
 
   // Engineer Recent Activities
@@ -134,21 +150,25 @@ Route::group(['middleware' => ['auth', 'IfEngineer']], function () {
     Route::get('/electrical-plan', [EngineerController::class, 'ElectricalPlanIndex'])->name('review-electrical-plan');
     Route::get('/plumbing-plan', [EngineerController::class, 'PlumbingPlanIndex'])->name('review-plumbing-plan');
     // Architectural Plan Review Actions
-    Route::post('/under-review/{id}', [EngineerController::class, 'UnderReviewIndex'])->name('under-review');
-    Route::post('/approve/{id}', [EngineerController::class, 'ApproveIndex'])->name('approve');
-    Route::delete('/delete/{id}', [EngineerController::class, 'DeleteIndex'])->name('delete');
+    Route::put('/under-review/{id}', [EngineerController::class, 'UnderReviewIndex'])->name('under-review');
+    Route::put('/approve/{id}', [EngineerController::class, 'ApproveIndex'])->name('approve');
+    Route::patch('/reject/{id}', [EngineerController::class, 'RejectIndex'])->name('reject');
+    Route::patch('/archive/{id}', [EngineerController::class, 'ArchiveIndex'])->name('archive');
     // Structural Plan Review Actions
-    Route::post('/under-review-structural/{id}', [EngineerController::class, 'UnderReviewStructuralIndex'])->name('under-review-structural');
-    Route::post('/approve-structural/{id}', [EngineerController::class, 'ApproveStructuralIndex'])->name('approve-electrical');
-    Route::delete('/delete-structural/{id}', [EngineerController::class, 'DeleteStructuralIndex'])->name('delete-structural');
+    Route::put('/under-review-structural/{id}', [EngineerController::class, 'UnderReviewStructuralIndex'])->name('under-review-structural');
+    Route::put('/approve-structural/{id}', [EngineerController::class, 'ApproveStructuralIndex'])->name('approve-structural');
+    Route::patch('/reject-structural/{id}', [EngineerController::class, 'RejectStructuralIndex'])->name('reject-structural');
+    Route::patch('/archive-structural/{id}', [EngineerController::class, 'ArchiveStructuralIndex'])->name('archive-structural');
     // Electrical Plan Review Actions
-    Route::post('/under-review-electrical/{id}', [EngineerController::class, 'UnderReviewElectricalIndex'])->name('under-review-electrical');
-    Route::post('/approve-electrical/{id}', [EngineerController::class, 'ApproveElectricalIndex'])->name('approve-electrical');
-    Route::delete('/delete-electrical/{id}', [EngineerController::class, 'DeleteElectricalIndex'])->name('delete-electrical');
+    Route::put('/under-review-electrical/{id}', [EngineerController::class, 'UnderReviewElectricalIndex'])->name('under-review-electrical');
+    Route::put('/approve-electrical/{id}', [EngineerController::class, 'ApproveElectricalIndex'])->name('approve-electrical');
+    Route::patch('/reject-electrical/{id}', [EngineerController::class, 'RejectElectricalIndex'])->name('reject-electrical');
+    Route::patch('/archive-electrical/{id}', [EngineerController::class, 'ArchiveElectricalIndex'])->name('archive-electrical');
     // Plumbing Plan Review Actions
-    Route::post('/under-review-plumbing/{id}', [EngineerController::class, 'UnderReviewPlumbingIndex'])->name('under-review-plumbing');
-    Route::post('/approve-plumbing/{id}', [EngineerController::class, 'ApprovePlumbingIndex'])->name('approve-plumbing');
-    Route::delete('/delete-plumbing/{id}', [EngineerController::class, 'DeletePlumbingIndex'])->name('delete-plumbing');
+    Route::put('/under-review-plumbing/{id}', [EngineerController::class, 'UnderReviewPlumbingIndex'])->name('under-review-plumbing');
+    Route::put('/approve-plumbing/{id}', [EngineerController::class, 'ApprovePlumbingIndex'])->name('approve-plumbing');
+    Route::patch('/reject-plumbing/{id}', [EngineerController::class, 'RejectPlumbingIndex'])->name('reject-plumbing');
+    Route::patch('/archive-plumbing/{id}', [EngineerController::class, 'ArchivePlumbingIndex'])->name('archive-plumbing');
   });
 
   // Engineer Logs History
@@ -194,13 +214,14 @@ Route::group(['middleware' => 'auth', 'IfMpdo'], function () {
     // Update the Status of the Permits to Under Review, Approved, and Disapproved
     Route::put('/under-review/update-status/{id}', [MpdoController::class, 'UnderReviewUpdateStatus'])->name('under-review-update-status');
     Route::put('/approved/update-status/{id}', [MpdoController::class, 'ApprovedUpdateStatus'])->name('approved-update-status');
-    Route::delete('/delete-permit/{id}', [MpdoController::class, 'delete'])->name('delete');
+    Route::patch('/reject/{id}', [MpdoController::class, 'RejectIndex'])->name('reject');
+    Route::patch('/archive/{id}', [MpdoController::class, 'ArchiveIndex'])->name('archive');
 
     // MPDO Statuses in Architectural Plans
     Route::put('/under-review-architectural/update-status/{id}', [MpdoController::class, 'UnderReviewArchitecturalUpdateStatus'])
-    ->name('architectural-under-review');
+      ->name('architectural-under-review');
     Route::put('/approved-architectural/update-status/{id}', [MpdoController::class, 'ApprovedArchitecturalUpdateStatus'])
-    ->name('architectural-approved');
+      ->name('architectural-approved');
   });
 
   // MPDO Adding Staff or Employees
@@ -218,7 +239,7 @@ Route::group(['middleware' => 'auth', 'IfMpdo'], function () {
   });
 
   // MPDO Maintennace View
-  Route::prefix('maintenance')->name('mpdo.maintenance.')->group(function(){
+  Route::prefix('maintenance')->name('mpdo.maintenance.')->group(function () {
     Route::get('/view-maintenance', [MpdoController::class, 'ViewMaintenanceIndex'])->name('view-maintenance');
   });
 });

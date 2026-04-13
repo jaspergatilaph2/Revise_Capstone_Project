@@ -14,6 +14,10 @@ class StructuralPlan extends Model
         'documents',
         'reviewed_by',
         'status',
+        'created_at',
+        'rejection_comment',
+        'rejected_by ',
+        'archived',
     ];
 
     protected $casts = [

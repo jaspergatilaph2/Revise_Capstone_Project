@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                                          <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                                        </a> -->
+                                                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                                </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -52,25 +52,25 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                                            <a href="" class="menu-link">
-                                                                <div data-i18n="Without menu">Under Review applications</div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="" class="menu-link">
-                                                                <div data-i18n="Without menu">Approved applications</div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="" class="menu-link">
-                                                                <div data-i18n="Without menu">Rejected applications</div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="" class="menu-link">
-                                                                <div data-i18n="Without menu">Revenue from permit fees</div>
-                                                            </a>
-                                                        </li> -->
+                                                                    <a href="" class="menu-link">
+                                                                        <div data-i18n="Without menu">Under Review applications</div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item">
+                                                                    <a href="" class="menu-link">
+                                                                        <div data-i18n="Without menu">Approved applications</div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item">
+                                                                    <a href="" class="menu-link">
+                                                                        <div data-i18n="Without menu">Rejected applications</div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item">
+                                                                    <a href="" class="menu-link">
+                                                                        <div data-i18n="Without menu">Revenue from permit fees</div>
+                                                                    </a>
+                                                                </li> -->
                         </ul>
                     </li>
 
@@ -137,34 +137,49 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon fa-solid fa-file-zipper"></i>
+                            <div data-i18n="Layouts">Archive</div>
+                        </a>
+
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ route('candidate.applicants.view-archive') }}" class="menu-link">
+                                    <div data-i18n="Without navbar">Deleted Permits & Plans</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <!-- <li class="menu-item">
-                                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                                        <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
-                                                        <div data-i18n="Account Settings">Payment Management</div>
-                                                    </a>
-                                                    <ul class="menu-sub">
-                                                        <li class="menu-item">
-                                                            <a href="" class="menu-link">
-                                                                <div data-i18n="Account">Application fees</div>
+                                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                                <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
+                                                                <div data-i18n="Account Settings">Payment Management</div>
                                                             </a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="" class="menu-link">
-                                                                <div data-i18n="Notifications">Renewal fees</div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="" class="menu-link">
-                                                                <div data-i18n="Notifications">Pending Payments</div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="" class="menu-link">
-                                                                <div data-i18n="Notifications">Completed Payments</div>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </li> -->
+                                                            <ul class="menu-sub">
+                                                                <li class="menu-item">
+                                                                    <a href="" class="menu-link">
+                                                                        <div data-i18n="Account">Application fees</div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item">
+                                                                    <a href="" class="menu-link">
+                                                                        <div data-i18n="Notifications">Renewal fees</div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item">
+                                                                    <a href="" class="menu-link">
+                                                                        <div data-i18n="Notifications">Pending Payments</div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item">
+                                                                    <a href="" class="menu-link">
+                                                                        <div data-i18n="Notifications">Completed Payments</div>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </li> -->
 
 
 
@@ -188,33 +203,33 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                              <a href="" class="menu-link">
-                                                <div data-i18n="Notifications">Settings</div>
-                                              </a>
-                                            </li> -->
+                                                      <a href="" class="menu-link">
+                                                        <div data-i18n="Notifications">Settings</div>
+                                                      </a>
+                                                    </li> -->
 
                         </ul>
                     </li>
 
 
                     <!-- <li class="menu-item">
-                                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                                        <i class="menu-icon fa-solid fa-list-check"></i>
-                                                        <div data-i18n="Account Settings">User Management</div>
-                                                    </a>
-                                                    <ul class="menu-sub">
-                                                        <li class="menu-item">
-                                                            <a href="" class="menu-link">
-                                                                <div data-i18n="Account">Staff/Inspector</div>
+                                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                                <i class="menu-icon fa-solid fa-list-check"></i>
+                                                                <div data-i18n="Account Settings">User Management</div>
                                                             </a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="" class="menu-link">
-                                                                <div data-i18n="Notifications">Applicant</div>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </li> -->
+                                                            <ul class="menu-sub">
+                                                                <li class="menu-item">
+                                                                    <a href="" class="menu-link">
+                                                                        <div data-i18n="Account">Staff/Inspector</div>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="menu-item">
+                                                                    <a href="" class="menu-link">
+                                                                        <div data-i18n="Notifications">Applicant</div>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Miscellaneous</span>
@@ -333,11 +348,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                                  <a class="dropdown-item" href="">
-                                                    <i class="bx bx-cog me-2"></i>
-                                                    <span class="align-middle">Settings</span>
-                                                  </a>
-                                                </li> -->
+                                                          <a class="dropdown-item" href="">
+                                                            <i class="bx bx-cog me-2"></i>
+                                                            <span class="align-middle">Settings</span>
+                                                          </a>
+                                                        </li> -->
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logs.history.view') }}">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -378,6 +393,13 @@
 
                         <div class="row">
                             <div class="col-md-12">
+                                @if(session('success'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ session('success') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endif
                                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="javascript:void(0);"><i
@@ -391,8 +413,8 @@
 
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-bordered table-striped text-center">
-                                                <thead class="table-light">
+                                            <table class="table table-dark table-bordered table-striped text-center">
+                                                <thead class="table-secondary">
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Project Name</th>
@@ -404,6 +426,10 @@
                                                 <tbody>
                                                     @foreach($users as $user)
                                                         @foreach($user->permitApplications as $permit)
+                                                        {{-- SKIP IF NO ELECTRICAL PLANS --}}
+    @if($permit->plumbingplan->isEmpty())
+        @continue
+    @endif
                                                             <tr>
                                                                 <!-- User Name -->
                                                                 <td>{{ $user->name }}</td>
@@ -446,45 +472,170 @@
                                                                 </td>
 
                                                                 <td class="text-center">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                                                    <div
+                                                                        class="d-flex flex-wrap gap-2 justify-content-center permit-wrapper">
 
-        <!-- Under Review Button -->
-        @foreach ($user->PlumbingPlan ?? [] as $permit)
-    <form action="{{ route('review.proposal.under-review-plumbing', $permit->id) }}" method="POST" class="w-100 w-md-auto">
-        @csrf
-        <button type="submit" class="btn btn-warning btn-sm w-100 w-md-auto"
-            {{ $permit->status === 'under_review' ? 'disabled' : '' }}>
-            <i class="bx bx-hourglass me-1"></i>
-            {{ $permit->status === 'under_review' ? 'Under Review' : 'Mark as Under Review' }}
-        </button>
-    </form>
-@endforeach
+                                                                        {{-- ✅ CHECK IF NO PLANS --}}
+                                                                        @if($permit->plumbingplan->isEmpty())
+                                                                            <span class="text-secondary">No Electrical Plans
+                                                                                Available</span>
 
-        <!-- Approve Button -->
-        @foreach ( $user->PlumbingPlan ?? [] as $permit )
-        <form action="{{ route('review.proposal.approve-plumbing', $permit->id) }}" method="POST" class="w-100 w-md-auto">
-        @csrf
-        <button type="submit" class="btn btn-success btn-m w-100 w-md-auto"
-                {{ $permit->status === 'approved' ? 'disabled' : '' }}>
-            <i class="bx bx-check me-1"></i>
-            {{ $permit->status === 'approved' ? 'Approved' : 'Approve' }}
-        </button>
-    </form>
-        @endforeach
+                                                                        @else
 
-        <!-- Delete Button -->
-         @foreach ( $user->PlumbingPlan ?? [] as $permit )
-         <form action="{{ route('review.proposal.delete-plumbing', $permit->id) }}" method="POST" class="w-100 w-md-auto" onsubmit="return confirm('Are you sure you want to delete this permit?');">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger btn-m w-100 w-md-auto">
-                <i class="fa-solid fa-trash me-1"></i> Delete
-            </button>
-        </form>
-            @endforeach
+                                                                            @foreach($permit->plumbingplan as $plan)
 
-    </div>
-</td>
+                                                                                @if(auth()->user()->role === 'engineer')
+
+                                                                                    <div class="d-flex gap-2 permit-item"
+                                                                                        data-permit-id="{{ $plan->id }}"
+                                                                                        data-user-id="{{ $plan->id }}">
+
+                                                                                        {{-- UNDER REVIEW --}}
+                                                                                        @if($plan->status === 'pending')
+                                                                                            <form
+                                                                                                action="{{ route('review.proposal.under-review-plumbing', $plan->id) }}"
+                                                                                                method="POST">
+                                                                                                @csrf
+                                                                                                @method('PUT')
+                                                                                                <button type="submit" class="btn btn-info btn-sm"
+                                                                                                    style="min-width: 140px;">
+                                                                                                    <i class="bx bx-hourglass me-1"></i> Mark as
+                                                                                                    Under Review
+                                                                                                </button>
+                                                                                            </form>
+                                                                                        @else
+                                                                                            <button class="btn btn-info btn-sm" disabled
+                                                                                                style="min-width: 140px;">
+                                                                                                Under Review
+                                                                                            </button>
+                                                                                        @endif
+
+                                                                                        {{-- APPROVE --}}
+                                                                                        @if($plan->status === 'under_review')
+                                                                                            <form
+                                                                                                action="{{ route('review.proposal.approve-plumbing', $plan->id) }}"
+                                                                                                method="POST">
+                                                                                                @csrf
+                                                                                                @method('PUT')
+                                                                                                <button type="submit" class="btn btn-success btn-sm"
+                                                                                                    style="min-width: 100px;">
+                                                                                                    <i class="bx bx-check-circle me-1"></i> Approve
+                                                                                                </button>
+                                                                                            </form>
+                                                                                        @else
+                                                                                            <button class="btn btn-success btn-sm" disabled
+                                                                                                style="min-width: 100px;">
+                                                                                                Approve
+                                                                                            </button>
+                                                                                        @endif
+
+                                                                                        {{-- REJECT --}}
+                                                                                        @if(in_array($plan->status, ['pending', 'under_review', 'approved']))
+                                                                                            <button type="button" class="btn btn-warning btn-sm"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#rejectModal{{ $plan->id }}"
+                                                                                                style="min-width: 100px;">
+                                                                                                <i class="fa-solid fa-xmark me-1"></i> Reject
+                                                                                            </button>
+                                                                                        @else
+                                                                                            <button class="btn btn-warning btn-sm" disabled
+                                                                                                style="min-width: 100px;">
+                                                                                                Reject
+                                                                                            </button>
+                                                                                        @endif
+
+
+                                                                                        {{-- REJECT MODAL --}}
+                                                                                        <div class="modal fade" id="rejectModal{{ $plan->id }}"
+                                                                                            tabindex="-1" aria-hidden="true">
+                                                                                            <div class="modal-dialog modal-dialog-centered">
+
+                                                                                                <div class="modal-content">
+
+                                                                                                    <form
+                                                                                                        action="{{ route('review.proposal.reject-plumbing', $plan->id) }}"
+                                                                                                        method="POST">
+                                                                                                        @csrf
+                                                                                                        @method('PUT')
+
+                                                                                                        {{-- HEADER --}}
+                                                                                                        <div
+                                                                                                            class="modal-header bg-warning text-dark">
+                                                                                                            <h5 class="modal-title">Reject Plan
+                                                                                                            </h5>
+                                                                                                            <button type="button"
+                                                                                                                class="btn-close"
+                                                                                                                data-bs-dismiss="modal"></button>
+                                                                                                        </div>
+
+                                                                                                        {{-- BODY --}}
+                                                                                                        <div class="modal-body">
+
+                                                                                                            <p class="text-muted">
+                                                                                                                Please provide a reason for
+                                                                                                                rejection.
+                                                                                                            </p>
+
+                                                                                                            <div class="mb-3">
+                                                                                                                <label
+                                                                                                                    class="form-label fw-bold">Comment</label>
+                                                                                                                <textarea
+                                                                                                                    name="rejection_comment"
+                                                                                                                    class="form-control"
+                                                                                                                    rows="4" required
+                                                                                                                    placeholder="Enter rejection reason..."></textarea>
+                                                                                                            </div>
+
+                                                                                                        </div>
+
+                                                                                                        {{-- FOOTER --}}
+                                                                                                        <div class="modal-footer">
+                                                                                                            <button type="button"
+                                                                                                                class="btn btn-secondary"
+                                                                                                                data-bs-dismiss="modal">
+                                                                                                                Cancel
+                                                                                                            </button>
+
+                                                                                                            <button type="submit"
+                                                                                                                class="btn btn-warning">
+                                                                                                                Confirm Reject
+                                                                                                            </button>
+                                                                                                        </div>
+
+                                                                                                    </form>
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        {{-- ARCHIVE --}}
+                                                                                        @if($plan->status === 'approved')
+                                                                                            <button type="button" class="btn btn-danger btn-sm"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#archivePlanModal{{ $plan->id }}"
+                                                                                                style="min-width: 100px;">
+                                                                                                <i class="fa-solid fa-archive me-1"></i> Archive
+                                                                                            </button>
+                                                                                        @else
+                                                                                            <button class="btn btn-danger btn-sm" disabled
+                                                                                                style="min-width: 100px;">
+                                                                                                Archive
+                                                                                            </button>
+                                                                                        @endif
+
+                                                                                    </div>
+
+                                                                                @else
+                                                                                    <span class="text-secondary">Waiting for Engineer
+                                                                                        Approval</span>
+                                                                                @endif
+
+                                                                            @endforeach
+
+                                                                        @endif
+
+                                                                    </div>
+                                                                </td>
                                                             </tr>
                                                         @endforeach
                                                     @endforeach

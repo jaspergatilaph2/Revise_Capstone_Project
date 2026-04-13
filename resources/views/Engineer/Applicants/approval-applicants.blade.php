@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                </a> -->
+                                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -57,25 +57,25 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                    <a href="" class="menu-link">
-                                        <div data-i18n="Without menu">Under Review applications</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="" class="menu-link">
-                                        <div data-i18n="Without menu">Approved applications</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="" class="menu-link">
-                                        <div data-i18n="Without menu">Rejected applications</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="" class="menu-link">
-                                        <div data-i18n="Without menu">Revenue from permit fees</div>
-                                    </a>
-                                </li> -->
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Without menu">Under Review applications</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Without menu">Approved applications</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Without menu">Rejected applications</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Without menu">Revenue from permit fees</div>
+                                                    </a>
+                                                </li> -->
                         </ul>
                     </li>
 
@@ -98,7 +98,13 @@
                             </li>
                             <li class="menu-item">
                                 <a href="{{ route('review.proposal.review-electrical-plan') }}" class="menu-link">
-                                    <div data-i18n="Without navbar">Review electrical / plumbing plans</div>
+                                    <div data-i18n="Without navbar">Review electrical plans</div>
+                                </a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="{{ route('review.proposal.review-plumbing-plan') }}" class="menu-link">
+                                    <div data-i18n="Without navbar">Review plumbing plans</div>
                                 </a>
                             </li>
                         </ul>
@@ -137,34 +143,49 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon fa-solid fa-file-zipper"></i>
+                            <div data-i18n="Layouts">Archive</div>
+                        </a>
+
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ route('candidate.applicants.view-archive') }}" class="menu-link">
+                                    <div data-i18n="Without navbar">Deleted Permits & Plans</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <!-- <li class="menu-item">
-                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
-                                <div data-i18n="Account Settings">Payment Management</div>
-                            </a>
-                            <ul class="menu-sub">
-                                <li class="menu-item">
-                                    <a href="" class="menu-link">
-                                        <div data-i18n="Account">Application fees</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="" class="menu-link">
-                                        <div data-i18n="Notifications">Renewal fees</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="" class="menu-link">
-                                        <div data-i18n="Notifications">Pending Payments</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="" class="menu-link">
-                                        <div data-i18n="Notifications">Completed Payments</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li> -->
+                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
+                                                <div data-i18n="Account Settings">Payment Management</div>
+                                            </a>
+                                            <ul class="menu-sub">
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Account">Application fees</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Notifications">Renewal fees</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Notifications">Pending Payments</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Notifications">Completed Payments</div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li> -->
 
 
 
@@ -188,33 +209,33 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                      <a href="" class="menu-link">
-                        <div data-i18n="Notifications">Settings</div>
-                      </a>
-                    </li> -->
+                                      <a href="" class="menu-link">
+                                        <div data-i18n="Notifications">Settings</div>
+                                      </a>
+                                    </li> -->
 
                         </ul>
                     </li>
 
 
                     <!-- <li class="menu-item">
-                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                <i class="menu-icon fa-solid fa-list-check"></i>
-                                <div data-i18n="Account Settings">User Management</div>
-                            </a>
-                            <ul class="menu-sub">
-                                <li class="menu-item">
-                                    <a href="" class="menu-link">
-                                        <div data-i18n="Account">Staff/Inspector</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="" class="menu-link">
-                                        <div data-i18n="Notifications">Applicant</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li> -->
+                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                <i class="menu-icon fa-solid fa-list-check"></i>
+                                                <div data-i18n="Account Settings">User Management</div>
+                                            </a>
+                                            <ul class="menu-sub">
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Account">Staff/Inspector</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Notifications">Applicant</div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Miscellaneous</span>
@@ -333,11 +354,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                          <a class="dropdown-item" href="">
-                            <i class="bx bx-cog me-2"></i>
-                            <span class="align-middle">Settings</span>
-                          </a>
-                        </li> -->
+                                          <a class="dropdown-item" href="">
+                                            <i class="bx bx-cog me-2"></i>
+                                            <span class="align-middle">Settings</span>
+                                          </a>
+                                        </li> -->
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logs.history.view') }}">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -372,33 +393,42 @@
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Applicants Management /</span>Show
-                            All Accounts
+                            Approval Applicants Docs
                         </h4>
 
                         <div class="row">
                             <div class="col-md-12">
                                 @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ session('success') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endif
+
+                                @if(session('error'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ session('error') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endif
 
                                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="javascript:void(0);"><i
-                                                class="bx bx-user me-1"></i> All Accounts</a>
+                                                class="bx bx-file me-1"></i> All Approval Applicants</a>
                                     </li>
                                 </ul>
 
                                 <div class="card mb-4">
-                                    <h5 class="card-header">User Management</h5>
+                                    <h5 class="card-header">Approval Applicants</h5>
                                     <hr class="my-0" />
 
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-bordered table-striped text-center">
-                                                <thead class="table-light">
+                                            <table class="table table-bordered table-striped text-center table-dark">
+                                                <thead class="table table-dark">
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Email</th>
@@ -410,7 +440,7 @@
                                                 <tbody>
                                                     @foreach($users as $user)
                                                         @if($user->role === 'user')
-                                                            <tr>
+                                                            <tr id="permitRow-{{ $user->id }}">
                                                                 <td>{{ $user->name }}</td>
                                                                 <td>{{ $user->email }}</td>
                                                                 <td>
@@ -462,7 +492,7 @@
                                                                                                     <th>Documents</th>
                                                                                                     <th>Status</th>
                                                                                                     <th>Submitted On</th>
-                                                                                                    
+
                                                                                                 </tr>
                                                                                             </thead>
                                                                                             <tbody>
@@ -496,13 +526,14 @@
 
 
                                                                                                         <td>
-                                                                                                            <span class="
-                                                                                                                            @if($permit->status === 'approved') text-success
-                                                                                                                            @elseif($permit->status === 'pending') text-warning
-                                                                                                                            @elseif($permit->status === 'rejected') text-danger
-                                                                                                                            @else text-secondary
-                                                                                                                            @endif
-                                                                                                                        ">
+                                                                                                            <span
+                                                                                                                class="
+                                                                                                                                                                                                            @if($permit->status === 'approved') text-success
+                                                                                                                                                                                                            @elseif($permit->status === 'pending') text-warning
+                                                                                                                                                                                                            @elseif($permit->status === 'rejected') text-danger
+                                                                                                                                                                                                            @else text-secondary
+                                                                                                                                                                                                            @endif
+                                                                                                                                                                                                        ">
                                                                                                                 {{ ucfirst($permit->status) }}
                                                                                                             </span>
                                                                                                         </td>
@@ -527,45 +558,151 @@
                                                                         <span class="text-secondary">No Application</span>
                                                                     @endif
                                                                 </td>
-                                                               <td class="text-center">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                                                <td class="text-center">
+                                                                    <div class="d-flex flex-wrap gap-2 justify-content-center permit-wrapper" 
+     data-user-id="{{ $user->id }}">
+                                                                        @foreach($user->permitApplications as $permit)
+                                                                            @if(auth()->user()->role === 'engineer')
+                                                                                <div class="d-flex gap-2 permit-item" 
+     data-permit-id="{{ $permit->id }}" 
+     data-user-id="{{ $user->id }}">
 
-        <!-- Under Review Button (POST Form) -->
-        @foreach($user->permitApplications as $permit)
-            @if(!($permit->status === 'under_review' && auth()->user()->role === 'mpdo'))
-                <form action="{{ route('candidate.applicants.under-review', $permit->id) }}" method="POST" class="w-100 w-md-auto">
-                    @csrf
-                    <button type="submit" class="btn btn-warning btn-sm w-100 w-md-auto"
-                            {{ $permit->status === 'under_review' ? 'disabled' : '' }}>
-                        <i class="bx bx-hourglass me-1"></i>
-                        {{ $permit->status === 'under_review' ? 'Under Review' : 'Mark as Under Review' }}
-                    </button>
-                </form>
-            @endif
-        @endforeach
+                                                                                    {{-- Under Review Button --}}
+                                                                                    <form
+                                                                                        action="{{ route('candidate.applicants.under-review', $permit->id) }}"
+                                                                                        method="POST">
+                                                                                        @csrf
+                                                                                        <button type="submit" class="btn btn-info btn-sm"
+                                                                                            style="min-width: 140px;" {{ strtolower(trim($permit->status)) !== 'pending' ? 'disabled' : '' }}>
+                                                                                            <i class="bx bx-hourglass me-1"></i>
+                                                                                            {{ strtolower(trim($permit->status)) === 'pending' ? 'Mark as Under Review' : 'Under Review' }}
+                                                                                        </button>
+                                                                                    </form>
 
-        <!-- Approve Button -->
-        @foreach($user->permitApplications as $permit)
-            @if($permit->status === 'under_review'  && auth()->user()->role === 'mpdo')
-                <form action="{{ route('candidate.applicants.approve', $permit->id) }}" method="POST" class="w-100 w-md-auto">
-                    @csrf
-                    <button type="submit" class="btn btn-success btn-sm w-100 w-md-auto">
-                        Approve
-                    </button>
-                </form>
-            @endif
-        @endforeach
+                                                                                    {{-- Approve Button --}}
+                                                                                    <form
+                                                                                        action="{{ route('candidate.applicants.approve', $permit->id) }}"
+                                                                                        method="POST">
+                                                                                        @csrf
+                                                                                        <button type="submit" class="btn btn-success btn-sm"
+                                                                                            style="min-width: 100px;" {{ strtolower(trim($permit->status)) !== 'under_review' ? 'disabled' : '' }}>
+                                                                                            <i class="bx bx-check-circle me-1"></i>
+                                                                                            Approve
+                                                                                        </button>
+                                                                                    </form>
 
-        <!-- Reject Button -->
-        <!-- <form action="" method="POST" class="w-100 w-md-auto">
-            @csrf
-            <button type="submit" class="btn btn-danger btn-m w-100 w-md-auto">
-                <i class="fa-solid fa-xmark me-1"></i> Reject
-            </button>
-        </form> -->
+                                                                                    {{-- Reject Button --}}
+                                                                                    <button type="button" class="btn btn-warning btn-sm"
+                                                                                        data-bs-toggle="modal"
+                                                                                        data-bs-target="#rejectModal{{ $permit->id }}"
+                                                                                        style="min-width: 100px;" {{ !in_array($permit->status, ['pending', 'under_review']) ? 'disabled' : '' }}>
+                                                                                        <i class="fa-solid fa-xmark me-1"></i> Reject
+                                                                                    </button>
 
+                                                                                    {{-- Reject Modal --}}
+                                                                                    <div class="modal fade"
+                                                                                        id="rejectModal{{ $permit->id }}" tabindex="-1"
+                                                                                        aria-labelledby="rejectModalLabel{{ $permit->id }}"
+                                                                                        aria-hidden="true">
+                                                                                        <div class="modal-dialog">
+
+                                                                                            {{-- ✅ FORM START --}}
+                                                                                            <form
+                                                                                                action="{{ route('candidate.applicants.reject', $permit->id) }}"
+                                                                                                method="POST">
+                                                                                                @csrf
+                                                                                                @method('PATCH')
+
+                                                                                                <div class="modal-content">
+                                                                                                    <div class="modal-header">
+                                                                                                        <h5 class="modal-title"
+                                                                                                            id="rejectModalLabel{{ $permit->id }}">
+                                                                                                            Reject Permit
+                                                                                                        </h5>
+                                                                                                        <button type="button"
+                                                                                                            class="btn-close"
+                                                                                                            data-bs-dismiss="modal"
+                                                                                                            aria-label="Close"></button>
+                                                                                                    </div>
+
+                                                                                                    <div class="modal-body">
+                                                                                                        <div class="mb-3">
+                                                                                                            <label
+                                                                                                                for="rejection_comment{{ $permit->id }}"
+                                                                                                                class="form-label">Comment</label>
+
+                                                                                                            <textarea
+                                                                                                                name="rejection_comment"
+                                                                                                                id="rejection_comment{{ $permit->id }}"
+                                                                                                                class="form-control"
+                                                                                                                rows="3"
+                                                                                                                required></textarea>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="modal-footer">
+                                                                                                        <button type="button"
+                                                                                                            class="btn btn-secondary btn-sm"
+                                                                                                            data-bs-dismiss="modal">Cancel</button>
+
+                                                                                                        <button type="submit"
+                                                                                                            class="btn btn-danger btn-sm">
+                                                                                                            Reject
+                                                                                                        </button>
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                            </form>
+                                                                                            {{-- ✅ FORM END --}}
+
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <!-- Archive Button -->
+                                                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                                                        data-bs-toggle="modal"
+                                                                                        data-bs-target="#archivePlanModal{{ $permit->id }}"
+                                                                                        style="min-width: 100px;">
+                                                                                        <i class="fa-solid fa-archive me-1"></i> Archive
+                                                                                    </button>
+
+                                                                                    <!-- Archive Modal -->
+                                                                                    <div class="modal fade"
+                                                                                        id="archivePlanModal{{ $permit->id }}" tabindex="-1"
+                                                                                        aria-labelledby="archivePlanModalLabel{{ $permit->id }}"
+                                                                                        aria-hidden="true">
+                                                                                        <div class="modal-dialog">
+                                                                                            <form class="archive-form" 
+      action="{{ route('candidate.applicants.archive', $permit->id) }}" 
+      method="POST" 
+      data-permit-id="{{ $permit->id }}">
+    @csrf
+    @method('PATCH')
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Archive Plan</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-dark">
+            Are you sure you want to archive this plan? It will be moved to archived documents.
+            <p class="countdown text-danger mt-2" data-permit-id="{{ $permit->id }}">
+                You can archive in 15 seconds...
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-warning btn-sm archive-btn" id="archiveBtn-{{ $permit->id }}" disabled>Yes, Archive</button>
+        </div>
     </div>
-</td>
+</form>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </div>
+                                                                </td>
                                                             </tr>
                                                         @endif
                                                     @endforeach

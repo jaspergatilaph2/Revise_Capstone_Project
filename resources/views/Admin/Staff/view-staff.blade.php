@@ -25,7 +25,7 @@
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <li class="menu-item active">
+                    <li class="menu-item">
                         <a href="{{ route('admin.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
@@ -105,12 +105,12 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('admin.accounts.view-admin-accounts') }}" class="menu-link">
                                     <div data-i18n="Account">Account</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('admin.accounts.view-update-admin-account') }}" class="menu-link">
                                     <div data-i18n="Notifications">Update Account</div>
                                 </a>
                             </li>
@@ -124,19 +124,19 @@
                     </li>
 
 
-                    <li class="menu-item">
+                    <li class="menu-item {{ $ActiveTabMenu === 'Staff' ? 'active' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon fa-solid fa-list-check"></i>
                             <div data-i18n="Account Settings">User Management</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="" class="menu-link">
+                            <li class="menu-item {{ $SubActiveTab === 'View' ? 'active' : '' }}">
+                                <a href="{{ route('staff.employees.view-staff') }}" class="menu-link">
                                     <div data-i18n="Account">Staff/Inspector</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="" class="menu-link">
+                                <a href="{{ route('staff.employees.view-applicants') }}" class="menu-link">
                                     <div data-i18n="Notifications">Applicant</div>
                                 </a>
                             </li>
@@ -191,7 +191,7 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ $currentUser->avatar ? asset('storage/' . $currentUser->avatar) : asset('sneat/img/avatars/1.png') }}"
+                                        <img src="{{Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png')  }}"
                                             alt class="w-px-120 h-px-120 rounded-circle" />
                                     </div>
                                 </a>
@@ -201,7 +201,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="{{ $currentUser->avatar ? asset('storage/' . $currentUser->avatar) : asset('sneat/img/avatars/1.png') }}"
+                                                        <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('sneat/img/avatars/1.png')  }}"
                                                             alt class="w-px-120 h-px-120 rounded-circle" />
                                                     </div>
                                                 </div>
@@ -314,93 +314,113 @@
                                                 </thead>
 
                                                 <tbody>
-                                                    <tr class="table-primary text-center">
-                                                        <td colspan="7"><strong>MPDO Staff</strong></td>
-                                                    </tr>
-                                                    @php
-                                                        $mpdoStaffs = \App\Models\User::where('role', 'mpdo_staff')->get();
-                                                    @endphp
-                                                    @forelse($mpdoStaffs as $index => $staff)
-                                                        <tr>
-                                                            <td>{{ $index + 1 }}</td>
-                                                            <td>{{ $staff->name }}</td>
-                                                            <td>{{ $staff->email }}</td>
-                                                            <td>{{ strtoupper($staff->department ?? 'N/A') }}</td>
-                                                            <td>{{ str_replace('_', ' ', ucfirst($staff->role)) }}</td>
-                                                            <td>
-                                                                <form action="" method="POST" class="d-flex">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <select name="role" class="form-select form-select-sm"
-                                                                        onchange="this.form.submit()">
-                                                                        <option value="mpdo_staff" {{ ($staff->role ?? 'engineer') == 'mpdo_staff' ? 'selected' : '' }}>MPDO
-                                                                            Staff</option>
-                                                                        <option value="engineer" {{ ($staff->role ?? 'engineer') == 'engineer' ? 'selected' : '' }}>
-                                                                            Engineer</option>
-                                                                    </select>
-                                                                </form>
-                                                            </td>
-                                                            <td class="d-flex align-items-center" style="gap: 0.3rem;">
-                                                                @php
-                                                                    $statusColor = $staff->is_active ? 'text-success' : 'text-danger';
-                                                                    $statusIcon = $staff->is_active ? 'fa-circle-check' : 'fa-circle-xmark';
-                                                                    $statusText = $staff->is_active ? 'Active' : 'Inactive';
-                                                                @endphp
-                                                                <i class="fa-solid {{ $statusIcon }} {{ $statusColor }}"></i>
-                                                                <span
-                                                                    class="{{ $statusColor }} fw-semibold">{{ $statusText }}</span>
-                                                            </td>
-                                                        </tr>
-                                                    @empty
-                                                        <tr>
-                                                            <td colspan="6" class="text-center">No MPDO staff found.</td>
-                                                        </tr>
-                                                    @endforelse
+    <!-- MPDO STAFF -->
+    <tr class="table-primary text-center">
+        <td colspan="7"><strong>MPDO Staff</strong></td>
+    </tr>
 
-                                                    <tr style="height: 2rem;"></tr> <!-- empty row as vertical gap -->
-                                                    <tr class="table-primary text-center">
-                                                        <td colspan="7"><strong>Engineers</strong></td>
-                                                    </tr>
-                                                    @php
-                                                        $engineers = \App\Models\User::where('role', 'engineer')->get();
-                                                    @endphp
-                                                    @forelse($engineers as $index => $engineer)
-                                                        <tr>
-                                                            <td>{{ $index + 1 }}</td>
-                                                            <td>{{ $engineer->name }}</td>
-                                                            <td>{{ $engineer->email }}</td>
-                                                            <td>{{ strtoupper($engineer->department ?? 'N/A') }}</td>
-                                                            <td>{{ str_replace('_', ' ', ucfirst($engineer->role)) }}</td>
-                                                            <td>
-                                                                <form action="" method="POST" class="d-flex">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <select name="role" class="form-select form-select-sm"
-                                                                        onchange="this.form.submit()">
-                                                                        <option value="mpdo_staff" {{ ($staff->role ?? 'engineer') == 'mpdo_staff' ? 'selected' : '' }}>MPDO
-                                                                            Staff</option>
-                                                                        <option value="engineer" {{ ($staff->role ?? 'engineer') == 'engineer' ? 'selected' : '' }}>
-                                                                            Engineer</option>
-                                                                    </select>
-                                                                </form>
-                                                            </td>
-                                                            <td class="d-flex align-items-center" style="gap: 0.3rem;">
-                                                                @php
-                                                                    $statusColor = $staff->is_active ? 'text-success' : 'text-danger';
-                                                                    $statusIcon = $staff->is_active ? 'fa-circle-check' : 'fa-circle-xmark';
-                                                                    $statusText = $staff->is_active ? 'Active' : 'Inactive';
-                                                                @endphp
-                                                                <i class="fa-solid {{ $statusIcon }} {{ $statusColor }}"></i>
-                                                                <span
-                                                                    class="{{ $statusColor }} fw-semibold">{{ $statusText }}</span>
-                                                            </td>
-                                                        </tr>
-                                                    @empty
-                                                        <tr>
-                                                            <td colspan="6" class="text-center">No engineers found.</td>
-                                                        </tr>
-                                                    @endforelse
-                                                </tbody>
+    @forelse($mpdoStaffs as $index => $staff)
+        <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ $staff->name }}</td>
+            <td>{{ $staff->email }}</td>
+            <td>{{ strtoupper($staff->department ?? 'N/A') }}</td>
+            <td>{{ str_replace('_', ' ', ucfirst($staff->role)) }}</td>
+
+            <td>
+                <form action="" method="POST" class="d-flex">
+                    @csrf
+                    @method('PUT')
+                    <select name="role" class="form-select form-select-sm"
+                        onchange="this.form.submit()">
+
+                        <option value="mpdo_staff"
+                            {{ $staff->role == 'mpdo_staff' ? 'selected' : '' }}>
+                            MPDO Staff
+                        </option>
+
+                        <option value="engineer"
+                            {{ $staff->role == 'engineer' ? 'selected' : '' }}>
+                            Engineer
+                        </option>
+
+                    </select>
+                </form>
+            </td>
+
+            <td class="d-flex align-items-center" style="gap: 0.3rem;">
+                @php
+                    $statusColor = $staff->is_active ? 'text-success' : 'text-danger';
+                    $statusIcon = $staff->is_active ? 'fa-circle-check' : 'fa-circle-xmark';
+                    $statusText = $staff->is_active ? 'Active' : 'Inactive';
+                @endphp
+
+                <i class="fa-solid {{ $statusIcon }} {{ $statusColor }}"></i>
+                <span class="{{ $statusColor }} fw-semibold">{{ $statusText }}</span>
+            </td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="7" class="text-center">No MPDO staff found.</td>
+        </tr>
+    @endforelse
+
+
+    <!-- SPACING -->
+    <tr style="height: 2rem;"></tr>
+
+
+    <!-- ENGINEERS -->
+    <tr class="table-primary text-center">
+        <td colspan="7"><strong>Engineers</strong></td>
+    </tr>
+
+    @forelse($engineers as $index => $engineer)
+        <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ $engineer->name }}</td>
+            <td>{{ $engineer->email }}</td>
+            <td>{{ strtoupper($engineer->department ?? 'N/A') }}</td>
+            <td>{{ str_replace('_', ' ', ucfirst($engineer->role)) }}</td>
+
+            <td>
+                <form action="" method="POST" class="d-flex">
+                    @csrf
+                    @method('PUT')
+                    <select name="role" class="form-select form-select-sm"
+                        onchange="this.form.submit()">
+
+                        <option value="mpdo_staff"
+                            {{ $engineer->role == 'mpdo_staff' ? 'selected' : '' }}>
+                            MPDO Staff
+                        </option>
+
+                        <option value="engineer"
+                            {{ $engineer->role == 'engineer' ? 'selected' : '' }}>
+                            Engineer
+                        </option>
+
+                    </select>
+                </form>
+            </td>
+
+            <td class="d-flex align-items-center" style="gap: 0.3rem;">
+                @php
+                    $statusColor = $engineer->is_active ? 'text-success' : 'text-danger';
+                    $statusIcon = $engineer->is_active ? 'fa-circle-check' : 'fa-circle-xmark';
+                    $statusText = $engineer->is_active ? 'Active' : 'Inactive';
+                @endphp
+
+                <i class="fa-solid {{ $statusIcon }} {{ $statusColor }}"></i>
+                <span class="{{ $statusColor }} fw-semibold">{{ $statusText }}</span>
+            </td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="7" class="text-center">No engineers found.</td>
+        </tr>
+    @endforelse
+</tbody>
                                             </table>
                                         </div>
 

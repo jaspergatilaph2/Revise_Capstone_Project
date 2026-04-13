@@ -27,10 +27,56 @@ class EngineerController extends Controller
         // ===============================
         // Counting Applications
         // ===============================
+        $UserCounts = User::where('role', 'user')->count();
         $totalApplications = PermitApplication::count();
         $PendingApplications = PermitApplication::where('status', 'pending')->count();
         $UnderReviewApplications = PermitApplication::where('status', 'under_review')->count();
         $ApprovedApplication = PermitApplication::where('status', 'approved')->count();
+
+        // ===============================
+        // Counting Applications And Plans
+        // ===============================
+        $totalPermitApplications = PermitApplication::count();
+        $totalArchitecturalPlans = ArchitecturalPlan::count();
+        $totalStructuralPlans = StructuralPlan::count();
+        $totalElectricalPlans = ElectricalPlans::count();
+        $totalPlumbingPlans = PlumbingPlan::count();
+
+        // ===============================
+        // Counting Applications And Plans by the status "Pending"
+        // ===============================
+        $PendingApplications = PermitApplication::where('status', 'pending')->count();
+        $pendingArchitecturalPlans = ArchitecturalPlan::where('status', 'pending')->count();
+        $pendingStructuralPlans = StructuralPlan::where('status', 'pending')->count();
+        $pendingElectricalPlans = ElectricalPlans::where('status', 'pending')->count();
+        $pendingPlumbingPlans = PlumbingPlan::where('status', 'pending')->count();
+
+        // ===============================
+        // Counting Applications And Plans by the status "Under Review"
+        // ===============================
+        $UnderReviewApplications = PermitApplication::where('status', 'under_review')->count();
+        $underReviewArchitecturalPlans = ArchitecturalPlan::where('status', 'under_review')->count();
+        $underReviewStructuralPlans = StructuralPlan::where('status', 'under_review')->count();
+        $underReviewElectricalPlans = ElectricalPlans::where('status', 'under_review')->count();
+        $underReviewPlumbingPlans = PlumbingPlan::where('status', 'under_review')->count();
+
+        // ===============================
+        // Counting Applications And Plans by the status "Approved"
+        // ===============================
+        $ApprovedApplication = PermitApplication::where('status', 'approved')->count();
+        $approvedArchitecturalPlans = ArchitecturalPlan::where('status', 'approved')->count();
+        $approvedStructuralPlans = StructuralPlan::where('status', 'approved')->count();
+        $approvedElectricalPlans = ElectricalPlans::where('status', 'approved')->count();
+        $approvedPlumbingPlans = PlumbingPlan::where('status', 'approved')->count();
+
+        // ===============================
+        // Counting Applications And Plans by the status "Rejected"
+        // ===============================
+        $RejectedApplication = PermitApplication::where('status', 'rejected')->count();
+        $rejectedArchitecturalPlans = ArchitecturalPlan::where('status', 'rejected')->count();
+        $rejectedStructuralPlans = StructuralPlan::where('status', 'rejected')->count();
+        $rejectedElectricalPlans = ElectricalPlans::where('status', 'rejected')->count();
+        $rejectedPlumbingPlans = PlumbingPlan::where('status', 'rejected')->count();
 
         // ===============================
         // Activity Chart (Last 7 Days)
@@ -69,7 +115,32 @@ class EngineerController extends Controller
             'PendingApplications',
             'UnderReviewApplications',
             'ApprovedApplication',
-            'weeklyApplications'
+            'weeklyApplications',
+            'UserCounts',
+            'totalArchitecturalPlans',
+            'totalStructuralPlans',
+            'totalElectricalPlans',
+            'totalPlumbingPlans',
+            'totalPermitApplications',
+            'pendingArchitecturalPlans',
+            'pendingStructuralPlans',
+            'pendingElectricalPlans',
+            'pendingPlumbingPlans',
+            'PendingApplications',
+            'underReviewArchitecturalPlans',
+            'underReviewStructuralPlans',
+            'underReviewElectricalPlans',
+            'underReviewPlumbingPlans',
+            'ApprovedApplication',
+            'approvedArchitecturalPlans',
+            'approvedStructuralPlans',
+            'approvedElectricalPlans',
+            'approvedPlumbingPlans',
+            'RejectedApplication',
+            'rejectedArchitecturalPlans',
+            'rejectedStructuralPlans',
+            'rejectedElectricalPlans',
+            'rejectedPlumbingPlans'
         ));
     }
 
@@ -275,7 +346,7 @@ class EngineerController extends Controller
 
         $users = User::with([
             'permitApplications:id,user_id,project_name,status',
-            'permitApplications.architecturalPlans:id,permit_application_id,plan_name,file_path'
+            'permitApplications.architecturalPlans:id,permit_application_id,plan_name,file_path,status'
         ])
             ->where('role', 'user')
             ->latest()
@@ -361,7 +432,7 @@ class EngineerController extends Controller
 
         $users = User::with([
             'permitApplications:id,user_id,project_name,status',
-            'permitApplications.structuralPlans:id,permit_application_id,plan_name,documents'
+            'permitApplications.structuralPlans:id,permit_application_id,plan_name,documents,status'
         ])
             ->where('role', 'user')
             ->latest()
@@ -465,7 +536,7 @@ class EngineerController extends Controller
         $currentUser = Auth::user();
         $users = User::with([
             'permitApplications:id,user_id,project_name,status',
-            'permitApplications.electricalPlans:id,permit_application_id,plan_name,documents'
+            'permitApplications.electricalPlans:id,permit_application_id,plan_name,documents,status'
         ])
             ->where('role', 'user')
             ->latest()
@@ -551,17 +622,22 @@ class EngineerController extends Controller
     {
         $currentUser = Auth::user();
 
-        // Fetch all users with role 'user' and their permit applications
+        // ✅ FIX: Exclude archived permits
         $users = User::where('role', 'user')
-            ->with('permitApplications')
+            ->with([
+                'permitApplications' => function ($query) {
+                    $query->where('archived', false); // 🔥 IMPORTANT
+                }
+            ])
             ->get();
 
-        // Transform each user's permitApplications to add document URLs
+        // (Optional) You can also filter this if used somewhere else
         $permitApplications = PermitApplication::whereIn('status', ['pending', 'under_review', 'approved', 'rejected'])
+            ->where('archived', false) // ✅ ADD THIS TOO
             ->select('id', 'user_id', 'project_name', 'location', 'address', 'radiusRange', 'status', 'documents', 'created_at', 'description')
             ->get();
 
-        // Add document URLs safely
+        // Transform document URLs
         $users->each(function ($user) {
             $user->permitApplications->transform(function ($permit) {
                 $documentUrls = [];
@@ -569,16 +645,12 @@ class EngineerController extends Controller
                 if ($permit->documents) {
                     $docs = json_decode($permit->documents, true);
 
-                    // Ensure it's an array
                     if (!is_array($docs)) {
                         $docs = [$permit->documents];
                     }
 
                     foreach ($docs as $doc) {
-                        // Remove any escaped slashes or quotes
                         $doc = str_replace(['\\', '"'], '', $doc);
-
-                        // Generate proper URL using 'public' disk
                         $documentUrls[] = Storage::url($doc);
                     }
                 }
@@ -590,7 +662,6 @@ class EngineerController extends Controller
 
             return $user;
         });
-
 
         return view(
             'Engineer.Applicants.approval-applicants',
@@ -619,6 +690,11 @@ class EngineerController extends Controller
             ]);
         }
 
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Updated permit status to Under Review.',
+        ]);
+
         return back()->with('success', 'Permit marked as Under Review.');
     }
 
@@ -639,7 +715,95 @@ class EngineerController extends Controller
             ]);
         }
 
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Updated permit status to Approved.',
+        ]);
+
         return back()->with('success', 'Permit marked as Approved.');
+    }
+
+    // Engineer Mark Rejected Permit
+    public function MarkRejectIndex(Request $request, $id)
+    {
+        $request->validate([
+            'rejection_comment' => 'required|string|max:1000',
+        ]);
+
+        $permit = PermitApplication::findOrFail($id);
+
+        // Optional: prevent rejecting already finalized permits
+        if (!in_array($permit->status, ['pending', 'under_review'])) {
+            return back()->with('error', 'Cannot reject this permit.');
+        }
+
+        // Update status and comment
+        $permit->status = 'rejected';
+        $permit->rejection_comment = $request->rejection_comment;
+        $permit->rejected_by = Auth::id(); // optional (if you track who rejected)
+        $permit->save();
+
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Updated permit status to Rejected. Comment: ' . $request->rejection_comment,
+        ]);
+
+        return back()->with('success', 'Permit rejected successfully.');
+    }
+
+    // Engineer Archive Permit
+    public function MarkArchiveIndex($id)
+    {
+        $permit = PermitApplication::findOrFail($id);
+
+        // Archive permit without deleting
+        DeletedPlanFile::create([
+            'permit_application_id' => $permit->id,
+            'plan_name' => $permit->project_name,
+            'file_path' => $permit->documents,
+            'deleted_by' => Auth::id(),
+            'rejection_comment' => $permit->rejection_comment ?? null,
+            'rejected_by' => $permit->rejected_by ?? Auth::id(),
+        ]);
+
+        // Optionally mark the permit as archived
+        $permit->archived = true;
+        $permit->save();
+
+        // Log
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Archived permit: ' . $permit->project_name,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Permit archived successfully!',
+            'permit_id' => $permit->id, // optional, useful for JS
+        ]);
+    }
+
+    // View Archive of Deleted Permits & Plans
+    public function ViewArchiveIndex()
+    {
+        $currentUser = Auth::user();
+
+        // Get deleted plans with necessary relationships
+        $deletedPlans = DeletedPlanFile::with([
+            'user',                 // deleted_by relationship
+            'permitApplication',    // original permit application
+            'rejectedBy'      // user who rejected
+        ])
+            ->where('deleted_by', $currentUser->id)
+            ->latest()
+            ->paginate(10); // use pagination to match Blade if you want links
+
+        return view('Engineer.Archive.archive', [
+            'deletedPlans' => $deletedPlans,
+            'currentUser' => $currentUser,
+            'ActiveTabMenu' => 'View-Archive',
+            'SubActiveTab' => 'Deleted Plans'
+        ]);
     }
 
     // Engineer View Plumbing Plan
@@ -742,7 +906,7 @@ class EngineerController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Permit marked under review successfully.');
+        return back()->with('success', 'Architectural Plan marked under review successfully.');
     }
 
     // Engineer Mark Approved Architectural Plan
@@ -762,26 +926,75 @@ class EngineerController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Permit approved successfully.');
+        return back()->with('success', 'Architectural Plan approved successfully.');
     }
 
-    // Engineer Delete Architectural Plan
-    public function DeleteIndex($id)
+    // Engineer Mark Rejected Architectural Plan
+    public function RejectIndex(Request $request, $id)
     {
-        $plan = ArchitecturalPlan::findOrFail($id); // change model accordingly
-
-        // Save deleted plan info to new table
-        DeletedPlanFile::create([
-            'permit_application_id' => $plan->permit_application_id,
-            'plan_name' => $plan->plan_name,
-            'file_path' => $plan->file_path, // you can store JSON if multiple files
-            'deleted_by' => Auth::id(),
+        $request->validate([
+            'rejection_comment' => 'required|string|max:1000',
         ]);
 
-        // Delete original plan
-        $plan->delete();
+        $permit = ArchitecturalPlan::findOrFail($id);
 
-        return back()->with('success', 'Plan deleted and logged successfully.');
+        // Optional: prevent rejecting already finalized plans
+        if (!in_array($permit->status, ['pending', 'under_review'])) {
+            return back()->with('error', 'Cannot reject this plan.');
+        }
+
+        // Update status and comment
+        $permit->status = 'rejected';
+        $permit->rejection_comment = $request->rejection_comment;
+        $permit->rejected_by = Auth::id(); // optional (if you track who rejected)
+        $permit->save();
+
+        return back()->with('success', 'Architectural Plan rejected successfully.');
+    }
+
+    // Engineer Archive Architectural Plan
+    public function ArchiveIndex($id)
+    {
+        $plan = ArchitecturalPlan::findOrFail($id); // Get the plan
+
+        // Handle file_path which may be JSON or array
+        $files = [];
+
+        if (!empty($plan->file_path)) {
+            // Decode JSON if needed
+            $files = is_array($plan->file_path)
+                ? $plan->file_path
+                : (json_decode($plan->file_path, true) ?: [$plan->file_path]);
+        }
+
+        foreach ($files as $file) {
+            if (!empty($file)) {
+                DeletedPlanFile::create([
+                    'permit_application_id' => $plan->permit_application_id, // correct permit ID
+                    'plan_name' => $plan->plan_name, // plan name
+                    'file_path' => is_array($file) ? json_encode($file) : $file, // convert array to string if needed
+                    'deleted_by' => Auth::id(),
+                    'rejection_comment' => $plan->rejection_comment ?? null,
+                    'rejected_by' => $plan->rejected_by ?? Auth::id(),
+                ]);
+            }
+        }
+
+        // Mark the plan as archived
+        $plan->archived = true;
+        $plan->save();
+
+        // Log
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Archived plan: ' . $plan->plan_name,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'plan_name' => $plan->plan_name,
+            'file_urls' => $plan->file_urls,
+        ]);
     }
 
     // Engineer Mark Under Review Structural Plan
@@ -801,7 +1014,7 @@ class EngineerController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Permit marked under review successfully.');
+        return back()->with('success', 'Structural plan marked under review successfully.');
     }
 
     // Engineer Mark Approved Structural Plan
@@ -824,23 +1037,72 @@ class EngineerController extends Controller
         return back()->with('success', 'Permit approved successfully.');
     }
 
-    // Engineer Delete Structural Plan
-    public function DeleteStructuralIndex($id)
+    // Engineer Reject Structural Plan
+    public function RejectStructuralIndex(Request $request, $id)
+    {
+        $request->validate([
+            'rejection_comment' => 'required|string|max:1000',
+        ]);
+
+        $permit = StructuralPlan::findOrFail($id);
+
+        // Optional: prevent rejecting already finalized plans
+        if (!in_array($permit->status, ['pending', 'under_review'])) {
+            return back()->with('error', 'Cannot reject this plan.');
+        }
+
+        // Update status and comment
+        $permit->status = 'rejected';
+        $permit->rejection_comment = $request->rejection_comment;
+        $permit->rejected_by = Auth::id(); // optional (if you track who rejected)
+        $permit->save();
+
+        return back()->with('success', 'Structural Plan rejected successfully.');
+    }
+
+    // Engineer Archived Structural Plan
+    public function ArchiveStructuralIndex($id)
     {
         $plan = StructuralPlan::findOrFail($id); // change model accordingly
 
-        // Save deleted plan info to new table
-        DeletedPlanFile::create([
-            'permit_application_id' => $plan->permit_application_id,
-            'plan_name' => $plan->plan_name,
-            'file_path' => $plan->file_path, // you can store JSON if multiple files
-            'deleted_by' => Auth::id(),
+        // Handle file_path which may be JSON or array
+        $files = [];
+
+        if (!empty($plan->file_path)) {
+            // Decode JSON if needed
+            $files = is_array($plan->file_path)
+                ? $plan->file_path
+                : (json_decode($plan->file_path, true) ?: [$plan->file_path]);
+        }
+
+        foreach ($files as $file) {
+            if (!empty($file)) {
+                DeletedPlanFile::create([
+                    'permit_application_id' => $plan->permit_application_id, // correct permit ID
+                    'plan_name' => $plan->plan_name, // plan name
+                    'file_path' => is_array($file) ? json_encode($file) : $file, // convert array to string if needed
+                    'deleted_by' => Auth::id(),
+                    'rejection_comment' => $plan->rejection_comment ?? null,
+                    'rejected_by' => $plan->rejected_by ?? Auth::id(),
+                ]);
+            }
+        }
+
+        // Mark the plan as archived
+        $plan->archived = true;
+        $plan->save();
+
+        // Log
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Archived plan: ' . $plan->plan_name,
         ]);
 
-        // Delete original plan
-        $plan->delete();
-
-        return back()->with('success', 'Plan deleted and logged successfully.');
+        return response()->json([
+            'success' => true,
+            'plan_name' => $plan->plan_name,
+            'file_urls' => $plan->file_urls,
+        ]);
     }
 
     // Engineer Mark Under Review Electrical Plan
@@ -860,7 +1122,7 @@ class EngineerController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Permit marked under review successfully.');
+        return back()->with('success', 'Electrical Plan marked under review successfully.');
     }
 
     // Engineer Mark Approved Electrical Plan
@@ -880,26 +1142,75 @@ class EngineerController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Permit approved successfully.');
+        return back()->with('success', 'Electrical Plan approved successfully.');
     }
 
-    // Engineer Delete Electrical Plan
-    public function DeleteElectricalIndex($id)
+    // Engineer Reject Electrical Plan
+    public function RejectElectricalIndex(Request $request, $id)
+    {
+        $request->validate([
+            'rejection_comment' => 'required|string|max:1000',
+        ]);
+
+        $permit = ElectricalPlans::findOrFail($id);
+
+        // Optional: prevent rejecting already finalized plans
+        if (!in_array($permit->status, ['pending', 'under_review'])) {
+            return back()->with('error', 'Cannot reject this plan.');
+        }
+
+        // Update status and comment
+        $permit->status = 'rejected';
+        $permit->rejection_comment = $request->rejection_comment;
+        $permit->rejected_by = Auth::id(); // optional (if you track who rejected)
+        $permit->save();
+
+        return back()->with('success', 'Electrical Plan rejected successfully.');
+    }
+
+    // Engineer Archive Electrical Plan
+    public function ArchiveElectricalIndex($id)
     {
         $plan = ElectricalPlans::findOrFail($id); // change model accordingly
 
-        // Save deleted plan info to new table
-        DeletedPlanFile::create([
-            'permit_application_id' => $plan->permit_application_id,
-            'plan_name' => $plan->plan_name,
-            'file_path' => $plan->file_path, // you can store JSON if multiple files
-            'deleted_by' => Auth::id(),
+        // Handle file_path which may be JSON or array
+        $files = [];
+
+        if (!empty($plan->documents)) {
+            // Decode JSON if needed
+            $files = is_array($plan->documents)
+                ? $plan->documents
+                : (json_decode($plan->documents, true) ?: [$plan->documents]);
+        }
+
+        foreach ($files as $file) {
+            if (!empty($file)) {
+                DeletedPlanFile::create([
+                    'permit_application_id' => $plan->permit_application_id, // correct permit ID
+                    'plan_name' => $plan->plan_name, // plan name
+                    'file_path' => is_array($file) ? json_encode($file) : $file, // convert array to string if needed
+                    'deleted_by' => Auth::id(),
+                    'rejection_comment' => $plan->rejection_comment ?? null,
+                    'rejected_by' => $plan->rejected_by ?? Auth::id(),
+                ]);
+            }
+        }
+
+        // Mark the plan as archived
+        $plan->archived = true;
+        $plan->save();
+
+        // Log
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Archived plan: ' . $plan->plan_name,
         ]);
 
-        // Delete original plan
-        $plan->delete();
-
-        return back()->with('success', 'Plan deleted and logged successfully.');
+        return response()->json([
+            'success' => true,
+            'plan_name' => $plan->plan_name,
+            'file_urls' => $plan->file_urls,
+        ]);
     }
 
     // Engineer Mark Under Review Plumbing Plan
@@ -919,7 +1230,7 @@ class EngineerController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Permit marked under review successfully.');
+        return back()->with('success', 'Plumbing Plan marked under review successfully.');
     }
 
     // Engineer Mark Approved Plumbing Plan
@@ -943,25 +1254,72 @@ class EngineerController extends Controller
     }
 
     // Engineer Delete Plumbing Plan
-    public function DeletePlumbingIndex($id)
+    public function RejectPlumbingIndex(Request $request, $id)
+    {
+        $request->validate([
+            'rejection_comment' => 'required|string|max:1000',
+        ]);
+
+        $permit = ElectricalPlans::findOrFail($id);
+
+        // Optional: prevent rejecting already finalized plans
+        if (!in_array($permit->status, ['pending', 'under_review'])) {
+            return back()->with('error', 'Cannot reject this plan.');
+        }
+
+        // Update status and comment
+        $permit->status = 'rejected';
+        $permit->rejection_comment = $request->rejection_comment;
+        $permit->rejected_by = Auth::id(); // optional (if you track who rejected)
+        $permit->save();
+
+        return back()->with('success', 'Plumbing Plan rejected successfully.');
+    }
+
+    // Engineer Archive Plumbing Plan
+    public function ArchivePlumbingIndex($id)
     {
         $plan = PlumbingPlan::findOrFail($id); // change model accordingly
 
-        // Save deleted plan info to new table
-        DeletedPlanFile::create([
-            'permit_application_id' => $plan->permit_application_id,
-            'plan_name' => $plan->plan_name,
-            'file_path' => $plan->file_path, // you can store JSON if multiple files
-            'deleted_by' => Auth::id(),
+        // Handle file_path which may be JSON or array
+        $files = [];
+
+        if (!empty($plan->documents)) {
+            // Decode JSON if needed
+            $files = is_array($plan->documents)
+                ? $plan->documents
+                : (json_decode($plan->documents, true) ?: [$plan->documents]);
+        }
+
+        foreach ($files as $file) {
+            if (!empty($file)) {
+                DeletedPlanFile::create([
+                    'permit_application_id' => $plan->permit_application_id, // correct permit ID
+                    'plan_name' => $plan->plan_name, // plan name
+                    'file_path' => is_array($file) ? json_encode($file) : $file, // convert array to string if needed
+                    'deleted_by' => Auth::id(),
+                    'rejection_comment' => $plan->rejection_comment ?? null,
+                    'rejected_by' => $plan->rejected_by ?? Auth::id(),
+                ]);
+            }
+        }
+
+        // Mark the plan as archived
+        $plan->archived = true;
+        $plan->save();
+
+        // Log
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Archived plan: ' . $plan->plan_name,
         ]);
 
-        // Delete original plan
-        $plan->delete();
-
-        return back()->with('success', 'Plan deleted and logged successfully.');
+        return response()->json([
+            'success' => true,
+            'plan_name' => $plan->plan_name,
+            'file_urls' => $plan->file_urls,
+        ]);
     }
-
-
     // Engineer Under Maintenance
     public function UnderMaintenanceIndex()
     {

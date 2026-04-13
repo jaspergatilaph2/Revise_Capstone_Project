@@ -169,54 +169,69 @@ class MpdoController extends Controller
 
     // MPDO View All Permits Index
     public function ViewAllPermitsIndex()
-    {
-        $currentUser = Auth::user();
+{
+    $currentUser = Auth::user();
 
-        // Fetch users with permits and their plans
-        $users = User::where('role', 'user')
-            ->with([
-                'permitApplications.architecturalPlans',
-                'permitApplications.structuralPlans',
-                'permitApplications.electricalPlans',
-                'permitApplications.plumbingPlan'
-            ])
-            ->get();
+    $users = User::where('role', 'user')
+        ->with([
+            'permitApplications' => function ($query) {
+                $query->whereIn('status', ['under_review', 'approved'])
+                    ->select(
+                        'id',
+                        'user_id',
+                        'status',
+                        'documents',
+                        'reviewed_by'
+                    )
+                    ->with([
+                        'architecturalPlans',
+                        'structuralPlans',
+                        'electricalPlans',
+                        'plumbingPlan',
+                        'reviewer' // ✅ IMPORTANT: load reviewer relationship
+                    ]);
+            }
+        ])
+        ->get();
 
-        $users->each(function ($user) {
+    $users->each(function ($user) {
 
-            $user->permitApplications->transform(function ($permit) {
+        $user->permitApplications->transform(function ($permit) {
 
-                $documentUrls = [];
+            $documentUrls = [];
 
-                if ($permit->documents) {
+            if (!empty($permit->documents)) {
 
-                    $docs = json_decode($permit->documents, true);
+                $docs = json_decode($permit->documents, true);
 
-                    if (!is_array($docs)) {
-                        $docs = [$permit->documents];
-                    }
-
-                    foreach ($docs as $doc) {
-
-                        $doc = str_replace(['\\', '"'], '', $doc);
-
-                        $documentUrls[] = Storage::url($doc);
-                    }
+                if (!is_array($docs)) {
+                    $docs = [$permit->documents];
                 }
 
-                $permit->document_urls = $documentUrls;
+                foreach ($docs as $doc) {
+                    if (!$doc) continue;
 
-                return $permit;
-            });
+                    $doc = str_replace(['\\', '"'], '', $doc);
+                    $documentUrls[] = Storage::url($doc);
+                }
+            }
 
-            return $user;
+            $permit->document_urls = $documentUrls;
+
+            return $permit;
         });
 
-        return view('MPDO.Permits.all-permit-review', compact('currentUser', 'users'), [
-            'ActiveTabMenu' => 'Reviews',
-            'SubActiveTab' => 'Permits'
-        ]);
-    }
+        return $user;
+    });
+
+    return view('MPDO.Permits.all-permit-review', [
+        'currentUser' => $currentUser,
+        'users' => $users,
+        'ActiveTabMenu' => 'Reviews',
+        'SubActiveTab' => 'Permits'
+    ]);
+}
+
 
 
     // MPDO View Architectural Plans Index
@@ -227,7 +242,7 @@ class MpdoController extends Controller
         // Fetch users with permits and their architectural plans
         $users = User::where('role', 'user')
             ->with([
-                'permitApplications.architecturalPlans.reviewer' // ✅ FIX HERE
+                'permitApplications.architecturalPlans.reviewer.file_path.plan_name' // ✅ FIX HERE
             ])
             ->get();
 
@@ -250,7 +265,7 @@ class MpdoController extends Controller
 
                         foreach ($files as $file) {
                             $file = str_replace(['\\', '"'], '', $file);
-                            $planUrls[] = Storage::url($file);
+                            $planUrls[] = asset('storage/' . $file);
                         }
                     }
 
@@ -630,6 +645,35 @@ class MpdoController extends Controller
         return redirect()->back()->with('success', 'Permit status updated successfully.');
     }
 
+
+    // MPDO Reject the permit Status
+    public function RejectIndex(Request $request, $id)
+    {
+        $request->validate([
+            'rejection_comment' => 'required|string|max:1000',
+        ]);
+
+        $permit = PermitApplication::findOrFail($id);
+
+        // Optional: prevent rejecting already finalized permits
+        if (!in_array($permit->status, ['pending', 'under_review'])) {
+            return back()->with('error', 'Cannot reject this permit.');
+        }
+
+        // Update status and comment
+        $permit->status = 'rejected';
+        $permit->rejection_comment = $request->rejection_comment;
+        $permit->rejected_by = Auth::id(); // optional (if you track who rejected)
+        $permit->save();
+
+        LogsHistory::create([
+            'user_id' => Auth::id(),
+            'description' => 'Updated permit status to Rejected. Comment: ' . $request->rejection_comment,
+        ]);
+
+        return back()->with('success', 'Permit rejected successfully.');
+    }
+
     // MPDO Update the Architectural Plans Status
     public function UnderReviewArchitecturalUpdateStatus(Request $request, $id)
     {
@@ -647,6 +691,7 @@ class MpdoController extends Controller
 
         return back()->with('success', 'Permit marked under review successfully.');
     }
+
 
 
     // MPDO Approve the Architectural Plans Status
@@ -686,7 +731,8 @@ class MpdoController extends Controller
     }
 
     // View Maintenance in MPDO
-    public function ViewMaintenanceIndex(){
+    public function ViewMaintenanceIndex()
+    {
         $currentUser = Auth::user();
         return view('MPDO.Maintenance.maintenance', compact('currentUser'));
     }

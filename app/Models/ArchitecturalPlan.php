@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ArchitecturalPlan extends Model
 {
-    use HasFactory;
     protected $fillable = [
         'permit_application_id',
         'plan_name',
@@ -15,8 +14,14 @@ class ArchitecturalPlan extends Model
         'file_path',
         'reviewed_by',
         'status',
-
+        'created_at',
+        'updated_at',
+        'archived',
+        'rejection_comment',
+        'rejected_by',
     ];
+
+    
 
     protected $table = 'architectural_plans';
 
@@ -34,5 +39,5 @@ class ArchitecturalPlan extends Model
     {
         return $this->belongsTo(User::class, 'reviewed_by');
     }
-
+    use HasFactory;
 }

@@ -21,56 +21,123 @@ class ApplicantsController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $userId = $user->id;
 
-        // Pending Permits For User ID
-        $pendingPermits = PermitApplication::where('user_id', $user->id)
+        // ✅ Get all permit IDs of this user
+        $permitIds = PermitApplication::where('user_id', $userId)
+            ->pluck('id');
+
+        // =========================
+        // PENDING
+        // =========================
+        $pendingPermits = PermitApplication::where('user_id', $userId)
             ->where('status', 'pending')
             ->count();
 
-        // Pending plans (total, not per user)
-        $pendingStructural = StructuralPlan::where('status', 'pending')->count();
-        $pendingArchitectural = ArchitecturalPlan::where('status', 'pending')->count();
-        $pendingElectrical = ElectricalPlans::where('status', 'pending')->count();
-        $pendingPlumbing = PlumbingPlan::where('status', 'pending')->count();
-        // Total Pending
+        $pendingStructural = StructuralPlan::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'pending')
+            ->count();
+
+        $pendingArchitectural = ArchitecturalPlan::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'pending')
+            ->count();
+
+        $pendingElectrical = ElectricalPlans::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'pending')
+            ->count();
+
+        $pendingPlumbing = PlumbingPlan::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'pending')
+            ->count();
+
         $totalPending = $pendingPermits +
             $pendingStructural +
             $pendingArchitectural +
             $pendingElectrical +
             $pendingPlumbing;
 
-        // Under Review For Users ID
-        $underReview = PermitApplication::where('user_id', $user->id)
+        // =========================
+        // UNDER REVIEW
+        // =========================
+        $underReview = PermitApplication::where('user_id', $userId)
             ->where('status', 'under_review')
             ->count();
-        // Under Review For Plans
-        $underReviewStructural = StructuralPlan::where('status', 'under_review')->count();
-        $underReviewArchitectural = ArchitecturalPlan::where('status', 'under_review')->count();
-        $underReviewElectrical = ElectricalPlans::where('status', 'under_review')->count();
-        $underReviewPlumbing = PlumbingPlan::where('status', 'under_review')->count();
 
-        // Under Review Total
+        $underReviewStructural = StructuralPlan::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'under_review')
+            ->count();
+
+        $underReviewArchitectural = ArchitecturalPlan::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'under_review')
+            ->count();
+
+        $underReviewElectrical = ElectricalPlans::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'under_review')
+            ->count();
+
+        $underReviewPlumbing = PlumbingPlan::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'under_review')
+            ->count();
+
         $totalUnderReview = $underReview +
             $underReviewStructural +
             $underReviewArchitectural +
             $underReviewElectrical +
             $underReviewPlumbing;
 
-        // Approve For User ID
-        $approve = PermitApplication::where('user_id', $user->id)
+        // =========================
+        // APPROVED
+        // =========================
+        $approve = PermitApplication::where('user_id', $userId)
             ->where('status', 'approved')
             ->count();
-        //Approve For Plans
-        $approveStructural =  StructuralPlan::where('status', 'approved')->count();
-        $approveArchitectural = ArchitecturalPlan::where('status', 'approved')->count();
-        $approveElectrical =  ElectricalPlans::where('status', 'approved')->count();
-        $approveplumbing = PlumbingPlan::where('status', 'approved')->count();
-        // Totol Approve
+
+        $approveStructural = StructuralPlan::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'approved')
+            ->count();
+
+        $approveArchitectural = ArchitecturalPlan::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'approved')
+            ->count();
+
+        $approveElectrical = ElectricalPlans::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'approved')
+            ->count();
+
+        $approveplumbing = PlumbingPlan::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'approved')
+            ->count();
+
         $totalApprove = $approve +
-        $approveStructural +
-        $approveArchitectural +
-        $approveElectrical +
-        $approveplumbing;
+            $approveStructural +
+            $approveArchitectural +
+            $approveElectrical +
+            $approveplumbing;
+
+        // =========================
+        // REJECTED
+        // =========================
+        $rejected = PermitApplication::where('user_id', $userId)
+            ->where('status', 'rejected')
+            ->count();
+        $rejectedStructural = StructuralPlan::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'rejected')
+            ->count();
+        $rejectedArchitectural = ArchitecturalPlan::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'rejected')
+            ->count();
+        $rejectedElectrical = ElectricalPlans::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'rejected')
+            ->count();
+        $rejectedPlumbing = PlumbingPlan::whereIn('permit_application_id', $permitIds)
+            ->where('status', 'rejected')
+            ->count();
+        $totalRejected = $rejected +
+            $rejectedStructural +
+            $rejectedArchitectural +
+            $rejectedElectrical +
+            $rejectedPlumbing;
+
 
         return view('Applicants.Dashboard.index', compact(
             'user',
@@ -87,13 +154,19 @@ class ApplicantsController extends Controller
             'underReviewPlumbing',
             'totalUnderReview',
             'approve',
+            'approveStructural',
             'approveArchitectural',
             'approveElectrical',
             'approveplumbing',
-            'totalApprove'
+            'totalApprove',
+            'rejected',
+            'rejectedStructural',
+            'rejectedArchitectural',
+            'rejectedElectrical',
+            'rejectedPlumbing',
+            'totalRejected'
         ));
     }
-
     // Downloads Permits View
     public function DownloadsIndex()
     {
@@ -663,11 +736,13 @@ class ApplicantsController extends Controller
     // View Plumbing Plan Dashboard
     public function PlumbingPlanIndex()
     {
+        $user = Auth::user();
         $permit = PermitApplication::where('user_id', Auth::id())->first();
         return view('Applicants.Apply.plumbing-plan', [
             'ActiveTabMenu' => 'Plumbing-Upload',
             'SubActiveTab' => 'Plan',
             'permit' => $permit, // pass $permit here
+            'user' => $user, // pass $user here
         ]);
     }
 
@@ -712,17 +787,62 @@ class ApplicantsController extends Controller
     }
 
     // View Under Maintenance
-    public function ViewUnderMaintenanceIndex(){
+    public function ViewUnderMaintenanceIndex()
+    {
         $user = Auth::user();
         return view('Applicants.Maintenance.app-under-maintenance', compact('user'));
     }
 
     // User Options Dark Mode
-    public function ViewDarkModeOptionsIndex(){
+    public function ViewDarkModeOptionsIndex()
+    {
         $user = Auth::user();
         return view('Applicants.Options.dark-mode', compact('user'), [
             'ActiveTabMenu' => 'Dark-Mode',
             'SubActiveTab' => 'Options'
+        ]);
+    }
+
+    // View The Rejected Permits
+    public function ViewRejectedIndex()
+    {
+        $users = Auth::user();
+
+        // Get only rejected permits
+        $users->permitApplications = PermitApplication::where('user_id', $users->id)
+            ->where('status', 'rejected')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Transform permits to add document URLs
+        $users->permitApplications->transform(function ($permit) {
+            $documentUrls = [];
+
+            if ($permit->documents) {
+                $docs = is_array($permit->documents)
+                    ? $permit->documents
+                    : json_decode($permit->documents, true);
+
+                if (!is_array($docs)) {
+                    $docs = [$permit->documents];
+                }
+
+                foreach ($docs as $doc) {
+                    $doc = str_replace(['\\', '"'], '', $doc);
+                    $documentUrls[] = asset('storage/' . $doc);
+                }
+            }
+
+            $permit->document_urls = $documentUrls;
+
+            return $permit;
+        });
+
+        $permitApplications = $users->permitApplications;
+
+        return view('Applicants.Rejected.rejected-permit', compact('users', 'permitApplications'), [
+            'ActiveTabMenu' => 'Rejected',
+            'SubActiveTab' => 'Permit'
         ]);
     }
 }

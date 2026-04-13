@@ -15,6 +15,11 @@ class PlumbingPlan extends Model
         'documents',
         'reviewed_by',
         'status',
+        'created_at',
+        'updated_at',
+        'rejected_by',
+        'rejection_comment',
+        'archived'
     ];
 
     protected $casts = [

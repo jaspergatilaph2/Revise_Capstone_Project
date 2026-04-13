@@ -78,6 +78,7 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/dark-mode.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin-hover-card.css') }}">
 </head>
 
 <body>
@@ -113,7 +114,7 @@
     <script src="{{asset('sneat/js/main.js')}}"></script>
 
     <!-- additional script -->
-    <script src="{{asset('sneat/js/linegraph.js')}}"></script>
+    <!-- <script src="{{asset('sneat/js/linegraph.js')}}"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="{{asset('sneat/js/year.js')}}"></script>
     <script src="{{ asset('js/arrow_toggle.js') }}"></script>
@@ -122,7 +123,6 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="{{ asset('js/longtitude.js') }}"></script>
@@ -164,6 +164,12 @@
     <script src="{{ asset('js/dark-mode.js') }}"></script>
     <script src="{{ asset('js/tooltip.js') }}"></script>
     <script src="{{ asset('js/maintenance-timer.js') }}"></script>
+    <script src="{{ asset('js/approved-button.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('js/admin-activity-chart.js') }}"></script>
+    <script src="{{ asset('js/delCountdown.js') }}"></script>
+    <script src="{{ asset('js/arch-plans.js') }}"></script>
+    <script src="{{ asset('js/mpdo-reject.js') }}"></script>
 </body>
 
 </html>

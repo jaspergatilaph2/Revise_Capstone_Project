@@ -137,6 +137,21 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon fa-solid fa-file-zipper"></i>
+                            <div data-i18n="Layouts">Archive</div>
+                        </a>
+
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ route('candidate.applicants.view-archive') }}" class="menu-link">
+                                    <div data-i18n="Without navbar">Deleted Permits & Plans</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <!-- <li class="menu-item">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>

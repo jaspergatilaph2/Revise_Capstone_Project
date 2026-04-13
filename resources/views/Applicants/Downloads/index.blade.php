@@ -35,14 +35,32 @@
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon fa-solid fa-bars-progress"></i>
-                            <div data-i18n="Layouts">Notification</div>
+                            <div data-i18n="Layouts">
+                                @php
+                                    $notifications = Auth::user()->permitApplications;
+
+                                    $pendingCount = $notifications->where('status', 'pending')->count();
+                                    $reviewCount = $notifications->where('status', 'under_review')->count();
+                                    $approvedCount = $notifications->where('status', 'approved')->count();
+
+                                    $totalNotifications = $pendingCount + $reviewCount + $approvedCount;
+                                @endphp
+                                Notification
+                                @if($totalNotifications > 0)
+                                    ({{ $totalNotifications }})
+                                @endif
+                            </div>
                         </a>
 
                         <ul class="menu-sub">
 
                             <li class="menu-item">
                                 <a href="{{ route('apply.permit.pending') }}" class="menu-link">
-                                    <div data-i18n="Without navbar">Progress</div>
+                                    <div data-i18n="Without navbar">Progress
+                                        @if($totalNotifications > 0)
+                                            ({{ $totalNotifications }})
+                                        @endif
+                                    </div>
                                 </a>
                             </li>
 
@@ -51,6 +69,7 @@
                                     <div data-i18n="Without navbar">Certificate</div>
                                 </a>
                             </li>
+
                         </ul>
                     </li>
 
@@ -103,58 +122,69 @@
                                     <div data-i18n="Without navbar">Plumbing Plan Upload</div>
                                 </a>
                             </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon fa-solid fa-ban"></i>
+                            <div data-i18n="Layouts">Rejection</div>
+                        </a>
+
+                        <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="" class="menu-link">
-                                    <div data-i18n="Without navbar">Issues</div>
+                                <a href="{{ route('permit.rejections.view-rejected') }}" class="menu-link">
+                                    <div data-i18n="Without navbar">Rejected</div>
                                 </a>
                             </li>
                         </ul>
                     </li>
 
                     <!-- <li class="menu-item">
-                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                        <i class="menu-icon fa-solid fa-receipt"></i>
-                                        <div data-i18n="Layouts">Payments</div>
-                                    </a>
+                                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                    <i class="menu-icon fa-solid fa-receipt"></i>
+                                                    <div data-i18n="Layouts">Payments</div>
+                                                </a>
 
-                                    <ul class="menu-sub">
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without navbar">Pending Payments</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without navbar">Paid</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without navbar">Overdue</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li> -->
+                                                <ul class="menu-sub">
+                                                    <li class="menu-item">
+                                                        <a href="" class="menu-link">
+                                                            <div data-i18n="Without navbar">Pending Payments</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="" class="menu-link">
+                                                            <div data-i18n="Without navbar">Paid</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="" class="menu-link">
+                                                            <div data-i18n="Without navbar">Overdue</div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li> -->
 
                     <!-- <li class="menu-item">
-                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                        <i class="menu-icon fa-solid fa-comment"></i>
-                                        <div data-i18n="Layouts">Notification / Messages</div>
-                                    </a>
+                                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                    <i class="menu-icon fa-solid fa-comment"></i>
+                                                    <div data-i18n="Layouts">Notification / Messages</div>
+                                                </a>
 
-                                    <ul class="menu-sub">
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without navbar">Notifications</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="" class="menu-link">
-                                                <div data-i18n="Without navbar">History Notification</div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li> -->
+                                                <ul class="menu-sub">
+                                                    <li class="menu-item">
+                                                        <a href="" class="menu-link">
+                                                            <div data-i18n="Without navbar">Notifications</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="" class="menu-link">
+                                                            <div data-i18n="Without navbar">History Notification</div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Accounts</span>
@@ -258,7 +288,7 @@
                                                     <span class="fw-semibold d-block">{{Auth::user()->name}}</span>
                                                     <small class="text-muted">
                                                         @php
-                                                            $role = strtolower($user->role); // use $user instead of auth()->user()
+                                                            $role = strtolower(Auth::user()->role); // use $user instead of auth()->user()
 
                                                             if ($role === 'bfp') {
                                                                 $roleLabel = 'BFP';
@@ -273,7 +303,7 @@
                                                             }
 
                                                             // Status label
-                                                            $statusLabel = strtolower($user->status ?? 'inactive');
+                                                            $statusLabel = strtolower(Auth::user()->status ?? 'inactive');
                                                             if ($statusLabel === 'active') {
                                                                 $statusLabel = 'Active';
                                                             } elseif ($statusLabel === 'inactive') {
@@ -285,8 +315,8 @@
 
                                                         {{ $roleLabel }} ||
                                                         <span
-                                                            class="px-2 py-1 rounded text-white {{ $user->status === 'active' ? 'bg-success' : 'bg-secondary' }}">
-                                                            {{ ucfirst($user->status) }}
+                                                            class="px-2 py-1 rounded text-white {{ Auth::user()->status === 'active' ? 'bg-success' : 'bg-secondary' }}">
+                                                            {{ ucfirst(Auth::user()->status) }}
                                                         </span>
                                                     </small>
                                                 </div>
@@ -303,11 +333,11 @@
                                         </a>
                                     </li>
                                     <li>
-                                          <a class="dropdown-item" href="{{ route('user.options.view-dark-mode') }}">
+                                        <a class="dropdown-item" href="{{ route('user.options.view-dark-mode') }}">
                                             <i class="bx bx-cog me-2"></i>
                                             <span class="align-middle">Options</span>
-                                          </a>
-                                        </li>
+                                        </a>
+                                    </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('record.history.log-history') }}">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -475,7 +505,7 @@
                     <!-- Footer -->
                     <footer class="content-footer footer bg-footer-theme mt-4">
                         <div class="container-xxl d-flex flex-wrap justify-content-between py-2
-                                    flex-md-row flex-column text-center text-md-start">
+                                                flex-md-row flex-column text-center text-md-start">
                             <div class="mb-2 mb-md-0">
                                 ©
                                 <script>

@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                            </a> -->
+                                  <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -57,25 +57,25 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Without menu">Under Review applications</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Without menu">Approved applications</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Without menu">Rejected applications</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Without menu">Revenue from permit fees</div>
-                                                </a>
-                                            </li> -->
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Without menu">Under Review applications</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Without menu">Approved applications</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Without menu">Rejected applications</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Without menu">Revenue from permit fees</div>
+                                                    </a>
+                                                </li> -->
                         </ul>
                     </li>
 
@@ -142,34 +142,49 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon fa-solid fa-file-zipper"></i>
+                            <div data-i18n="Layouts">Archive</div>
+                        </a>
+
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ route('candidate.applicants.view-archive') }}" class="menu-link">
+                                    <div data-i18n="Without navbar">Deleted Permits & Plans</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <!-- <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                            <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
-                                            <div data-i18n="Account Settings">Payment Management</div>
-                                        </a>
-                                        <ul class="menu-sub">
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Account">Application fees</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Notifications">Renewal fees</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Notifications">Pending Payments</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Notifications">Completed Payments</div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li> -->
+                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                <i class="menu-icon fa-solid fa-file-invoice-dollar"></i>
+                                                <div data-i18n="Account Settings">Payment Management</div>
+                                            </a>
+                                            <ul class="menu-sub">
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Account">Application fees</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Notifications">Renewal fees</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Notifications">Pending Payments</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Notifications">Completed Payments</div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li> -->
 
 
 
@@ -193,33 +208,33 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                  <a href="" class="menu-link">
-                                    <div data-i18n="Notifications">Settings</div>
-                                  </a>
-                                </li> -->
+                                      <a href="" class="menu-link">
+                                        <div data-i18n="Notifications">Settings</div>
+                                      </a>
+                                    </li> -->
 
                         </ul>
                     </li>
 
 
                     <!-- <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                            <i class="menu-icon fa-solid fa-list-check"></i>
-                                            <div data-i18n="Account Settings">User Management</div>
-                                        </a>
-                                        <ul class="menu-sub">
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Account">Staff/Inspector</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="" class="menu-link">
-                                                    <div data-i18n="Notifications">Applicant</div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li> -->
+                                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                                <i class="menu-icon fa-solid fa-list-check"></i>
+                                                <div data-i18n="Account Settings">User Management</div>
+                                            </a>
+                                            <ul class="menu-sub">
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Account">Staff/Inspector</div>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a href="" class="menu-link">
+                                                        <div data-i18n="Notifications">Applicant</div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Miscellaneous</span>
@@ -338,11 +353,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                      <a class="dropdown-item" href="">
-                                        <i class="bx bx-cog me-2"></i>
-                                        <span class="align-middle">Settings</span>
-                                      </a>
-                                    </li> -->
+                                          <a class="dropdown-item" href="">
+                                            <i class="bx bx-cog me-2"></i>
+                                            <span class="align-middle">Settings</span>
+                                          </a>
+                                        </li> -->
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logs.history.view') }}">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -391,11 +406,32 @@
                             <div class="row g-4">
                                 <!-- Total Applications -->
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
+                                    <div
+                                        class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn hover-card">
+                                        <div class="card-body text-center">
+                                            <i class="fa-solid fa-users fa-2x text-primary mb-2"></i>
+                                            <h6 class="fw-bold text-uppercase small">Total User or Applicants</h6>
+                                            <h3 class="fw-bolder text-primary mb-1">{{ $UserCounts }}</h3>
+                                            <p class="text-muted small mb-0">All users</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Total Applications Permit and Plans by User -->
+                                <div class="col-12 col-sm-6 col-lg-3">
+                                    <div
+                                        class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn hover-card">
                                         <div class="card-body text-center">
                                             <i class="fa-solid fa-file-circle-plus fa-2x text-primary mb-2"></i>
                                             <h6 class="fw-bold text-uppercase small">Total Applications</h6>
                                             <h3 class="fw-bolder text-primary mb-1">{{ $totalApplications }}</h3>
+                                            <small class="text-muted">
+                                                Permit: {{ $totalPermitApplications }} |
+                                                Arch: {{ $totalArchitecturalPlans }} |
+                                                Struct: {{ $totalStructuralPlans }} |
+                                                Elec: {{ $totalElectricalPlans }} |
+                                                Plumb: {{ $totalPlumbingPlans }}
+                                            </small>
                                             <p class="text-muted small mb-0">All applications submitted</p>
                                         </div>
                                     </div>
@@ -404,13 +440,21 @@
 
                                 <!-- Pending Approvals -->
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
+                                    <div
+                                        class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn hover-card">
                                         <div class="card-body text-center">
                                             <i class="fa-solid fa-hourglass-half fa-2x text-warning mb-2"></i>
                                             <h6 class="fw-bold text-uppercase small">Pending Approvals</h6>
                                             <h3 class="fw-bolder text-warning mb-1" id="pendingApprovals">
                                                 {{ $PendingApplications }}
                                             </h3>
+                                            <small class="text-muted small mb-0">
+                                                Permit: {{ $PendingApplications }} |
+                                                Arch: {{ $pendingArchitecturalPlans }} |
+                                                Struct: {{ $pendingStructuralPlans }} |
+                                                Elec: {{ $pendingElectricalPlans }} |
+                                                Plumb: {{ $pendingPlumbingPlans }}
+                                            </small>
                                             <p class="text-muted small mb-0">Awaiting review</p>
                                         </div>
                                     </div>
@@ -418,13 +462,21 @@
 
                                 <!-- Under Review -->
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
+                                    <div
+                                        class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn hover-card">
                                         <div class="card-body text-center">
                                             <i class="fa-solid fa-magnifying-glass fa-2x text-warning mb-2"></i>
                                             <h6 class="fw-bold text-uppercase small">Under Review</h6>
                                             <h3 class="fw-bolder text-warning mb-1" id="pendingApprovals">
                                                 {{ $UnderReviewApplications }}
                                             </h3>
+                                            <small class="text-muted small mb-0">
+                                                Permit: {{ $UnderReviewApplications }} |
+                                                Arch: {{ $underReviewArchitecturalPlans }} |
+                                                Struct: {{ $underReviewStructuralPlans }} |
+                                                Elec: {{ $underReviewElectricalPlans }} |
+                                                Plumb: {{ $underReviewPlumbingPlans }}
+                                            </small>
                                             <p class="text-muted small mb-0">Awaiting review</p>
                                         </div>
                                     </div>
@@ -432,29 +484,59 @@
 
                                 <!-- Approved Permits -->
                                 <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn">
+                                    <div
+                                        class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn hover-card">
                                         <div class="card-body text-center">
                                             <i class="fa-solid fa-circle-check fa-2x text-success mb-2"></i>
                                             <h6 class="fw-bold text-uppercase small">Approved Permits</h6>
                                             <h3 class="fw-bolder text-success mb-1" id="approvedPermits">
                                                 {{ $ApprovedApplication }}
                                             </h3>
+                                            <small class="text-muted small mb-0">
+                                                Permit: {{ $ApprovedApplication }} |
+                                                Arch: {{ $approvedArchitecturalPlans }} |
+                                                Struct: {{ $approvedStructuralPlans }} |
+                                                Elec: {{ $approvedElectricalPlans }} |
+                                                Plumb: {{ $approvedPlumbingPlans }}
+                                            </small>
                                             <p class="text-muted small mb-0">Successfully issued permits</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Rejected Permits -->
+                                <div class="col-12 col-sm-6 col-lg-3">
+                                    <div
+                                        class="card shadow-sm border-0 h-100 animate__animated animate__bounceIn hover-card">
+                                        <div class="card-body text-center">
+                                            <i class="fa-solid fa-circle-xmark fa-2x text-danger mb-2"></i>
+                                            <h6 class="fw-bold text-uppercase small">Rejected Permits</h6>
+                                            <h3 class="fw-bolder text-danger mb-1" id="rejectedPermits">
+                                                {{ $RejectedApplication }}
+                                            </h3>
+                                            <small class="text-muted small mb-0">
+                                                Permit: {{ $RejectedApplication }} |
+                                                Arch: {{ $rejectedArchitecturalPlans }} |
+                                                Struct: {{ $rejectedStructuralPlans }} |
+                                                Elec: {{ $rejectedElectricalPlans }} |
+                                                Plumb: {{ $rejectedPlumbingPlans }}
+                                            </small>
+                                            <p class="text-muted small mb-0">Permits that were rejected</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Revenue Collected -->
                                 <!-- <div class="col-12 col-sm-6 col-lg-3">
-                                                    <div class="card shadow-sm border-0 h-100">
-                                                        <div class="card-body text-center">
-                                                            <i class="fa-solid fa-peso-sign fa-2x text-info mb-2"></i>
-                                                            <h6 class="fw-bold text-uppercase small">Revenue Collected</h6>
-                                                            <h3 class="fw-bolder text-info mb-1" id="totalRevenue">₱120,500</h3>
-                                                            <p class="text-muted small mb-0">Total fees collected</p>
+                                                        <div class="card shadow-sm border-0 h-100">
+                                                            <div class="card-body text-center">
+                                                                <i class="fa-solid fa-peso-sign fa-2x text-info mb-2"></i>
+                                                                <h6 class="fw-bold text-uppercase small">Revenue Collected</h6>
+                                                                <h3 class="fw-bolder text-info mb-1" id="totalRevenue">₱120,500</h3>
+                                                                <p class="text-muted small mb-0">Total fees collected</p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div> -->
+                                                    </div> -->
                             </div>
 
                             <!-- Quick Stats Section -->
@@ -587,7 +669,7 @@
                                                             </div>
 
                                                             <div class="text-muted small mt-1 mt-md-0">
-                                                                {{ $user->created_at->diffForHumans() }}
+                                                                {{ $user->created_at ? $user->created_at->diffForHumans() : '-' }}
                                                             </div>
                                                         </div>
 
@@ -614,49 +696,49 @@
 
                             <!-- User Management Table -->
                             <!-- <div class="row mt-4">
-                                                <div class="col-12">
-                                                    <div class="card shadow-sm border-0">
-                                                        <div class="card-body">
-                                                            <h5 class="fw-bold mb-3">
-                                                                <i class="fa-solid fa-users-gear me-2 text-primary"></i> User Management
-                                                            </h5>
-                                                            <div class="table-responsive">
-                                                                <table class="table table-striped table-hover mb-0">
-                                                                    <thead class="table-light">
-                                                                        <tr>
-                                                                            <th>Name</th>
-                                                                            <th>Role</th>
-                                                                            <th>Status</th>
-                                                                            <th>Last Seen</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
+                                                    <div class="col-12">
+                                                        <div class="card shadow-sm border-0">
+                                                            <div class="card-body">
+                                                                <h5 class="fw-bold mb-3">
+                                                                    <i class="fa-solid fa-users-gear me-2 text-primary"></i> User Management
+                                                                </h5>
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-striped table-hover mb-0">
+                                                                        <thead class="table-light">
+                                                                            <tr>
+                                                                                <th>Name</th>
+                                                                                <th>Role</th>
+                                                                                <th>Status</th>
+                                                                                <th>Last Seen</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
 
-                                                                        <tr>
-                                                                            <td>John Doe</td>
-                                                                            <td>User</td>
-                                                                            <td>
-                                                                                <span class="px-3 py-2 rounded-pill shadow-sm fw-semibold small text-white bg-success" style="letter-spacing: 0.5px;">
-                                                                                    Active
-                                                                                </span>
-
-
-                                                                            </td>
-                                                                            <td>Yesterday</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td colspan="4" class="text-center text-muted">No users found</td>
-                                                                        </tr>
-
-                                                                    </tbody>
-                                                                </table>
+                                                                            <tr>
+                                                                                <td>John Doe</td>
+                                                                                <td>User</td>
+                                                                                <td>
+                                                                                    <span class="px-3 py-2 rounded-pill shadow-sm fw-semibold small text-white bg-success" style="letter-spacing: 0.5px;">
+                                                                                        Active
+                                                                                    </span>
 
 
+                                                                                </td>
+                                                                                <td>Yesterday</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td colspan="4" class="text-center text-muted">No users found</td>
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+
+
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div> -->
+                                                </div> -->
                         </div>
                     </div>
 

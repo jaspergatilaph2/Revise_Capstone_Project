@@ -17,8 +17,8 @@
                     </a>
 
                     <!-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                                                                      <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                                                                    </a> -->
+                                                                              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                                                                            </a> -->
                 </div>
 
                 <div class="menu-inner-shadow"></div>
@@ -176,10 +176,10 @@
                                 </a>
                             </li>
                             <!-- <li class="menu-item">
-                                                                          <a href="" class="menu-link">
-                                                                            <div data-i18n="Notifications">Settings</div>
-                                                                          </a>
-                                                                        </li> -->
+                                                                                  <a href="" class="menu-link">
+                                                                                    <div data-i18n="Notifications">Settings</div>
+                                                                                  </a>
+                                                                                </li> -->
 
                         </ul>
                     </li>
@@ -294,11 +294,11 @@
                                         </a>
                                     </li>
                                     <!-- <li>
-                                                                              <a class="dropdown-item" href="">
-                                                                                <i class="bx bx-cog me-2"></i>
-                                                                                <span class="align-middle">Settings</span>
-                                                                              </a>
-                                                                            </li> -->
+                                                                                      <a class="dropdown-item" href="">
+                                                                                        <i class="bx bx-cog me-2"></i>
+                                                                                        <span class="align-middle">Settings</span>
+                                                                                      </a>
+                                                                                    </li> -->
                                     <li>
                                         <a class="dropdown-item" href="">
                                             <i class="menu-icon tf-icons bx bx-file"></i>
@@ -399,14 +399,18 @@
                                                                         @if($permit->architecturalPlans->count() > 0)
                                                                             <div class="d-flex flex-column">
                                                                                 @foreach($permit->architecturalPlans as $plan)
-                                                                                    @if(!empty($plan->file_path))
-                                                                                        @foreach($plan->file_path as $index => $url)
+
+                                                                                    @if(!empty($plan->file_urls))
+                                                                                        @foreach($plan->file_urls as $index => $url)
                                                                                             <a href="{{ $url }}" target="_blank"
                                                                                                 class="btn btn-sm btn-primary mb-1">
                                                                                                 View File ({{ $index + 1 }})
                                                                                             </a>
                                                                                         @endforeach
+                                                                                    @else
+                                                                                        <span class="text-secondary">No Files</span>
                                                                                     @endif
+
                                                                                 @endforeach
                                                                             </div>
                                                                         @else
@@ -416,24 +420,24 @@
 
                                                                     <!-- Reviewer Status -->
                                                                     <td>
-                                                                        @if($plan->reviewer)
-                                                                            @if($plan->reviewer->role === 'engineer')
+                                                                        @if($permit->reviewer)
+                                                                            @if($permit->reviewer->role === 'engineer')
                                                                                 <span class="text-success">
-                                                                                    Reviewed by Engr. {{ $plan->reviewer->name }}
+                                                                                    Reviewed by Engr. {{ $permit->reviewer->name }}
                                                                                 </span>
                                                                                 <br>
                                                                                 <span class="text-warning">
                                                                                     Pending MPDO Approval
                                                                                 </span>
-                                                                            @elseif($plan->reviewer->role === 'mpdo')
+                                                                            @elseif($permit->reviewer->role === 'mpdo')
                                                                                 <span class="text-success">
-                                                                                    Reviewed by MPDO Dept. {{ $plan->reviewer->name }}
+                                                                                    Reviewed by MPDO Dept. {{ $permit->reviewer->name }}
                                                                                 </span>
                                                                             @endif
                                                                         @else
                                                                             <span class="text-warning">Pending Review</span>
                                                                         @endif
-                                                                    </td>   
+                                                                    </td>
 
                                                                     <!-- Action Buttons -->
                                                                     <td>
